@@ -1,9 +1,9 @@
 //import type { ComponentType, SvelteComponent } from 'svelte';
 
-export type blocks = 'img' | 'video' | 'code' | 'quote' | 'paragraph' | 'header' | 'list';
+export type blocks = 'image' | 'video' | 'code' | 'quote' | 'paragraph' | 'header' | 'list';
 
 export type dataBlock =
-	| { type: 'img'; id: string; data: { href: string; alt: string } }
+	| { type: 'image'; id: string; data: { href: string; alt: string } }
 	| { type: 'video'; id: string; data: { href: string; alt: string } }
 	| { type: 'code'; id: string; data: { text: string; lang: string } }
 	| { type: 'quote'; id: string; data: { text: string } }

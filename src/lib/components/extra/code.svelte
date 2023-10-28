@@ -2,3 +2,5 @@
 	export let data: { text: string; lang: string };
 	export let id: string;
 </script>
+
+<span>code</span>

@@ -2,3 +2,5 @@
 	export let data: { text: string };
 	export let id: string;
 </script>
+
+<span>quote</span>
