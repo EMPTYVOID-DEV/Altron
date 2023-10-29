@@ -2,6 +2,7 @@
 	import { data, workingBlock } from '$lib/utils/store.js';
 	import { onDestroy, onMount } from 'svelte';
 	import BlockWrapper from './blockWrapper.svelte';
+	import ToolBar from './toolBar.svelte';
 	export let headerFont = `Verdana, sans-serif`;
 	export let bodyFont = `Helvetica, sans-serif`;
 	export let primaryColor = '#3366FF';
@@ -38,11 +39,25 @@
 			workingBlock.set({ id, state: 'focused' });
 		else workingBlock.set({ id, state: 'editing' });
 	}
+
+	function removeBlock(event: KeyboardEvent) {
+		if (event.key == 'Backspace' && $workingBlock && $workingBlock.state == 'focused') {
+			data.update((prev) => {
+				const newDataBlocks = prev.filter((element) => {
+					return element.id != $workingBlock.id;
+				});
+				return newDataBlocks;
+			});
+		}
+	}
+
 	onMount(() => {
 		window.addEventListener('click', switchBlockState);
+		window.addEventListener('keyup', removeBlock);
 	});
 	onDestroy(() => {
 		window.removeEventListener('click', switchBlockState);
+		window.removeEventListener('keyup', removeBlock);
 	});
 </script>
 
@@ -68,11 +83,17 @@
 	{#each $data as block (block.id)}
 		<BlockWrapper dataBlock={block} />
 	{/each}
+
+	<ToolBar />
 </div>
 
 <style>
 	.main {
 		width: 100%;
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		padding-bottom: 20px;
 	}
 	.main :global(*) {
 		box-sizing: border-box;

@@ -24,7 +24,7 @@
 <style>
 	.areaWrapper {
 		width: 100%;
-		border-left: 5px solid var(--primaryColor);
+		border-left: 8px solid var(--fontColor);
 		padding-left: 4px;
 	}
 	.editableArea {

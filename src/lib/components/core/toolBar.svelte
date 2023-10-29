@@ -1,17 +1,19 @@
 <script lang="ts">
-	import { data, workingBlock } from '$lib/utils/store';
 	import type { blocks, dataBlock } from '$lib/utils/types';
+	import type { ComponentType, SvelteComponent } from 'svelte';
+	import CodeIcon from '$lib/components/icons/codeIcon.svelte';
+	import HeaderIcon from '$lib/components/icons/header.svelte';
+	import ImageIcon from '$lib/components/icons/image.svelte';
+	import VideoIcon from '$lib/components/icons/video.svelte';
+	import ListIcon from '$lib/components/icons/listIcon.svelte';
+	import QuoteIcon from '$lib/components/icons/quote.svelte';
+	import ParagraphIcon from '$lib/components/icons/paragraphIcon.svelte';
+	import PlusIcon from '$lib/components/icons/plusIcon.svelte';
+	import CloseIcon from '$lib/components/icons/closeIcon.svelte';
 	import shortUUID from 'short-uuid';
-	let toggle = true;
-	let menuOptions: { type: blocks; label: string }[] = [
-		{ type: 'paragraph', label: 'Paragraph' },
-		{ type: 'header', label: 'Header' },
-		{ type: 'code', label: 'Code' },
-		{ type: 'list', label: 'List' },
-		{ type: 'quote', label: 'Quote' },
-		{ type: 'image', label: 'Image' },
-		{ type: 'video', label: 'Video' }
-	];
+	import { data } from '$lib/utils/store';
+	import { fade } from 'svelte/transition';
+	import { elasticIn } from 'svelte/easing';
 	function add(list: dataBlock[], id: string, type: blocks) {
 		if (type === 'paragraph') {
 			list.push({ type, id, data: { text: '' } });
@@ -29,78 +31,101 @@
 			list.push({ type, id, data: { items: [], type: 'unordered' } });
 		}
 	}
+	const options: Map<blocks, ComponentType<SvelteComponent>> = new Map([
+		['code', CodeIcon],
+		['image', ImageIcon],
+		['video', VideoIcon],
+		['quote', QuoteIcon],
+		['header', HeaderIcon],
+		['paragraph', ParagraphIcon],
+		['list', ListIcon]
+	]);
+	let toggle = true;
 </script>
 
 <div class="toolBar">
-	<!-- svelte-ignore a11y-click-events-have-key-events -->
-	<!-- svelte-ignore a11y-no-static-element-interactions -->
-	<span class="menuToggle" on:click|stopPropagation={() => (toggle = true)}>
-		<svg
-			width="32px"
-			height="32px"
-			viewBox="0 0 24 24"
-			fill="none"
-			xmlns="http://www.w3.org/2000/svg"
-			><g id="SVGRepo_bgCarrier" stroke-width="0" /><g
-				id="SVGRepo_tracerCarrier"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-			/><g id="SVGRepo_iconCarrier">
-				<path
-					d="M6 12H18M12 6V18"
-					stroke="#000000"
-					stroke-width="2"
-					stroke-linecap="round"
-					stroke-linejoin="round"
-				/>
-			</g></svg
-		>
-	</span>
 	{#if toggle}
-		<div class="dropDownMenu">
-			<span>Add Block</span>
-			{#each menuOptions as option}
+		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<!-- svelte-ignore a11y-no-static-element-interactions -->
+		<span on:click={() => (toggle = false)} class="control">
+			<PlusIcon />
+		</span>
+	{:else}
+		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<!-- svelte-ignore a11y-no-static-element-interactions -->
+		<span on:click={() => (toggle = true)} class="control">
+			<CloseIcon />
+		</span>
+		<div class="options">
+			{#each options.entries() as option, index}
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<!-- svelte-ignore a11y-no-static-element-interactions -->
 				<span
-					on:click|stopPropagation={() => {
+					in:fade|global={{ delay: 100 * index, duration: 400, easing: elasticIn }}
+					out:fade|global={{
+						delay: 100 * (6 - index),
+						duration: 400,
+						easing: elasticIn
+					}}
+					class="option"
+					on:click={() => {
 						data.update((prev) => {
 							const id = shortUUID().generate();
-							add(prev, id, option.type);
-							workingBlock.set({ state: 'editing', id });
-							toggle = false;
+							add(prev, id, option[0]);
 							return prev;
 						});
-					}}>{option.label}</span
+					}}
 				>
+					<svelte:component this={option[1]} />
+				</span>
 			{/each}
-			<!-- svelte-ignore a11y-click-events-have-key-events -->
-			<!-- svelte-ignore a11y-no-static-element-interactions -->
-			<span on:click={() => (toggle = false)}>Cancel</span>
 		</div>
 	{/if}
 </div>
 
 <style>
 	.toolBar {
-		position: relative;
-		display: none;
-	}
-	.menuToggle {
-		width: fit-content;
-		height: fit-content;
+		width: 100%;
 		display: flex;
-		justify-content: center;
 		align-items: center;
-		border: 3px solid var(--primaryColor);
+		gap: 20px;
+	}
+	.toolBar span {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 36px;
+		aspect-ratio: 1/1;
 		border-radius: 50%;
+		cursor: pointer;
 	}
-	.menuToggle svg {
-		width: 32px;
-		height: 32px;
+
+	.control {
+		border: 1px solid var(--fontColor);
 	}
-	.menuToggle svg path {
-		stroke: var(--fontColor);
-		stroke-width: 3px;
+	.control :global(svg path) {
+		fill: var(--fontColor);
 	}
+	.options {
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 5px;
+	}
+	.option {
+		border: 1px solid var(--primaryColor);
+	}
+	.option > :global(svg path) {
+		fill: var(--primaryColor);
+	}
+	/* @media screen and (width < 768px) {
+		.toolBar span {
+			width: 28px;
+		}
+		.toolBar span :global(svg) {
+			width: 20px;
+			height: 20px;
+		}
+	} */
 </style>

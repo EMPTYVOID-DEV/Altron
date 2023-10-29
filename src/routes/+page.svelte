@@ -3,4 +3,16 @@
 	import Textarea from '$lib/components/extra/textarea.svelte';
 </script>
 
-<Main />
+<div>
+	<Main />
+</div>
+
+<style>
+	div {
+		width: 50vw;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		translate: -50% -50%;
+	}
+</style>

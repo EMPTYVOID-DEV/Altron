@@ -37,10 +37,11 @@
 
 <style>
 	.blockWrapper {
-		width: 99%;
-		padding-block: 6px;
-		padding-inline: 5px;
+		width: 100%;
+		padding-block: 30px;
+		padding-inline: 20px;
 		position: relative;
+		overflow: hidden;
 	}
 	.focused {
 		border: 2px solid var(--primaryColor);
@@ -64,7 +65,7 @@
 		display: none;
 		padding-inline: 12px;
 		padding-block: 4px;
-		border-bottom-left-radius: 16px;
+		border-bottom-left-radius: 12px;
 		text-transform: capitalize;
 	}
 </style>
