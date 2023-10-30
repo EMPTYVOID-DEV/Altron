@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { workingBlock } from '$lib/utils/store';
+
 	export let changeHandler: (data: string) => void;
 	export let textContent: string = '';
 	export let textLevel: 'h1' | 'h2' | 'h3' | 'h4' | 'body' = 'body';
@@ -24,8 +26,9 @@
 <style>
 	.areaWrapper {
 		width: 100%;
-		border-left: 8px solid var(--fontColor);
+		border-left: 6px solid var(--fontColor);
 		padding-left: 4px;
+		cursor: auto;
 	}
 	.editableArea {
 		width: 100%;

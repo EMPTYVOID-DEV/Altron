@@ -11,7 +11,7 @@
 	import PlusIcon from '$lib/components/icons/plusIcon.svelte';
 	import CloseIcon from '$lib/components/icons/closeIcon.svelte';
 	import shortUUID from 'short-uuid';
-	import { data } from '$lib/utils/store';
+	import { data, workingBlock } from '$lib/utils/store';
 	import { fade } from 'svelte/transition';
 	import { elasticIn } from 'svelte/easing';
 	function add(list: dataBlock[], id: string, type: blocks) {
@@ -31,6 +31,7 @@
 			list.push({ type, id, data: { items: [], type: 'unordered' } });
 		}
 	}
+
 	const options: Map<blocks, ComponentType<SvelteComponent>> = new Map([
 		['code', CodeIcon],
 		['image', ImageIcon],
@@ -44,36 +45,33 @@
 </script>
 
 <div class="toolBar">
-	{#if toggle}
-		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<!-- svelte-ignore a11y-no-static-element-interactions -->
-		<span on:click={() => (toggle = false)} class="control">
-			<PlusIcon />
-		</span>
-	{:else}
-		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<!-- svelte-ignore a11y-no-static-element-interactions -->
-		<span on:click={() => (toggle = true)} class="control">
+	<!-- svelte-ignore a11y-click-events-have-key-events -->
+	<!-- svelte-ignore a11y-no-static-element-interactions -->
+	<span on:click={() => (toggle = !toggle)} class="control">
+		{#if toggle}
 			<CloseIcon />
-		</span>
+		{:else}
+			<PlusIcon />
+		{/if}
+	</span>
+	{#if toggle}
 		<div class="options">
 			{#each options.entries() as option, index}
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<!-- svelte-ignore a11y-no-static-element-interactions -->
 				<span
-					in:fade|global={{ delay: 100 * index, duration: 400, easing: elasticIn }}
-					out:fade|global={{
-						delay: 100 * (6 - index),
-						duration: 400,
-						easing: elasticIn
-					}}
+					in:fade|global={{ delay: 80 * index, duration: 300, easing: elasticIn }}
+					out:fade|global={{ delay: 80 * (6 - index), duration: 300, easing: elasticIn }}
+					data-label={'add ' + option[0]}
 					class="option"
-					on:click={() => {
+					on:click|stopPropagation={() => {
+						const id = shortUUID().generate();
 						data.update((prev) => {
-							const id = shortUUID().generate();
 							add(prev, id, option[0]);
+							toggle = true;
 							return prev;
 						});
+						workingBlock.set({ id, state: 'editing' });
 					}}
 				>
 					<svelte:component this={option[1]} />
@@ -85,9 +83,10 @@
 
 <style>
 	.toolBar {
-		width: 100%;
-		display: flex;
+		width: fit-content;
+		display: grid;
 		align-items: center;
+		grid-template-columns: repeat(2, auto);
 		gap: 20px;
 	}
 	.toolBar span {
@@ -111,21 +110,44 @@
 		align-items: center;
 		flex-wrap: wrap;
 		justify-content: center;
-		gap: 5px;
+		gap: 12px;
 	}
 	.option {
 		border: 1px solid var(--primaryColor);
+		position: relative;
+	}
+	.option::after {
+		content: attr(data-label);
+		position: absolute;
+		display: none;
+		top: 102%;
+		left: 1.2rem;
+		width: 120px;
+		text-transform: capitalize;
+		padding-inline: 6px;
+		padding-block: 3px;
+		font-size: var(--small);
+		font-weight: bold;
+		color: var(--primaryColor);
+		background-color: transparent;
+		z-index: 99;
+	}
+	.option:hover::after {
+		display: block;
 	}
 	.option > :global(svg path) {
 		fill: var(--primaryColor);
 	}
-	/* @media screen and (width < 768px) {
+	@media screen and (width < 768px) {
 		.toolBar span {
-			width: 28px;
+			width: 32px;
+		}
+		.toolBar .options {
+			row-gap: 25px;
 		}
 		.toolBar span :global(svg) {
-			width: 20px;
-			height: 20px;
+			width: 22px;
+			height: 22px;
 		}
-	} */
+	}
 </style>

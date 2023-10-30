@@ -13,7 +13,12 @@
 
 <div
 	class="blockWrapper"
-	class:focused={$workingBlock && $workingBlock.id == dataBlock.id}
+	class:focused={$workingBlock &&
+		$workingBlock.state == 'focused' &&
+		$workingBlock.id == dataBlock.id}
+	class:editing={$workingBlock &&
+		$workingBlock.state == 'editing' &&
+		$workingBlock.id == dataBlock.id}
 	data-blockid={dataBlock.id}
 	data-blocktype={dataBlock.type}
 >
@@ -48,8 +53,21 @@
 		border-radius: 8px;
 	}
 
-	.focused .blockType {
+	.editing {
+		border: 2px solid var(--editingColor);
+		border-radius: 8px;
+	}
+
+	.focused .blockType,
+	.editing .blockType {
 		display: inline-block;
+	}
+	.focused .blockType {
+		background-color: var(--primaryColor);
+	}
+
+	.editing .blockType {
+		background-color: var(--editingColor);
 	}
 
 	.blockType {
@@ -58,7 +76,6 @@
 		height: fit-content;
 		top: 0%;
 		right: 0%;
-		background-color: var(--primaryColor);
 		color: var(--fontColor);
 		font-size: var(--small);
 		font-weight: bold;

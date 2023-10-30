@@ -6,22 +6,8 @@
 	export let headerFont = `Verdana, sans-serif`;
 	export let bodyFont = `Helvetica, sans-serif`;
 	export let primaryColor = '#3366FF';
-	export let bgColor = '#dfe2ec';
+	export let editingColor = '#1eeb36';
 	export let textColor = '#121212';
-	let h1 = ' clamp(1.8rem, calc(1.8rem + ((1vw - 0.48rem) * 0.9722)), 2.1rem)';
-	let h2 = ' clamp(1.5rem, calc(1.5rem + ((1vw - 0.48rem) * 0.9722)), 1.8rem)';
-	let h3 = ' clamp(1.2rem, calc(1.2rem + ((1vw - 0.48rem) * 0.9722)), 1.5rem)';
-	let h4 = ' clamp(1.125rem, calc(1.15rem + ((1vw - 0.48rem) * 0.3472)), 1.2rem)';
-	let body = ' clamp(1rem, calc(1rem + ((1vw - 0.48rem) * 0.1736)), 1.125rem)';
-	let lh1 = '1.3';
-	let lh2 = '1.35';
-	let lh3 = '1.4';
-	let lh4 = '1.5';
-	let lbody = '1.6';
-
-	$: {
-		console.log($data, $workingBlock);
-	}
 
 	function traverseParent(element: any): null | string {
 		while (element) {
@@ -35,7 +21,7 @@
 	function switchBlockState(event: MouseEvent) {
 		const id = traverseParent(event.target);
 		if (!id) workingBlock.set(null);
-		else if ($workingBlock == null || $workingBlock.id !== id)
+		else if ($workingBlock == null || ($workingBlock.id !== id && $workingBlock.state == 'focused'))
 			workingBlock.set({ id, state: 'focused' });
 		else workingBlock.set({ id, state: 'editing' });
 	}
@@ -64,21 +50,21 @@
 <div
 	class="main"
 	style:--primaryColor={primaryColor}
+	style:--editingColor={editingColor}
 	style:--fontColor={textColor}
-	style:--bgColor={bgColor}
 	style:--headingFont={headerFont}
 	style:--bodyFont={bodyFont}
-	style:--h1={h1}
-	style:--h2={h2}
-	style:--h3={h3}
-	style:--h4={h4}
-	style:--body={body}
-	style:--small="clamp(0.875rem, calc(0.875rem + ((1vw - 0.48rem) * 0.1736)), 1rem);"
-	style:--lh1={lh1}
-	style:--lh2={lh2}
-	style:--lh3={lh3}
-	style:--lh4={lh4}
-	style:--lbody={lbody}
+	style:--h1="clamp(1.8rem, calc(1.8rem + ((1vw - 0.48rem) * 0.9722)), 2.1rem)"
+	style:--h2="clamp(1.5rem, calc(1.5rem + ((1vw - 0.48rem) * 0.9722)), 1.8rem)"
+	style:--h3="clamp(1.2rem, calc(1.2rem + ((1vw - 0.48rem) * 0.9722)), 1.5rem)"
+	style:--h4="clamp(1.125rem, calc(1.15rem + ((1vw - 0.48rem) * 0.3472)), 1.2rem)"
+	style:--body="clamp(1rem, calc(1rem + ((1vw - 0.48rem) * 0.1736)), 1.125rem)"
+	style:--small="clamp(0.875rem, calc(0.875rem + ((1vw - 0.48rem) * 0.1736)), 1rem)"
+	style:--lh1="1.3"
+	style:--lh2="1.35"
+	style:--lh3="1.4"
+	style:--lh4="1.5"
+	style:--lbody="1.6"
 >
 	{#each $data as block (block.id)}
 		<BlockWrapper dataBlock={block} />
@@ -97,5 +83,39 @@
 	}
 	.main :global(*) {
 		box-sizing: border-box;
+	}
+	.main :global(h1),
+	.main :global(h2),
+	.main :global(h3),
+	.main :global(h4) {
+		font-family: var(--headingFont);
+		font-weight: bold;
+	}
+	.main :global(h1) {
+		font-size: var(--h1);
+		line-height: var(--lh1);
+	}
+	.main :global(h2) {
+		font-size: var(--h2);
+		line-height: var(--lh2);
+	}
+	.main :global(h3) {
+		font-size: var(--h3);
+		line-height: var(--lh3);
+	}
+	.main :global(h4) {
+		font-size: var(--h4);
+		line-height: var(--lh4);
+	}
+
+	.main :global(span),
+	.main :global(li),
+	.main :global(p),
+	.main :global(code) {
+		font-family: var(--bodyFont);
+		font-size: var(--body);
+		font-weight: 400;
+		line-height: var(--lbody);
+		white-space: normal;
 	}
 </style>
