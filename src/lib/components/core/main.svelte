@@ -6,7 +6,7 @@
 	export let headerFont = `Verdana, sans-serif`;
 	export let bodyFont = `Helvetica, sans-serif`;
 	export let primaryColor = '#3366FF';
-	export let editingColor = '#1eeb36';
+	export let secondaryColor = '#1eeb36';
 	export let textColor = '#121212';
 
 	function traverseParent(element: any): null | string {
@@ -21,36 +21,45 @@
 	function switchBlockState(event: MouseEvent) {
 		const id = traverseParent(event.target);
 		if (!id) workingBlock.set(null);
-		else if ($workingBlock == null || ($workingBlock.id !== id && $workingBlock.state == 'focused'))
+		else if ($workingBlock == null || $workingBlock.id !== id)
 			workingBlock.set({ id, state: 'focused' });
 		else workingBlock.set({ id, state: 'editing' });
 	}
 
-	function removeBlock(event: KeyboardEvent) {
-		if (event.key == 'Backspace' && $workingBlock && $workingBlock.state == 'focused') {
+	function actionOnBlock(event: KeyboardEvent) {
+		if (!$workingBlock || $workingBlock.state != 'focused') return;
+		if (event.key == 'Backspace') {
 			data.update((prev) => {
 				const newDataBlocks = prev.filter((element) => {
 					return element.id != $workingBlock.id;
 				});
 				return newDataBlocks;
 			});
+		} else if (event.key == 'ArrowUp' || event.key == 'ArrowDown') {
+			data.update((prev) => {
+				const index = prev.findIndex((val) => val.id == $workingBlock.id);
+				const val = prev.splice(index, 1)[0];
+				prev.splice(event.key == 'ArrowUp' ? index - 1 : index + 1, 0, val);
+				return prev;
+			});
 		}
 	}
 
 	onMount(() => {
 		window.addEventListener('click', switchBlockState);
-		window.addEventListener('keyup', removeBlock);
+		window.addEventListener('keyup', actionOnBlock);
 	});
 	onDestroy(() => {
 		window.removeEventListener('click', switchBlockState);
-		window.removeEventListener('keyup', removeBlock);
+		window.removeEventListener('keyup', actionOnBlock);
 	});
+	// *TODO:: add the moving behiavior to mobile and custom ui components for the blocks
 </script>
 
 <div
 	class="main"
 	style:--primaryColor={primaryColor}
-	style:--editingColor={editingColor}
+	style:--secondaryColor={secondaryColor}
 	style:--fontColor={textColor}
 	style:--headingFont={headerFont}
 	style:--bodyFont={bodyFont}
@@ -83,6 +92,8 @@
 	}
 	.main :global(*) {
 		box-sizing: border-box;
+		margin: 0;
+		padding: 0;
 	}
 	.main :global(h1),
 	.main :global(h2),
@@ -111,11 +122,12 @@
 	.main :global(span),
 	.main :global(li),
 	.main :global(p),
-	.main :global(code) {
+	.main :global(code),
+	.main :global(label) {
 		font-family: var(--bodyFont);
 		font-size: var(--body);
 		font-weight: 400;
 		line-height: var(--lbody);
-		white-space: normal;
+		white-space: pre-line;
 	}
 </style>

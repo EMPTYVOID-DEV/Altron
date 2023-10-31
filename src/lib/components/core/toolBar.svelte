@@ -128,7 +128,7 @@
 		padding-block: 3px;
 		font-size: var(--small);
 		font-weight: bold;
-		color: var(--primaryColor);
+		color: var(--fontColor);
 		background-color: transparent;
 		z-index: 99;
 	}

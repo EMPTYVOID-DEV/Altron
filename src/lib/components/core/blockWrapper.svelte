@@ -9,33 +9,32 @@
 	import Video from '../extra/video.svelte';
 	import { workingBlock } from '$lib/utils/store';
 	export let dataBlock: dataBlock;
+	$: active = $workingBlock && $workingBlock.state == 'editing' && $workingBlock.id == dataBlock.id;
+	$: focused =
+		$workingBlock && $workingBlock.state == 'focused' && $workingBlock.id == dataBlock.id;
 </script>
 
 <div
 	class="blockWrapper"
-	class:focused={$workingBlock &&
-		$workingBlock.state == 'focused' &&
-		$workingBlock.id == dataBlock.id}
-	class:editing={$workingBlock &&
-		$workingBlock.state == 'editing' &&
-		$workingBlock.id == dataBlock.id}
+	class:focused
+	class:editing={active}
 	data-blockid={dataBlock.id}
 	data-blocktype={dataBlock.type}
 >
 	{#if dataBlock.type == 'header'}
-		<Header id={dataBlock.id} data={dataBlock.data} />
+		<Header id={dataBlock.id} content={dataBlock.data} {active} />
 	{:else if dataBlock.type == 'code'}
-		<Code data={dataBlock.data} id={dataBlock.id} />
+		<Code content={dataBlock.data} id={dataBlock.id} {active} />
 	{:else if dataBlock.type == 'image'}
-		<Img id={dataBlock.id} data={dataBlock.data} />
+		<Img id={dataBlock.id} content={dataBlock.data} {active} />
 	{:else if dataBlock.type == 'list'}
-		<List id={dataBlock.id} data={dataBlock.data} />
+		<List id={dataBlock.id} content={dataBlock.data} {active} />
 	{:else if dataBlock.type == 'paragraph'}
-		<Paragraph id={dataBlock.id} data={dataBlock.data} />
+		<Paragraph id={dataBlock.id} content={dataBlock.data} {active} />
 	{:else if dataBlock.type == 'quote'}
-		<Quote id={dataBlock.id} data={dataBlock.data} />
+		<Quote id={dataBlock.id} content={dataBlock.data} {active} />
 	{:else if dataBlock.type == 'video'}
-		<Video id={dataBlock.id} data={dataBlock.data} />
+		<Video id={dataBlock.id} content={dataBlock.data} {active} />
 	{/if}
 	<span class="blockType">{dataBlock.type}</span>
 </div>
@@ -44,7 +43,7 @@
 	.blockWrapper {
 		width: 100%;
 		padding-block: 30px;
-		padding-inline: 20px;
+		padding-inline: 15px;
 		position: relative;
 		overflow: hidden;
 	}
@@ -54,7 +53,7 @@
 	}
 
 	.editing {
-		border: 2px solid var(--editingColor);
+		border: 2px solid var(--secondaryColor);
 		border-radius: 8px;
 	}
 
@@ -67,7 +66,7 @@
 	}
 
 	.editing .blockType {
-		background-color: var(--editingColor);
+		background-color: var(--secondaryColor);
 	}
 
 	.blockType {

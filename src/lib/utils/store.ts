@@ -4,10 +4,11 @@ import shortUUID from 'short-uuid';
 
 export const data = writable<dataBlock[]>([
 	{
-		type: 'paragraph',
+		type: 'header',
 		id: shortUUID('123456').generate(),
 		data: {
-			text: 'hello friend'
+			text: 'hello friend',
+			level: 1
 		}
 	}
 ]);

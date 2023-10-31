@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { workingBlock } from '$lib/utils/store';
-
 	export let changeHandler: (data: string) => void;
 	export let textContent: string = '';
 	export let textLevel: 'h1' | 'h2' | 'h3' | 'h4' | 'body' = 'body';
@@ -15,7 +13,7 @@
 		class="editableArea"
 		contenteditable="plaintext-only"
 		bind:textContent
-		on:change={(e) => {
+		on:input={(e) => {
 			changeHandler(e.currentTarget.textContent);
 		}}
 	>
@@ -26,8 +24,9 @@
 <style>
 	.areaWrapper {
 		width: 100%;
-		border-left: 6px solid var(--fontColor);
-		padding-left: 4px;
+		border-left: 6px solid var(--secondaryColor);
+		border-radius: 4px;
+		padding-left: 8px !important;
 		cursor: auto;
 	}
 	.editableArea {
