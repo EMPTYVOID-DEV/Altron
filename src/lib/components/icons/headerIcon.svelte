@@ -4,3 +4,9 @@
 		d="M2 4h4V1a1 1 0 1 1 2 0v8a1 1 0 1 1-2 0V6H2v3a1 1 0 1 1-2 0V1a1 1 0 1 1 2 0v3z"
 	/></svg
 >
+
+<style>
+	svg path {
+		fill: var(--primaryColor);
+	}
+</style>

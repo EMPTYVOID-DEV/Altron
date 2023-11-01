@@ -24,10 +24,13 @@
 <style>
 	.areaWrapper {
 		width: 100%;
+		display: flex;
+		align-items: center;
+		min-height: 2rem;
 		border-left: 6px solid var(--secondaryColor);
-		border-radius: 4px;
 		padding-left: 8px !important;
 		cursor: auto;
+		cursor: pointer;
 	}
 	.editableArea {
 		width: 100%;

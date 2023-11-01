@@ -2,11 +2,11 @@
 	import type { blocks, dataBlock } from '$lib/utils/types';
 	import type { ComponentType, SvelteComponent } from 'svelte';
 	import CodeIcon from '$lib/components/icons/codeIcon.svelte';
-	import HeaderIcon from '$lib/components/icons/header.svelte';
-	import ImageIcon from '$lib/components/icons/image.svelte';
-	import VideoIcon from '$lib/components/icons/video.svelte';
+	import HeaderIcon from '$lib/components/icons/headerIcon.svelte';
+	import ImageIcon from '$lib/components/icons/imageIcon.svelte';
+	import VideoIcon from '$lib/components/icons/videoIcon.svelte';
 	import ListIcon from '$lib/components/icons/listIcon.svelte';
-	import QuoteIcon from '$lib/components/icons/quote.svelte';
+	import QuoteIcon from '$lib/components/icons/closeQuoteIcon.svelte';
 	import ParagraphIcon from '$lib/components/icons/paragraphIcon.svelte';
 	import PlusIcon from '$lib/components/icons/plusIcon.svelte';
 	import CloseIcon from '$lib/components/icons/closeIcon.svelte';
@@ -24,7 +24,7 @@
 		} else if (type === 'code') {
 			list.push({ type, id, data: { text: '', lang: '' } });
 		} else if (type === 'quote') {
-			list.push({ type, id, data: { text: '' } });
+			list.push({ type, id, data: { text: '', owner: '' } });
 		} else if (type === 'header') {
 			list.push({ type, id, data: { text: '', level: 1 } });
 		} else if (type === 'list') {
@@ -47,6 +47,7 @@
 <div class="toolBar">
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
+
 	<span on:click={() => (toggle = !toggle)} class="control">
 		{#if toggle}
 			<CloseIcon />
@@ -102,9 +103,7 @@
 	.control {
 		border: 1px solid var(--fontColor);
 	}
-	.control :global(svg path) {
-		fill: var(--fontColor);
-	}
+
 	.options {
 		display: flex;
 		align-items: center;

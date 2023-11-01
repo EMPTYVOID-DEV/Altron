@@ -3,6 +3,7 @@
 	import { onDestroy, onMount } from 'svelte';
 	import BlockWrapper from './blockWrapper.svelte';
 	import ToolBar from './toolBar.svelte';
+	import Input from '../extra/input.svelte';
 	export let headerFont = `Verdana, sans-serif`;
 	export let bodyFont = `Helvetica, sans-serif`;
 	export let primaryColor = '#3366FF';

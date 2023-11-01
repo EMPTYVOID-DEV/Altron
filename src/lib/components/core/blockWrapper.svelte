@@ -42,7 +42,8 @@
 <style>
 	.blockWrapper {
 		width: 100%;
-		padding-block: 30px;
+		padding-top: 25px;
+		padding-bottom: 5px;
 		padding-inline: 15px;
 		position: relative;
 		overflow: hidden;
@@ -80,7 +81,7 @@
 		font-weight: bold;
 		display: none;
 		padding-inline: 12px;
-		padding-block: 4px;
+		padding-block: 2px;
 		border-bottom-left-radius: 12px;
 		text-transform: capitalize;
 	}

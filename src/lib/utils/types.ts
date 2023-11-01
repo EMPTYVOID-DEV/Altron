@@ -7,6 +7,6 @@ export type dataBlock =
 	| { type: 'video'; id: string; data: { href: string; alt: string } }
 	| { type: 'paragraph'; id: string; data: { text: string } }
 	| { type: 'code'; id: string; data: { text: string; lang: string } }
-	| { type: 'quote'; id: string; data: { text: string } }
+	| { type: 'quote'; id: string; data: { text: string; owner: string } }
 	| { type: 'header'; id: string; data: { text: string; level: 1 | 2 | 3 | 4 } }
 	| { type: 'list'; id: string; data: { items: string[]; type: 'ordered' | 'unordered' } };
