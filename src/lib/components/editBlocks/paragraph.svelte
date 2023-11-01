@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { data } from '$lib/utils/store';
-	import Textarea from './textarea.svelte';
+	import Textarea from '../extra/textarea.svelte';
 	export let content: { text: string };
 	export let active = false;
 	export let id: string;
@@ -13,7 +13,7 @@
 		changeHandler={(textContent) => {
 			data.update((prev) => {
 				prev.forEach((el) => {
-					if (el.id == id && el.type == 'paragraph') el.data.text = textContent;
+					if (el.id == id && el.name == 'paragraph') el.data.text = textContent;
 				});
 				return prev;
 			});

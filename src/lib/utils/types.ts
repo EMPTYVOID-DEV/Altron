@@ -1,12 +1,30 @@
+import type { ComponentType, SvelteComponent } from 'svelte';
+
 export type blocks = 'image' | 'video' | 'code' | 'quote' | 'paragraph' | 'header' | 'list';
 
 // *TODO: add links and bold text
 
 export type dataBlock =
-	| { type: 'image'; id: string; data: { href: string; alt: string } }
-	| { type: 'video'; id: string; data: { href: string; alt: string } }
-	| { type: 'paragraph'; id: string; data: { text: string } }
-	| { type: 'code'; id: string; data: { text: string; lang: string } }
-	| { type: 'quote'; id: string; data: { text: string; owner: string } }
-	| { type: 'header'; id: string; data: { text: string; level: 1 | 2 | 3 | 4 } }
-	| { type: 'list'; id: string; data: { items: string[]; type: 'ordered' | 'unordered' } };
+	| { name: 'image'; id: string; data: { href: string; alt: string } }
+	| { name: 'video'; id: string; data: { href: string; alt: string } }
+	| { name: 'paragraph'; id: string; data: { text: string } }
+	| { name: 'code'; id: string; data: { text: string; lang: string } }
+	| { name: 'quote'; id: string; data: { text: string; owner: string } }
+	| { name: 'header'; id: string; data: { text: string; level: 1 | 2 | 3 | 4 } }
+	| { name: 'list'; id: string; data: { items: string[]; type: 'ordered' | 'unordered' } };
+
+export type viewBlocks = [
+	{ name: 'image'; component: ComponentType<SvelteComponent<{ href: string; alt: string }>> },
+	{ name: 'video'; component: ComponentType<SvelteComponent<{ href: string; alt: string }>> },
+	{ name: 'quote'; component: ComponentType<SvelteComponent<{ text: string; owner: string }>> },
+	{ name: 'code'; component: ComponentType<SvelteComponent<{ text: string; lang: string }>> },
+	{
+		name: 'header';
+		component: ComponentType<SvelteComponent<{ text: string; level: 1 | 2 | 3 | 4 }>>;
+	},
+	{ name: 'paragraph'; component: ComponentType<SvelteComponent<{ text: string }>> },
+	{
+		name: 'list';
+		component: ComponentType<SvelteComponent<{ items: string[]; type: 'ordered' | 'unordered' }>>;
+	}
+];

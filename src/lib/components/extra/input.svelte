@@ -11,7 +11,7 @@
 			type="text"
 			{value}
 			placeholder="Enter the {label.toLowerCase()}"
-			id="custom-input"
+			class="custom-input"
 			on:input={(e) => changeHandler(e.currentTarget.value)}
 		/>
 	</div>
@@ -44,7 +44,7 @@
 		border: 2px solid var(--secondaryColor);
 	}
 
-	#custom-input {
+	.custom-input {
 		width: 100%;
 		padding-left: 8px;
 		padding-block: 10px;

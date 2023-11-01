@@ -1,12 +1,12 @@
 <script lang="ts">
 	import type { dataBlock } from '$lib/utils/types.js';
-	import Code from '../extra/code.svelte';
-	import Header from '../extra/header.svelte';
-	import Img from '../extra/img.svelte';
-	import List from '../extra/list.svelte';
-	import Paragraph from '../extra/paragraph.svelte';
-	import Quote from '../extra/quote.svelte';
-	import Video from '../extra/video.svelte';
+	import Code from '../editBlocks/code.svelte';
+	import Header from '../editBlocks/header.svelte';
+	import Img from '../editBlocks/img.svelte';
+	import List from '../editBlocks/list.svelte';
+	import Paragraph from '../editBlocks/paragraph.svelte';
+	import Quote from '../editBlocks/quote.svelte';
+	import Video from '../editBlocks/video.svelte';
 	import { workingBlock } from '$lib/utils/store';
 	export let dataBlock: dataBlock;
 	$: active = $workingBlock && $workingBlock.state == 'editing' && $workingBlock.id == dataBlock.id;
@@ -19,34 +19,33 @@
 	class:focused
 	class:editing={active}
 	data-blockid={dataBlock.id}
-	data-blocktype={dataBlock.type}
+	data-blocktype={dataBlock.name}
 >
-	{#if dataBlock.type == 'header'}
+	{#if dataBlock.name == 'header'}
 		<Header id={dataBlock.id} content={dataBlock.data} {active} />
-	{:else if dataBlock.type == 'code'}
+	{:else if dataBlock.name == 'code'}
 		<Code content={dataBlock.data} id={dataBlock.id} {active} />
-	{:else if dataBlock.type == 'image'}
+	{:else if dataBlock.name == 'image'}
 		<Img id={dataBlock.id} content={dataBlock.data} {active} />
-	{:else if dataBlock.type == 'list'}
+	{:else if dataBlock.name == 'list'}
 		<List id={dataBlock.id} content={dataBlock.data} {active} />
-	{:else if dataBlock.type == 'paragraph'}
+	{:else if dataBlock.name == 'paragraph'}
 		<Paragraph id={dataBlock.id} content={dataBlock.data} {active} />
-	{:else if dataBlock.type == 'quote'}
+	{:else if dataBlock.name == 'quote'}
 		<Quote id={dataBlock.id} content={dataBlock.data} {active} />
-	{:else if dataBlock.type == 'video'}
+	{:else if dataBlock.name == 'video'}
 		<Video id={dataBlock.id} content={dataBlock.data} {active} />
 	{/if}
-	<span class="blockType">{dataBlock.type}</span>
+	<span class="blockType">{dataBlock.name}</span>
 </div>
 
 <style>
 	.blockWrapper {
 		width: 100%;
 		padding-top: 25px;
-		padding-bottom: 5px;
+		padding-bottom: 10px;
 		padding-inline: 15px;
 		position: relative;
-		overflow: hidden;
 	}
 	.focused {
 		border: 2px solid var(--primaryColor);

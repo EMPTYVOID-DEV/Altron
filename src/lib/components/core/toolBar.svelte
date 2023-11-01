@@ -14,21 +14,21 @@
 	import { data, workingBlock } from '$lib/utils/store';
 	import { fade } from 'svelte/transition';
 	import { elasticIn } from 'svelte/easing';
-	function add(list: dataBlock[], id: string, type: blocks) {
-		if (type === 'paragraph') {
-			list.push({ type, id, data: { text: '' } });
-		} else if (type === 'image') {
-			list.push({ type, id, data: { href: '', alt: '' } });
-		} else if (type === 'video') {
-			list.push({ type, id, data: { href: '', alt: '' } });
-		} else if (type === 'code') {
-			list.push({ type, id, data: { text: '', lang: '' } });
-		} else if (type === 'quote') {
-			list.push({ type, id, data: { text: '', owner: '' } });
-		} else if (type === 'header') {
-			list.push({ type, id, data: { text: '', level: 1 } });
-		} else if (type === 'list') {
-			list.push({ type, id, data: { items: [], type: 'unordered' } });
+	function add(list: dataBlock[], id: string, name: blocks) {
+		if (name === 'paragraph') {
+			list.push({ name, id, data: { text: '' } });
+		} else if (name === 'image') {
+			list.push({ name, id, data: { href: '', alt: '' } });
+		} else if (name === 'video') {
+			list.push({ name, id, data: { href: '', alt: '' } });
+		} else if (name === 'code') {
+			list.push({ name, id, data: { text: '', lang: '' } });
+		} else if (name === 'quote') {
+			list.push({ name, id, data: { text: '', owner: '' } });
+		} else if (name === 'header') {
+			list.push({ name, id, data: { text: '', level: 4 } });
+		} else if (name === 'list') {
+			list.push({ name, id, data: { items: [], type: 'unordered' } });
 		}
 	}
 

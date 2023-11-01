@@ -1,14 +1,39 @@
 <script lang="ts">
 	import { data, workingBlock } from '$lib/utils/store.js';
-	import { onDestroy, onMount } from 'svelte';
+	import { SvelteComponent, onDestroy, onMount, type ComponentType, setContext } from 'svelte';
 	import BlockWrapper from './blockWrapper.svelte';
 	import ToolBar from './toolBar.svelte';
-	import Input from '../extra/input.svelte';
+	import ViewImage from '../viewBlocks/viewImage.svelte';
+	import ViewCode from '../viewBlocks/viewCode.svelte';
+	import ViewHeader from '../viewBlocks/viewHeader.svelte';
+	import ViewList from '../viewBlocks/viewList.svelte';
+	import ViewParagraph from '../viewBlocks/viewParagraph.svelte';
+	import ViewQuote from '../viewBlocks/viewQuote.svelte';
+	import ViewVideo from '../viewBlocks/viewVideo.svelte';
 	export let headerFont = `Verdana, sans-serif`;
 	export let bodyFont = `Helvetica, sans-serif`;
 	export let primaryColor = '#3366FF';
 	export let secondaryColor = '#1eeb36';
 	export let textColor = '#121212';
+	export let customImage: ComponentType<SvelteComponent<{ href: string; alt: string }>> = ViewImage;
+	export let customCode: ComponentType<SvelteComponent<{ text: string; lang: string }>> = ViewCode;
+	export let customVideo: ComponentType<SvelteComponent<{ href: string; alt: string }>> = ViewVideo;
+	export let customList: ComponentType<
+		SvelteComponent<{ items: string[]; type: 'ordered' | 'unordered' }>
+	> = ViewList;
+	export let customHeader: ComponentType<SvelteComponent<{ text: string; level: 1 | 2 | 3 | 4 }>> =
+		ViewHeader;
+	export let customParagraph: ComponentType<SvelteComponent<{ text: string }>> = ViewParagraph;
+	export let customQuote: ComponentType<SvelteComponent<{ text: string; owner: string }>> =
+		ViewQuote;
+
+	setContext('Image', customImage);
+	setContext('Video', customVideo);
+	setContext('Code', customCode);
+	setContext('Header', customHeader);
+	setContext('Paragraph', customParagraph);
+	setContext('List', customList);
+	setContext('Quote', customQuote);
 
 	function traverseParent(element: any): null | string {
 		while (element) {
@@ -54,7 +79,8 @@
 		window.removeEventListener('click', switchBlockState);
 		window.removeEventListener('keyup', actionOnBlock);
 	});
-	// *TODO:: add the moving behiavior to mobile and custom ui components for the blocks
+	// *TODO:: add the moving behiavior to mobile
+	// *TODO : add view mode
 </script>
 
 <div
@@ -88,7 +114,7 @@
 		width: 100%;
 		display: flex;
 		flex-direction: column;
-		gap: 10px;
+		gap: 30px;
 		padding-bottom: 20px;
 	}
 	.main :global(*) {
@@ -130,5 +156,16 @@
 		font-weight: 400;
 		line-height: var(--lbody);
 		white-space: pre-line;
+	}
+
+	.main :global(::-webkit-scrollbar) {
+		width: 0.5rem;
+	}
+	.main :global(::-webkit-scrollbar-track) {
+		background: color-mix(in srgb, var(--secondaryColor) 40%, white 40%);
+	}
+	.main :global(::-webkit-scrollbar-thumb) {
+		border-radius: 12px;
+		background: var(--secondaryColor);
 	}
 </style>

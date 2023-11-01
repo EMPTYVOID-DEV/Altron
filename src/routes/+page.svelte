@@ -1,7 +1,5 @@
 <script>
 	import Main from '$lib/components/core/main.svelte';
-	import Input from '$lib/components/extra/input.svelte';
-	import Textarea from '$lib/components/extra/textarea.svelte';
 </script>
 
 <div>

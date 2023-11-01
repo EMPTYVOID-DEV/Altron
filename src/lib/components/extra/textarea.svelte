@@ -1,15 +1,15 @@
 <script lang="ts">
 	export let changeHandler: (data: string) => void;
 	export let textContent: string = '';
-	export let textLevel: 'h1' | 'h2' | 'h3' | 'h4' | 'body' = 'body';
+	export let textLevel: 0 | 1 | 2 | 3 | 4 = 0;
 </script>
 
 <div class="areaWrapper">
 	<span
-		style:font-size="var(--{textLevel})"
-		style:font-weight={textLevel == 'body' ? '400' : 'bold'}
+		style:font-size="var(--{textLevel == 0 ? 'body' : 'h' + textLevel})"
+		style:font-weight={textLevel == 0 ? '400' : 'bold'}
 		style:line-height="var(--l{textLevel})"
-		style:font-family={textLevel == 'body' ? 'var(--bodyFont)' : 'var(--headingFont)'}
+		style:font-family={textLevel == 0 ? 'var(--bodyFont)' : 'var(--headingFont)'}
 		class="editableArea"
 		contenteditable="plaintext-only"
 		bind:textContent
