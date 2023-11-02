@@ -30,7 +30,7 @@
 		font-size: var(--small);
 		font-weight: 600;
 		margin-left: 10px;
-		color: var(--fontColor);
+		color: var(--textColor);
 	}
 
 	.input-container div {
@@ -49,6 +49,7 @@
 		padding-left: 8px;
 		padding-block: 10px;
 		font-size: var(--body);
+		color: var(--textColor);
 		border: 1px solid var(--secondaryColor);
 		border-radius: 0.4rem;
 		outline: none;

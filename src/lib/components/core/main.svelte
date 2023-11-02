@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { data, workingBlock } from '$lib/utils/store.js';
+	import { data, workingBlock } from '$lib/utils/stores.js';
 	import { SvelteComponent, onDestroy, onMount, type ComponentType, setContext } from 'svelte';
+	import { nightOwl } from 'svelte-highlight/styles';
 	import BlockWrapper from './blockWrapper.svelte';
 	import ToolBar from './toolBar.svelte';
 	import ViewImage from '../viewBlocks/viewImage.svelte';
@@ -10,13 +11,16 @@
 	import ViewParagraph from '../viewBlocks/viewParagraph.svelte';
 	import ViewQuote from '../viewBlocks/viewQuote.svelte';
 	import ViewVideo from '../viewBlocks/viewVideo.svelte';
+	import type { languages } from '$lib/utils/consts';
 	export let headerFont = `Verdana, sans-serif`;
 	export let bodyFont = `Helvetica, sans-serif`;
 	export let primaryColor = '#3366FF';
 	export let secondaryColor = '#1eeb36';
 	export let textColor = '#121212';
+	export let codeTheme: string = nightOwl;
 	export let customImage: ComponentType<SvelteComponent<{ href: string; alt: string }>> = ViewImage;
-	export let customCode: ComponentType<SvelteComponent<{ text: string; lang: string }>> = ViewCode;
+	export let customCode: ComponentType<SvelteComponent<{ text: string; lang: languages }>> =
+		ViewCode;
 	export let customVideo: ComponentType<SvelteComponent<{ href: string; alt: string }>> = ViewVideo;
 	export let customList: ComponentType<
 		SvelteComponent<{ items: string[]; type: 'ordered' | 'unordered' }>
@@ -26,7 +30,16 @@
 	export let customParagraph: ComponentType<SvelteComponent<{ text: string }>> = ViewParagraph;
 	export let customQuote: ComponentType<SvelteComponent<{ text: string; owner: string }>> =
 		ViewQuote;
-
+	export let codeBlockLanguages: languages[] = [
+		'javascript',
+		'java',
+		'c',
+		'css',
+		'typescript',
+		'python',
+		'csharp'
+	];
+	setContext('codeTheme', codeTheme);
 	setContext('Image', customImage);
 	setContext('Video', customVideo);
 	setContext('Code', customCode);
@@ -34,7 +47,7 @@
 	setContext('Paragraph', customParagraph);
 	setContext('List', customList);
 	setContext('Quote', customQuote);
-
+	setContext('languages', codeBlockLanguages);
 	function traverseParent(element: any): null | string {
 		while (element) {
 			let currentId = element?.dataset.blockid;
@@ -87,7 +100,7 @@
 	class="main"
 	style:--primaryColor={primaryColor}
 	style:--secondaryColor={secondaryColor}
-	style:--fontColor={textColor}
+	style:--textColor={textColor}
 	style:--headingFont={headerFont}
 	style:--bodyFont={bodyFont}
 	style:--h1="clamp(1.8rem, calc(1.8rem + ((1vw - 0.48rem) * 0.9722)), 2.1rem)"
@@ -102,7 +115,7 @@
 	style:--lh4="1.5"
 	style:--lbody="1.6"
 >
-	{#each $data as block (block.id)}
+	{#each $data as block}
 		<BlockWrapper dataBlock={block} />
 	{/each}
 
@@ -128,6 +141,7 @@
 	.main :global(h4) {
 		font-family: var(--headingFont);
 		font-weight: bold;
+		color: var(--textColor);
 	}
 	.main :global(h1) {
 		font-size: var(--h1);
@@ -149,7 +163,7 @@
 	.main :global(span),
 	.main :global(li),
 	.main :global(p),
-	.main :global(code),
+	.main :global(i),
 	.main :global(label) {
 		font-family: var(--bodyFont);
 		font-size: var(--body);
@@ -165,7 +179,6 @@
 		background: color-mix(in srgb, var(--secondaryColor) 40%, white 40%);
 	}
 	.main :global(::-webkit-scrollbar-thumb) {
-		border-radius: 12px;
 		background: var(--secondaryColor);
 	}
 </style>

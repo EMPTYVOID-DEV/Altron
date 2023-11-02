@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { data } from '$lib/utils/store';
 	import { SvelteComponent, getContext, type ComponentType } from 'svelte';
 	import Input from '../extra/input.svelte';
 	import Textarea from '../extra/textarea.svelte';
+	import { updateData } from '$lib/utils/functions';
 	export let content: { text: string; owner: string };
 	export let id: string;
 	export let active = false;
@@ -13,13 +13,10 @@
 	<div class="quoteEdit">
 		<Input
 			value={content.owner}
-			label="Quote owner"
+			label="The Quote owner"
 			changeHandler={(textContent) => {
-				data.update((prev) => {
-					prev.forEach((el) => {
-						if (el.id == id && el.name == 'quote') el.data.owner = textContent;
-					});
-					return prev;
+				updateData(id, (prev) => {
+					if (prev.name == 'quote') prev.data.owner = textContent;
 				});
 			}}
 		/>
@@ -29,11 +26,8 @@
 				textContent={content.text}
 				textLevel={0}
 				changeHandler={(textContent) => {
-					data.update((prev) => {
-						prev.forEach((el) => {
-							if (el.id == id && el.name == 'quote') el.data.text = textContent;
-						});
-						return prev;
+					updateData(id, (prev) => {
+						if (prev.name == 'quote') prev.data.text = textContent;
 					});
 				}}
 			/>
@@ -54,6 +48,7 @@
 		display: flex;
 		flex-direction: column;
 		gap: 5px;
+		color: var(-textColor);
 	}
 	.quoteEdit div span {
 		margin-left: 10px;

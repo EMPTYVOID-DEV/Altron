@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { dataBlock } from '$lib/utils/types.js';
+	import type { dataBlock } from '$lib/utils/consts.js';
 	import Code from '../editBlocks/code.svelte';
 	import Header from '../editBlocks/header.svelte';
 	import Img from '../editBlocks/img.svelte';
@@ -7,7 +7,7 @@
 	import Paragraph from '../editBlocks/paragraph.svelte';
 	import Quote from '../editBlocks/quote.svelte';
 	import Video from '../editBlocks/video.svelte';
-	import { workingBlock } from '$lib/utils/store';
+	import { workingBlock } from '$lib/utils/stores';
 	export let dataBlock: dataBlock;
 	$: active = $workingBlock && $workingBlock.state == 'editing' && $workingBlock.id == dataBlock.id;
 	$: focused =
@@ -42,11 +42,12 @@
 <style>
 	.blockWrapper {
 		width: 100%;
-		padding-top: 25px;
+		padding-top: 30px;
 		padding-bottom: 10px;
 		padding-inline: 15px;
 		position: relative;
 	}
+
 	.focused {
 		border: 2px solid var(--primaryColor);
 		border-radius: 8px;
@@ -75,8 +76,8 @@
 		height: fit-content;
 		top: 0%;
 		right: 0%;
-		color: var(--fontColor);
 		font-size: var(--small);
+		color: var(--textColor);
 		font-weight: bold;
 		display: none;
 		padding-inline: 12px;

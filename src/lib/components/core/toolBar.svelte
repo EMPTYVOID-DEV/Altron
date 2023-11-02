@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { blocks, dataBlock } from '$lib/utils/types';
+	import type { blocks, dataBlock } from '$lib/utils/consts';
 	import type { ComponentType, SvelteComponent } from 'svelte';
 	import CodeIcon from '$lib/components/icons/codeIcon.svelte';
 	import HeaderIcon from '$lib/components/icons/headerIcon.svelte';
@@ -11,22 +11,22 @@
 	import PlusIcon from '$lib/components/icons/plusIcon.svelte';
 	import CloseIcon from '$lib/components/icons/closeIcon.svelte';
 	import shortUUID from 'short-uuid';
-	import { data, workingBlock } from '$lib/utils/store';
+	import { data, workingBlock } from '$lib/utils/stores';
 	import { fade } from 'svelte/transition';
 	import { elasticIn } from 'svelte/easing';
 	function add(list: dataBlock[], id: string, name: blocks) {
 		if (name === 'paragraph') {
-			list.push({ name, id, data: { text: '' } });
+			list.push({ name, id, data: { text: 'hello friend' } });
 		} else if (name === 'image') {
 			list.push({ name, id, data: { href: '', alt: '' } });
 		} else if (name === 'video') {
 			list.push({ name, id, data: { href: '', alt: '' } });
 		} else if (name === 'code') {
-			list.push({ name, id, data: { text: '', lang: '' } });
+			list.push({ name, id, data: { text: 'console.log(13)', lang: 'plaintext' } });
 		} else if (name === 'quote') {
-			list.push({ name, id, data: { text: '', owner: '' } });
+			list.push({ name, id, data: { text: 'my quote', owner: 'you' } });
 		} else if (name === 'header') {
-			list.push({ name, id, data: { text: '', level: 4 } });
+			list.push({ name, id, data: { text: 'hello friend', level: 4 } });
 		} else if (name === 'list') {
 			list.push({ name, id, data: { items: [], type: 'unordered' } });
 		}
@@ -101,7 +101,7 @@
 	}
 
 	.control {
-		border: 1px solid var(--fontColor);
+		border: 1px solid var(--textColor);
 	}
 
 	.options {
@@ -127,7 +127,7 @@
 		padding-block: 3px;
 		font-size: var(--small);
 		font-weight: bold;
-		color: var(--fontColor);
+		color: var(--textColor);
 		background-color: transparent;
 		z-index: 99;
 	}

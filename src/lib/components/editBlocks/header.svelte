@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { SvelteComponent, getContext, type ComponentType } from 'svelte';
 	import Select from '../extra/select.svelte';
-	import { data } from '$lib/utils/store';
 	import Textarea from '../extra/textarea.svelte';
+	import { updateData } from '$lib/utils/functions';
 	export let content: { text: string; level: 1 | 2 | 3 | 4 };
 	export let id: string;
 	export let active = false;
@@ -22,14 +22,11 @@
 				{ value: 4, label: 'h4' }
 			]}
 			changeHandler={(detail) => {
-				data.update((prev) => {
-					prev.forEach((el) => {
-						if (el.id == id && el.name == 'header') {
-							el.data.level = detail.value;
-							content.level = detail.value;
-						}
-					});
-					return prev;
+				updateData(id, (prev) => {
+					if (prev.name == 'header') {
+						prev.data.level = detail.value;
+						content.level = detail.value;
+					}
 				});
 			}}
 		/>
@@ -39,11 +36,8 @@
 				textLevel={content.level}
 				textContent={content.text}
 				changeHandler={(text) => {
-					data.update((prev) => {
-						prev.forEach((el) => {
-							if (el.id == id && el.name == 'header') el.data.text = text;
-						});
-						return prev;
+					updateData(id, (prev) => {
+						if (prev.name == 'header') prev.data.text = text;
 					});
 				}}
 			/>
@@ -68,6 +62,7 @@
 	.headerEdit div span {
 		margin-left: 10px;
 		font-weight: bold;
+		color: var(--textColor);
 		font-size: var(--small);
 	}
 </style>

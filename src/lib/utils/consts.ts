@@ -17,7 +17,7 @@ export type viewBlocks = [
 	{ name: 'image'; component: ComponentType<SvelteComponent<{ href: string; alt: string }>> },
 	{ name: 'video'; component: ComponentType<SvelteComponent<{ href: string; alt: string }>> },
 	{ name: 'quote'; component: ComponentType<SvelteComponent<{ text: string; owner: string }>> },
-	{ name: 'code'; component: ComponentType<SvelteComponent<{ text: string; lang: string }>> },
+	{ name: 'code'; component: ComponentType<SvelteComponent<{ text: string; lang: languages }>> },
 	{
 		name: 'header';
 		component: ComponentType<SvelteComponent<{ text: string; level: 1 | 2 | 3 | 4 }>>;
@@ -28,3 +28,44 @@ export type viewBlocks = [
 		component: ComponentType<SvelteComponent<{ items: string[]; type: 'ordered' | 'unordered' }>>;
 	}
 ];
+
+export type languages =
+	| 'typescript'
+	| 'javascript'
+	| 'java'
+	| 'css'
+	| 'json'
+	| 'c'
+	| 'cpp'
+	| 'go'
+	| 'python'
+	| 'php'
+	| 'sql'
+	| 'plaintext'
+	| 'yaml'
+	| 'xml'
+	| 'rust'
+	| 'lua'
+	| 'bash'
+	| 'markdown'
+	| 'swift'
+	| 'dart'
+	| 'dockerfile'
+	| 'csharp'
+	| 'kotlin'
+	| 'ruby'
+	| 'perl'
+	| 'scala'
+	| 'groovy'
+	| 'haskell'
+	| 'r'
+	| 'erlang'
+	| 'elixir'
+	| 'assembly'
+	| 'powershell'
+	| 'matlab'
+	| 'fortran'
+	| 'pascal'
+	| 'cobol'
+	| 'actionscript'
+	| 'scheme';

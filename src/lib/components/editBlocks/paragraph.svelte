@@ -1,32 +1,24 @@
 <script lang="ts">
-	import { data } from '$lib/utils/store';
+	import { updateData } from '$lib/utils/functions';
+	import { SvelteComponent, getContext, type ComponentType } from 'svelte';
 	import Textarea from '../extra/textarea.svelte';
 	export let content: { text: string };
 	export let active = false;
 	export let id: string;
+	export let view: ComponentType<SvelteComponent<{ text: string }>> = getContext('Paragraph');
+	// *TODO : use custom paragraph
 </script>
 
 {#if active}
 	<Textarea
 		textContent={content.text}
-		textLevel="body"
+		textLevel={0}
 		changeHandler={(textContent) => {
-			data.update((prev) => {
-				prev.forEach((el) => {
-					if (el.id == id && el.name == 'paragraph') el.data.text = textContent;
-				});
-				return prev;
+			updateData(id, (prev) => {
+				if (prev.name == 'paragraph') prev.data.text = textContent;
 			});
 		}}
 	/>
 {:else}
-	<div class="paragraph">
-		<p>{content.text}</p>
-	</div>
+	<svelte:component this={view} text={content.text} />
 {/if}
-
-<style>
-	.paragraph {
-		width: 100%;
-	}
-</style>

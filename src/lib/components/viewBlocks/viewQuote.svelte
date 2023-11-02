@@ -15,6 +15,7 @@
 		width: 100%;
 		display: flex;
 		flex-direction: column;
+		color: var(--textColor);
 	}
 	.quote .quoteOwner {
 		align-self: flex-end;

@@ -8,7 +8,7 @@
 	<span
 		style:font-size="var(--{textLevel == 0 ? 'body' : 'h' + textLevel})"
 		style:font-weight={textLevel == 0 ? '400' : 'bold'}
-		style:line-height="var(--l{textLevel})"
+		style:line-height="var(--l{textLevel == 0 ? 'body' : 'h'})"
 		style:font-family={textLevel == 0 ? 'var(--bodyFont)' : 'var(--headingFont)'}
 		class="editableArea"
 		contenteditable="plaintext-only"
@@ -34,7 +34,7 @@
 	}
 	.editableArea {
 		width: 100%;
-		color: var(--fontColor);
+		color: var(--textColor);
 		border: none;
 		outline: none;
 	}

@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
-import type { dataBlock } from './types.js';
+import type { dataBlock } from './consts.js';
 import shortUUID from 'short-uuid';
 
 export const data = writable<dataBlock[]>([

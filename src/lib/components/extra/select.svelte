@@ -18,6 +18,7 @@
 		--background={'transparent'}
 		--chevron-color={'var(--fontColor)'}
 		--item-color={'var(--fontColor)'}
+		--item-first-border-radius={'0'}
 		--input-color={'var(--fontColor)'}
 		--item-hover-bg={'color-mix(in srgb , var(--secondaryColor) 70%, white 0%)'}
 		--item-is-active-color={'var(--fontColor)'}
@@ -45,6 +46,6 @@
 		font-size: var(--small);
 		font-weight: 600;
 		margin-left: 10px;
-		color: var(--fontColor);
+		color: var(--textColor);
 	}
 </style>
