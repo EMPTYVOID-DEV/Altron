@@ -2,9 +2,10 @@
 	export let changeHandler: (data: string) => void;
 	export let textContent: string = '';
 	export let textLevel: 0 | 1 | 2 | 3 | 4 = 0;
+	export let width = 100;
 </script>
 
-<div class="areaWrapper">
+<div class="areaWrapper" style:width={`${width}%`}>
 	<span
 		style:font-size="var(--{textLevel == 0 ? 'body' : 'h' + textLevel})"
 		style:font-weight={textLevel == 0 ? '400' : 'bold'}
@@ -23,7 +24,6 @@
 
 <style>
 	.areaWrapper {
-		width: 100%;
 		display: flex;
 		align-items: center;
 		min-height: 2rem;

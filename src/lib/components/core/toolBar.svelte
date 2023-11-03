@@ -22,13 +22,13 @@
 		} else if (name === 'video') {
 			list.push({ name, id, data: { href: '', alt: '' } });
 		} else if (name === 'code') {
-			list.push({ name, id, data: { text: 'console.log(13)', lang: 'plaintext' } });
+			list.push({ name, id, data: { text: 'console.log("hello friend")', lang: 'plaintext' } });
 		} else if (name === 'quote') {
-			list.push({ name, id, data: { text: 'my quote', owner: 'you' } });
+			list.push({ name, id, data: { text: 'hello friend', owner: 'me' } });
 		} else if (name === 'header') {
 			list.push({ name, id, data: { text: 'hello friend', level: 4 } });
 		} else if (name === 'list') {
-			list.push({ name, id, data: { items: [], type: 'unordered' } });
+			list.push({ name, id, data: { items: ['hello friend'], type: 'ordered' } });
 		}
 	}
 

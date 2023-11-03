@@ -12,6 +12,8 @@
 	import ViewQuote from '../viewBlocks/viewQuote.svelte';
 	import ViewVideo from '../viewBlocks/viewVideo.svelte';
 	import type { languages } from '$lib/utils/consts';
+
+	// exports
 	export let headerFont = `Verdana, sans-serif`;
 	export let bodyFont = `Helvetica, sans-serif`;
 	export let primaryColor = '#3366FF';
@@ -39,6 +41,8 @@
 		'python',
 		'csharp'
 	];
+
+	// context setup
 	setContext('codeTheme', codeTheme);
 	setContext('Image', customImage);
 	setContext('Video', customVideo);
@@ -48,6 +52,8 @@
 	setContext('List', customList);
 	setContext('Quote', customQuote);
 	setContext('languages', codeBlockLanguages);
+
+	// local functions
 	function traverseParent(element: any): null | string {
 		while (element) {
 			let currentId = element?.dataset.blockid;

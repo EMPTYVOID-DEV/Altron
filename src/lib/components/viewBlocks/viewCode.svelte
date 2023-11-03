@@ -2,6 +2,8 @@
 	import type { languages } from '$lib/utils/consts';
 	import { getContext } from 'svelte';
 	import { HighlightAuto, LineNumbers } from 'svelte-highlight';
+	import CopyIcon from '../icons/copyIcon.svelte';
+	import DoneIcon from '../icons/doneIcon.svelte';
 	export let text: string;
 	export let lang: languages;
 	const theme = getContext('codeTheme');
@@ -24,9 +26,9 @@
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<!-- svelte-ignore a11y-no-static-element-interactions -->
 		{#if !copyStatement}
-			<span on:click={copyCode}>Copy</span>
+			<span on:click={copyCode}><CopyIcon /></span>
 		{:else}
-			<span>Copied</span>
+			<span><DoneIcon /></span>
 		{/if}
 	</div>
 	<HighlightAuto code={text} let:highlighted>
