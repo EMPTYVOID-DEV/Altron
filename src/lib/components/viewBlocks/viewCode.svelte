@@ -26,13 +26,13 @@
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<!-- svelte-ignore a11y-no-static-element-interactions -->
 		{#if !copyStatement}
-			<span on:click={copyCode}><CopyIcon /></span>
+			<span on:click|stopPropagation={copyCode}><CopyIcon /></span>
 		{:else}
 			<span><DoneIcon /></span>
 		{/if}
 	</div>
 	<HighlightAuto code={text} let:highlighted>
-		<LineNumbers {highlighted} hideBorder />
+		<LineNumbers {highlighted} hideBorder wrapLines />
 	</HighlightAuto>
 </div>
 

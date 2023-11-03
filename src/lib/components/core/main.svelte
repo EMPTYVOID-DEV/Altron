@@ -12,6 +12,7 @@
 	import ViewQuote from '../viewBlocks/viewQuote.svelte';
 	import ViewVideo from '../viewBlocks/viewVideo.svelte';
 	import type { languages } from '$lib/utils/consts';
+	import Upload from '../extra/upload.svelte';
 
 	// exports
 	export let headerFont = `Verdana, sans-serif`;
@@ -20,7 +21,9 @@
 	export let secondaryColor = '#1eeb36';
 	export let textColor = '#121212';
 	export let codeTheme: string = nightOwl;
-	export let customImage: ComponentType<SvelteComponent<{ href: string; alt: string }>> = ViewImage;
+	export let customImage: ComponentType<
+		SvelteComponent<{ base64: string; name: string; caption: string }>
+	> = ViewImage;
 	export let customCode: ComponentType<SvelteComponent<{ text: string; lang: languages }>> =
 		ViewCode;
 	export let customVideo: ComponentType<SvelteComponent<{ href: string; alt: string }>> = ViewVideo;
@@ -99,7 +102,8 @@
 		window.removeEventListener('keyup', actionOnBlock);
 	});
 	// *TODO:: add the moving behiavior to mobile
-	// *TODO : add view mode
+	// *TODO: add view mode
+	// *TODO: add file upload to base64 (pdf)
 </script>
 
 <div
@@ -133,8 +137,8 @@
 		width: 100%;
 		display: flex;
 		flex-direction: column;
-		gap: 30px;
-		padding-bottom: 20px;
+		gap: 20px;
+		padding-bottom: 30px;
 	}
 	.main :global(*) {
 		box-sizing: border-box;
@@ -171,11 +175,11 @@
 	.main :global(p),
 	.main :global(i),
 	.main :global(label) {
+		word-break: break-word;
 		font-family: var(--bodyFont);
 		font-size: var(--body);
 		font-weight: 400;
 		line-height: var(--lbody);
-		white-space: pre-line;
 	}
 
 	.main :global(::-webkit-scrollbar) {

@@ -40,7 +40,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: stretch;
-		gap: 5px;
+		gap: 15px;
 	}
 	.select span {
 		font-size: var(--small);

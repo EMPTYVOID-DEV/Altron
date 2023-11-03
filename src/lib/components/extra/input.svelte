@@ -23,7 +23,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: stretch;
-		gap: 5px;
+		gap: 15px;
 	}
 
 	.input-container label {
@@ -39,6 +39,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		box-shadow: 2px 2px 5px 5px color-mix(in srgb, var(--textColor) 28%, white 0%);
 	}
 	.input-container div:hover {
 		border: 2px solid var(--secondaryColor);

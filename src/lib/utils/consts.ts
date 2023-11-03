@@ -5,7 +5,7 @@ export type blocks = 'image' | 'video' | 'code' | 'quote' | 'paragraph' | 'heade
 // *TODO: add links and bold text
 
 export type dataBlock =
-	| { name: 'image'; id: string; data: { href: string; alt: string } }
+	| { name: 'image'; id: string; data: { base64: string; name: string; caption: string } }
 	| { name: 'video'; id: string; data: { href: string; alt: string } }
 	| { name: 'paragraph'; id: string; data: { text: string } }
 	| { name: 'code'; id: string; data: { text: string; lang: string } }
@@ -14,7 +14,10 @@ export type dataBlock =
 	| { name: 'list'; id: string; data: { items: string[]; type: 'ordered' | 'unordered' } };
 
 export type viewBlocks = [
-	{ name: 'image'; component: ComponentType<SvelteComponent<{ href: string; alt: string }>> },
+	{
+		name: 'image';
+		component: ComponentType<SvelteComponent<{ base64: string; name: string; caption: string }>>;
+	},
 	{ name: 'video'; component: ComponentType<SvelteComponent<{ href: string; alt: string }>> },
 	{ name: 'quote'; component: ComponentType<SvelteComponent<{ text: string; owner: string }>> },
 	{ name: 'code'; component: ComponentType<SvelteComponent<{ text: string; lang: languages }>> },

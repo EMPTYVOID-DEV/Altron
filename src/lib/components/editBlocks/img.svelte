@@ -2,35 +2,41 @@
 	import { updateData } from '$lib/utils/functions';
 	import { SvelteComponent, getContext, type ComponentType } from 'svelte';
 	import Input from '../extra/input.svelte';
-	export let content: { href: string; alt: string };
+	import Upload from '../extra/upload.svelte';
+	export let content: { base64: string; name: string; caption: string };
 	export let id: string;
 	export let active = false;
-	const view: ComponentType<SvelteComponent<{ href: string; alt: string }>> = getContext('Image');
+	const view: ComponentType<SvelteComponent<{ base64: string; caption: string }>> =
+		getContext('Image');
 </script>
 
 {#if active}
 	<div class="imageEdit">
 		<Input
 			label="Image caption"
-			value={content.alt}
+			value={content.caption}
 			changeHandler={(text) => {
-				updateData(id, (prev) => {
-					if (prev.name == 'image') prev.data.alt = text;
+				updateData(id, (el) => {
+					if (el.name == 'image') el.data.caption = text;
 				});
 			}}
 		/>
-		<Input
-			label="Image link"
-			value={content.alt}
-			changeHandler={(text) => {
-				updateData(id, (prev) => {
-					if (prev.name == 'image') prev.data.href = text;
+		<Upload
+			fileType="image/*"
+			label="Image source"
+			currentFileName={content.name}
+			changeHandler={(base64, fileName) => {
+				updateData(id, (el) => {
+					if (el.name == 'image') {
+						el.data.name = fileName;
+						el.data.base64 = base64;
+					}
 				});
 			}}
 		/>
 	</div>
 {:else}
-	<svelte:component this={view} href={content.href} alt={content.alt} />
+	<svelte:component this={view} {...content} />
 {/if}
 
 <style>

@@ -18,7 +18,7 @@
 		if (name === 'paragraph') {
 			list.push({ name, id, data: { text: 'hello friend' } });
 		} else if (name === 'image') {
-			list.push({ name, id, data: { href: '', alt: '' } });
+			list.push({ name, id, data: { base64: '', name: 'default.png', caption: 'default image' } });
 		} else if (name === 'video') {
 			list.push({ name, id, data: { href: '', alt: '' } });
 		} else if (name === 'code') {

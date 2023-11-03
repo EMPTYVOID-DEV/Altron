@@ -1,11 +1,13 @@
 <script lang="ts">
-	export let href: string;
-	export let alt: string;
+	export let base64: string;
+	export let caption: string;
+	export let name;
+	String;
 </script>
 
 <div class="imageView">
-	<img src={href} {alt} on:error={(ev) => {}} />
-	<span>{alt}</span>
+	<img src={base64} alt="none" />
+	<span>{caption}</span>
 </div>
 
 <style>
@@ -18,9 +20,13 @@
 	}
 	.imageView img {
 		width: 100%;
-		aspect-ratio: 1/2;
+		aspect-ratio: 2/1;
 		border-radius: 8px;
-		object-fit: contain;
+		object-fit: cover;
 		object-position: center;
+	}
+	.imageView span {
+		color: var(--textColor);
+		font-weight: 600;
 	}
 </style>
