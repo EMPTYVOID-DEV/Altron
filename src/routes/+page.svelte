@@ -30,6 +30,7 @@
 				}
 			}
 		]}
+		viewMode={false}
 	/>
 </div>
 

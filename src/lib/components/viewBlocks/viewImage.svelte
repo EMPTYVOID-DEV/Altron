@@ -2,12 +2,16 @@
 	export let base64: string;
 	export let caption: string;
 	export let name: string;
-	console.log(base64);
+	import defaultImg from '$lib/assets/default.jpg';
+	let fallback = base64 == '';
 </script>
 
 <div class="imageView">
-	<!-- svelte-ignore a11y-img-redundant-alt -->
-	<img src={base64} alt="sorry {name} image does not exist" />
+	{#if fallback}
+		<img src={defaultImg} alt="favicon" />
+	{:else}
+		<img src={base64} alt="sorry {name} image does not exist" on:error={() => (fallback = true)} />
+	{/if}
 	<span>{caption}</span>
 </div>
 

@@ -43,8 +43,6 @@
 	.blockWrapper {
 		width: 100%;
 		padding-top: 30px;
-		padding-bottom: 10px;
-		padding-inline: 15px;
 		position: relative;
 	}
 
@@ -53,6 +51,11 @@
 		border-radius: 8px;
 	}
 
+	.focused,
+	.editing {
+		padding-bottom: 10px;
+		padding-inline: 15px;
+	}
 	.editing {
 		border: 2px solid var(--secondaryColor);
 		border-radius: 8px;
