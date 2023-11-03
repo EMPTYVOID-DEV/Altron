@@ -6,8 +6,8 @@
 	import List from '../editBlocks/list.svelte';
 	import Paragraph from '../editBlocks/paragraph.svelte';
 	import Quote from '../editBlocks/quote.svelte';
-	import Video from '../editBlocks/video.svelte';
 	import { workingBlock } from '$lib/utils/stores';
+	import Space from '../editBlocks/space.svelte';
 	export let dataBlock: dataBlock;
 	$: active = $workingBlock && $workingBlock.state == 'editing' && $workingBlock.id == dataBlock.id;
 	$: focused =
@@ -33,8 +33,8 @@
 		<Paragraph id={dataBlock.id} content={dataBlock.data} {active} />
 	{:else if dataBlock.name == 'quote'}
 		<Quote id={dataBlock.id} content={dataBlock.data} {active} />
-	{:else if dataBlock.name == 'video'}
-		<Video id={dataBlock.id} content={dataBlock.data} {active} />
+	{:else}
+		<Space id={dataBlock.id} content={dataBlock.data} {active} />
 	{/if}
 	<span class="blockType">{dataBlock.name}</span>
 </div>

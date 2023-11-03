@@ -10,23 +10,34 @@
 	import ViewList from '../viewBlocks/viewList.svelte';
 	import ViewParagraph from '../viewBlocks/viewParagraph.svelte';
 	import ViewQuote from '../viewBlocks/viewQuote.svelte';
-	import ViewVideo from '../viewBlocks/viewVideo.svelte';
-	import type { languages } from '$lib/utils/consts';
-	import Upload from '../extra/upload.svelte';
+	import type { dataBlock, languages } from '$lib/utils/consts';
+	import ViewMode from './viewMode.svelte';
 
 	// exports
+	export let intailData: dataBlock[] = [];
+	export let viewMode = false;
 	export let headerFont = `Verdana, sans-serif`;
 	export let bodyFont = `Helvetica, sans-serif`;
 	export let primaryColor = '#3366FF';
 	export let secondaryColor = '#1eeb36';
 	export let textColor = '#121212';
+	export let h1 = 'clamp(1.8rem, calc(1.8rem + ((1vw - 0.48rem) * 0.9722)), 2.1rem)';
+	export let h2 = 'clamp(1.5rem, calc(1.5rem + ((1vw - 0.48rem) * 0.9722)), 1.8rem)';
+	export let h3 = 'clamp(1.2rem, calc(1.2rem + ((1vw - 0.48rem) * 0.9722)), 1.5rem)';
+	export let h4 = 'clamp(1.125rem, calc(1.15rem + ((1vw - 0.48rem) * 0.3472)), 1.2rem)';
+	export let body = 'clamp(1rem, calc(1rem + ((1vw - 0.48rem) * 0.1736)), 1.125rem)';
+	export let small = 'clamp(0.875rem, calc(0.875rem + ((1vw - 0.48rem) * 0.1736)), 1rem)';
+	export let lh1 = '1.3';
+	export let lh2 = '1.35';
+	export let lh3 = '1.4';
+	export let lh4 = '1.5';
+	export let lbody = '1.6';
 	export let codeTheme: string = nightOwl;
 	export let customImage: ComponentType<
 		SvelteComponent<{ base64: string; name: string; caption: string }>
 	> = ViewImage;
 	export let customCode: ComponentType<SvelteComponent<{ text: string; lang: languages }>> =
 		ViewCode;
-	export let customVideo: ComponentType<SvelteComponent<{ href: string; alt: string }>> = ViewVideo;
 	export let customList: ComponentType<
 		SvelteComponent<{ items: string[]; type: 'ordered' | 'unordered' }>
 	> = ViewList;
@@ -48,7 +59,6 @@
 	// context setup
 	setContext('codeTheme', codeTheme);
 	setContext('Image', customImage);
-	setContext('Video', customVideo);
 	setContext('Code', customCode);
 	setContext('Header', customHeader);
 	setContext('Paragraph', customParagraph);
@@ -101,9 +111,9 @@
 		window.removeEventListener('click', switchBlockState);
 		window.removeEventListener('keyup', actionOnBlock);
 	});
+
+	data.set(intailData);
 	// *TODO:: add the moving behiavior to mobile
-	// *TODO: add view mode
-	// *TODO: add file upload to base64 (pdf)
 </script>
 
 <div
@@ -113,23 +123,27 @@
 	style:--textColor={textColor}
 	style:--headingFont={headerFont}
 	style:--bodyFont={bodyFont}
-	style:--h1="clamp(1.8rem, calc(1.8rem + ((1vw - 0.48rem) * 0.9722)), 2.1rem)"
-	style:--h2="clamp(1.5rem, calc(1.5rem + ((1vw - 0.48rem) * 0.9722)), 1.8rem)"
-	style:--h3="clamp(1.2rem, calc(1.2rem + ((1vw - 0.48rem) * 0.9722)), 1.5rem)"
-	style:--h4="clamp(1.125rem, calc(1.15rem + ((1vw - 0.48rem) * 0.3472)), 1.2rem)"
-	style:--body="clamp(1rem, calc(1rem + ((1vw - 0.48rem) * 0.1736)), 1.125rem)"
-	style:--small="clamp(0.875rem, calc(0.875rem + ((1vw - 0.48rem) * 0.1736)), 1rem)"
-	style:--lh1="1.3"
-	style:--lh2="1.35"
-	style:--lh3="1.4"
-	style:--lh4="1.5"
-	style:--lbody="1.6"
+	style:--h1={h1}
+	style:--h2={h2}
+	style:--h3={h3}
+	style:--h4={h4}
+	style:--body={body}
+	style:--small={small}
+	style:--lh1={lh1}
+	style:--lh2={lh2}
+	style:--lh3={lh3}
+	style:--lh4={lh4}
+	style:--lbody={lbody}
 >
-	{#each $data as block}
-		<BlockWrapper dataBlock={block} />
-	{/each}
+	{#if viewMode}
+		<ViewMode />
+	{:else}
+		{#each $data as block}
+			<BlockWrapper dataBlock={block} />
+		{/each}
 
-	<ToolBar />
+		<ToolBar />
+	{/if}
 </div>
 
 <style>
@@ -137,7 +151,7 @@
 		width: 100%;
 		display: flex;
 		flex-direction: column;
-		gap: 20px;
+		gap: 10px;
 		padding-bottom: 30px;
 	}
 	.main :global(*) {
@@ -152,6 +166,7 @@
 		font-family: var(--headingFont);
 		font-weight: bold;
 		color: var(--textColor);
+		word-break: break-word;
 	}
 	.main :global(h1) {
 		font-size: var(--h1);
@@ -180,15 +195,5 @@
 		font-size: var(--body);
 		font-weight: 400;
 		line-height: var(--lbody);
-	}
-
-	.main :global(::-webkit-scrollbar) {
-		width: 0.5rem;
-	}
-	.main :global(::-webkit-scrollbar-track) {
-		background: color-mix(in srgb, var(--secondaryColor) 40%, white 40%);
-	}
-	.main :global(::-webkit-scrollbar-thumb) {
-		background: var(--secondaryColor);
 	}
 </style>

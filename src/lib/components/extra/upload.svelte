@@ -1,5 +1,5 @@
 <script lang="ts">
-	import CodeIcon from '../icons/codeIcon.svelte';
+	import UploadIcon from '../icons/uploadIcon.svelte';
 
 	export let label = '';
 	export let changeHandler: (base64: string, fileName: string) => void;
@@ -29,7 +29,7 @@
 	<div class="inputReplace">
 		<label class="uploadBtn" for="custom-input">
 			<span>Upload a file</span>
-			<CodeIcon />
+			<UploadIcon />
 		</label>
 		<span>{currentFileName}</span>
 	</div>

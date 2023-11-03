@@ -1,6 +1,7 @@
 <script lang="ts">
 	export let value = '';
 	export let label = '';
+	export let type: 'text' | 'number' = 'text';
 	export let changeHandler: (text: string) => void;
 </script>
 
@@ -8,7 +9,7 @@
 	<label for="custom-input">{label}</label>
 	<div>
 		<input
-			type="text"
+			{type}
 			{value}
 			placeholder="Enter the {label.toLowerCase()}"
 			class="custom-input"
@@ -42,7 +43,7 @@
 		box-shadow: 2px 2px 5px 5px color-mix(in srgb, var(--textColor) 28%, white 0%);
 	}
 	.input-container div:hover {
-		border: 2px solid var(--secondaryColor);
+		border: 3px solid var(--secondaryColor);
 	}
 
 	.custom-input {
@@ -55,5 +56,9 @@
 		border-radius: 0.4rem;
 		outline: none;
 		position: relative;
+	}
+	.custom-input[type='number']::-webkit-outer-spin-button,
+	.custom-input::-webkit-inner-spin-button {
+		-webkit-appearance: none;
 	}
 </style>

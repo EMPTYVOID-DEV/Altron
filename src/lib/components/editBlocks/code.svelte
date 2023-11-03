@@ -4,12 +4,13 @@
 	import type { languages } from '$lib/utils/consts';
 	import { updateData } from '$lib/utils/functions';
 	import Textarea from '../extra/textarea.svelte';
-	export let content: { text: string; lang: string };
+	export let content: { text: string; lang: languages };
 	export let id: string;
 	export let active = false;
 	const languages = getContext('languages') as languages[];
-	const view: ComponentType<SvelteComponent<{ text: string; lang: string }>> = getContext('Code');
-	// fix the ui and the autoHighlight (code splitting)
+	const view: ComponentType<SvelteComponent<{ text: string; lang: languages }>> =
+		getContext('Code');
+	// *TODO: fix the ui and the autoHighlight (code splitting)
 </script>
 
 {#if active}
@@ -47,6 +48,15 @@
 		display: flex;
 		flex-direction: column;
 		gap: 15px;
+	}
+	.codeEdit :global(::-webkit-scrollbar) {
+		width: 0.5rem;
+	}
+	.codeEdit :global(::-webkit-scrollbar-track) {
+		background: color-mix(in srgb, var(--secondaryColor) 40%, white 40%);
+	}
+	.codeEdit :global(::-webkit-scrollbar-thumb) {
+		background: var(--secondaryColor);
 	}
 	.codeEdit div {
 		display: flex;

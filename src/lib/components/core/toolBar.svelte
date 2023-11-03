@@ -4,12 +4,12 @@
 	import CodeIcon from '$lib/components/icons/codeIcon.svelte';
 	import HeaderIcon from '$lib/components/icons/headerIcon.svelte';
 	import ImageIcon from '$lib/components/icons/imageIcon.svelte';
-	import VideoIcon from '$lib/components/icons/videoIcon.svelte';
 	import ListIcon from '$lib/components/icons/listIcon.svelte';
 	import QuoteIcon from '$lib/components/icons/closeQuoteIcon.svelte';
 	import ParagraphIcon from '$lib/components/icons/paragraphIcon.svelte';
 	import PlusIcon from '$lib/components/icons/plusIcon.svelte';
 	import CloseIcon from '$lib/components/icons/closeIcon.svelte';
+	import SpaceIcon from '$lib/components/icons/spaceIcon.svelte';
 	import shortUUID from 'short-uuid';
 	import { data, workingBlock } from '$lib/utils/stores';
 	import { fade } from 'svelte/transition';
@@ -18,9 +18,11 @@
 		if (name === 'paragraph') {
 			list.push({ name, id, data: { text: 'hello friend' } });
 		} else if (name === 'image') {
-			list.push({ name, id, data: { base64: '', name: 'default.png', caption: 'default image' } });
-		} else if (name === 'video') {
-			list.push({ name, id, data: { href: '', alt: '' } });
+			list.push({
+				name,
+				id,
+				data: { base64: '', name: 'default.png', caption: 'default image' }
+			});
 		} else if (name === 'code') {
 			list.push({ name, id, data: { text: 'console.log("hello friend")', lang: 'plaintext' } });
 		} else if (name === 'quote') {
@@ -29,17 +31,19 @@
 			list.push({ name, id, data: { text: 'hello friend', level: 4 } });
 		} else if (name === 'list') {
 			list.push({ name, id, data: { items: ['hello friend'], type: 'ordered' } });
+		} else {
+			list.push({ id, name, data: { size: 24 } });
 		}
 	}
 
 	const options: Map<blocks, ComponentType<SvelteComponent>> = new Map([
 		['code', CodeIcon],
 		['image', ImageIcon],
-		['video', VideoIcon],
 		['quote', QuoteIcon],
 		['header', HeaderIcon],
 		['paragraph', ParagraphIcon],
-		['list', ListIcon]
+		['list', ListIcon],
+		['space', SpaceIcon]
 	]);
 	let toggle = true;
 </script>
