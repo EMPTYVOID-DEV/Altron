@@ -7,6 +7,7 @@
 	import UpIcon from '../icons/upIcon.svelte';
 	import DeleteIcon from '$lib/components/icons/deleteIcon.svelte';
 	import DownIcon from '../icons/downIcon.svelte';
+	import { browser } from '$app/environment';
 
 	function traverseParent(element: any): null | string {
 		while (element) {
@@ -62,14 +63,16 @@
 	// 	}
 	// }
 
-	onMount(() => {
-		window.addEventListener('click', switchBlockState);
-		//	window.addEventListener('keyup', actionOnBlock);
-	});
-	onDestroy(() => {
-		window.removeEventListener('click', switchBlockState);
-		// window.removeEventListener('keyup', actionOnBlock);
-	});
+	if (browser) {
+		onMount(() => {
+			window.addEventListener('click', switchBlockState);
+			//	window.addEventListener('keyup', actionOnBlock);
+		});
+		onDestroy(() => {
+			window.removeEventListener('click', switchBlockState);
+			// window.removeEventListener('keyup', actionOnBlock);
+		});
+	}
 </script>
 
 {#each $data as block}

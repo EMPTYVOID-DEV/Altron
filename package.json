@@ -1,7 +1,7 @@
 {
-	"name": "svelterichtext",
+	"name": "altron-rich-text",
 	"version": "0.0.0",
-	"description": "Rich text editor svelte component",
+	"description": "Rich text editor as a svelte component",
 	"maintainers": [
 		"Aymen keskas <keskasaymen8@gmail.com> (https://aymenkeskas.vercel.app/)"
 	],
@@ -10,24 +10,24 @@
 	},
 	"keywords": [
 		"sveltekit",
-		"markdown",
 		"rich text editor",
 		"javascript",
 		"typescript",
-		"svelte"
+		"svelte",
+		"blocks"
 	],
 	"author": "Keskas aymen",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/Shinji13/SvelteDocsMaker"
+		"url": "https://github.com/Shinji13/Altron-Rich-Text.git"
 	},
 	"scripts": {
 		"dev": "vite --host",
 		"build": "vite build",
 		"preview": "vite preview",
 		"package": "svelte-kit sync && svelte-package && publint",
-		"release": "pnpm run package && npx changeset publish",
+		"release": "pnpm run package && pnpx changeset publish",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"test": "vitest",
