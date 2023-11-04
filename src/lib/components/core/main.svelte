@@ -1,9 +1,7 @@
 <script lang="ts">
-	import { data, workingBlock } from '$lib/utils/stores.js';
-	import { SvelteComponent, onDestroy, onMount, type ComponentType, setContext } from 'svelte';
+	import { data } from '$lib/utils/stores.js';
+	import { type SvelteComponent, type ComponentType, setContext } from 'svelte';
 	import { nightOwl } from 'svelte-highlight/styles';
-	import BlockWrapper from './blockWrapper.svelte';
-	import ToolBar from './toolBar.svelte';
 	import ViewImage from '../viewBlocks/viewImage.svelte';
 	import ViewCode from '../viewBlocks/viewCode.svelte';
 	import ViewHeader from '../viewBlocks/viewHeader.svelte';
@@ -22,6 +20,7 @@
 	export let primaryColor = '#3366FF';
 	export let secondaryColor = '#1eeb36';
 	export let textColor = '#121212';
+	export let bgColor = '#ffffff';
 	export let h1 = 'clamp(1.8rem, calc(1.8rem + ((1vw - 0.48rem) * 0.9722)), 2.1rem)';
 	export let h2 = 'clamp(1.5rem, calc(1.5rem + ((1vw - 0.48rem) * 0.9722)), 1.8rem)';
 	export let h3 = 'clamp(1.2rem, calc(1.2rem + ((1vw - 0.48rem) * 0.9722)), 1.5rem)';
@@ -68,7 +67,6 @@
 	setContext('languages', codeBlockLanguages);
 
 	data.set(intailData);
-	// *TODO:: add the moving behiavior to mobile
 </script>
 
 <div
@@ -78,6 +76,7 @@
 	style:--textColor={textColor}
 	style:--headingFont={headerFont}
 	style:--bodyFont={bodyFont}
+	style:--bgColor={bgColor}
 	style:--h1={h1}
 	style:--h2={h2}
 	style:--h3={h3}

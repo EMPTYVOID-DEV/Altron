@@ -31,6 +31,7 @@
 			<span><DoneIcon /></span>
 		{/if}
 	</div>
+
 	<HighlightAuto code={text} let:highlighted>
 		<LineNumbers {highlighted} hideBorder wrapLines />
 	</HighlightAuto>

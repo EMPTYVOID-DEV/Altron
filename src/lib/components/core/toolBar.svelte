@@ -88,6 +88,7 @@
 
 <style>
 	.toolBar {
+		margin-top: 30px;
 		width: fit-content;
 		display: grid;
 		align-items: center;
@@ -140,17 +141,5 @@
 	}
 	.option > :global(svg path) {
 		fill: var(--primaryColor);
-	}
-	@media screen and (width < 768px) {
-		.toolBar span {
-			width: 32px;
-		}
-		.toolBar .options {
-			row-gap: 25px;
-		}
-		.toolBar span :global(svg) {
-			width: 22px;
-			height: 22px;
-		}
 	}
 </style>
