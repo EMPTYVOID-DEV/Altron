@@ -1,5 +1,11 @@
 # altron-rich-text
 
+## 0.0.3
+
+### Patch Changes
+
+- d38082b: updating the readme
+
 ## 0.0.2
 
 ### Patch Changes
