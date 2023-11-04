@@ -2,7 +2,7 @@
 	export let base64: string;
 	export let caption: string;
 	export let name: string;
-	import defaultImg from '$lib/assets/default.jpg';
+	import defaultImg from '../../assets/default.jpg';
 	let fallback = base64 == '';
 </script>
 

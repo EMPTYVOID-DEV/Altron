@@ -1,12 +1,12 @@
 <script lang="ts">
-	import type { dataBlock } from '$lib/utils/consts.js';
+	import type { dataBlock } from '../../utils/consts.js';
 	import Code from '../editBlocks/code.svelte';
 	import Header from '../editBlocks/header.svelte';
 	import Img from '../editBlocks/img.svelte';
 	import List from '../editBlocks/list.svelte';
 	import Paragraph from '../editBlocks/paragraph.svelte';
 	import Quote from '../editBlocks/quote.svelte';
-	import { workingBlock } from '$lib/utils/stores';
+	import { workingBlock } from '../../utils/stores';
 	import Space from '../editBlocks/space.svelte';
 	export let dataBlock: dataBlock;
 	$: active = $workingBlock && $workingBlock.state == 'editing' && $workingBlock.id == dataBlock.id;

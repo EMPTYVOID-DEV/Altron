@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { languages } from '$lib/utils/consts';
+	import type { languages } from '../../utils/consts';
 	import { getContext } from 'svelte';
 	import { HighlightAuto, LineNumbers } from 'svelte-highlight';
 	import CopyIcon from '../icons/copyIcon.svelte';

@@ -2,7 +2,7 @@
 	import { SvelteComponent, getContext, type ComponentType } from 'svelte';
 	import Input from '../extra/input.svelte';
 	import Textarea from '../extra/textarea.svelte';
-	import { updateData } from '$lib/utils/functions';
+	import { updateData } from '../../utils/functions';
 	export let content: { text: string; owner: string };
 	export let id: string;
 	export let active = false;

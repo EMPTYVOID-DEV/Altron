@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { ComponentType, SvelteComponent } from 'svelte';
-	import MenuIcon from '$lib/components/icons/menuIcon.svelte';
+	import MenuIcon from '../icons/menuIcon.svelte';
 	import CloseIcon from '../icons/closeIcon.svelte';
 	export let options: { icon: ComponentType<SvelteComponent>; label: string; cb: () => void }[] =
 		[];

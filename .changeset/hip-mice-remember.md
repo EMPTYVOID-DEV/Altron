@@ -2,4 +2,4 @@
 'altron-rich-text': patch
 ---
 
-adding if browser condition when executing onMount and onDestroy to prevent window is not defined
+removing the ondestroy method and adding a return function from onMount because it execute in the server

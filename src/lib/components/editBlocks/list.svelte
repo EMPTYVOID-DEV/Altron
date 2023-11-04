@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { SvelteComponent, getContext, type ComponentType } from 'svelte';
 	import Select from '../extra/select.svelte';
-	import { updateData } from '$lib/utils/functions';
+	import { updateData } from '../../utils/functions';
 	import Textarea from '../extra/textarea.svelte';
 	import CloseIcon from '../icons/closeIcon.svelte';
 	import PlusIcon from '../icons/plusIcon.svelte';

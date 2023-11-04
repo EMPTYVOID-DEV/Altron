@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { updateData } from '$lib/utils/functions';
+	import { updateData } from '../../utils/functions';
 	import { SvelteComponent, getContext, type ComponentType } from 'svelte';
 	import Textarea from '../extra/textarea.svelte';
 	export let content: { text: string };

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { data } from '$lib/utils/stores.js';
+	import { data } from '../../utils/stores.js';
 	import { type SvelteComponent, type ComponentType, setContext } from 'svelte';
 	import { nightOwl } from 'svelte-highlight/styles';
 	import ViewImage from '../viewBlocks/viewImage.svelte';
@@ -8,7 +8,7 @@
 	import ViewList from '../viewBlocks/viewList.svelte';
 	import ViewParagraph from '../viewBlocks/viewParagraph.svelte';
 	import ViewQuote from '../viewBlocks/viewQuote.svelte';
-	import type { dataBlock, languages } from '$lib/utils/consts';
+	import type { dataBlock, languages } from '../../utils/consts';
 	import ViewMode from './viewMode.svelte';
 	import EditMode from './editMode.svelte';
 

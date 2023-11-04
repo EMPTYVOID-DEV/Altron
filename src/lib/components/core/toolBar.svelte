@@ -1,17 +1,17 @@
 <script lang="ts">
-	import type { blocks, dataBlock } from '$lib/utils/consts';
+	import type { blocks, dataBlock } from '../../utils/consts';
 	import type { ComponentType, SvelteComponent } from 'svelte';
-	import CodeIcon from '$lib/components/icons/codeIcon.svelte';
-	import HeaderIcon from '$lib/components/icons/headerIcon.svelte';
-	import ImageIcon from '$lib/components/icons/imageIcon.svelte';
-	import ListIcon from '$lib/components/icons/listIcon.svelte';
-	import QuoteIcon from '$lib/components/icons/closeQuoteIcon.svelte';
-	import ParagraphIcon from '$lib/components/icons/paragraphIcon.svelte';
-	import PlusIcon from '$lib/components/icons/plusIcon.svelte';
-	import CloseIcon from '$lib/components/icons/closeIcon.svelte';
-	import SpaceIcon from '$lib/components/icons/spaceIcon.svelte';
+	import CodeIcon from '../icons/codeIcon.svelte';
+	import HeaderIcon from '../icons/headerIcon.svelte';
+	import ImageIcon from '../icons/imageIcon.svelte';
+	import ListIcon from '../icons/listIcon.svelte';
+	import QuoteIcon from '../icons/closeQuoteIcon.svelte';
+	import ParagraphIcon from '../icons/paragraphIcon.svelte';
+	import PlusIcon from '../icons/plusIcon.svelte';
+	import CloseIcon from '../icons/closeIcon.svelte';
+	import SpaceIcon from '../icons/spaceIcon.svelte';
 	import shortUUID from 'short-uuid';
-	import { data, workingBlock } from '$lib/utils/stores';
+	import { data, workingBlock } from '../../utils/stores';
 	import { fade } from 'svelte/transition';
 	import { elasticIn } from 'svelte/easing';
 	function add(list: dataBlock[], id: string, name: blocks) {

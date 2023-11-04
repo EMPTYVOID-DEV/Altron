@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { updateData } from '$lib/utils/functions';
+	import { updateData } from '../../utils/functions';
 	import Input from '../extra/input.svelte';
 
 	export let content: { size: number };

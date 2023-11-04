@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { SvelteComponent, getContext, type ComponentType } from 'svelte';
 	import Select from '../extra/select.svelte';
-	import type { languages } from '$lib/utils/consts';
-	import { updateData } from '$lib/utils/functions';
+	import type { languages } from '../../utils/consts';
+	import { updateData } from '../../utils/functions';
 	import Textarea from '../extra/textarea.svelte';
 	export let content: { text: string; lang: languages };
 	export let id: string;

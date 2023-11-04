@@ -1,13 +1,12 @@
 <script lang="ts">
-	import { data, workingBlock } from '$lib/utils/stores';
-	import { onMount, onDestroy } from 'svelte';
+	import { data, workingBlock } from '../../utils/stores';
+	import { onMount } from 'svelte';
 	import BlockWrapper from './blockWrapper.svelte';
 	import ToolBar from './toolBar.svelte';
-	import DropDown from '$lib/components/extra/dropDown.svelte';
+	import DropDown from '../../components/extra/dropDown.svelte';
 	import UpIcon from '../icons/upIcon.svelte';
-	import DeleteIcon from '$lib/components/icons/deleteIcon.svelte';
+	import DeleteIcon from '../icons/deleteIcon.svelte';
 	import DownIcon from '../icons/downIcon.svelte';
-	import { browser } from '$app/environment';
 
 	function traverseParent(element: any): null | string {
 		while (element) {
@@ -63,16 +62,12 @@
 	// 	}
 	// }
 
-	if (browser) {
-		onMount(() => {
-			window.addEventListener('click', switchBlockState);
-			//	window.addEventListener('keyup', actionOnBlock);
-		});
-		onDestroy(() => {
+	onMount(() => {
+		window.addEventListener('click', switchBlockState);
+		return () => {
 			window.removeEventListener('click', switchBlockState);
-			// window.removeEventListener('keyup', actionOnBlock);
-		});
-	}
+		};
+	});
 </script>
 
 {#each $data as block}

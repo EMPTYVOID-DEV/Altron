@@ -1,5 +1,5 @@
 <script>
-	import { data } from '$lib/utils/stores';
+	import { data } from '../../utils/stores';
 	import ViewCode from '../viewBlocks/viewCode.svelte';
 	import ViewHeader from '../viewBlocks/viewHeader.svelte';
 	import ViewImage from '../viewBlocks/viewImage.svelte';
