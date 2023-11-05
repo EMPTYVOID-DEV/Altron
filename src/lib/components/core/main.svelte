@@ -21,6 +21,8 @@
 	export let secondaryColor = '#1eeb36';
 	export let textColor = '#121212';
 	export let bgColor = '#ffffff';
+	export let blocksGap = 10;
+	export let marginBlock = 30;
 	export let h1 = 'clamp(1.8rem, calc(1.8rem + ((1vw - 0.48rem) * 0.9722)), 2.1rem)';
 	export let h2 = 'clamp(1.5rem, calc(1.5rem + ((1vw - 0.48rem) * 0.9722)), 1.8rem)';
 	export let h3 = 'clamp(1.2rem, calc(1.2rem + ((1vw - 0.48rem) * 0.9722)), 1.5rem)';
@@ -84,10 +86,12 @@
 	style:--body={body}
 	style:--small={small}
 	style:--lh1={lh1}
+	style:gap="{blocksGap}px"
 	style:--lh2={lh2}
 	style:--lh3={lh3}
 	style:--lh4={lh4}
 	style:--lbody={lbody}
+	style:margin-block="{marginBlock}px"
 >
 	{#if viewMode}
 		<ViewMode />
@@ -101,8 +105,6 @@
 		width: 100%;
 		display: flex;
 		flex-direction: column;
-		gap: 10px;
-		padding-bottom: 30px;
 	}
 	.main :global(*) {
 		box-sizing: border-box;

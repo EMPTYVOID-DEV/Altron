@@ -6,6 +6,7 @@
 	import ViewList from '../viewBlocks/viewList.svelte';
 	import ViewParagraph from '../viewBlocks/viewParagraph.svelte';
 	import ViewQuote from '../viewBlocks/viewQuote.svelte';
+	import ViewSpace from '../viewBlocks/viewSpace.svelte';
 </script>
 
 {#each $data as block}
@@ -21,5 +22,7 @@
 		<ViewQuote {...block.data} />
 	{:else if block.name == 'paragraph'}
 		<ViewParagraph {...block.data} />
+	{:else}
+		<ViewSpace size={block.data.size} />
 	{/if}
 {/each}

@@ -1,6 +1,8 @@
 
 # Altron Rich Text Svelte Component
 
+![altronLogo](./static/altronGreen.jpg)
+
 ## Introduction
 
 The **Altron Rich Text Svelte Component** is a powerful and versatile rich text editor for Svelte applications. It allows users to create, edit, and manage structured text content by adding various blocks with associated data. This component is designed to be highly customizable, responsive on mobile devices, and supportive of both editing and viewing modes.
@@ -84,6 +86,8 @@ You can customize various aspects of the rich text editor:
 
 - **Custom Code Block Languages:** Define the list of languages users can use for code blocks with the `codeBlockLanguages` prop. By default, it includes JavaScript, Java, C, CSS, TypeScript, Python, and C#.
 
+- **Custom spacing:** By default **altron** separate blocks with 10px gap and have **margin-block** set to 30px you can change that using **blocksGap** and **marginBlock** props .
+
 - **Custom Components:** You can replace the default view components for various block types with your custom components. For example:
     - `customImage` for image blocks
     - `customCode` for code blocks
@@ -155,6 +159,10 @@ Here are all AltronRichText props and their default values:
 export let initialData: dataBlock[] = [];
 
 export let viewMode = false;
+
+export let blocksGap = 10;
+
+export let marginBlock = 30;
 
 export let headerFont = `Verdana, sans-serif`;
 

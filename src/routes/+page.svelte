@@ -1,44 +1,41 @@
 <script>
 	import Main from '$lib/components/core/main.svelte';
-	import shortUUID from 'short-uuid';
+	import { AltronRichText, getData } from '$lib/index';
 </script>
 
 <div>
 	<Main
 		intailData={[
 			{
-				name: 'header',
-				id: shortUUID('123456').generate(),
-				data: {
-					text: 'hello friend',
-					level: 1
-				}
-			},
-			{
-				name: 'code',
-				id: '88',
-				data: {
-					lang: 'bash',
-					text: 'hello'
-				}
-			},
-			{
-				id: '99',
+				id: '123',
 				name: 'paragraph',
-				data: {
-					text: 'hello'
-				}
+				data: { text: 'hello' }
+			},
+			{
+				id: '12',
+				name: 'header',
+				data: { text: 'hello', level: 1 }
+			},
+
+			{
+				id: '14',
+				name: 'quote',
+				data: { text: 'my quote', owner: 'me' }
 			}
 		]}
-		viewMode={false}
 	/>
+	<button
+		on:click={() => {
+			console.log(getData());
+		}}>save</button
+	>
 </div>
 
 <style>
 	div {
 		width: 50vw;
 		position: absolute;
-		top: 50%;
+		top: 70%;
 		left: 50%;
 		translate: -50% -50%;
 	}
