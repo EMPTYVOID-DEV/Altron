@@ -1,5 +1,13 @@
 # altron-rich-text
 
+## 0.0.4
+
+### Patch Changes
+
+- 217ad5c: updating the readme , adding two props to customize block gap and margin-block
+- Updated dependencies [217ad5c]
+  - altron-rich-text@0.0.4
+
 ## 0.0.3
 
 ### Patch Changes
