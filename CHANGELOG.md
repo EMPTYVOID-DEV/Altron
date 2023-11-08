@@ -1,5 +1,11 @@
 # altron-rich-text
 
+## 0.0.5
+
+### Patch Changes
+
+- 47faec2: updating some ui elements
+
 ## 0.0.4
 
 ### Patch Changes
