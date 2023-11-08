@@ -74,33 +74,31 @@
 	<div class="block">
 		<BlockWrapper dataBlock={block} />
 		{#if $workingBlock?.id == block.id && $workingBlock.state == 'focused'}
-			<div class="menu">
-				<DropDown
-					options={[
-						{
-							label: 'move the block up',
-							icon: UpIcon,
-							cb: () => {
-								move(true);
-							}
-						},
-						{
-							icon: DownIcon,
-							label: 'move the block down',
-							cb: () => {
-								move(false);
-							}
-						},
-						{
-							icon: DeleteIcon,
-							label: 'Delete the block',
-							cb: () => {
-								Delete();
-							}
+			<DropDown
+				options={[
+					{
+						label: 'move the block up',
+						icon: UpIcon,
+						cb: () => {
+							move(true);
 						}
-					]}
-				/>
-			</div>
+					},
+					{
+						icon: DownIcon,
+						label: 'move the block down',
+						cb: () => {
+							move(false);
+						}
+					},
+					{
+						icon: DeleteIcon,
+						label: 'Delete the block',
+						cb: () => {
+							Delete();
+						}
+					}
+				]}
+			/>
 		{/if}
 	</div>
 {/each}
@@ -113,8 +111,5 @@
 		width: 100%;
 		gap: 10px;
 		align-items: center;
-	}
-	.block .menu {
-		display: block;
 	}
 </style>

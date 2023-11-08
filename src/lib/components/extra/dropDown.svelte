@@ -47,7 +47,7 @@
 		<!-- svelte-ignore a11y-no-static-element-interactions -->
 		<div
 			class="option"
-			on:click|stopPropagation={() => {
+			on:click={() => {
 				dialog.close();
 			}}
 		>
@@ -64,9 +64,7 @@
 		top: 50%;
 		left: 50%;
 		translate: -50% -50%;
-		background-color: var(--bgColor);
-		border-radius: 4px;
-		border: 2px solid var(--textColor);
+		background-color: transparent;
 	}
 
 	dialog::backdrop {
@@ -91,6 +89,9 @@
 		padding-block: 4px;
 		min-width: 18rem;
 		max-width: 25rem;
+		background-color: var(--bgColor);
+		border-radius: 4px;
+		border: 2px solid var(--textColor);
 	}
 	.dropDown div {
 		width: 100%;
@@ -111,7 +112,7 @@
 		height: 20px;
 	}
 	.dropDown .option :global(path) {
-		fill: var(--primaryColor);
+		fill: var(--textColor);
 	}
 	.dropDown .option:hover {
 		background-color: color-mix(in srgb, var(--primaryColor) 38%, white 0%);

@@ -12,6 +12,8 @@
 	import ViewMode from './viewMode.svelte';
 	import EditMode from './editMode.svelte';
 
+	// TODO: custom blocks
+
 	// exports
 	export let intailData: dataBlock[] = [];
 	export let viewMode = false;
@@ -35,6 +37,15 @@
 	export let lh4 = '1.5';
 	export let lbody = '1.6';
 	export let codeTheme: string = nightOwl;
+	export let codeBlockLanguages: languages[] = [
+		'javascript',
+		'java',
+		'c',
+		'css',
+		'typescript',
+		'python',
+		'csharp'
+	];
 	export let customImage: ComponentType<
 		SvelteComponent<{ base64: string; name: string; caption: string }>
 	> = ViewImage;
@@ -48,15 +59,6 @@
 	export let customParagraph: ComponentType<SvelteComponent<{ text: string }>> = ViewParagraph;
 	export let customQuote: ComponentType<SvelteComponent<{ text: string; owner: string }>> =
 		ViewQuote;
-	export let codeBlockLanguages: languages[] = [
-		'javascript',
-		'java',
-		'c',
-		'css',
-		'typescript',
-		'python',
-		'csharp'
-	];
 
 	// context setup
 	setContext('codeTheme', codeTheme);
