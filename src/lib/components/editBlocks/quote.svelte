@@ -54,5 +54,6 @@
 		margin-left: 10px;
 		font-weight: bold;
 		font-size: var(--small);
+		color: var(--textColor);
 	}
 </style>

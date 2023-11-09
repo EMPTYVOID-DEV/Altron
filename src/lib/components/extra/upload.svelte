@@ -71,9 +71,8 @@
 		gap: 5px;
 		border: 2px solid var(--secondaryColor);
 		padding-inline: 8px;
-		padding-block: 10px;
+		padding-block: 8px;
 		border-radius: 0.5rem;
-		box-shadow: 2px 2px 5px 5px color-mix(in srgb, var(--textColor) 28%, white 0%);
 	}
 	.uploadBtn span {
 		font-weight: 600;

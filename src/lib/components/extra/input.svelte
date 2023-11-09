@@ -40,7 +40,8 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		box-shadow: 2px 2px 5px 5px color-mix(in srgb, var(--textColor) 28%, white 0%);
+		padding: 3px;
+		height: 3rem;
 	}
 	.input-container div:hover {
 		border: 3px solid var(--secondaryColor);
@@ -48,12 +49,14 @@
 
 	.custom-input {
 		width: 100%;
+		height: 100%;
 		padding-left: 8px;
 		padding-block: 10px;
 		font-size: var(--body);
 		color: var(--textColor);
+		background-color: transparent;
 		border: 1px solid var(--secondaryColor);
-		border-radius: 0.4rem;
+		border-radius: 0.3rem;
 		outline: none;
 		position: relative;
 	}

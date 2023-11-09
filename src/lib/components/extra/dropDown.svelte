@@ -68,7 +68,7 @@
 	}
 
 	dialog::backdrop {
-		background: color-mix(in srgb, gray 70%, white 0%);
+		background: color-mix(in srgb, gray 50%, white 0%);
 	}
 	.openMenu {
 		cursor: pointer;
@@ -112,7 +112,7 @@
 		height: 20px;
 	}
 	.dropDown .option :global(path) {
-		fill: var(--textColor);
+		fill: var(--primaryColor);
 	}
 	.dropDown .option:hover {
 		background-color: color-mix(in srgb, var(--primaryColor) 38%, white 0%);

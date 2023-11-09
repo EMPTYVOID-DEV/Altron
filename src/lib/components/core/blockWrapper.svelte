@@ -42,7 +42,6 @@
 <style>
 	.blockWrapper {
 		width: 100%;
-		overflow-x: hidden;
 		padding-top: 30px;
 		position: relative;
 	}

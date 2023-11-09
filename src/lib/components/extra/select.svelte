@@ -15,19 +15,23 @@
 		showChevron={true}
 		hideEmptyState={true}
 		clearable={false}
+		--chevron-color={'var(--textColor)'}
 		--background={'transparent'}
-		--chevron-color={'var(--fontColor)'}
-		--item-color={'var(--fontColor)'}
-		--item-first-border-radius={'0'}
-		--input-color={'var(--fontColor)'}
-		--item-hover-bg={'color-mix(in srgb , var(--secondaryColor) 70%, white 0%)'}
-		--item-is-active-color={'var(--fontColor)'}
-		--item-is-active-bg={'var(--secondaryColor)'}
+		--placeholder-color={'var(--textColor)'}
+		--input-color={'var(--textColor)'}
+		--list-background={'var(--bgColor)'}
 		--list-border={'1px solid var(--secondaryColor)'}
+		--selected-item-color={'var(--textColor)'}
+		--item-color={'var(--textColor)'}
+		--item-first-border-radius={'0'}
+		--item-hover-bg={'color-mix(in srgb , var(--secondaryColor) 40%, white 0%)'}
+		--item-hover-color={'var(--textColor)'}
+		--item-is-active-color={'var(--textColor)'}
+		--item-is-active-bg={'var(--secondaryColor)'}
 		--border={'2px solid var(--secondaryColor)'}
 		--border-focused={'2px solid var(--secondaryColor)'}
 		--border-hover={'2px solid var(--secondaryColor)'}
-		--clear-icon-color={'var(--fontColor)'}
+		--clear-icon-color={'var(--textColor)'}
 		on:change={(event) => {
 			changeHandler(event.detail);
 		}}

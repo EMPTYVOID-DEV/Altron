@@ -7,6 +7,6 @@
 
 <style>
 	svg path {
-		fill: var(---primaryColor);
+		fill: var(--primaryColor);
 	}
 </style>

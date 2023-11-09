@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { blocks, dataBlock } from '../../utils/consts';
-	import type { ComponentType, SvelteComponent } from 'svelte';
+	import type { blocks, dataBlock, languages } from '../../utils/consts';
+	import { getContext, type ComponentType, type SvelteComponent } from 'svelte';
 	import CodeIcon from '../icons/codeIcon.svelte';
 	import HeaderIcon from '../icons/headerIcon.svelte';
 	import ImageIcon from '../icons/imageIcon.svelte';
@@ -24,7 +24,11 @@
 				data: { base64: '', name: 'default.png', caption: 'default image' }
 			});
 		} else if (name === 'code') {
-			list.push({ name, id, data: { text: 'console.log("hello friend")', lang: 'plaintext' } });
+			list.push({
+				name,
+				id,
+				data: { text: 'console.log("hello friend")', lang: languages[0] }
+			});
 		} else if (name === 'quote') {
 			list.push({ name, id, data: { text: 'hello friend', owner: 'me' } });
 		} else if (name === 'header') {
@@ -35,7 +39,7 @@
 			list.push({ id, name, data: { size: 24 } });
 		}
 	}
-
+	const languages = getContext('languages') as languages[];
 	const options: Map<blocks, ComponentType<SvelteComponent>> = new Map([
 		['code', CodeIcon],
 		['image', ImageIcon],
@@ -125,7 +129,7 @@
 		position: absolute;
 		display: none;
 		top: 102%;
-		left: 1.2rem;
+		left: -50%;
 		width: 120px;
 		text-transform: capitalize;
 		padding-inline: 6px;

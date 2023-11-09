@@ -63,6 +63,7 @@
 		padding-inline: 10px;
 		padding-block: 5px;
 	}
+
 	#codeMdBlock #lang span {
 		color: var(--textColor);
 		font-weight: bold;

@@ -11,8 +11,7 @@
 	import type { dataBlock, languages } from '../../utils/consts';
 	import ViewMode from './viewMode.svelte';
 	import EditMode from './editMode.svelte';
-
-	// TODO: custom blocks
+	import Code from '../editBlocks/code.svelte';
 
 	// exports
 	export let intailData: dataBlock[] = [];
@@ -42,6 +41,7 @@
 		'java',
 		'c',
 		'css',
+		'plaintext',
 		'typescript',
 		'python',
 		'csharp'
@@ -60,6 +60,7 @@
 	export let customQuote: ComponentType<SvelteComponent<{ text: string; owner: string }>> =
 		ViewQuote;
 
+	//
 	// context setup
 	setContext('codeTheme', codeTheme);
 	setContext('Image', customImage);
@@ -68,6 +69,8 @@
 	setContext('Paragraph', customParagraph);
 	setContext('List', customList);
 	setContext('Quote', customQuote);
+	// in case no options add plaintext
+	if (codeBlockLanguages.length == 0) codeBlockLanguages.push('plaintext');
 	setContext('languages', codeBlockLanguages);
 
 	data.set(intailData);
@@ -78,9 +81,9 @@
 	style:--primaryColor={primaryColor}
 	style:--secondaryColor={secondaryColor}
 	style:--textColor={textColor}
+	style:--bgColor={bgColor}
 	style:--headingFont={headerFont}
 	style:--bodyFont={bodyFont}
-	style:--bgColor={bgColor}
 	style:--h1={h1}
 	style:--h2={h2}
 	style:--h3={h3}
