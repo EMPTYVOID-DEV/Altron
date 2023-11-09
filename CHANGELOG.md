@@ -1,5 +1,11 @@
 # altron-rich-text
 
+## 0.1.0
+
+### Minor Changes
+
+- fixing ui mainly colors
+
 ## 0.0.5
 
 ### Patch Changes
