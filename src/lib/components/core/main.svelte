@@ -1,4 +1,10 @@
 <script lang="ts">
+	//   Breaking changes in next version
+	// - adding more blocks
+	// - working on inline sub-blocks e.g : links , bold .
+	// - adding customization features like centering, resizing .
+	// - removing autohighlight
+
 	import { type SvelteComponent, type ComponentType, setContext } from 'svelte';
 	import { nightOwl } from 'svelte-highlight/styles';
 	import ViewImage from '../viewBlocks/viewImage.svelte';

@@ -10,7 +10,6 @@
 	const languages = getContext('languages') as languages[];
 	const view: ComponentType<SvelteComponent<{ text: string; lang: languages }>> =
 		getContext('Code');
-	// *TODO: rm the autoHighlight (code splitting)
 </script>
 
 {#if active}

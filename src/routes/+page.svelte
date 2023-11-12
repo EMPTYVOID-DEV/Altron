@@ -1,9 +1,9 @@
 <script>
-	import Main from '$lib/components/core/main.svelte';
+	import { AltronRichText } from '$lib/index';
 </script>
 
 <div>
-	<Main primaryColor={'red'} secondaryColor={'blue'} textColor={'green'} bgColor={'pink'} />
+	<AltronRichText />
 </div>
 
 <style>

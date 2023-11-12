@@ -157,6 +157,14 @@ The package provides a function to set the `data` dynamically ,  this is needed 
  type setData=(newData: dataBlock[] | (prev: dataBlock[]) => dataBlock[])=>void
 ```
 
+### The getWorkingBlock function
+
+The package provides a function to get the current block id and state.Its value will be null if all blocks are in **view state**.
+
+```ts  
+  type returnValue= {  state: "focused" | "editing";  id: string;  } |  null
+```
+
 ## Alerts
 
 ### Svelte Highlight

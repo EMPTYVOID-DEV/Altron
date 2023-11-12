@@ -2,9 +2,6 @@ import type { ComponentType, SvelteComponent } from 'svelte';
 
 export type blocks = 'image' | 'code' | 'quote' | 'paragraph' | 'header' | 'list' | 'space';
 
-// *TODO: add links and bold text
-// *TODO: add pdf files and tables
-
 export type dataBlock =
 	| { name: 'image'; id: string; data: { base64: string; name: string; caption: string } }
 	| { name: 'paragraph'; id: string; data: { text: string } }
