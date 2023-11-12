@@ -1,5 +1,13 @@
 # altron-rich-text
 
+## 1.1.1
+
+### Patch Changes
+
+- patching the old version changes --missing to bundle the package
+- Updated dependencies
+  - altron-rich-text@1.1.1
+
 ## 1.1.0
 
 ### Minor Changes

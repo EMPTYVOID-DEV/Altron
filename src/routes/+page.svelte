@@ -1,5 +1,18 @@
 <script>
-	import { AltronRichText } from '$lib/index';
+	import { AltronRichText, setData } from 'altron-rich-text';
+	import { onMount } from 'svelte';
+	onMount(() => {
+		setData([
+			{
+				id: 'ywywy',
+				name: 'header',
+				data: {
+					level: 1,
+					text: 'welcome'
+				}
+			}
+		]);
+	});
 </script>
 
 <div>

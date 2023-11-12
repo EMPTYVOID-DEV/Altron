@@ -1,6 +1,6 @@
 {
 	"name": "altron-rich-text",
-	"version": "1.1.0",
+	"version": "1.1.1",
 	"description": "Rich text editor as a svelte component",
 	"maintainers": [
 		"Aymen keskas <keskasaymen8@gmail.com> (https://aymenkeskas.vercel.app/)"
@@ -79,7 +79,7 @@
 		}
 	},
 	"dependencies": {
-		"altron-rich-text": "^1.1.0",
+		"altron-rich-text": "^1.1.1",
 		"short-uuid": "^4.2.2",
 		"svelte-highlight": "^7.4.1",
 		"svelte-select": "^5.7.0"

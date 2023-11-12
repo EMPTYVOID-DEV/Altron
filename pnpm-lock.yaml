@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   altron-rich-text:
-    specifier: ^1.0.0
-    version: 1.0.0(svelte@4.2.2)
+    specifier: ^1.1.1
+    version: 1.1.1(svelte@4.2.2)
   short-uuid:
     specifier: ^4.2.2
     version: 4.2.2
@@ -1002,8 +1002,8 @@ packages:
       uri-js: 4.4.1
     dev: true
 
-  /altron-rich-text@1.0.0(svelte@4.2.2):
-    resolution: {integrity: sha512-EItpV1Stm0fG/wTp7eE5XMXpHbj7+Vco7V4kuZBEge+Ves0mkw8ssO+JaeC1lHeuomA2UwdRXju+qVHd9UvGFA==}
+  /altron-rich-text@1.1.1(svelte@4.2.2):
+    resolution: {integrity: sha512-rNhv0/gGI9Ws9SgR+l50fBWnD6SWH+gH266ckbUO2Ev4pw7Tetg55QUWZF3CI7ODS0TQLdjNIw3T2W2JgyCt3A==}
     engines: {node: '>=16.14'}
     peerDependencies:
       svelte: ^4.0.0
