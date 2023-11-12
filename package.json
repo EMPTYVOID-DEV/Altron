@@ -1,6 +1,6 @@
 {
 	"name": "altron-rich-text",
-	"version": "0.1.0",
+	"version": "1.0.0",
 	"description": "Rich text editor as a svelte component",
 	"maintainers": [
 		"Aymen keskas <keskasaymen8@gmail.com> (https://aymenkeskas.vercel.app/)"

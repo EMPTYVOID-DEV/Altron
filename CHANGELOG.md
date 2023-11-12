@@ -1,5 +1,11 @@
 # altron-rich-text
 
+## 1.0.0
+
+### Major Changes
+
+- in these major the release we fixed the ui bugs and we added the customMenu option along side the set function
+
 ## 0.1.0
 
 ### Minor Changes

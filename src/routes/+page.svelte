@@ -3,7 +3,7 @@
 </script>
 
 <div>
-	<Main />
+	<Main primaryColor={'red'} secondaryColor={'blue'} textColor={'green'} bgColor={'pink'} />
 </div>
 
 <style>

@@ -80,7 +80,7 @@ You can customize various aspects of the rich text editor:
   - Customize font sizes using `h1`, `h2`, `h3`, `h4`, `body`, `small`.
   - Set line heights for various text elements using `lh1`, `lh2`, `lh3`, `lh4`, and `lbody`.
 
-- **Custom Code Themes:** Users can import and apply custom themes from `svelte-highlight` for code highlighting by setting the `codeTheme` prop.
+- **Custom Code Theme:** Users can import and apply custom theme from `svelte-highlight` for code highlighting by setting the `codeTheme` prop.
 
 - **Custom Code Block Languages:** Define the list of languages users can use for code blocks with the `codeBlockLanguages` prop. By default, it includes JavaScript, Java, C, CSS, TypeScript, Python, and C#.
 
