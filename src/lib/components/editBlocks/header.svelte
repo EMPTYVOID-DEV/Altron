@@ -8,19 +8,23 @@
 	export let active = false;
 	const view: ComponentType<SvelteComponent<{ text: string; level: 1 | 2 | 3 | 4 }>> =
 		getContext('Header');
+	const elements = [
+		{ value: 1, label: 'Very big' },
+		{ value: 2, label: 'Big' },
+		{ value: 3, label: 'Medium' },
+		{ value: 4, label: 'Small' }
+	];
 </script>
 
 {#if active}
 	<div class="headerEdit">
 		<Select
-			preSelected={{ value: content.level, label: 'h' + content.level }}
+			preSelected={{
+				value: content.level,
+				label: elements.find((el) => el.value == content.level).label
+			}}
 			label="Header level"
-			elements={[
-				{ value: 1, label: 'h1' },
-				{ value: 2, label: 'h2' },
-				{ value: 3, label: 'h3' },
-				{ value: 4, label: 'h4' }
-			]}
+			{elements}
 			changeHandler={(detail) => {
 				updateData(id, (prev) => {
 					if (prev.name == 'header') {

@@ -12,7 +12,7 @@
 		<Input
 			label="Space Block size"
 			type="number"
-			value="16"
+			value={content.size.toString()}
 			changeHandler={(val) => {
 				updateData(id, (el) => {
 					if (el.name == 'space') el.data.size = parseInt(val);

@@ -6,7 +6,9 @@
 </script>
 
 <div class="quote">
-	<span class="quoteContent"><OpenQuote />{text}<CloseQuoteIcon /></span>
+	<OpenQuote />
+	<span class="quoteContent">{text}</span>
+	<CloseQuoteIcon />
 	<span class="quoteOwner">{owner}</span>
 </div>
 

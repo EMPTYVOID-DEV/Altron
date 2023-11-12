@@ -41,12 +41,12 @@
 	}
 	const languages = getContext('languages') as languages[];
 	const options: Map<blocks, ComponentType<SvelteComponent>> = new Map([
-		['code', CodeIcon],
-		['image', ImageIcon],
-		['quote', QuoteIcon],
-		['header', HeaderIcon],
 		['paragraph', ParagraphIcon],
+		['header', HeaderIcon],
+		['image', ImageIcon],
 		['list', ListIcon],
+		['quote', QuoteIcon],
+		['code', CodeIcon],
 		['space', SpaceIcon]
 	]);
 	let toggle = true;
@@ -110,7 +110,7 @@
 	}
 
 	.control {
-		border: 1px solid var(--textColor);
+		border: 2px solid var(--textColor);
 	}
 
 	.options {
@@ -121,7 +121,7 @@
 		gap: 12px;
 	}
 	.option {
-		border: 1px solid var(--primaryColor);
+		border: 2px solid var(--primaryColor);
 		position: relative;
 	}
 	.option::after {

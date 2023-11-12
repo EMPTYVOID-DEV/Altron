@@ -6,6 +6,7 @@
 </script>
 
 <div class="areaWrapper" style:width={`${width}%`}>
+	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<span
 		style:font-size="var(--{textLevel == 0 ? 'body' : 'h' + textLevel})"
 		style:font-weight={textLevel == 0 ? '400' : 'bold'}
@@ -14,8 +15,8 @@
 		class="editableArea"
 		contenteditable="plaintext-only"
 		bind:textContent
-		on:input={(e) => {
-			changeHandler(e.currentTarget.textContent);
+		on:input={() => {
+			changeHandler(textContent);
 		}}
 	>
 		{textContent}
@@ -29,7 +30,6 @@
 		min-height: 2rem;
 		border-left: 6px solid var(--secondaryColor);
 		padding-left: 8px !important;
-		cursor: auto;
 		cursor: pointer;
 	}
 	.editableArea {

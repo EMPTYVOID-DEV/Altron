@@ -11,7 +11,6 @@
 	import type { dataBlock, languages } from '../../utils/consts';
 	import ViewMode from './viewMode.svelte';
 	import EditMode from './editMode.svelte';
-	import Code from '../editBlocks/code.svelte';
 
 	// exports
 	export let intailData: dataBlock[] = [];
@@ -59,9 +58,10 @@
 	export let customParagraph: ComponentType<SvelteComponent<{ text: string }>> = ViewParagraph;
 	export let customQuote: ComponentType<SvelteComponent<{ text: string; owner: string }>> =
 		ViewQuote;
-
+	export let customMenu: ComponentType<SvelteComponent<{ close: () => void }>> = null;
 	//
 	// context setup
+	setContext('dropDown', customMenu);
 	setContext('codeTheme', codeTheme);
 	setContext('Image', customImage);
 	setContext('Code', customCode);
@@ -73,6 +73,7 @@
 	if (codeBlockLanguages.length == 0) codeBlockLanguages.push('plaintext');
 	setContext('languages', codeBlockLanguages);
 
+	// setting intail data
 	data.set(intailData);
 </script>
 
@@ -124,6 +125,7 @@
 		font-weight: bold;
 		color: var(--textColor);
 		word-break: break-word;
+		white-space: pre-line;
 	}
 	.main :global(h1) {
 		font-size: var(--h1);
@@ -147,6 +149,7 @@
 	.main :global(p),
 	.main :global(i),
 	.main :global(label) {
+		white-space: pre-wrap;
 		word-break: break-word;
 		font-family: var(--bodyFont);
 		font-size: var(--body);
