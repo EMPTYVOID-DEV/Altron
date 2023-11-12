@@ -1,5 +1,16 @@
 # altron-rich-text
 
+## 1.1.0
+
+### Minor Changes
+
+- adding getWorkingBlock function to get the states and id for the current working block this one is especially needed when creating customMenu
+
+### Patch Changes
+
+- Updated dependencies
+  - altron-rich-text@1.1.0
+
 ## 1.0.0
 
 ### Major Changes
