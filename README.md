@@ -1,15 +1,15 @@
 
-# Altron Rich Text Svelte Component
+# Altron Rich Text 
 
 ![altronLogo](./static/altronGreen.jpg)
 
 ## Introduction
 
-The **Altron Rich Text Svelte Component** is a powerful and versatile rich text editor for Svelte applications. It allows users to create, edit, and manage structured text content by adding various blocks with associated data. This component is designed to be highly customizable, responsive on mobile devices, and supportive of both editing and viewing modes.
+The **Altron Rich Text**  is a powerful and versatile rich text editor for Svelte applications. It allows users to create, edit, and manage structured text content by adding various blocks with associated data. This component is designed to be highly customizable, responsive on mobile devices, and supportive of both editing and viewing modes.
 
 ## Installation
 
-To get started with the Altron Rich Text Svelte Component, you can install it via your package manager of choice:
+To get started with the  **Altron Rich Text** , you can install it via your package manager of choice:
 
 ```bash
 npm install altron-rich-text
@@ -35,7 +35,7 @@ To use the Altron Rich Text editor, import the `AltronRichText` component and in
 
 The rich text editor works with a specific data structure known as `dataBlock`. This type includes:
 
-- `image`: Represents image blocks with data such as base64 representation, name, and caption.
+- `image`: Represents image blocks with data such as **base64** representation, name, and caption.
 - `paragraph`: Basic text blocks.
 - `code`: Code blocks with text content and a specified programming language.
 - `quote`: Text quotes with owner attribution.
@@ -56,7 +56,7 @@ type dataBlock =
 
 ### Block States
 
-Each block in the Altron Rich Text editor can exist in one of three states: 
+Each block in the **Altron Rich Text** editor can exist in one of three states: 
 
 1. **View State:** In this state, the block displays its information based on its type and associated data. 
 2. **Focus State:** When a user clicks on a block, it switches to the focus state. In this state, the block is wrapped with a wrapper that provides options for deleting the block and reordering it (moving it up or down). 
@@ -82,8 +82,6 @@ You can customize various aspects of the rich text editor:
 
 - **Custom Code Themes:** Users can import and apply custom themes from `svelte-highlight` for code highlighting by setting the `codeTheme` prop.
 
-- **Initial Data:** You can prepopulate the editor with initial data by passing an array of `dataBlock` to the `initialData` prop.
-
 - **Custom Code Block Languages:** Define the list of languages users can use for code blocks with the `codeBlockLanguages` prop. By default, it includes JavaScript, Java, C, CSS, TypeScript, Python, and C#.
 
 - **Custom spacing:** By default **altron** separate blocks with 10px gap and have **margin-block** set to 30px you can change that using **blocksGap** and **marginBlock** props .
@@ -95,6 +93,7 @@ You can customize various aspects of the rich text editor:
     - `customHeader` for header blocks
     - `customParagraph` for paragraph blocks
     - `customQuote` for quote blocks
+    - `customMenu`  The default menu allows for deleting the block and moving it up and down   , also have good UI .
 
 ```ts
 export let customImage: ComponentType<
@@ -117,6 +116,7 @@ export let customParagraph: ComponentType<SvelteComponent<{ text: string }
 
 export let customQuote: ComponentType<SvelteComponent<{ text: string; owner: string }>> =
 ViewQuote;
+export let customMenu: ComponentType<SvelteComponent<{ close: () => void }>> = null;
 ```
 
 ## View Mode
@@ -131,7 +131,9 @@ The Altron Rich Text editor includes a `viewMode` prop, which, when set to `true
 <AltronRichText viewMode={true} />
 ```
 
-## The getData Function
+## Utils
+
+### The getData function
 
 The package provides a function to retrieve the `dataBlock` at any given moment. Here is an example:
 
@@ -147,22 +149,31 @@ The package provides a function to retrieve the `dataBlock` at any given moment.
 }}>Save</Button>
 ```
 
-## Svelte Highlight
+### The setData function
 
-The package uses `svelte-highlight` with `autoHighlight` functionality for code highlighting. This feature enhances the visual representation of code blocks in your rich text editor. However, note that enabling `autoHighlight` may result in a larger bundle size. You may need to consider using customCode component.
+The package provides a function to set the `data` dynamically ,  this is needed when creating  a `customMenu` or initializing the editor.
+
+```ts
+ type setData=(newData: dataBlock[] | (prev: dataBlock[]) => dataBlock[])=>void
+```
+
+## Alerts
+
+### Svelte Highlight
+
+The package uses `svelte-highlight` with `autoHighlight` functionality for code highlighting. This feature enhances the visual representation of code blocks in your rich text editor. However, note that enabling `autoHighlight` may result in a larger bundle size. You may need to consider using `customCode` component.
+
+### `setData` and `getData` in Sveltekit environment
+
+When working with **Sveltekit** or any **SSR** environment to be general here , try calling the `setData` and `getData` after the component has been mounted that to prevent any side effects.
 
 ## Props
 
-Here are all AltronRichText props and their default values:
+Here are all **Altron Rich Text** props and their default values:
 
 ```ts
-export let initialData: dataBlock[] = [];
 
 export let viewMode = false;
-
-export let blocksGap = 10;
-
-export let marginBlock = 30;
 
 export let headerFont = `Verdana, sans-serif`;
 
@@ -175,6 +186,10 @@ export let secondaryColor = '#1eeb36';
 export let textColor = '#121212';
 
 export let bgColor = '#ffffff';
+
+export let blocksGap = 10;
+
+export let marginBlock = 30;
 
 export let h1 = 'clamp(1.8rem, calc(1.8rem + ((1vw - 0.48rem) * 0.9722)), 2.1rem)';
 
@@ -200,32 +215,51 @@ export let lbody = '1.6';
 
 export let codeTheme: string = nightOwl;
 
+export let codeBlockLanguages: languages[] = [
+
+'javascript',
+
+'java',
+
+'c',
+
+'css',
+
+'plaintext',
+
+'typescript',
+
+'python',
+
+'csharp'
+
+];
+
 export let customImage: ComponentType<
+
 SvelteComponent<{ base64: string; name: string; caption: string }>
+
 > = ViewImage;
 
 export let customCode: ComponentType<SvelteComponent<{ text: string; lang: languages }>> =
+
 ViewCode;
 
 export let customList: ComponentType<
+
 SvelteComponent<{ items: string[]; type: 'ordered' | 'unordered' }>
+
 > = ViewList;
 
 export let customHeader: ComponentType<SvelteComponent<{ text: string; level: 1 | 2 | 3 | 4 }>> =
+
 ViewHeader;
 
 export let customParagraph: ComponentType<SvelteComponent<{ text: string }>> = ViewParagraph;
 
 export let customQuote: ComponentType<SvelteComponent<{ text: string; owner: string }>> =
+
 ViewQuote;
 
-export let codeBlockLanguages: languages[] = [
-'javascript',
-'java',
-'c',
-'css',
-'typescript',
-'python',
-'csharp'
-];
+export let customMenu: ComponentType<SvelteComponent<{ close: () => void }>> = null;
 ```

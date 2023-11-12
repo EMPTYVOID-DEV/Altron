@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { data } from '../../utils/stores.js';
 	import { type SvelteComponent, type ComponentType, setContext } from 'svelte';
 	import { nightOwl } from 'svelte-highlight/styles';
 	import ViewImage from '../viewBlocks/viewImage.svelte';
@@ -8,12 +7,11 @@
 	import ViewList from '../viewBlocks/viewList.svelte';
 	import ViewParagraph from '../viewBlocks/viewParagraph.svelte';
 	import ViewQuote from '../viewBlocks/viewQuote.svelte';
-	import type { dataBlock, languages } from '../../utils/consts';
+	import type { languages } from '../../utils/consts';
 	import ViewMode from './viewMode.svelte';
 	import EditMode from './editMode.svelte';
 
 	// exports
-	export let intailData: dataBlock[] = [];
 	export let viewMode = false;
 	export let headerFont = `Verdana, sans-serif`;
 	export let bodyFont = `Helvetica, sans-serif`;
@@ -74,7 +72,6 @@
 	setContext('languages', codeBlockLanguages);
 
 	// setting intail data
-	data.set(intailData);
 </script>
 
 <div
