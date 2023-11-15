@@ -79,9 +79,7 @@
 		}
 	},
 	"dependencies": {
-		"altron-rich-text": "^1.1.1",
-		"short-uuid": "^4.2.2",
-		"svelte-highlight": "^7.4.1",
+		"nanoid": "^5.0.3",
 		"svelte-select": "^5.7.0"
 	}
 }

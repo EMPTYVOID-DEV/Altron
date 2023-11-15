@@ -1,15 +1,15 @@
 
-# Altron Rich Text 
+# Altron Rich Text V2.0.0
 
-![altronLogo](./static/altronGreen.jpg)
+![Altron Logo](./static/altronGreen.jpg)
 
 ## Introduction
 
-The **Altron Rich Text**  is a powerful and versatile rich text editor for Svelte applications. It allows users to create, edit, and manage structured text content by adding various blocks with associated data. This component is designed to be highly customizable, responsive on mobile devices, and supportive of both editing and viewing modes.
+**Altron Rich Text** is a robust and versatile rich text editor designed for Svelte applications. It empowers users to effortlessly create, edit, and manage structured text content by seamlessly incorporating various blocks with associated data. This component is meticulously crafted to offer high customizability, responsiveness on mobile devices, and support for both editing and viewing modes.
 
 ## Installation
 
-To get started with the  **Altron Rich Text** , you can install it via your package manager of choice:
+To kickstart your journey with **Altron Rich Text**, install it via your preferred package manager:
 
 ```bash
 npm install altron-rich-text
@@ -21,9 +21,9 @@ pnpm i altron-rich-text
 
 ## Basic Usage
 
-To use the Altron Rich Text editor, import the `AltronRichText` component and include it in your Svelte application.
+Integrating the Altron Rich Text editor into your Svelte application is as simple as importing the `AltronRichText` component and incorporating it into your project.
 
-```svelte
+```ts
 <script>
   import { AltronRichText } from 'altron-rich-text';
 </script>
@@ -33,10 +33,10 @@ To use the Altron Rich Text editor, import the `AltronRichText` component and in
 
 ## Data Structure
 
-The rich text editor works with a specific data structure known as `dataBlock`. This type includes:
+The rich text editor operates on a distinct data structure known as `dataBlock`. This type encompasses:
 
-- `image`: Represents image blocks with data such as **base64** representation, name, and caption.
-- `paragraph`: Basic text blocks.
+- `image`: Represents image blocks with data such as base64 representation, name, and caption.
+- `paragraph`: Fundamental text blocks.
 - `code`: Code blocks with text content and a specified programming language.
 - `quote`: Text quotes with owner attribution.
 - `header`: Header blocks with different levels (1 to 4) and associated text.
@@ -56,44 +56,44 @@ type dataBlock =
 
 ### Block States
 
-Each block in the **Altron Rich Text** editor can exist in one of three states: 
+Every block in the **Altron Rich Text** editor can exist in one of three states:
 
-1. **View State:** In this state, the block displays its information based on its type and associated data. 
-2. **Focus State:** When a user clicks on a block, it switches to the focus state. In this state, the block is wrapped with a wrapper that provides options for deleting the block and reordering it (moving it up or down). 
-3. **Edit State:** Upon another click, the block enters the edit state, allowing the user to modify the block's information. ## Customization
+1. **View State:** In this state, the block displays its information based on its type and associated data.
+2. **Focus State:** Upon clicking a block, it transitions to the focus state. Here, the block is enveloped with options for deleting the block, moving it up and down (default options of the `menu`).
+3. **Edit State:** Upon another click, the block enters the edit state, allowing users to modify the block's information.
 
 ## Customization
 
-You can customize various aspects of the rich text editor:
+Various aspects of the rich text editor can be customized:
 
 - **Colors:**
   - `primaryColor`: Used in both focus and view states.
   - `secondaryColor`: Specifically used in the edit state.
   - `textColor`: Defines the text color within the editor.
-  - `bgColor`: Specifies the background color of the editor.
+  - `bgColor`: The background color of your app, needed with `menu`.
 
 - **Fonts:**
-  - `headerFont`: Set the font for header elements (e.g., h1, h2, h3, h4).
-  - `bodyFont`: Define the font for general text elements (e.g., p, span, label, li, a).
+  - `headerFont`: Sets the font for header elements (e.g., h1, h2, h3, h4).
+  - `bodyFont`: Defines the font for general text elements (e.g., p, span, label, li, a).
 
 - **Font Sizes and Line Heights:**
   - Customize font sizes using `h1`, `h2`, `h3`, `h4`, `body`, `small`.
   - Set line heights for various text elements using `lh1`, `lh2`, `lh3`, `lh4`, and `lbody`.
 
-- **Custom Code Theme:** Users can import and apply custom theme from `svelte-highlight` for code highlighting by setting the `codeTheme` prop.
-
 - **Custom Code Block Languages:** Define the list of languages users can use for code blocks with the `codeBlockLanguages` prop. By default, it includes JavaScript, Java, C, CSS, TypeScript, Python, and C#.
 
-- **Custom spacing:** By default **altron** separate blocks with 10px gap and have **margin-block** set to 30px you can change that using **blocksGap** and **marginBlock** props .
+- **Excluded Blocks**: This prop excludes a list of blocks from the blocks menu. This only restricts the end user from adding these blocks; you can still add those using the `setData` function.
 
-- **Custom Components:** You can replace the default view components for various block types with your custom components. For example:
+- **Custom spacing:** By default, **Altron** separates blocks with a 10px gap and has **margin-block** set to 30px. You can change that using **blocksGap** and **marginBlock** props.
+
+- **Custom Components:** You can replace the default view components for various block types with your custom components.
     - `customImage` for image blocks
     - `customCode` for code blocks
     - `customList` for list blocks
     - `customHeader` for header blocks
     - `customParagraph` for paragraph blocks
     - `customQuote` for quote blocks
-    - `customMenu`  The default menu allows for deleting the block and moving it up and down   , also have good UI .
+    - `customMenu` The default menu allows for deleting, moving up and down the **focused** block.
 
 ```ts
 export let customImage: ComponentType<
@@ -121,9 +121,9 @@ export let customMenu: ComponentType<SvelteComponent<{ close: () => void }>> = n
 
 ## View Mode
 
-The Altron Rich Text editor includes a `viewMode` prop, which, when set to `true`, allows you to use the editor in a read-only mode. In this mode, you can display existing content without enabling editing.
+The Altron Rich Text editor includes a `viewMode` prop, which, when set to `true`, allows you to use the editor in read-only mode. In this mode, you can display existing content without enabling editing.
 
-```svelte
+```ts
 <script>
   import { AltronRichText } from 'altron-rich-text';
 </script>
@@ -133,141 +133,107 @@ The Altron Rich Text editor includes a `viewMode` prop, which, when set to `true
 
 ## Utils
 
-### The getData function
+**Altron** **exports** some utility functions that come in handy when trying to extract, update, or get information about the component state. Here is a description of each one:
 
-The package provides a function to retrieve the `dataBlock` at any given moment. Here is an example:
-
-```ts
-<script>
-  import { AltronRichText, getData } from 'altron-rich-text';
-</script>
-
-<AltronRichText viewMode={true} />
-<Button on:click={()=>{
-  const data = getData(); // returns dataBlock[] type
-  saveData(data);
-}}>Save</Button>
-```
-
-### The setData function
-
-The package provides a function to set the `data` dynamically ,  this is needed when creating  a `customMenu` or initializing the editor.
+- `getData`: This function returns the data-blocks that are stored at a given moment.
+- `setData`: This function allows you to update the data-blocks directly.
+- `getWorkingBlock`: This function allows you to get the working block id and its state. It can return null if none of the blocks are focused or edited (view state).
 
 ```ts
- type setData=(newData: dataBlock[] | (prev: dataBlock[]) => dataBlock[])=>void
+type getData:()=> dataBlock[]
+type setData:(newData: dataBlock[] | ((prev: dataBlock[]) => dataBlock[]))=> void
+type getWorkingBlock:()=>{state: "focused" | "editing";  id: string; } | null
 ```
 
-### The getWorkingBlock function
+### Usage
 
-The package provides a function to get the current block id and state.Its value will be null if all blocks are in **view state**.
+These functions are exported from the **AltronRichText** component, which means in order to use them, you have to bind a variable to the component reference (this).
 
-```ts  
-  type returnValue= {  state: "focused" | "editing";  id: string;  } |  null
+```ts
+<script lang="ts">
+import AltronRichText from 'Altron-rich-text';
+import { onMount } from 'svelte';
+let editor: AltronRichText = null; // we are creating a variable to hold a  
+     //reference to the AltronRichText component 
+ 
+onMount(() => {
+    editor.setData([{ id: '12', name: 'header', data: { text: 'hello friend!', 
+          level: 1 } }]); // initialize the editor with a header
+    const intervalId=setInterval(()=>{
+        const data =editor.getData()
+        const workingBlock=editor.getWorkingBlock()
+        console.log(data,workingBlock)        
+    },2000)
+    // here we have created a setInterval that prints the component data and  
+     //working block each two seconds
+     return ()=>{
+        clearInterval(intervalId)
+     }
+});
+</script>  
+   <div>
+     <AltronRichText bind:this={editor} viewMode={true} />
+   </div>
 ```
 
-## Alerts
+## Notes
 
-### Svelte Highlight
+#### Code Highlighting
 
-The package uses `svelte-highlight` with `autoHighlight` functionality for code highlighting. This feature enhances the visual representation of code blocks in your rich text editor. However, note that enabling `autoHighlight` may result in a larger bundle size. You may need to consider using `customCode` component.
+**Altron** by default doesn't highlight code blocks mainly to decrease the package size, but we recommend using [svelte-highlight](https://www.npmjs.com/package/svelte-highlight). There is a `customCode` example that uses **svelte-highlight** in the suggestions sub-directory of the project repository.
 
-### `setData` and `getData` in Sveltekit environment
+#### More than one instance
 
-When working with **Sveltekit** or any **SSR** environment to be general here , try calling the `setData` and `getData` after the component has been mounted that to prevent any side effects.
+Starting from version **v2.0.0**, the data of **AltronRichText** component is isolated, allowing us to create more than one instance of the component for things like changes comparison.
+
+#### Component Reference Typing
+
+In case you want to get linting and auto-completion when using the utility functions, you have to type the component reference.
 
 ## Props
 
 Here are all **Altron Rich Text** props and their default values:
 
-```ts
+| Name                  | Type                                      | Default Value                                                             |
+|-----------------------|-------------------------------------------|---------------------------------------------------------------------------|
+| excludedBlocks        | blocks[]                                  | []                                                                        |
+| viewMode              | boolean                                   | false                                                                     |
+| headerFont            | string                                    | 'Verdana, sans-serif'                                                     |
+| bodyFont              | string                                    | 'Helvetica, sans-serif'                                                   |
+| primaryColor          | string                                    | '#3366FF'                                                                 |
+| secondaryColor        | string                                    | '#1eeb36'                                                                 |
+| textColor             | string                                    | '#121212'                                                                 |
+| bgColor               | string                                    | '#ffffff'                                                                 |
+| blocksGap             | number                                    | 10                                                                        |
+| marginBlock           | number                                    | 30                                                                        |
+| h1                    | string                                    | 'clamp(1.8rem, calc(1.8rem + ((1vw - 0.48rem) * 0.9722)), 2.1rem)'         |
+| h2                    | string                                    | 'clamp(1.5rem, calc(1.5rem + ((1vw - 0.48rem) * 0.9722)), 1.8rem)'         |
+| h3                    | string                                    | 'clamp(1.2rem, calc(1.2rem + ((1vw - 0.48rem) * 0.9722)), 1.5rem)'         |
+| h4                    | string                                    | 'clamp(1.125rem, calc(1.15rem + ((1vw - 0.48rem) * 0.3472)), 1.2rem)'     |
+| body                  | string                                    | 'clamp(1rem, calc(1rem + ((1vw - 0.48rem) * 0.1736)), 1.125rem)'          |
+| small                 | string                                    | 'clamp(0.875rem, calc(0.875rem + ((1vw - 0.48rem) * 0.1736)), 1rem)'      |
+| lh1                   | string                                    | '1.3'                                                                     |
+| lh2                   | string                                    | '1.35'                                                                    |
+| lh3                   | string                                    | '1.4'                                                                     |
+| lh4                   | string                                    | '1.5'                                                                     |
+| lbody                 | string                                    | '1.6'                                                                     |
+| codeBlockLanguages    | languages[]                               | ['javascript', 'java', 'c', 'css', 'plaintext', 'typescript', 'python', 'csharp'] |
+| customImage           | ComponentType<SvelteComponent<{ base64: string; name: string; caption: string }>> | ViewImage |
+| customCode            | ComponentType<SvelteComponent<{ text: string; lang: languages }>> | ViewCode |
+| customList            | ComponentType<SvelteComponent<{ items: string[]; type: 'ordered' | 'unordered' }>> | ViewList |
+| customHeader          | ComponentType<SvelteComponent<{ text: string; level: 1 | 2 | 3 | 4 }>> | ViewHeader |
+| customParagraph       | ComponentType<SvelteComponent<{ text: string }>> | ViewParagraph |
+| customQuote           | ComponentType<SvelteComponent<{ text: string; owner: string }>> | ViewQuote |
+| customMenu            | ComponentType<SvelteComponent<{ close: () => void }>> | null        |
 
-export let viewMode = false;
 
-export let headerFont = `Verdana, sans-serif`;
+## Contribution
 
-export let bodyFont = `Helvetica, sans-serif`;
+We welcome contributions! If you find any issues or have suggestions for improvements, feel free to open an issue or submit a pull request.
 
-export let primaryColor = '#3366FF';
+## License
 
-export let secondaryColor = '#1eeb36';
-
-export let textColor = '#121212';
-
-export let bgColor = '#ffffff';
-
-export let blocksGap = 10;
-
-export let marginBlock = 30;
-
-export let h1 = 'clamp(1.8rem, calc(1.8rem + ((1vw - 0.48rem) * 0.9722)), 2.1rem)';
-
-export let h2 = 'clamp(1.5rem, calc(1.5rem + ((1vw - 0.48rem) * 0.9722)), 1.8rem)';
-
-export let h3 = 'clamp(1.2rem, calc(1.2rem + ((1vw - 0.48rem) * 0.9722)), 1.5rem)';
-
-export let h4 = 'clamp(1.125rem, calc(1.15rem + ((1vw - 0.48rem) * 0.3472)), 1.2rem)';
-
-export let body = 'clamp(1rem, calc(1rem + ((1vw - 0.48rem) * 0.1736)), 1.125rem)';
-
-export let small = 'clamp(0.875rem, calc(0.875rem + ((1vw - 0.48rem) * 0.1736)), 1rem)';
-
-export let lh1 = '1.3';
-
-export let lh2 = '1.35';
-
-export let lh3 = '1.4';
-
-export let lh4 = '1.5';
-
-export let lbody = '1.6';
-
-export let codeTheme: string = nightOwl;
-
-export let codeBlockLanguages: languages[] = [
-
-'javascript',
-
-'java',
-
-'c',
-
-'css',
-
-'plaintext',
-
-'typescript',
-
-'python',
-
-'csharp'
-
-];
-
-export let customImage: ComponentType<
-
-SvelteComponent<{ base64: string; name: string; caption: string }>
-
-> = ViewImage;
-
-export let customCode: ComponentType<SvelteComponent<{ text: string; lang: languages }>> =
-
-ViewCode;
-
-export let customList: ComponentType<
-
-SvelteComponent<{ items: string[]; type: 'ordered' | 'unordered' }>
-
-> = ViewList;
-
-export let customHeader: ComponentType<SvelteComponent<{ text: string; level: 1 | 2 | 3 | 4 }>> =
-
-ViewHeader;
-
-export let customParagraph: ComponentType<SvelteComponent<{ text: string }>> = ViewParagraph;
-
-export let customQuote: ComponentType<SvelteComponent<{ text: string; owner: string }>> =
-
-ViewQuote;
-
-export let customMenu: ComponentType<SvelteComponent<{ close: () => void }>> = null;
+This project is licensed under the [MIT License](LICENSE).
 ```
+
+Feel free to use or modify as needed!

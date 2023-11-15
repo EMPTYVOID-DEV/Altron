@@ -10,7 +10,7 @@
 	import PlusIcon from '../icons/plusIcon.svelte';
 	import CloseIcon from '../icons/closeIcon.svelte';
 	import SpaceIcon from '../icons/spaceIcon.svelte';
-	import shortUUID from 'short-uuid';
+	import { nanoid } from 'nanoid';
 	import { fade } from 'svelte/transition';
 	import { elasticIn } from 'svelte/easing';
 	import type { Writable } from 'svelte/store';
@@ -40,6 +40,7 @@
 		}
 	}
 	const data: Writable<dataBlock[]> = getContext('data');
+	const excludedBlocks: blocks[] = getContext('excludedBlocks');
 	const workingBlock: Writable<{ state: 'focused' | 'editing'; id: string }> =
 		getContext('workingBlock');
 	const languages = getContext('languages') as languages[];
@@ -52,6 +53,9 @@
 		['code', CodeIcon],
 		['space', SpaceIcon]
 	]);
+	excludedBlocks.forEach((el) => {
+		options.delete(el);
+	});
 	let toggle = true;
 </script>
 
@@ -77,9 +81,7 @@
 					data-label={'add ' + option[0]}
 					class="option"
 					on:click|stopPropagation={() => {
-						const id = shortUUID('0123456', {
-							consistentLength: true
-						}).generate();
+						const id = nanoid(8);
 						data.update((prev) => {
 							add(prev, id, option[0]);
 							toggle = true;

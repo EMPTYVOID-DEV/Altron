@@ -1,20 +1,20 @@
 <script lang="ts">
 	import { type SvelteComponent, type ComponentType, setContext } from 'svelte';
-	import { nightOwl } from 'svelte-highlight/styles';
 	import ViewImage from '../viewBlocks/viewImage.svelte';
 	import ViewCode from '../viewBlocks/viewCode.svelte';
 	import ViewHeader from '../viewBlocks/viewHeader.svelte';
 	import ViewList from '../viewBlocks/viewList.svelte';
 	import ViewParagraph from '../viewBlocks/viewParagraph.svelte';
 	import ViewQuote from '../viewBlocks/viewQuote.svelte';
-	import type { dataBlock, languages } from '../../utils/consts';
+	import type { blocks, dataBlock, languages } from '../../utils/consts';
 	import ViewMode from './viewMode.svelte';
 	import EditMode from './editMode.svelte';
 	import { createDataStore, createWorkingBlockStore } from '$lib/utils/stores';
 	import { get } from 'svelte/store';
-	import shortUUID from 'short-uuid';
+	import { nanoid } from 'nanoid';
 
 	// exports
+	export let excludedBlocks: blocks[] = [];
 	export let viewMode = false;
 	export let headerFont = `Verdana, sans-serif`;
 	export let bodyFont = `Helvetica, sans-serif`;
@@ -35,7 +35,6 @@
 	export let lh3 = '1.4';
 	export let lh4 = '1.5';
 	export let lbody = '1.6';
-	export let codeTheme: string = nightOwl;
 	export let codeBlockLanguages: languages[] = [
 		'javascript',
 		'java',
@@ -63,18 +62,19 @@
 	// context setup
 
 	setContext('dropDown', customMenu);
-	setContext('codeTheme', codeTheme);
 	setContext('Image', customImage);
 	setContext('Code', customCode);
 	setContext('Header', customHeader);
 	setContext('Paragraph', customParagraph);
 	setContext('List', customList);
 	setContext('Quote', customQuote);
+	// excluded blocks
+	setContext('excludedBlocks', excludedBlocks);
 	// in case no options add plaintext
 	if (codeBlockLanguages.length == 0) codeBlockLanguages.push('plaintext');
 	setContext('languages', codeBlockLanguages);
 	// editor id
-	setContext('editorId', shortUUID('0123456', { consistentLength: true }).generate());
+	setContext('editorId', nanoid(8));
 
 	// setting up stores
 	const data = createDataStore();
@@ -162,6 +162,7 @@
 	}
 
 	.main :global(span),
+	.main :global(code),
 	.main :global(li),
 	.main :global(p),
 	.main :global(i),

@@ -1,7 +1,9 @@
 <script lang="ts">
-	import type { languages } from '../../utils/consts';
-	import CopyIcon from '../icons/copyIcon.svelte';
-	import DoneIcon from '../icons/doneIcon.svelte';
+	import type { languages } from '../src/lib/utils/consts';
+	import { github } from 'svelte-highlight/styles';
+	import { HighlightAuto, LineNumbers } from 'svelte-highlight';
+	import CopyIcon from '../src/lib/components/icons/copyIcon.svelte';
+	import DoneIcon from '../src/lib/components/icons/doneIcon.svelte';
 	export let text: string;
 	export let lang: languages;
 	let copyStatement: boolean = false;
@@ -12,6 +14,10 @@
 		copyStatement = false;
 	}
 </script>
+
+<svelte:head>
+	{@html github}
+</svelte:head>
 
 <div id="codeMdBlock" class={lang}>
 	<div id="lang">
@@ -25,7 +31,9 @@
 		{/if}
 	</div>
 
-	<code>{text}</code>
+	<HighlightAuto code={text} let:highlighted>
+		<LineNumbers {highlighted} hideBorder wrapLines />
+	</HighlightAuto>
 </div>
 
 <style>
@@ -33,20 +41,21 @@
 		width: 100%;
 		display: flex;
 		flex-direction: column;
-		gap: 5px;
-		border-radius: 5px;
-		background-color: color-mix(in srgb, var(--primaryColor) 40%, white 0%);
-		padding-bottom: 10px;
-		overflow: hidden;
-		color: var(--textColor);
+	}
+	#codeMdBlock > :global(:not(#lang)) {
+		width: 100%;
+		border-bottom-left-radius: 5px;
+		border-bottom-right-radius: 5px;
 	}
 
-	#codeMdBlock > code {
-		padding-left: 10px;
+	#codeMdBlock :global(tr) {
+		display: block;
 	}
 
 	#codeMdBlock #lang {
 		width: 100%;
+		border-top-left-radius: 5px;
+		border-top-right-radius: 5px;
 		background-color: var(--primaryColor);
 		display: flex;
 		justify-content: space-between;
@@ -56,6 +65,7 @@
 	}
 
 	#codeMdBlock #lang span {
+		color: var(--textColor);
 		font-weight: bold;
 		text-transform: capitalize;
 	}

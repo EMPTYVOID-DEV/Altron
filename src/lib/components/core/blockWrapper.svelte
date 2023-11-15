@@ -52,7 +52,7 @@
 	}
 
 	.focused {
-		border: 2px solid var(--primaryColor);
+		border: 3px solid var(--primaryColor);
 		border-radius: 8px;
 	}
 
@@ -62,7 +62,7 @@
 		padding-inline: 15px;
 	}
 	.editing {
-		border: 2px solid var(--secondaryColor);
+		border: 3px solid var(--secondaryColor);
 		border-radius: 8px;
 	}
 
