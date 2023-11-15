@@ -1,10 +1,4 @@
 <script lang="ts">
-	//   Breaking changes in next version
-	// - adding more blocks
-	// - working on inline sub-blocks e.g : links , bold .
-	// - adding customization features like centering, resizing .
-	// - removing autohighlight
-
 	import { type SvelteComponent, type ComponentType, setContext } from 'svelte';
 	import { nightOwl } from 'svelte-highlight/styles';
 	import ViewImage from '../viewBlocks/viewImage.svelte';
@@ -18,6 +12,7 @@
 	import EditMode from './editMode.svelte';
 	import { createDataStore, createWorkingBlockStore } from '$lib/utils/stores';
 	import { get } from 'svelte/store';
+	import shortUUID from 'short-uuid';
 
 	// exports
 	export let viewMode = false;
@@ -65,7 +60,6 @@
 	export let customQuote: ComponentType<SvelteComponent<{ text: string; owner: string }>> =
 		ViewQuote;
 	export let customMenu: ComponentType<SvelteComponent<{ close: () => void }>> = null;
-	//
 	// context setup
 
 	setContext('dropDown', customMenu);
@@ -79,6 +73,8 @@
 	// in case no options add plaintext
 	if (codeBlockLanguages.length == 0) codeBlockLanguages.push('plaintext');
 	setContext('languages', codeBlockLanguages);
+	// editor id
+	setContext('editorId', shortUUID('0123456', { consistentLength: true }).generate());
 
 	// setting up stores
 	const data = createDataStore();

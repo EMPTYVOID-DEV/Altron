@@ -12,6 +12,7 @@
 	export let dataBlock: dataBlock;
 	const workingBlock: Writable<{ state: 'focused' | 'editing'; id: string }> =
 		getContext('workingBlock');
+	const editorId: string = getContext('editorId');
 	$: active = $workingBlock && $workingBlock.state == 'editing' && $workingBlock.id == dataBlock.id;
 	$: focused =
 		$workingBlock && $workingBlock.state == 'focused' && $workingBlock.id == dataBlock.id;
@@ -22,6 +23,7 @@
 	class:focused
 	class:editing={active}
 	data-blockid={dataBlock.id}
+	data-editorid={editorId}
 	data-blocktype={dataBlock.name}
 >
 	{#if dataBlock.name == 'header'}

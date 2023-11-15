@@ -77,7 +77,9 @@
 					data-label={'add ' + option[0]}
 					class="option"
 					on:click|stopPropagation={() => {
-						const id = shortUUID().generate();
+						const id = shortUUID('0123456', {
+							consistentLength: true
+						}).generate();
 						data.update((prev) => {
 							add(prev, id, option[0]);
 							toggle = true;
@@ -100,7 +102,7 @@
 		display: grid;
 		align-items: center;
 		grid-template-columns: repeat(2, auto);
-		gap: 20px;
+		gap: 12px;
 	}
 	.toolBar span {
 		display: flex;
@@ -121,7 +123,7 @@
 		align-items: center;
 		flex-wrap: wrap;
 		justify-content: center;
-		gap: 12px;
+		gap: 15px;
 	}
 	.option {
 		border: 2px solid var(--primaryColor);

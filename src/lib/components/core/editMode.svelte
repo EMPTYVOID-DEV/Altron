@@ -8,26 +8,35 @@
 	import DownIcon from '../icons/downIcon.svelte';
 	import type { Writable } from 'svelte/store';
 	import type { dataBlock } from '$lib/utils/consts';
-
+	const editorId: string = getContext('editorId');
 	const data: Writable<dataBlock[]> = getContext('data');
 	const workingBlock: Writable<{ state: 'focused' | 'editing'; id: string }> =
 		getContext('workingBlock');
 
-	function traverseParent(element: any): null | string {
+	function traverseParent(element: any): { blockId: string; blockEditorId: string } {
 		while (element) {
-			let currentId = element?.dataset.blockid;
-			if (typeof currentId == 'string') return currentId;
+			let currentId = element?.dataset?.blockid;
+			let editorId = element?.dataset?.editorid;
+			if (typeof currentId == 'string' && typeof editorId == 'string') {
+				return {
+					blockId: currentId,
+					blockEditorId: editorId
+				};
+			}
 			element = element.parentElement;
 		}
-		return null;
+		return {
+			blockEditorId: null,
+			blockId: null
+		};
 	}
 
 	function switchBlockState(event: MouseEvent) {
-		const id = traverseParent(event.target);
-		if (!id) workingBlock.set(null);
-		else if ($workingBlock == null || $workingBlock.id !== id)
-			workingBlock.set({ id, state: 'focused' });
-		else workingBlock.set({ id, state: 'editing' });
+		const detail = traverseParent(event.target);
+		if (!detail.blockId || detail.blockEditorId != editorId) return workingBlock.set(null);
+		if ($workingBlock == null || $workingBlock.id !== detail.blockId)
+			return workingBlock.set({ id: detail.blockId, state: 'focused' });
+		workingBlock.set({ id: detail.blockId, state: 'editing' });
 	}
 
 	function move(up: boolean) {
@@ -47,25 +56,6 @@
 			return newDataBlocks;
 		});
 	}
-
-	// function actionOnBlock(event: KeyboardEvent) {
-	// 	if (!$workingBlock || $workingBlock.state != 'focused') return;
-	// 	if (event.key == 'Backspace') {
-	// 		data.update((prev) => {
-	// 			const newDataBlocks = prev.filter((element) => {
-	// 				return element.id != $workingBlock.id;
-	// 			});
-	// 			return newDataBlocks;
-	// 		});
-	// 	} else if (event.key == 'ArrowUp' || event.key == 'ArrowDown') {
-	// 		data.update((prev) => {
-	// 			const index = prev.findIndex((val) => val.id == $workingBlock.id);
-	// 			const val = prev.splice(index, 1)[0];
-	// 			prev.splice(event.key == 'ArrowUp' ? index - 1 : index + 1, 0, val);
-	// 			return prev;
-	// 		});
-	// 	}
-	// }
 
 	onMount(() => {
 		window.addEventListener('click', switchBlockState);
