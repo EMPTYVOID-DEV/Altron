@@ -1,5 +1,17 @@
 # altron-rich-text
 
+## 2.0.0
+
+### Major Changes
+
+- Major change:
+  -Replacing the global store with context-store approach to prevent multiple instances using the same store that lead to re-exporting the util functions from the component.
+
+  Minor changes:
+  -The removal of svelte-highlight and the usage of vanilla code element to reduce the package size
+  -For the same reason replacing short-uuid with nanoid to generate 8 bytes random string.
+  -Adding exludeBlocks prop to limit toolbar options.
+
 ## 1.1.1
 
 ### Patch Changes

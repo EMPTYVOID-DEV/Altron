@@ -9,7 +9,6 @@
 
 <div>
 	<Main bind:this={main} />
-	<Main />
 </div>
 
 <style>
