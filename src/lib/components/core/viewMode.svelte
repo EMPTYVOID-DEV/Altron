@@ -1,5 +1,7 @@
-<script>
-	import { data } from '../../utils/stores';
+<script lang="ts">
+	import type { dataBlock } from '$lib/utils/consts';
+	import { getContext } from 'svelte';
+	import type { Writable } from 'svelte/store';
 	import ViewCode from '../viewBlocks/viewCode.svelte';
 	import ViewHeader from '../viewBlocks/viewHeader.svelte';
 	import ViewImage from '../viewBlocks/viewImage.svelte';
@@ -7,6 +9,7 @@
 	import ViewParagraph from '../viewBlocks/viewParagraph.svelte';
 	import ViewQuote from '../viewBlocks/viewQuote.svelte';
 	import ViewSpace from '../viewBlocks/viewSpace.svelte';
+	const data: Writable<dataBlock[]> = getContext('data');
 </script>
 
 {#each $data as block}

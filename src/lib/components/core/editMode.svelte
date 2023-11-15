@@ -1,12 +1,17 @@
 <script lang="ts">
-	import { data, workingBlock } from '../../utils/stores';
-	import { onMount } from 'svelte';
+	import { getContext, onMount } from 'svelte';
 	import BlockWrapper from './blockWrapper.svelte';
 	import ToolBar from './toolBar.svelte';
 	import DropDown from '../extra/dialog.svelte';
 	import UpIcon from '../icons/upIcon.svelte';
 	import DeleteIcon from '../icons/deleteIcon.svelte';
 	import DownIcon from '../icons/downIcon.svelte';
+	import type { Writable } from 'svelte/store';
+	import type { dataBlock } from '$lib/utils/consts';
+
+	const data: Writable<dataBlock[]> = getContext('data');
+	const workingBlock: Writable<{ state: 'focused' | 'editing'; id: string }> =
+		getContext('workingBlock');
 
 	function traverseParent(element: any): null | string {
 		while (element) {

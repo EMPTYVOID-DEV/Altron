@@ -2,10 +2,11 @@
 	import { SvelteComponent, getContext, type ComponentType } from 'svelte';
 	import Select from '../extra/select.svelte';
 	import Textarea from '../extra/textarea.svelte';
-	import { updateData } from '../../utils/functions';
+	import type { updateDataType } from '$lib/utils/consts';
 	export let content: { text: string; level: 1 | 2 | 3 | 4 };
 	export let id: string;
 	export let active = false;
+	const updateData: updateDataType = getContext('updateData');
 	const view: ComponentType<SvelteComponent<{ text: string; level: 1 | 2 | 3 | 4 }>> =
 		getContext('Header');
 	const elements = [

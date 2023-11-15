@@ -2,10 +2,11 @@
 	import { SvelteComponent, getContext, type ComponentType } from 'svelte';
 	import Input from '../extra/input.svelte';
 	import Textarea from '../extra/textarea.svelte';
-	import { updateData } from '../../utils/functions';
 	export let content: { text: string; owner: string };
 	export let id: string;
 	export let active = false;
+	import type { updateDataType } from '$lib/utils/consts';
+	const updateData: updateDataType = getContext('updateData');
 	const view: ComponentType<SvelteComponent<{ text: string; owner: string }>> = getContext('Quote');
 </script>
 

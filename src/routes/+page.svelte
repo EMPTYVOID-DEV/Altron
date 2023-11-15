@@ -1,22 +1,12 @@
-<script>
-	import { AltronRichText, setData } from 'altron-rich-text';
+<script lang="ts">
+	import Main from '$lib/components/core/main.svelte';
 	import { onMount } from 'svelte';
-	onMount(() => {
-		setData([
-			{
-				id: 'ywywy',
-				name: 'header',
-				data: {
-					level: 1,
-					text: 'welcome'
-				}
-			}
-		]);
-	});
+	let main: Main = null;
 </script>
 
 <div>
-	<AltronRichText />
+	<Main />
+	<Main />
 </div>
 
 <style>

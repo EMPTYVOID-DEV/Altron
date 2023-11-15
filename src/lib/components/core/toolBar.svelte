@@ -11,9 +11,9 @@
 	import CloseIcon from '../icons/closeIcon.svelte';
 	import SpaceIcon from '../icons/spaceIcon.svelte';
 	import shortUUID from 'short-uuid';
-	import { data, workingBlock } from '../../utils/stores';
 	import { fade } from 'svelte/transition';
 	import { elasticIn } from 'svelte/easing';
+	import type { Writable } from 'svelte/store';
 	function add(list: dataBlock[], id: string, name: blocks) {
 		if (name === 'paragraph') {
 			list.push({ name, id, data: { text: 'hello friend' } });
@@ -39,6 +39,9 @@
 			list.push({ id, name, data: { size: 24 } });
 		}
 	}
+	const data: Writable<dataBlock[]> = getContext('data');
+	const workingBlock: Writable<{ state: 'focused' | 'editing'; id: string }> =
+		getContext('workingBlock');
 	const languages = getContext('languages') as languages[];
 	const options: Map<blocks, ComponentType<SvelteComponent>> = new Map([
 		['paragraph', ParagraphIcon],

@@ -29,6 +29,8 @@ export type viewBlocks = [
 	}
 ];
 
+export type updateDataType = (id: string, cb: (el: dataBlock) => void) => void;
+
 export type languages =
 	| 'typescript'
 	| 'javascript'

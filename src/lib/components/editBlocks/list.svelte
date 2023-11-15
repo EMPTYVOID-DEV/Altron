@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { SvelteComponent, getContext, type ComponentType } from 'svelte';
 	import Select from '../extra/select.svelte';
-	import { updateData } from '../../utils/functions';
 	import Textarea from '../extra/textarea.svelte';
 	import CloseIcon from '../icons/closeIcon.svelte';
 	import PlusIcon from '../icons/plusIcon.svelte';
-
+	import type { updateDataType } from '$lib/utils/consts';
 	export let content: { items: string[]; type: 'ordered' | 'unordered' };
 	export let id: string;
 	export let active = false;
+	const updateData: updateDataType = getContext('updateData');
 	const view: ComponentType<SvelteComponent<{ items: string[]; type: 'ordered' | 'unordered' }>> =
 		getContext('List');
 </script>

@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { getContext } from 'svelte';
+	import type { Writable } from 'svelte/store';
 	import type { dataBlock } from '../../utils/consts.js';
 	import Code from '../editBlocks/code.svelte';
 	import Header from '../editBlocks/header.svelte';
@@ -6,9 +8,10 @@
 	import List from '../editBlocks/list.svelte';
 	import Paragraph from '../editBlocks/paragraph.svelte';
 	import Quote from '../editBlocks/quote.svelte';
-	import { workingBlock } from '../../utils/stores';
 	import Space from '../editBlocks/space.svelte';
 	export let dataBlock: dataBlock;
+	const workingBlock: Writable<{ state: 'focused' | 'editing'; id: string }> =
+		getContext('workingBlock');
 	$: active = $workingBlock && $workingBlock.state == 'editing' && $workingBlock.id == dataBlock.id;
 	$: focused =
 		$workingBlock && $workingBlock.state == 'focused' && $workingBlock.id == dataBlock.id;

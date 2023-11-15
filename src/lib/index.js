@@ -2,9 +2,3 @@
 // @ts-nocheck
 
 export { default as AltronRichText } from './components/core/main.svelte';
-
-export { getData as getData } from './utils/functions';
-
-export { setData as setData } from './utils/functions';
-
-export { getWorkingBlock as getWorkingBlock } from './utils/functions';

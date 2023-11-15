@@ -13,9 +13,11 @@
 	import ViewList from '../viewBlocks/viewList.svelte';
 	import ViewParagraph from '../viewBlocks/viewParagraph.svelte';
 	import ViewQuote from '../viewBlocks/viewQuote.svelte';
-	import type { languages } from '../../utils/consts';
+	import type { dataBlock, languages } from '../../utils/consts';
 	import ViewMode from './viewMode.svelte';
 	import EditMode from './editMode.svelte';
+	import { createDataStore, createWorkingBlockStore } from '$lib/utils/stores';
+	import { get } from 'svelte/store';
 
 	// exports
 	export let viewMode = false;
@@ -65,6 +67,7 @@
 	export let customMenu: ComponentType<SvelteComponent<{ close: () => void }>> = null;
 	//
 	// context setup
+
 	setContext('dropDown', customMenu);
 	setContext('codeTheme', codeTheme);
 	setContext('Image', customImage);
@@ -77,7 +80,22 @@
 	if (codeBlockLanguages.length == 0) codeBlockLanguages.push('plaintext');
 	setContext('languages', codeBlockLanguages);
 
-	// setting intail data
+	// setting up stores
+	const data = createDataStore();
+	const workingBlock = createWorkingBlockStore();
+
+	export function getData() {
+		return get(data);
+	}
+
+	export function setData(newData: dataBlock[] | ((prev: dataBlock[]) => dataBlock[])) {
+		if (typeof newData == 'function') data.set(newData(get(data)) || []);
+		else if (typeof newData == 'object') data.set(newData);
+	}
+
+	export function getWorkingBlock() {
+		return get(workingBlock);
+	}
 </script>
 
 <div

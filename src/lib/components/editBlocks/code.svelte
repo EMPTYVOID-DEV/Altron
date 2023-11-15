@@ -1,8 +1,7 @@
 <script lang="ts">
 	import { SvelteComponent, getContext, type ComponentType } from 'svelte';
 	import Select from '../extra/select.svelte';
-	import type { languages } from '../../utils/consts';
-	import { updateData } from '../../utils/functions';
+	import type { languages, updateDataType } from '../../utils/consts';
 	import Textarea from '../extra/textarea.svelte';
 	export let content: { text: string; lang: languages };
 	export let id: string;
@@ -10,6 +9,7 @@
 	const languages = getContext('languages') as languages[];
 	const view: ComponentType<SvelteComponent<{ text: string; lang: languages }>> =
 		getContext('Code');
+	const updateData: updateDataType = getContext('updateData');
 </script>
 
 {#if active}
