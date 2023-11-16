@@ -5,6 +5,7 @@
 	import HeaderIcon from '../icons/headerIcon.svelte';
 	import ImageIcon from '../icons/imageIcon.svelte';
 	import ListIcon from '../icons/listIcon.svelte';
+	import ChecklistIcon from '../icons/checkListIcon.svelte';
 	import QuoteIcon from '../icons/closeQuoteIcon.svelte';
 	import ParagraphIcon from '../icons/paragraphIcon.svelte';
 	import PlusIcon from '../icons/plusIcon.svelte';
@@ -14,31 +15,7 @@
 	import { fade } from 'svelte/transition';
 	import { elasticIn } from 'svelte/easing';
 	import type { Writable } from 'svelte/store';
-	function add(list: dataBlock[], id: string, name: blocks) {
-		if (name === 'paragraph') {
-			list.push({ name, id, data: { text: 'hello friend' } });
-		} else if (name === 'image') {
-			list.push({
-				name,
-				id,
-				data: { base64: '', name: 'default.png', caption: 'default image' }
-			});
-		} else if (name === 'code') {
-			list.push({
-				name,
-				id,
-				data: { text: 'console.log("hello friend")', lang: languages[0] }
-			});
-		} else if (name === 'quote') {
-			list.push({ name, id, data: { text: 'hello friend', owner: 'me' } });
-		} else if (name === 'header') {
-			list.push({ name, id, data: { text: 'hello friend', level: 4 } });
-		} else if (name === 'list') {
-			list.push({ name, id, data: { items: ['hello friend'], type: 'ordered' } });
-		} else {
-			list.push({ id, name, data: { size: 24 } });
-		}
-	}
+
 	const data: Writable<dataBlock[]> = getContext('data');
 	const excludedBlocks: blocks[] = getContext('excludedBlocks');
 	const workingBlock: Writable<{ state: 'focused' | 'editing'; id: string }> =
@@ -51,12 +28,26 @@
 		['list', ListIcon],
 		['quote', QuoteIcon],
 		['code', CodeIcon],
-		['space', SpaceIcon]
+		['space', SpaceIcon],
+		['checklist', ChecklistIcon]
+	]);
+	const defaultData = new Map<blocks, any>([
+		['paragraph', { text: 'hello friend' }],
+		['image', { base64: '', name: 'default.png', caption: 'default image' }],
+		['code', { text: 'console.log("hello friend")', lang: languages[0] }],
+		['quote', { text: 'hello friend', owner: 'me' }],
+		['header', { text: 'hello friend', level: 4 }],
+		['list', { items: ['hello friend'], type: 'ordered' }],
+		['space', { size: 24 }],
+		['checklist', { items: [] }]
 	]);
 	excludedBlocks.forEach((el) => {
 		options.delete(el);
 	});
 	let toggle = true;
+	function add(list: dataBlock[], id: string, name: blocks) {
+		list.push({ id, name, data: { ...defaultData.get(name) } as any });
+	}
 </script>
 
 <div class="toolBar">

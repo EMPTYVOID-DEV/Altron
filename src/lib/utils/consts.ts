@@ -1,4 +1,12 @@
-export type blocks = 'image' | 'code' | 'quote' | 'paragraph' | 'header' | 'list' | 'space';
+export type blocks =
+	| 'image'
+	| 'code'
+	| 'quote'
+	| 'paragraph'
+	| 'header'
+	| 'list'
+	| 'space'
+	| 'checklist';
 
 export type dataBlock =
 	| { name: 'image'; id: string; data: { base64: string; name: string; caption: string } }
@@ -7,7 +15,8 @@ export type dataBlock =
 	| { name: 'quote'; id: string; data: { text: string; owner: string } }
 	| { name: 'header'; id: string; data: { text: string; level: 1 | 2 | 3 | 4 } }
 	| { name: 'space'; id: string; data: { size: number } }
-	| { name: 'list'; id: string; data: { items: string[]; type: 'ordered' | 'unordered' } };
+	| { name: 'list'; id: string; data: { items: string[]; type: 'ordered' | 'unordered' } }
+	| { name: 'checklist'; id: string; data: { items: { value: string; checked: boolean }[] } };
 
 export type updateDataType = (id: string, cb: (el: dataBlock) => void) => void;
 

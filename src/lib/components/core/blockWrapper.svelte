@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { getContext } from 'svelte';
+	import { getContext, type ComponentType } from 'svelte';
 	import type { Writable } from 'svelte/store';
-	import type { dataBlock } from '../../utils/consts.js';
+	import type { blocks, dataBlock } from '../../utils/consts.js';
 	import Code from '../editBlocks/code.svelte';
 	import Header from '../editBlocks/header.svelte';
 	import Img from '../editBlocks/img.svelte';
@@ -9,13 +9,25 @@
 	import Paragraph from '../editBlocks/paragraph.svelte';
 	import Quote from '../editBlocks/quote.svelte';
 	import Space from '../editBlocks/space.svelte';
+	import Checklist from '../editBlocks/checklist.svelte';
 	export let dataBlock: dataBlock;
 	const workingBlock: Writable<{ state: 'focused' | 'editing'; id: string }> =
 		getContext('workingBlock');
 	const editorId: string = getContext('editorId');
+	const blocksMap = new Map<blocks, ComponentType>([
+		['code', Code],
+		['header', Header],
+		['image', Img],
+		['list', List],
+		['paragraph', Paragraph],
+		['quote', Quote],
+		['space', Space],
+		['checklist', Checklist]
+	]);
 	$: active = $workingBlock && $workingBlock.state == 'editing' && $workingBlock.id == dataBlock.id;
 	$: focused =
 		$workingBlock && $workingBlock.state == 'focused' && $workingBlock.id == dataBlock.id;
+	console.log($workingBlock);
 </script>
 
 <div
@@ -26,21 +38,12 @@
 	data-editorid={editorId}
 	data-blocktype={dataBlock.name}
 >
-	{#if dataBlock.name == 'header'}
-		<Header id={dataBlock.id} content={dataBlock.data} {active} />
-	{:else if dataBlock.name == 'code'}
-		<Code content={dataBlock.data} id={dataBlock.id} {active} />
-	{:else if dataBlock.name == 'image'}
-		<Img id={dataBlock.id} content={dataBlock.data} {active} />
-	{:else if dataBlock.name == 'list'}
-		<List id={dataBlock.id} content={dataBlock.data} {active} />
-	{:else if dataBlock.name == 'paragraph'}
-		<Paragraph id={dataBlock.id} content={dataBlock.data} {active} />
-	{:else if dataBlock.name == 'quote'}
-		<Quote id={dataBlock.id} content={dataBlock.data} {active} />
-	{:else}
-		<Space id={dataBlock.id} content={dataBlock.data} {active} />
-	{/if}
+	<svelte:component
+		this={blocksMap.get(dataBlock.name)}
+		{active}
+		id={dataBlock.id}
+		content={dataBlock.data}
+	/>
 	<span class="blockType">{dataBlock.name}</span>
 </div>
 

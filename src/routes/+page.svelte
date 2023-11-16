@@ -3,15 +3,30 @@
 	import { onMount } from 'svelte';
 	let main: Main = null;
 	onMount(() => {
-		main.setData([{ id: '12', name: 'header', data: { text: 'hello friend!', level: 1 } }]);
+		main.setData([
+			{
+				id: '33',
+				name: 'header',
+				data: { level: 2, text: 'hello friend' }
+			}
+		]);
 	});
 </script>
 
 <div>
-	<Main bind:this={main} />
+	<Main
+		bgColor="#121212"
+		primaryColor="red"
+		secondaryColor="blue"
+		textColor="white"
+		bind:this={main}
+	/>
 </div>
 
 <style>
+	:global(body) {
+		background-color: #121212;
+	}
 	div {
 		width: 50vw;
 		position: absolute;

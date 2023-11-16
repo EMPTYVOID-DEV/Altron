@@ -23,5 +23,5 @@
 		/>
 	</div>
 {:else}
-	<ViewSpace size={content.size} />
+	<ViewSpace {...content} />
 {/if}

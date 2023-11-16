@@ -12,6 +12,12 @@
 	import { createDataStore, createWorkingBlockStore } from '$lib/utils/stores';
 	import { get } from 'svelte/store';
 	import { nanoid } from 'nanoid';
+	import ViewChecklist from '../viewBlocks/viewChecklist.svelte';
+
+	// TODO:checklist
+	// TODO:table
+	// TODO:attachement
+	// TODO:embeds
 
 	// exports
 	export let excludedBlocks: blocks[] = [];
@@ -58,10 +64,13 @@
 	export let customParagraph: ComponentType<SvelteComponent<{ text: string }>> = ViewParagraph;
 	export let customQuote: ComponentType<SvelteComponent<{ text: string; owner: string }>> =
 		ViewQuote;
+	export let customCheckList: ComponentType<
+		SvelteComponent<{ items: { value: string; checked: boolean }[] }>
+	> = ViewChecklist;
 	export let customMenu: ComponentType<SvelteComponent<{ close: () => void }>> = null;
 	// context setup
-
 	setContext('dropDown', customMenu);
+	setContext('Checklist', customCheckList);
 	setContext('Image', customImage);
 	setContext('Code', customCode);
 	setContext('Header', customHeader);
