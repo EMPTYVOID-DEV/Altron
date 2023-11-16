@@ -14,7 +14,10 @@
 <style>
 	div {
 		width: 50vw;
-		height: 100vh;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		translate: -50% -50%;
 	}
 
 	@media screen and (width < 768px) {

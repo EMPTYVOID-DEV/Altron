@@ -50,15 +50,15 @@
 		gap: 2px;
 		padding-inline: 8px;
 		padding-block: 4px;
-		min-width: 18rem;
-		max-width: 25rem;
+		min-width: 16rem;
+		max-width: 24rem;
 		background-color: var(--bgColor);
-		border-radius: 4px;
+		border-radius: 6px;
 		border: 2px solid var(--textColor);
 	}
 	.dropDown div {
 		width: 100%;
-		padding-left: 3px;
+		padding-left: 6px;
 		padding-block: 8px;
 		display: flex;
 		align-items: center;
@@ -66,7 +66,6 @@
 		cursor: pointer;
 	}
 	.dropDown span {
-		text-transform: capitalize;
 		color: var(--textColor);
 		font-weight: 600;
 	}

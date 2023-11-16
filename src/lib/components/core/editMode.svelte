@@ -72,7 +72,7 @@
 			<DropDown
 				options={[
 					{
-						label: 'move the block up',
+						label: 'Move up',
 						icon: UpIcon,
 						cb: () => {
 							move(true);
@@ -80,7 +80,7 @@
 					},
 					{
 						icon: DownIcon,
-						label: 'move the block down',
+						label: 'Move down',
 						cb: () => {
 							move(false);
 						}
