@@ -8,9 +8,9 @@
 
 <div class="imageView">
 	{#if fallback}
-		<img src={defaultImg} alt="favicon" />
+		<img src={defaultImg} alt="default" />
 	{:else}
-		<img src={base64} alt="sorry {name} image does not exist" on:error={() => (fallback = true)} />
+		<img src={base64} alt="sorry {name} image does not exist" />
 	{/if}
 	<span>{caption}</span>
 </div>

@@ -24,7 +24,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: stretch;
-		gap: 15px;
+		gap: 6px;
 	}
 
 	.input-container label {
