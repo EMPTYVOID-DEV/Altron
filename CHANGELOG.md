@@ -1,5 +1,11 @@
 # altron-rich-text
 
+## 2.0.1
+
+### Patch Changes
+
+- updating image block component to show the image updates
+
 ## 2.0.0
 
 ### Major Changes
