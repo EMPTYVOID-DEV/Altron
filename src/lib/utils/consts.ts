@@ -6,7 +6,8 @@ export type blocks =
 	| 'header'
 	| 'list'
 	| 'space'
-	| 'checklist';
+	| 'checklist'
+	| 'attachment';
 
 export type dataBlock =
 	| { name: 'image'; id: string; data: { base64: string; name: string; caption: string } }
@@ -16,7 +17,8 @@ export type dataBlock =
 	| { name: 'header'; id: string; data: { text: string; level: 1 | 2 | 3 | 4 } }
 	| { name: 'space'; id: string; data: { size: number } }
 	| { name: 'list'; id: string; data: { items: string[]; type: 'ordered' | 'unordered' } }
-	| { name: 'checklist'; id: string; data: { items: { value: string; checked: boolean }[] } };
+	| { name: 'checklist'; id: string; data: { items: { value: string; checked: boolean }[] } }
+	| { name: 'attachment'; id: string; data: { file: File; title: string } };
 
 export type updateDataType = (id: string, cb: (el: dataBlock) => void) => void;
 

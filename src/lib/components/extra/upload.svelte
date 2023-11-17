@@ -2,8 +2,8 @@
 	import UploadIcon from '../icons/uploadIcon.svelte';
 
 	export let label = '';
-	export let changeHandler: (base64: string, fileName: string) => void;
-	export let fileType: 'image/*' | '.pdf' = 'image/*';
+	export let changeHandler: (file: File) => void;
+	export let fileType: string = '*';
 	export let currentFileName: string = 'default.png';
 </script>
 
@@ -16,14 +16,7 @@
 		accept={fileType}
 		on:change={(e) => {
 			const file = e.currentTarget.files[0];
-			if (file) {
-				const reader = new FileReader();
-				reader.onload = () => {
-					changeHandler(reader.result.toString(), file.name);
-					currentFileName = file.name;
-				};
-				reader.readAsDataURL(file);
-			}
+			changeHandler(file);
 		}}
 	/>
 	<div class="inputReplace">

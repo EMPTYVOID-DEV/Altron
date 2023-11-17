@@ -11,15 +11,31 @@
 </script>
 
 {#if active}
-	<Textarea
-		textContent={content.text}
-		textLevel={0}
-		changeHandler={(textContent) => {
-			updateData(id, (prev) => {
-				if (prev.name == 'paragraph') prev.data.text = textContent;
-			});
-		}}
-	/>
+	<div class="editParagraph">
+		<span>Paragraph content</span>
+		<Textarea
+			textContent={content.text}
+			textLevel={0}
+			changeHandler={(textContent) => {
+				updateData(id, (prev) => {
+					if (prev.name == 'paragraph') prev.data.text = textContent;
+				});
+			}}
+		/>
+	</div>
 {:else}
 	<svelte:component this={view} text={content.text} />
 {/if}
+
+<style>
+	.editParagraph {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+	}
+	.editParagraph span {
+		font-weight: bold;
+		color: var(--textColor);
+	}
+</style>

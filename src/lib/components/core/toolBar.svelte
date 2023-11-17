@@ -11,6 +11,7 @@
 	import PlusIcon from '../icons/plusIcon.svelte';
 	import CloseIcon from '../icons/closeIcon.svelte';
 	import SpaceIcon from '../icons/spaceIcon.svelte';
+	import AttachmentIcon from '../icons/attachmentIcon.svelte';
 	import { nanoid } from 'nanoid';
 	import { fade } from 'svelte/transition';
 	import { elasticIn } from 'svelte/easing';
@@ -29,7 +30,8 @@
 		['quote', QuoteIcon],
 		['code', CodeIcon],
 		['space', SpaceIcon],
-		['checklist', ChecklistIcon]
+		['checklist', ChecklistIcon],
+		['attachment', AttachmentIcon]
 	]);
 	const defaultData = new Map<blocks, any>([
 		['paragraph', { text: 'hello friend' }],
@@ -39,7 +41,8 @@
 		['header', { text: 'hello friend', level: 4 }],
 		['list', { items: ['hello friend'], type: 'ordered' }],
 		['space', { size: 24 }],
-		['checklist', { items: [] }]
+		['checklist', { items: [] }],
+		['attachment', { file: null, title: '' }]
 	]);
 	excludedBlocks.forEach((el) => {
 		options.delete(el);

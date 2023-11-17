@@ -10,14 +10,21 @@
 	const updateData: updateDataType = getContext('updateData');
 	const view: ComponentType<SvelteComponent<{ base64: string; caption: string }>> =
 		getContext('Image');
+	let fallback = content.base64 == '';
 </script>
 
 {#if active}
 	<div class="imageEdit">
-		{#if content.base64 == ''}
+		{#if fallback}
 			<img src={defaultImg} alt="default" />
 		{:else}
-			<img src={content.base64} alt="sorry {content.name} image does not exist" />
+			<img
+				src={content.base64}
+				alt="sorry {content.name} image does not exist"
+				on:error={() => {
+					fallback = true;
+				}}
+			/>
 		{/if}
 		<Input
 			label="Image caption"
@@ -32,13 +39,18 @@
 			fileType="image/*"
 			label="Image source"
 			currentFileName={content.name}
-			changeHandler={(base64, fileName) => {
-				updateData(id, (el) => {
-					if (el.name == 'image') {
-						el.data.name = fileName;
-						el.data.base64 = base64;
-					}
-				});
+			changeHandler={(file) => {
+				const reader = new FileReader();
+				reader.readAsDataURL(file);
+				reader.onload = () => {
+					updateData(id, (el) => {
+						fallback = false;
+						if (el.name == 'image') {
+							el.data.name = file.name;
+							el.data.base64 = reader.result.toString();
+						}
+					});
+				};
 			}}
 		/>
 	</div>

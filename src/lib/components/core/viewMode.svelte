@@ -10,6 +10,7 @@
 	import ViewQuote from '../viewBlocks/viewQuote.svelte';
 	import ViewSpace from '../viewBlocks/viewSpace.svelte';
 	import ViewChecklist from '../viewBlocks/viewChecklist.svelte';
+	import viewAttachment from '../viewBlocks/viewAttachment.svelte';
 	const data: Writable<dataBlock[]> = getContext('data');
 	const viewsMap = new Map<blocks, ComponentType>([
 		['code', ViewCode],
@@ -19,7 +20,8 @@
 		['paragraph', ViewParagraph],
 		['quote', ViewQuote],
 		['space', ViewSpace],
-		['checklist', ViewChecklist]
+		['checklist', ViewChecklist],
+		['attachment', viewAttachment]
 	]);
 </script>
 

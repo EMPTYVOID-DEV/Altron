@@ -15,6 +15,7 @@
 
 <div>
 	<Main
+		attachmentTypes="image/png"
 		bgColor="#121212"
 		primaryColor="red"
 		secondaryColor="blue"

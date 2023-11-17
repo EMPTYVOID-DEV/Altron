@@ -13,13 +13,13 @@
 	import { get } from 'svelte/store';
 	import { nanoid } from 'nanoid';
 	import ViewChecklist from '../viewBlocks/viewChecklist.svelte';
+	import ViewAttachment from '../viewBlocks/viewAttachment.svelte';
 
-	// TODO:checklist
-	// TODO:table
 	// TODO:attachement
 	// TODO:embeds
 
 	// exports
+	export let attachmentTypes = '*';
 	export let excludedBlocks: blocks[] = [];
 	export let viewMode = false;
 	export let headerFont = `Verdana, sans-serif`;
@@ -51,6 +51,8 @@
 		'python',
 		'csharp'
 	];
+	export let customAttachment: ComponentType<SvelteComponent<{ file: File; title: string }>> =
+		ViewAttachment;
 	export let customImage: ComponentType<
 		SvelteComponent<{ base64: string; name: string; caption: string }>
 	> = ViewImage;
@@ -70,6 +72,7 @@
 	export let customMenu: ComponentType<SvelteComponent<{ close: () => void }>> = null;
 	// context setup
 	setContext('dropDown', customMenu);
+	setContext('Attachment', customAttachment);
 	setContext('Checklist', customCheckList);
 	setContext('Image', customImage);
 	setContext('Code', customCode);
@@ -77,6 +80,8 @@
 	setContext('Paragraph', customParagraph);
 	setContext('List', customList);
 	setContext('Quote', customQuote);
+	//setting attachment types
+	setContext('attachmentType', attachmentTypes);
 	// excluded blocks
 	setContext('excludedBlocks', excludedBlocks);
 	// in case no options add plaintext
