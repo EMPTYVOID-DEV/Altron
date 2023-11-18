@@ -4,7 +4,7 @@
 	import Textarea from '../extra/textarea.svelte';
 	import CloseIcon from '../icons/closeIcon.svelte';
 	import PlusIcon from '../icons/plusIcon.svelte';
-	import type { updateDataType } from '$lib/utils/consts';
+	import type { updateDataType } from '../../utils/consts';
 	export let content: { items: string[]; type: 'ordered' | 'unordered' };
 	export let id: string;
 	export let active = false;

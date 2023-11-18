@@ -1,22 +1,9 @@
 <script lang="ts">
+	import { mimeToFileNameMap } from '../../utils/consts';
 	import UploadIcon from '../icons/uploadIcon.svelte';
 
 	export let file: File;
 	export let title: string;
-	const mimeToFileNameMap = new Map([
-		['application/pdf', 'pdf'],
-		['application/msword', 'doc'],
-		['application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'docx'],
-		['application/vnd.ms-excel', 'xls'],
-		['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'xlsx'],
-		['application/vnd.ms-powerpoint', 'ppt'],
-		['application/vnd.openxmlformats-officedocument.presentationml.presentation', 'pptx'],
-		['text/plain', 'txt'],
-		['application/zip', 'zip'],
-		['image/jpeg', 'jpg'],
-		['image/png', 'png'],
-		['image/gif', 'gif']
-	]);
 </script>
 
 <div class="attachment">
@@ -27,7 +14,7 @@
 			<span class="type">{mimeToFileNameMap.get(file.type) || 'file'}</span>
 			<div class="subInfo">
 				<span>{title}</span>
-				<span>{file.size / Math.pow(10, 6)} Mb</span>
+				<span>{(file.size / Math.pow(10, 6)).toString().substring(0, 5)} Mb</span>
 			</div>
 		</div>
 		<a href={URL.createObjectURL(file)} download={file.name} on:click|stopPropagation>
@@ -48,6 +35,7 @@
 	.attachment .notSelected {
 		color: var(--textColor);
 		font-weight: bold;
+		padding-block: 10px;
 	}
 	.attachment .info {
 		display: flex;

@@ -6,19 +6,25 @@
 	import ViewList from '../viewBlocks/viewList.svelte';
 	import ViewParagraph from '../viewBlocks/viewParagraph.svelte';
 	import ViewQuote from '../viewBlocks/viewQuote.svelte';
-	import type { blocks, dataBlock, languages } from '../../utils/consts';
+	import type { IframeSettings, blocks, dataBlock, languages } from '../../utils/consts';
 	import ViewMode from './viewMode.svelte';
 	import EditMode from './editMode.svelte';
-	import { createDataStore, createWorkingBlockStore } from '$lib/utils/stores';
+	import { createDataStore, createWorkingBlockStore } from '../../utils/stores';
 	import { get } from 'svelte/store';
 	import { nanoid } from 'nanoid';
 	import ViewChecklist from '../viewBlocks/viewChecklist.svelte';
 	import ViewAttachment from '../viewBlocks/viewAttachment.svelte';
+	import ViewEmbed from '../viewBlocks/viewEmbed.svelte';
+	import ViewSpace from '../viewBlocks/viewSpace.svelte';
 
-	// TODO:attachement
 	// TODO:embeds
 
 	// exports
+	export let processEmbedSrcs: (src: string) => string = (src: string) => {
+		return src;
+	};
+	export let acceptedEmbedSrcs: string[] = [];
+	export let iframeSettings: IframeSettings = {};
 	export let attachmentTypes = '*';
 	export let excludedBlocks: blocks[] = [];
 	export let viewMode = false;
@@ -51,6 +57,7 @@
 		'python',
 		'csharp'
 	];
+	export let customEmbed: ComponentType<SvelteComponent<{ src: string }>> = ViewEmbed;
 	export let customAttachment: ComponentType<SvelteComponent<{ file: File; title: string }>> =
 		ViewAttachment;
 	export let customImage: ComponentType<
@@ -72,6 +79,7 @@
 	export let customMenu: ComponentType<SvelteComponent<{ close: () => void }>> = null;
 	// context setup
 	setContext('dropDown', customMenu);
+	setContext('Embed', customEmbed);
 	setContext('Attachment', customAttachment);
 	setContext('Checklist', customCheckList);
 	setContext('Image', customImage);
@@ -80,6 +88,10 @@
 	setContext('Paragraph', customParagraph);
 	setContext('List', customList);
 	setContext('Quote', customQuote);
+	// embeds context
+	setContext('processEmbedSrcs', processEmbedSrcs);
+	setContext('acceptedEmbedSrcs', acceptedEmbedSrcs);
+	setContext('iframeSettings', iframeSettings);
 	//setting attachment types
 	setContext('attachmentType', attachmentTypes);
 	// excluded blocks

@@ -16,6 +16,7 @@
 	import { fade } from 'svelte/transition';
 	import { elasticIn } from 'svelte/easing';
 	import type { Writable } from 'svelte/store';
+	import EmbedIcon from '../icons/embedIcon.svelte';
 
 	const data: Writable<dataBlock[]> = getContext('data');
 	const excludedBlocks: blocks[] = getContext('excludedBlocks');
@@ -31,7 +32,8 @@
 		['code', CodeIcon],
 		['space', SpaceIcon],
 		['checklist', ChecklistIcon],
-		['attachment', AttachmentIcon]
+		['attachment', AttachmentIcon],
+		['embed', EmbedIcon]
 	]);
 	const defaultData = new Map<blocks, any>([
 		['paragraph', { text: 'hello friend' }],
@@ -42,7 +44,8 @@
 		['list', { items: ['hello friend'], type: 'ordered' }],
 		['space', { size: 24 }],
 		['checklist', { items: [] }],
-		['attachment', { file: null, title: '' }]
+		['attachment', { file: null, title: '' }],
+		['embed', { src: '' }]
 	]);
 	excludedBlocks.forEach((el) => {
 		options.delete(el);

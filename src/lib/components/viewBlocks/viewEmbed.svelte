@@ -1,0 +1,55 @@
+<script lang="ts">
+	import type { IframeSettings } from '../../utils/consts';
+	import { getContext } from 'svelte';
+	import Loading from '../extra/loading.svelte';
+
+	export let src: string;
+	const iframeSettings: IframeSettings = getContext('iframeSettings');
+	const processEmbedSrcs: (src: string) => string = getContext('processEmbedSrcs');
+	let state: 'loading' | 'error' | 'working' = 'loading';
+</script>
+
+{#if src == ''}
+	<span class="message">The embed content source is not valid</span>
+{:else}
+	<div class="embedView">
+		<iframe
+			class:show={state == 'working'}
+			title="embed"
+			src={processEmbedSrcs(src)}
+			{...iframeSettings}
+			on:load={(e) => (state = 'working')}
+			on:error={() => (state = 'error')}
+		/>
+		<Loading visible={state == 'loading'} />
+		{#if state == 'error'}
+			<span class="message">Sorry the content has failed to load</span>
+		{/if}
+	</div>
+{/if}
+
+<style>
+	.message {
+		color: var(--textColor);
+		font-weight: bold !important;
+		border-left: 6px solid var(--primaryColor);
+		padding-left: 10px;
+		padding-block: 10px;
+	}
+	.embedView {
+		width: 100%;
+		display: flex;
+		align-items: center;
+	}
+	.embedView iframe {
+		width: 85%;
+		aspect-ratio: 2/1;
+		overflow: hidden;
+		display: none;
+		border: none;
+		outline: none;
+	}
+	.embedView .show {
+		display: block;
+	}
+</style>

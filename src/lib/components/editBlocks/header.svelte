@@ -2,7 +2,7 @@
 	import { SvelteComponent, getContext, type ComponentType } from 'svelte';
 	import Select from '../extra/select.svelte';
 	import Textarea from '../extra/textarea.svelte';
-	import type { updateDataType } from '$lib/utils/consts';
+	import type { updateDataType } from '../../utils/consts';
 	export let content: { text: string; level: 1 | 2 | 3 | 4 };
 	export let id: string;
 	export let active = false;

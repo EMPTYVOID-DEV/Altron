@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Input from '../extra/input.svelte';
 	import ViewSpace from '../viewBlocks/viewSpace.svelte';
-	import type { updateDataType } from '$lib/utils/consts';
+	import type { updateDataType } from '../../utils/consts';
 	import { getContext } from 'svelte';
 	export let content: { size: number };
 	export let id: string;

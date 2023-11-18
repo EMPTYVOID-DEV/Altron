@@ -7,7 +7,7 @@
 	import DeleteIcon from '../icons/deleteIcon.svelte';
 	import DownIcon from '../icons/downIcon.svelte';
 	import type { Writable } from 'svelte/store';
-	import type { dataBlock } from '$lib/utils/consts';
+	import type { dataBlock } from '../../utils/consts';
 	const editorId: string = getContext('editorId');
 	const data: Writable<dataBlock[]> = getContext('data');
 	const workingBlock: Writable<{ state: 'focused' | 'editing'; id: string }> =

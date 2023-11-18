@@ -11,6 +11,7 @@
 	import Space from '../editBlocks/space.svelte';
 	import Checklist from '../editBlocks/checklist.svelte';
 	import Attachment from '../editBlocks/attachment.svelte';
+	import Embed from '../editBlocks/embed.svelte';
 	export let dataBlock: dataBlock;
 	const workingBlock: Writable<{ state: 'focused' | 'editing'; id: string }> =
 		getContext('workingBlock');
@@ -24,7 +25,8 @@
 		['quote', Quote],
 		['space', Space],
 		['checklist', Checklist],
-		['attachment', Attachment]
+		['attachment', Attachment],
+		['embed', Embed]
 	]);
 	$: active = $workingBlock && $workingBlock.state == 'editing' && $workingBlock.id == dataBlock.id;
 	$: focused =

@@ -3,7 +3,7 @@
 	import Input from '../extra/input.svelte';
 	import Upload from '../extra/upload.svelte';
 	import defaultImg from '../../assets/default.jpg';
-	import type { updateDataType } from '$lib/utils/consts';
+	import type { updateDataType } from '../../utils/consts';
 	export let content: { base64: string; name: string; caption: string };
 	export let id: string;
 	export let active = false;

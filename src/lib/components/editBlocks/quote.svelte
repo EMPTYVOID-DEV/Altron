@@ -5,7 +5,7 @@
 	export let content: { text: string; owner: string };
 	export let id: string;
 	export let active = false;
-	import type { updateDataType } from '$lib/utils/consts';
+	import type { updateDataType } from '../../utils/consts';
 	const updateData: updateDataType = getContext('updateData');
 	const view: ComponentType<SvelteComponent<{ text: string; owner: string }>> = getContext('Quote');
 </script>

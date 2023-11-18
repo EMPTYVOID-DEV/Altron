@@ -15,25 +15,22 @@
 
 <div>
 	<Main
-		attachmentTypes="image/png"
-		bgColor="#121212"
-		primaryColor="red"
-		secondaryColor="blue"
-		textColor="white"
+		processEmbedSrcs={(src) => {
+			const a = src.split('/');
+			a.splice(a.length - 1, 0, 'embed');
+			return a.join('/').replace('watch?v=', '');
+		}}
+		iframeSettings={{
+			referrerpolicy: 'origin'
+		}}
 		bind:this={main}
 	/>
 </div>
 
 <style>
-	:global(body) {
-		background-color: #121212;
-	}
 	div {
+		padding-block: 30px;
 		width: 50vw;
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		translate: -50% -50%;
 	}
 
 	@media screen and (width < 768px) {
