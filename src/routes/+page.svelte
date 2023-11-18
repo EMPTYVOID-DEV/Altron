@@ -15,15 +15,18 @@
 
 <div>
 	<Main
+		excludedBlocks={['code']}
 		processEmbedSrcs={(src) => {
 			const a = src.split('/');
 			a.splice(a.length - 1, 0, 'embed');
 			return a.join('/').replace('watch?v=', '');
 		}}
 		iframeSettings={{
-			referrerpolicy: 'origin'
+			referrerpolicy: 'origin',
+			credentialless: true
 		}}
 		bind:this={main}
+		attachmentTypes="image/*"
 	/>
 </div>
 

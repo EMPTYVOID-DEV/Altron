@@ -1,70 +1,61 @@
-
-# Altron Rich Text V2.0.0
+# Altron
 
 ![Altron Logo](./static/altronGreen.jpg)
 
 ## Introduction
 
-**Altron Rich Text** is a robust and versatile rich text editor designed for Svelte applications. It empowers users to effortlessly create, edit, and manage structured text content by seamlessly incorporating various blocks with associated data. This component is meticulously crafted to offer high customizability, responsiveness on mobile devices, and support for both editing and viewing modes.
+**Altron** is a robust and versatile rich text editor designed for Svelte applications. It empowers users to effortlessly create, edit, and manage structured text content by seamlessly incorporating various blocks with associated data. This component is meticulously crafted to offer high customizability, responsiveness on mobile devices, and support for both editing and viewing modes.
 
 ## Installation
 
-To kickstart your journey with **Altron Rich Text**, install it via your preferred package manager:
+To kickstart your journey with **Altron**, install it via your preferred package manager:
 
 ```bash
-npm install altron-rich-text
+npm install altron
 # or
-yarn add altron-rich-text
+yarn add altron
 # or 
-pnpm i altron-rich-text
+pnpm i altron
 ```
 
 ## Basic Usage
 
-Integrating the Altron Rich Text editor into your Svelte application is as simple as importing the `AltronRichText` component and incorporating it into your project.
+Integrating the Altron editor into your Svelte application is as simple as importing the **Altron** component and incorporating it into your project.
 
 ```ts
 <script>
-  import { AltronRichText } from 'altron-rich-text';
+  import { Altron } from 'altron';
 </script>
 
-<AltronRichText />
+<Altron />
 ```
 
 ## Data Structure
 
-The rich text editor operates on a distinct data structure known as `dataBlock`. This type encompasses:
+**Altron** operates on blocks. Here are the supported blocks:
 
-- `image`: Represents image blocks with data such as base64 representation, name, and caption.
-- `paragraph`: Fundamental text blocks.
-- `code`: Code blocks with text content and a specified programming language.
-- `quote`: Text quotes with owner attribution.
-- `header`: Header blocks with different levels (1 to 4) and associated text.
-- `space`: Empty space blocks with a specified size.
-- `list`: List blocks with items and an ordered or unordered list type.
-
-```ts
-type dataBlock =
-| { name: 'image'; id: string; data: { base64: string; name: string; caption: string } }
-| { name: 'paragraph'; id: string; data: { text: string } }
-| { name: 'code'; id: string; data: { text: string; lang: languages } }
-| { name: 'quote'; id: string; data: { text: string; owner: string } }
-| { name: 'header'; id: string; data: { text: string; level: 1 | 2 | 3 | 4 } }
-| { name: 'space'; id: string; data: { size: number } }
-| { name: 'list'; id: string; data: { items: string[]; type: 'ordered' | 'unordered' } };
-```
+- `image`
+- `paragraph`
+- `code`
+- `quote`
+- `header`
+- `space`
+- `list`
+- `checklist` 
+- `attachment`
+- `embed`
 
 ### Block States
 
-Every block in the **Altron Rich Text** editor can exist in one of three states:
+Every block in the **Altron** editor can exist in one of three states:
 
 1. **View State:** In this state, the block displays its information based on its type and associated data.
-2. **Focus State:** Upon clicking a block, it transitions to the focus state. Here, the block is enveloped with options for deleting the block, moving it up and down (default options of the `menu`).
-3. **Edit State:** Upon another click, the block enters the edit state, allowing users to modify the block's information.
+2. **Focus State:** Upon clicking/touching a block, it transitions to the focus state. Here, the block is enveloped with options for deleting the block, moving it up and down (default options of the `menu`).
+3. **Edit State:** Upon another click/touch, the block enters the edit state, allowing users to modify the block's information.
 
 ## Customization
 
-Various aspects of the rich text editor can be customized:
+Various aspects of the rich text editor can be customized through props. For more information about each prop, check the props section.
 
 - **Colors:**
   - `primaryColor`: Used in both focus and view states.
@@ -80,56 +71,48 @@ Various aspects of the rich text editor can be customized:
   - Customize font sizes using `h1`, `h2`, `h3`, `h4`, `body`, `small`.
   - Set line heights for various text elements using `lh1`, `lh2`, `lh3`, `lh4`, and `lbody`.
 
+- **Custom spacing:** By default, **Altron** separates blocks with a 10px gap and has **margin-block** set to 30px. You can change that using **blocksGap** and **marginBlock** props.
+
 - **Custom Code Block Languages:** Define the list of languages users can use for code blocks with the `codeBlockLanguages` prop. By default, it includes JavaScript, Java, C, CSS, TypeScript, Python, and C#.
 
 - **Excluded Blocks**: This prop excludes a list of blocks from the blocks menu. This only restricts the end user from adding these blocks; you can still add those using the `setData` function.
 
-- **Custom spacing:** By default, **Altron** separates blocks with a 10px gap and has **margin-block** set to 30px. You can change that using **blocksGap** and **marginBlock** props.
+- **AttachmentTypes**: This prop specifies the mime types supported by attachment block default to "\*" meaning accept any file format/extension. For more information, check the [accept attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept).
 
-- **Custom Components:** You can replace the default view components for various block types with your custom components.
-    - `customImage` for image blocks
-    - `customCode` for code blocks
-    - `customList` for list blocks
-    - `customHeader` for header blocks
-    - `customParagraph` for paragraph blocks
-    - `customQuote` for quote blocks
-    - `customMenu` The default menu allows for deleting, moving up and down the **focused** block.
+- **AcceptedEmbedSrcs**: This prop defines an array of regexs for `embed` block accepted sources. This defaults to an empty array to accept any source.
+
+- **iframeSettings**: This contains iframe attributes that will be used to show the `embed` block data.
+
+#### ProcessEmbedSrcs 
+
+This function is going to be used in the embed block view state and takes as an argument accepted source to modify it before passing it to the iframe. For example, here we are turning the badly formed YouTube source to an accepted one.
 
 ```ts
-export let customImage: ComponentType<
-SvelteComponent<{ base64: string; name: string; caption: string }>
-> = ViewImage;
-
-export let customCode: ComponentType<SvelteComponent<{ text: string; lang: languages }>> =
-ViewCode;
-
-export let customList: ComponentType<
-SvelteComponent<{ items: string[]; type: 'ordered' | 'unordered' }>
-> = ViewList;
-
-export let customHeader: ComponentType<SvelteComponent<{ text: string; level: 1 | 2 | 3 | 4 }>> =
-ViewHeader;
-
-export let customParagraph: ComponentType<SvelteComponent<{ text: string }
-
->> = ViewParagraph;
-
-export let customQuote: ComponentType<SvelteComponent<{ text: string; owner: string }>> =
-ViewQuote;
-export let customMenu: ComponentType<SvelteComponent<{ close: () => void }>> = null;
+processEmbedSrcs={(src) => {
+   const a = src.split('/');
+   a.splice(a.length - 1, 0, 'embed');
+   return a.join('/').replace('watch?v=', '');
+}}
 ```
+
+#### **Custom Components**
+
+You can replace the default view components for various block types with your custom components.
+
+ - `customImage`
+ - `customCode`
+ - `customList` 
+ - `customHeader`
+ - `customParagraph` 
+ - `customQuote` 
+ - `customEmbed` 
+ - `customCheckList`
+ - `customAttachment`
+ - `customMenu` The default menu allows for deleting, moving up and down the **focused** block.
 
 ## View Mode
 
-The Altron Rich Text editor includes a `viewMode` prop, which, when set to `true`, allows you to use the editor in read-only mode. In this mode, you can display existing content without enabling editing.
-
-```ts
-<script>
-  import { AltronRichText } from 'altron-rich-text';
-</script>
-
-<AltronRichText viewMode={true} />
-```
+The **Altron** editor includes a `viewMode` prop, which, when set to `true`, allows you to use the editor in read-only mode. In this mode, you can display existing content without enabling editing.
 
 ## Utils
 
@@ -145,36 +128,78 @@ type setData:(newData: dataBlock[] | ((prev: dataBlock[]) => dataBlock[]))=> voi
 type getWorkingBlock:()=>{state: "focused" | "editing";  id: string; } | null
 ```
 
-### Usage
+These functions are exported from the **AltronRichText**
 
-These functions are exported from the **AltronRichText** component, which means in order to use them, you have to bind a variable to the component reference (this).
+ component, which means in order to use them, you have to bind a variable to the component reference.
 
 ```ts
 <script lang="ts">
 import AltronRichText from 'Altron-rich-text';
 import { onMount } from 'svelte';
-let editor: AltronRichText = null; // we are creating a variable to hold a  
-     //reference to the AltronRichText component 
+let editor: AltronRichText = null; // we are creating a variable to hold a reference to the AltronRichText component 
  
 onMount(() => {
-    editor.setData([{ id: '12', name: 'header', data: { text: 'hello friend!', 
-          level: 1 } }]); // initialize the editor with a header
-    const intervalId=setInterval(()=>{
-        const data =editor.getData()
-        const workingBlock=editor.getWorkingBlock()
-        console.log(data,workingBlock)        
-    },2000)
-    // here we have created a setInterval that prints the component data and  
-     //working block each two seconds
-     return ()=>{
+    editor.setData([{ id: '12', name: 'header', data: { text: 'hello friend!', level: 1 } }]); // initialize the editor with a header
+    const intervalId = setInterval(() => {
+        const data = editor.getData()
+        const workingBlock = editor.getWorkingBlock()
+        console.log(data, workingBlock)        
+    }, 2000)
+    // here we have created a setInterval that prints the component data and working block each two seconds
+    return () => {
         clearInterval(intervalId)
-     }
+    }
 });
 </script>  
    <div>
      <AltronRichText bind:this={editor} viewMode={true} />
    </div>
 ```
+
+## Events
+
+**Altron** component fires several events when used in edit-mode (viewMode set to false). Let's go through them:
+
+| Event Name | Description | Detail Information |
+|---|---|---|
+| blockAdded | Fired when a new block has been added | Block ID and name |
+| blockDeleted | Fired when a block has been deleted | Block ID, name, and data |
+| blockMoved | Fired when a block is moved | Block ID and `up` attribute (boolean) indicating whether it moved up or down |
+| focusing | Fired when a block gains focus | Block ID |
+| editing | Fired when a block is being edited | Block ID |
+| losingFocus | Fired when a block loses focus | None |
+
+## Types
+
+**Altron** uses well-defined types across all of its sub-components. Here they are:
+
+```ts
+type IframeSettings = {
+    allow?: string;
+    sandbox?: string;
+    referrerpolicy?: 'no-referrer' | 'no-referrer-when-downgrade' | 'origin'
+    | 'origin-when-cross-origin' | 'same-origin' | 'strict-origin' 
+    |'strict-  origin-when-cross-origin' | 'unsafe-url';
+    credentialless?: boolean;
+    loading?: 'eager' | 'lazy';
+};  
+
+type blocks = 'image' | 'code' | 'quote' | 'paragraph' | 'header' | 'list' 
+| 'space'| 'checklist' | 'attachment' | 'embed';
+
+type dataBlock =
+| { name: 'image'; id: string; data: { base64: string; name: string; caption: string } }
+| { name: 'paragraph'; id: string; data: { text: string } }
+| { name: 'code'; id: string; data: { text: string; lang: languages } }
+| { name: 'quote'; id: string; data: { text: string; owner: string } }
+| { name: 'header'; id: string; data: { text: string; level: 1 | 2 | 3 | 4 } }
+| { name: 'space'; id: string; data: { size: number } }
+| { name: 'list'; id: string; data: { items: string[]; type: 'ordered' | 'unordered' } }
+| { name: 'checklist'; id: string; data: { items: { value: string; checked: boolean }[] } }
+| { name: 'attachment'; id: string; data: { file: File; title: string } }
+| { name: 'embed'; id: string; data: { src: string } };
+```
+
 
 ## Notes
 
@@ -184,19 +209,26 @@ onMount(() => {
 
 #### More than one instance
 
-Starting from version **v2.0.0**, the data of **AltronRichText** component is isolated, allowing us to create more than one instance of the component for things like changes comparison.
+The data of **Altron** component is isolated, allowing us to create more than one instance of the component for things like changes comparison.
 
-#### Component Reference Typing
+#### Error handling  
 
-In case you want to get linting and auto-completion when using the utility functions, you have to type the component reference.
+When unwanted data has been added by the user **Altron** sets the default value.
+- `embed` when the input value is not a https-url or didn't follow the `acceptedEmbedSrcs` altron will set the source to empty string then handle it inside the view component.
+- `attachment` if the user didnt select a file or the selection does not meet the `attachmentTypes`  altron will set the file to null.
+-  same with `image` block base64 is empty string until a proper image get selected.
 
 ## Props
 
-Here are all **Altron Rich Text** props and their default values:
+Here are all **Altron** props and their default values:
 
 | Name                  | Type                                      | Default Value                                                             |
 |-----------------------|-------------------------------------------|---------------------------------------------------------------------------|
+| processEmbedSrcs      |(src: string) => string                    | (src: string) => {return src;};                                           |
 | excludedBlocks        | blocks[]                                  | []                                                                        |
+| attachmentTypes       | string                                    | "\*"                                                                        |
+| acceptedEmbedSrcs     | string[]                                  | []                                                                        |
+| iframeSettings        | IframeSettings                            | {}                                                                        |
 | viewMode              | boolean                                   | false                                                                     |
 | headerFont            | string                                    | 'Verdana, sans-serif'                                                     |
 | bodyFont              | string                                    | 'Helvetica, sans-serif'                                                   |
@@ -218,13 +250,21 @@ Here are all **Altron Rich Text** props and their default values:
 | lh4                   | string                                    | '1.5'                                                                     |
 | lbody                 | string                                    | '1.6'                                                                     |
 | codeBlockLanguages    | languages[]                               | ['javascript', 'java', 'c', 'css', 'plaintext', 'typescript', 'python', 'csharp'] |
-| customImage           | ComponentType<SvelteComponent<{ base64: string; name: string; caption: string }>> | ViewImage |
-| customCode            | ComponentType<SvelteComponent<{ text: string; lang: languages }>> | ViewCode |
-| customList            | ComponentType<SvelteComponent<{ items: string[]; type: 'ordered' | 'unordered' }>> | ViewList |
-| customHeader          | ComponentType<SvelteComponent<{ text: string; level: 1 | 2 | 3 | 4 }>> | ViewHeader |
-| customParagraph       | ComponentType<SvelteComponent<{ text: string }>> | ViewParagraph |
-| customQuote           | ComponentType<SvelteComponent<{ text: string; owner: string }>> | ViewQuote |
-| customMenu            | ComponentType<SvelteComponent<{ close: () => void }>> | null        |
+
+#### Custom components
+
+| Component          | Props                                                                       |
+| ------------------ | --------------------------------------------------------------------------------- |
+| customEmbed        | Accepts a `src` prop of type `string` for the embedded view.                        |
+| customAttachment   | Accepts a `file` prop of type `File` and a `title` prop of type `string`.          |
+| customImage        | Accepts `base64` (string), `name` (string), and `caption` (string) props.          |
+| customCode         | Accepts `text` (string) and `lang` (languages) props.                               |
+| customList         | Accepts `items` (array of strings) and `type` ('ordered' or 'unordered') props.    |
+| customHeader       | Accepts `text` (string) and `level` (1, 2, 3, or 4) props.                          |
+| customParagraph    | Accepts a `text` prop of type `string` for the paragraph view.                      |
+| customQuote        | Accepts `text` (string) and `owner` (string) props.                                 |
+| customCheckList    | Accepts an array of objects with `value` (string) and `checked` (boolean) props.   |
+| customMenu         | Accepts a `close` prop, a function to close the menu. Set to `null`.                |
 
 
 ## Contribution
@@ -233,7 +273,4 @@ We welcome contributions! If you find any issues or have suggestions for improve
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
-```
-
-Feel free to use or modify as needed!
+This project is licensed under the [MIT License](LICENSE).Feel free to use or modify as needed!

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getContext, onMount } from 'svelte';
+	import { createEventDispatcher, getContext, onMount } from 'svelte';
 	import BlockWrapper from './blockWrapper.svelte';
 	import ToolBar from './toolBar.svelte';
 	import DropDown from '../extra/dialog.svelte';
@@ -12,6 +12,7 @@
 	const data: Writable<dataBlock[]> = getContext('data');
 	const workingBlock: Writable<{ state: 'focused' | 'editing'; id: string }> =
 		getContext('workingBlock');
+	const eventDispatcher = createEventDispatcher();
 
 	function traverseParent(element: any): { blockId: string; blockEditorId: string } {
 		while (element) {
@@ -33,10 +34,20 @@
 
 	function switchBlockState(event: MouseEvent) {
 		const detail = traverseParent(event.target);
-		if (!detail.blockId || detail.blockEditorId != editorId) return workingBlock.set(null);
-		if ($workingBlock == null || $workingBlock.id !== detail.blockId)
+		if (!detail.blockId || detail.blockEditorId != editorId) {
+			eventDispatcher('losingFocus');
+			return workingBlock.set(null);
+		}
+		if ($workingBlock == null || $workingBlock.id !== detail.blockId) {
+			eventDispatcher('focusing', {
+				id: detail.blockId
+			});
 			return workingBlock.set({ id: detail.blockId, state: 'focused' });
+		}
 		workingBlock.set({ id: detail.blockId, state: 'editing' });
+		eventDispatcher('editing', {
+			id: detail.blockId
+		});
 	}
 
 	function move(up: boolean) {
@@ -46,14 +57,26 @@
 			prev.splice(up ? index - 1 : index + 1, 0, val);
 			return prev;
 		});
+		eventDispatcher('BlockMoved', {
+			id: $workingBlock.id,
+			up
+		});
 	}
 
 	function Delete() {
+		let deletedBlock: dataBlock = null;
 		data.update((prev) => {
 			const newDataBlocks = prev.filter((element) => {
+				if (element.id == $workingBlock.id) {
+					deletedBlock = { ...element };
+				}
 				return element.id != $workingBlock.id;
 			});
 			return newDataBlocks;
+		});
+
+		eventDispatcher('BlockDeleted', {
+			deletedBlock
 		});
 	}
 
@@ -98,7 +121,7 @@
 	</div>
 {/each}
 
-<ToolBar />
+<ToolBar on:blockAdded />
 
 <style>
 	.block {

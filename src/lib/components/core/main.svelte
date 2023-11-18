@@ -15,9 +15,10 @@
 	import ViewChecklist from '../viewBlocks/viewChecklist.svelte';
 	import ViewAttachment from '../viewBlocks/viewAttachment.svelte';
 	import ViewEmbed from '../viewBlocks/viewEmbed.svelte';
-	import ViewSpace from '../viewBlocks/viewSpace.svelte';
 
-	// TODO:embeds
+	// TODO:cypress testing
+	// TODO:publish under new scoped package
+	// TODO:built docs site
 
 	// exports
 	export let processEmbedSrcs: (src: string) => string = (src: string) => {
@@ -145,7 +146,7 @@
 	{#if viewMode}
 		<ViewMode />
 	{:else}
-		<EditMode />
+		<EditMode on:blockAdded on:BlockDeleted on:BlockMoved on:editing on:focusing on:losingFocus />
 	{/if}
 </div>
 

@@ -1,6 +1,11 @@
 <script lang="ts">
 	import type { blocks, dataBlock, languages } from '../../utils/consts';
-	import { getContext, type ComponentType, type SvelteComponent } from 'svelte';
+	import {
+		getContext,
+		type ComponentType,
+		type SvelteComponent,
+		createEventDispatcher
+	} from 'svelte';
 	import CodeIcon from '../icons/codeIcon.svelte';
 	import HeaderIcon from '../icons/headerIcon.svelte';
 	import ImageIcon from '../icons/imageIcon.svelte';
@@ -18,6 +23,7 @@
 	import type { Writable } from 'svelte/store';
 	import EmbedIcon from '../icons/embedIcon.svelte';
 
+	const eventDispatcher = createEventDispatcher();
 	const data: Writable<dataBlock[]> = getContext('data');
 	const excludedBlocks: blocks[] = getContext('excludedBlocks');
 	const workingBlock: Writable<{ state: 'focused' | 'editing'; id: string }> =
@@ -53,6 +59,10 @@
 	let toggle = true;
 	function add(list: dataBlock[], id: string, name: blocks) {
 		list.push({ id, name, data: { ...defaultData.get(name) } as any });
+		eventDispatcher('blockAdded', {
+			id,
+			name
+		});
 	}
 </script>
 

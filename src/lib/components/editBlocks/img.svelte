@@ -11,6 +11,12 @@
 	const view: ComponentType<SvelteComponent<{ base64: string; caption: string }>> =
 		getContext('Image');
 	let fallback = content.base64 == '';
+	function checkType(type: string) {
+		const typeArray = type.split('/');
+		let testType = 'image/*'.split('/');
+		if (testType[0] == typeArray[0]) return true;
+		return false;
+	}
 </script>
 
 {#if active}
@@ -47,7 +53,7 @@
 						fallback = false;
 						if (el.name == 'image') {
 							el.data.name = file.name;
-							el.data.base64 = reader.result.toString();
+							el.data.base64 = checkType(file.type) ? reader.result.toString() : '';
 						}
 					});
 				};
