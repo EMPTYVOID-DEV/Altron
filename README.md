@@ -24,7 +24,7 @@ Integrating the Altron editor into your Svelte application is as simple as impor
 
 ```ts
 <script>
-  import  Altron  from '@altron/altron';
+  import  {Altron}  from '@altron/altron';
 </script>
 
 <Altron />
@@ -134,9 +134,9 @@ These functions are exported from the **AltronRichText**
 
 ```ts
 <script lang="ts">
-import Altron from '@altron/altron';
+import {Altron} from '@altron/altron';
 import { onMount } from 'svelte';
-let editor: AltronRichText = null; // we are creating a variable to hold a reference to the AltronRichText component 
+let editor: Altron = null; // we are creating a variable to hold a reference to the AltronRichText component 
  
 onMount(() => {
     editor.setData([{ id: '12', name: 'header', data: { text: 'hello friend!', level: 1 } }]); // initialize the editor with a header
