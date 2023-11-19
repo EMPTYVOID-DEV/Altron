@@ -18,7 +18,6 @@
 	import ViewEmbed from '../viewBlocks/viewEmbed.svelte';
 
 	// TODO:cypress testing
-	// TODO:publish under new scoped package
 	// TODO:built docs site
 
 	// exports

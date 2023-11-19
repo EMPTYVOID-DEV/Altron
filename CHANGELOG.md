@@ -1,5 +1,11 @@
 # altron
 
+## 1.1.1
+
+### Patch Changes
+
+- fixing viewMode to use custom View blocks
+
 ## 1.1.0
 
 ### Minor Changes
