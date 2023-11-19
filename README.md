@@ -71,7 +71,9 @@ Various aspects of the rich text editor can be customized through props. For mor
   - Customize font sizes using `h1`, `h2`, `h3`, `h4`, `body`, `small`.
   - Set line heights for various text elements using `lh1`, `lh2`, `lh3`, `lh4`, and `lbody`.
 
-- **Custom spacing:** By default, **Altron** separates blocks with a 10px gap and has **margin-block** set to 30px. You can change that using **blocksGap** and **marginBlock** props.
+- **Custom spacing:** By default, **Altron** separates blocks with a 10px gap and have the different margins set to 10px. you can change that through these props: **marginLeft** ,**marginRight** ,**marginTop** ,**marginBottom** and **blocksGap**.
+
+- **Custom width** :  You can also pass custom width for the editor the default is **95%**.
 
 - **Custom Code Block Languages:** Define the list of languages users can use for code blocks with the `codeBlockLanguages` prop. By default, it includes JavaScript, Java, C, CSS, TypeScript, Python, and C#.
 
@@ -236,8 +238,12 @@ Here are all **Altron** props and their default values:
 | secondaryColor        | string                                    | '#1eeb36'                                                                 |
 | textColor             | string                                    | '#121212'                                                                 |
 | bgColor               | string                                    | '#ffffff'                                                                 |
-| blocksGap             | number                                    | 10                                                                        |
-| marginBlock           | number                                    | 30                                                                        |
+| blocksGap             | string                                    | "10px"                                                                    |
+| marginLeft            | string                                    | "10px" 
+| marginRight           | string                                    | "10px"                                                                    |
+| marginTop             | string                                    | "10px"                                                                    |
+| marginBottom          | string                                    | "10px"                                                                    |
+| width                 | string                                    | "95%"                                                                    |
 | h1                    | string                                    | 'clamp(1.8rem, calc(1.8rem + ((1vw - 0.48rem) * 0.9722)), 2.1rem)'         |
 | h2                    | string                                    | 'clamp(1.5rem, calc(1.5rem + ((1vw - 0.48rem) * 0.9722)), 1.8rem)'         |
 | h3                    | string                                    | 'clamp(1.2rem, calc(1.2rem + ((1vw - 0.48rem) * 0.9722)), 1.5rem)'         |
