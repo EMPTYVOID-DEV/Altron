@@ -1,5 +1,11 @@
 # altron
 
+## 1.1.3
+
+### Patch Changes
+
+- fixing select and upload component responsivness and removing toolbar hover effect in mobile
+
 ## 1.1.2
 
 ### Patch Changes
