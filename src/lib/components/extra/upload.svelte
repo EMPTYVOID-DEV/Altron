@@ -56,6 +56,7 @@
 	}
 	.inputReplace > span:last-child {
 		max-width: 50%;
+		text-align: center;
 	}
 
 	.custom-input {
@@ -73,5 +74,6 @@
 	}
 	.uploadBtn span {
 		font-weight: 600;
+		text-align: center;
 	}
 </style>

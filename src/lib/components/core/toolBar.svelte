@@ -132,7 +132,7 @@
 		align-items: center;
 		flex-wrap: wrap;
 		justify-content: center;
-		gap: 15px;
+		gap: 10px;
 	}
 	.option {
 		border: 2px solid var(--primaryColor);
@@ -144,11 +144,10 @@
 		display: none;
 		top: -95%;
 		left: -50%;
-		width: 8rem;
+		width: 9rem;
 		text-transform: capitalize;
 		padding-inline: 6px;
 		border: 1px solid var(--textColor);
-		border-radius: 24px;
 		font-size: var(--small);
 		font-weight: bold;
 		color: var(--textColor);
@@ -156,9 +155,15 @@
 		z-index: 99;
 	}
 	.option:hover::after {
-		display: block;
+		display: inline-block;
 	}
 	.option > :global(svg path) {
 		fill: var(--primaryColor);
+	}
+
+	@media screen and (width < 768px) {
+		.option:hover:after {
+			display: none;
+		}
 	}
 </style>
