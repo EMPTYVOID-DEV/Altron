@@ -5,6 +5,7 @@
 	import ViewHeader from '../viewBlocks/viewHeader.svelte';
 	import ViewList from '../viewBlocks/viewList.svelte';
 	import ViewParagraph from '../viewBlocks/viewParagraph.svelte';
+	import ToolBar from './toolBar.svelte';
 	import ViewQuote from '../viewBlocks/viewQuote.svelte';
 	import type { IframeSettings, blocks, dataBlock, languages } from '../../utils/consts';
 	import ViewMode from './viewMode.svelte';
@@ -35,8 +36,12 @@
 	export let secondaryColor = '#1eeb36';
 	export let textColor = '#121212';
 	export let bgColor = '#ffffff';
-	export let blocksGap = 10;
-	export let marginBlock = 30;
+	export let blocksGap = '10px';
+	export let marginTop = '10px';
+	export let marginBottom = '10px';
+	export let marginLeft = '10px';
+	export let marginRight = '10px';
+	export let width = '95%';
 	export let h1 = 'clamp(1.8rem, calc(1.8rem + ((1vw - 0.48rem) * 0.9722)), 2.1rem)';
 	export let h2 = 'clamp(1.5rem, calc(1.5rem + ((1vw - 0.48rem) * 0.9722)), 1.8rem)';
 	export let h3 = 'clamp(1.2rem, calc(1.2rem + ((1vw - 0.48rem) * 0.9722)), 1.5rem)';
@@ -136,24 +141,35 @@
 	style:--body={body}
 	style:--small={small}
 	style:--lh1={lh1}
-	style:gap="{blocksGap}px"
 	style:--lh2={lh2}
 	style:--lh3={lh3}
 	style:--lh4={lh4}
 	style:--lbody={lbody}
-	style:margin-block="{marginBlock}px"
+	style:margin-right={marginRight}
+	style:margin-left={marginLeft}
+	style:margin-top={marginTop}
+	style:margin-bottom={marginBottom}
+	style:width
 >
 	{#if viewMode}
 		<ViewMode />
 	{:else}
-		<EditMode on:blockAdded on:BlockDeleted on:BlockMoved on:editing on:focusing on:losingFocus />
+		<div class="blocks" style:gap={blocksGap}>
+			<EditMode on:BlockDeleted on:BlockMoved on:editing on:focusing on:losingFocus />
+		</div>
+		<ToolBar on:blockAdded />
 	{/if}
 </div>
 
 <style>
 	.main {
-		width: 100%;
 		display: flex;
+		flex-direction: column;
+	}
+
+	.main .blocks {
+		display: flex;
+		width: 100%;
 		flex-direction: column;
 	}
 	.main :global(*) {

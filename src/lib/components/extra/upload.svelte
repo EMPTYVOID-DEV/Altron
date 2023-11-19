@@ -30,6 +30,7 @@
 
 <style>
 	.input-container {
+		width: 100%;
 		display: flex;
 		flex-direction: column;
 		gap: 6px;
@@ -48,10 +49,13 @@
 	}
 
 	.inputReplace {
-		width: fit-content;
+		width: 100%;
 		display: flex;
 		align-items: center;
 		gap: 20px;
+	}
+	.inputReplace > span:last-child {
+		max-width: 50%;
 	}
 
 	.custom-input {

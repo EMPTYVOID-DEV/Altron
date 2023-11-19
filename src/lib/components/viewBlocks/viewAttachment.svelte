@@ -29,6 +29,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+		gap: 10px;
 		padding-inline: 10px;
 		border-left: 6px solid var(--primaryColor);
 	}

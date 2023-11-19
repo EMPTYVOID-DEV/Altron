@@ -14,26 +14,16 @@
 </script>
 
 <div>
-	<Main
-		excludedBlocks={['code']}
-		processEmbedSrcs={(src) => {
-			const a = src.split('/');
-			a.splice(a.length - 1, 0, 'embed');
-			return a.join('/').replace('watch?v=', '');
-		}}
-		iframeSettings={{
-			referrerpolicy: 'origin',
-			credentialless: true
-		}}
-		bind:this={main}
-		attachmentTypes="image/*"
-	/>
+	<Main width="400px" />
 </div>
 
 <style>
 	div {
-		padding-block: 30px;
-		width: 50vw;
+		width: 60vw;
+		min-height: 100vh;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 	}
 
 	@media screen and (width < 768px) {

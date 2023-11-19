@@ -85,7 +85,7 @@
 				<span
 					in:fade|global={{ delay: 80 * index, duration: 300, easing: elasticIn }}
 					out:fade|global={{ delay: 80 * (6 - index), duration: 300, easing: elasticIn }}
-					data-label={'add ' + option[0]}
+					data-label={'add ' + option[0] + '...'}
 					class="option"
 					on:click|stopPropagation={() => {
 						const id = nanoid(8);
@@ -106,12 +106,12 @@
 
 <style>
 	.toolBar {
-		margin-top: 30px;
 		width: fit-content;
 		display: grid;
-		align-items: center;
 		grid-template-columns: repeat(2, auto);
+		align-items: center;
 		gap: 12px;
+		margin-top: 35px;
 	}
 	.toolBar span {
 		display: flex;
@@ -142,16 +142,17 @@
 		content: attr(data-label);
 		position: absolute;
 		display: none;
-		top: 102%;
+		top: -95%;
 		left: -50%;
-		width: 120px;
+		width: 8rem;
 		text-transform: capitalize;
 		padding-inline: 6px;
-		padding-block: 3px;
+		border: 1px solid var(--textColor);
+		border-radius: 24px;
 		font-size: var(--small);
 		font-weight: bold;
 		color: var(--textColor);
-		background-color: transparent;
+		background-color: color-mix(in srgb, gray 60%, var(--primaryColor) 30%);
 		z-index: 99;
 	}
 	.option:hover::after {

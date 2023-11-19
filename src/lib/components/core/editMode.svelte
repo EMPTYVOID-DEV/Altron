@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { createEventDispatcher, getContext, onMount } from 'svelte';
 	import BlockWrapper from './blockWrapper.svelte';
-	import ToolBar from './toolBar.svelte';
 	import DropDown from '../extra/dialog.svelte';
 	import UpIcon from '../icons/upIcon.svelte';
 	import DeleteIcon from '../icons/deleteIcon.svelte';
@@ -120,8 +119,6 @@
 		{/if}
 	</div>
 {/each}
-
-<ToolBar on:blockAdded />
 
 <style>
 	.block {
