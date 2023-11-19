@@ -11,11 +11,11 @@
 To kickstart your journey with **Altron**, install it via your preferred package manager:
 
 ```bash
-npm install altron
+npm install @altron/altron
 # or
-yarn add altron
+yarn add @altron/altron
 # or 
-pnpm i altron
+pnpm i @altron/altron
 ```
 
 ## Basic Usage
@@ -24,7 +24,7 @@ Integrating the Altron editor into your Svelte application is as simple as impor
 
 ```ts
 <script>
-  import { Altron } from 'altron';
+  import  Altron  from '@altron/altron';
 </script>
 
 <Altron />
@@ -134,7 +134,7 @@ These functions are exported from the **AltronRichText**
 
 ```ts
 <script lang="ts">
-import AltronRichText from 'Altron-rich-text';
+import Altron from '@altron/altron';
 import { onMount } from 'svelte';
 let editor: AltronRichText = null; // we are creating a variable to hold a reference to the AltronRichText component 
  
@@ -152,7 +152,7 @@ onMount(() => {
 });
 </script>  
    <div>
-     <AltronRichText bind:this={editor} viewMode={true} />
+     <Altron bind:this={editor} viewMode={true} />
    </div>
 ```
 
