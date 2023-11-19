@@ -1,5 +1,11 @@
 # altron
 
+## 1.1.2
+
+### Patch Changes
+
+- fixing bugs on spacing
+
 ## 1.1.1
 
 ### Patch Changes
