@@ -53,7 +53,6 @@
 <style>
 	.blockWrapper {
 		width: 100%;
-		padding-top: 30px;
 		position: relative;
 	}
 
@@ -64,6 +63,7 @@
 
 	.focused,
 	.editing {
+		padding-top: 30px;
 		padding-bottom: 10px;
 		padding-inline: 15px;
 	}

@@ -151,7 +151,9 @@
 	style:width
 >
 	{#if viewMode}
-		<ViewMode />
+		<div class="blocks" style:gap={blocksGap}>
+			<ViewMode />
+		</div>
 	{:else}
 		<div class="blocks" style:gap={blocksGap}>
 			<EditMode on:BlockDeleted on:BlockMoved on:editing on:focusing on:losingFocus />
