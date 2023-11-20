@@ -1,6 +1,6 @@
 # Altron
 
-![Altron Logo](./static/altronGreen.jpg)
+![Altron Logo](./static/altronBg.png)
 
 ## Introduction
 

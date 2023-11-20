@@ -1,5 +1,11 @@
 # altron
 
+## 1.1.4
+
+### Patch Changes
+
+- changing the logo
+
 ## 1.1.3
 
 ### Patch Changes
