@@ -14,7 +14,7 @@ permissions: {} #reset
 jobs:
   release:
     # IMPORTANT: prevent this action from running on forks
-    if: github.repository == 'Shinji13/Altron-Rich-Text'
+    if: github.repository == 'Shinji13/Altron'
     permissions:
       contents: write # to create release (changesets/action)
       pull-requests: write # to create pull request (changesets/action)
