@@ -1,9 +1,8 @@
 <script lang="ts">
-	import type { languages } from '../../utils/consts';
 	import CopyIcon from '../icons/copyIcon.svelte';
 	import DoneIcon from '../icons/doneIcon.svelte';
 	export let text: string;
-	export let lang: languages;
+	export let lang: string;
 	let copyStatement: boolean = false;
 	async function copyCode(e: MouseEvent) {
 		navigator.clipboard.writeText(text);

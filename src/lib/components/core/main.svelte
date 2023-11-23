@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { type SvelteComponent, type ComponentType, setContext } from 'svelte';
+	import { type SvelteComponent, type ComponentType, setContext, onMount } from 'svelte';
 	import ViewImage from '../viewBlocks/viewImage.svelte';
 	import ViewCode from '../viewBlocks/viewCode.svelte';
 	import ViewHeader from '../viewBlocks/viewHeader.svelte';
@@ -7,7 +7,7 @@
 	import ViewParagraph from '../viewBlocks/viewParagraph.svelte';
 	import ToolBar from './toolBar.svelte';
 	import ViewQuote from '../viewBlocks/viewQuote.svelte';
-	import type { IframeSettings, blocks, dataBlock, languages } from '../../utils/consts';
+	import type { IframeSettings, blocks, dataBlock } from '../../utils/consts';
 	import ViewMode from './viewMode.svelte';
 	import EditMode from './editMode.svelte';
 	import { createDataStore, createWorkingBlockStore } from '../../utils/stores';
@@ -18,7 +18,6 @@
 	import ViewEmbed from '../viewBlocks/viewEmbed.svelte';
 
 	// TODO:cypress testing
-	// TODO:built docs site
 
 	// exports
 	export let processEmbedSrcs: (src: string) => string = (src: string) => {
@@ -52,7 +51,7 @@
 	export let lh3 = '1.4';
 	export let lh4 = '1.5';
 	export let lbody = '1.6';
-	export let codeBlockLanguages: languages[] = [
+	export let codeBlockLanguages: string[] = [
 		'javascript',
 		'java',
 		'c',
@@ -68,8 +67,7 @@
 	export let customImage: ComponentType<
 		SvelteComponent<{ base64: string; name: string; caption: string }>
 	> = ViewImage;
-	export let customCode: ComponentType<SvelteComponent<{ text: string; lang: languages }>> =
-		ViewCode;
+	export let customCode: ComponentType<SvelteComponent<{ text: string; lang: string }>> = ViewCode;
 	export let customList: ComponentType<
 		SvelteComponent<{ items: string[]; type: 'ordered' | 'unordered' }>
 	> = ViewList;
@@ -123,6 +121,17 @@
 	export function getWorkingBlock() {
 		return get(workingBlock);
 	}
+
+	// onMount(() => {
+	// 	const intervalId = setInterval(() => {
+	// 		fetch('', {
+	// 			body: JSON.stringify(getData())
+	// 		});
+	// 	}, 2000);
+	// 	return () => {
+	// 		clearInterval(intervalId);
+	// 	};
+	// });
 </script>
 
 <div

@@ -2,6 +2,10 @@
 
 ![Altron Logo](./static/altronBg.png)
 
+## Documentation site
+
+You can check our [altron-site](https://altron.vercel.app). We have much clear documentation with example and live testing route.
+
 ## Introduction
 
 **Altron** is a robust and versatile rich text editor designed for Svelte applications. It empowers users to effortlessly create, edit, and manage structured text content by seamlessly incorporating various blocks with associated data. This component is meticulously crafted to offer high customizability, responsiveness on mobile devices, and support for both editing and viewing modes.

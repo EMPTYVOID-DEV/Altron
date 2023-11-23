@@ -29,7 +29,7 @@ export type blocks =
 export type dataBlock =
 	| { name: 'image'; id: string; data: { base64: string; name: string; caption: string } }
 	| { name: 'paragraph'; id: string; data: { text: string } }
-	| { name: 'code'; id: string; data: { text: string; lang: languages } }
+	| { name: 'code'; id: string; data: { text: string; lang: string } }
 	| { name: 'quote'; id: string; data: { text: string; owner: string } }
 	| { name: 'header'; id: string; data: { text: string; level: 1 | 2 | 3 | 4 } }
 	| { name: 'space'; id: string; data: { size: number } }
@@ -39,47 +39,6 @@ export type dataBlock =
 	| { name: 'embed'; id: string; data: { src: string } };
 
 export type updateDataType = (id: string, cb: (el: dataBlock) => void) => void;
-
-export type languages =
-	| 'typescript'
-	| 'javascript'
-	| 'java'
-	| 'css'
-	| 'json'
-	| 'c'
-	| 'cpp'
-	| 'go'
-	| 'python'
-	| 'php'
-	| 'sql'
-	| 'plaintext'
-	| 'yaml'
-	| 'xml'
-	| 'rust'
-	| 'lua'
-	| 'bash'
-	| 'markdown'
-	| 'swift'
-	| 'dart'
-	| 'dockerfile'
-	| 'csharp'
-	| 'kotlin'
-	| 'ruby'
-	| 'perl'
-	| 'scala'
-	| 'groovy'
-	| 'haskell'
-	| 'r'
-	| 'erlang'
-	| 'elixir'
-	| 'assembly'
-	| 'powershell'
-	| 'matlab'
-	| 'fortran'
-	| 'pascal'
-	| 'cobol'
-	| 'actionscript'
-	| 'scheme';
 
 export const mimeToFileNameMap = new Map([
 	['audio/aac', 'aac'],

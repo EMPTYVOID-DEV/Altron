@@ -1,5 +1,10 @@
-<script>
-	import Main from '$lib/components/core/main.svelte';
+<script lang="ts">
+	import Altron from '../lib/components/core/main.svelte';
 </script>
 
-<Main />
+<Altron
+	codeBlockLanguages={['mam', 'papa']}
+	on:BlockDeleted={(e) => {
+		console.log(e.detail);
+	}}
+/>
