@@ -1,5 +1,11 @@
 # altron
 
+## 1.1.5
+
+### Patch Changes
+
+- c2951a9: changing the type of lang inside code block data from languages to string
+
 ## 1.1.4
 
 ### Patch Changes
