@@ -33,17 +33,26 @@
 
 	function switchBlockState(event: MouseEvent) {
 		const detail = traverseParent(event.target);
-		if (!detail.blockId || detail.blockEditorId != editorId) {
-			eventDispatcher('losingFocus');
-			return workingBlock.set(null);
-		}
-		if ($workingBlock == null || $workingBlock.id !== detail.blockId) {
+		const outFocus = !detail.blockId || detail.blockEditorId != editorId;
+		const onFocus = !$workingBlock || $workingBlock.id != detail.blockId;
+		if ($workingBlock?.state == 'editing' && (outFocus || onFocus))
+			eventDispatcher('afterEditing', {
+				id: $workingBlock.id
+			});
+		if (outFocus) return workingBlock.set(null);
+		if (onFocus) {
 			eventDispatcher('focusing', {
 				id: detail.blockId
 			});
-			return workingBlock.set({ id: detail.blockId, state: 'focused' });
+			return workingBlock.set({
+				id: detail.blockId,
+				state: 'focused'
+			});
 		}
-		workingBlock.set({ id: detail.blockId, state: 'editing' });
+		workingBlock.set({
+			id: detail.blockId,
+			state: 'editing'
+		});
 		eventDispatcher('editing', {
 			id: detail.blockId
 		});

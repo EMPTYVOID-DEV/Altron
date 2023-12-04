@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { blocks, dataBlock, languages } from '../../utils/consts';
+	import type { blocks, dataBlock } from '../../utils/consts';
 	import {
 		getContext,
 		type ComponentType,
@@ -28,7 +28,7 @@
 	const excludedBlocks: blocks[] = getContext('excludedBlocks');
 	const workingBlock: Writable<{ state: 'focused' | 'editing'; id: string }> =
 		getContext('workingBlock');
-	const languages = getContext('languages') as languages[];
+	const languages = getContext('languages') as string[];
 	const options: Map<blocks, ComponentType<SvelteComponent>> = new Map([
 		['paragraph', ParagraphIcon],
 		['header', HeaderIcon],
@@ -59,10 +59,14 @@
 	let toggle = true;
 	function add(list: dataBlock[], id: string, name: blocks) {
 		list.push({ id, name, data: { ...defaultData.get(name) } as any });
-		eventDispatcher('blockAdded', {
+		eventDispatcher('BlockAdded', {
 			id,
 			name
 		});
+		if ($workingBlock?.state == 'editing')
+			eventDispatcher('afterEditing', {
+				id: $workingBlock.id
+			});
 	}
 </script>
 

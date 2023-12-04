@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { type SvelteComponent, type ComponentType, setContext, onMount } from 'svelte';
+	import { type SvelteComponent, type ComponentType, setContext } from 'svelte';
 	import ViewImage from '../viewBlocks/viewImage.svelte';
 	import ViewCode from '../viewBlocks/viewCode.svelte';
 	import ViewHeader from '../viewBlocks/viewHeader.svelte';
@@ -165,9 +165,9 @@
 		</div>
 	{:else}
 		<div class="blocks" style:gap={blocksGap}>
-			<EditMode on:BlockDeleted on:BlockMoved on:editing on:focusing on:losingFocus />
+			<EditMode on:BlockDeleted on:BlockMoved on:editing on:focusing on:afterEditing />
 		</div>
-		<ToolBar on:blockAdded />
+		<ToolBar on:BlockAdded on:afterEditing />
 	{/if}
 </div>
 

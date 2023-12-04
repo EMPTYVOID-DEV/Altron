@@ -10,7 +10,7 @@
 	const updateData: updateDataType = getContext('updateData');
 	const view: ComponentType<SvelteComponent<{ base64: string; caption: string }>> =
 		getContext('Image');
-	let fallback = content.base64 == '';
+	$: fallback = content.base64 == '';
 	function checkType(type: string) {
 		const typeArray = type.split('/');
 		let testType = 'image/*'.split('/');
@@ -50,7 +50,6 @@
 				reader.readAsDataURL(file);
 				reader.onload = () => {
 					updateData(id, (el) => {
-						fallback = false;
 						if (el.name == 'image') {
 							el.data.name = file.name;
 							el.data.base64 = checkType(file.type) ? reader.result.toString() : '';
