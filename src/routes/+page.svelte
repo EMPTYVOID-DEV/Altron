@@ -4,7 +4,6 @@
 
 <div>
 	<Altron
-		codeBlockLanguages={['mam', 'papa']}
 		on:BlockDeleted={(e) => {
 			console.log('deleted');
 			console.log(e.detail);
@@ -19,6 +18,10 @@
 		}}
 		on:afterEditing={(e) => {
 			console.log('after editing');
+			console.log(e.detail);
+		}}
+		on:BlockMoved={(e) => {
+			console.log('blockMoved');
 			console.log(e.detail);
 		}}
 		on:editing={(e) => {

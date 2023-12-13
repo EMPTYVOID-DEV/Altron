@@ -10,10 +10,13 @@ export function createDataStore() {
 		data.update((prev) => {
 			prev.forEach((el) => {
 				if (el.id == id) {
-					updateDispatcher('BlockUpdate', {
-						id
-					});
+					const previousState = { ...el.data };
 					cb(el);
+					updateDispatcher('BlockUpdate', {
+						id,
+						previousState,
+						newState: { ...el.data }
+					});
 				}
 			});
 			return prev;

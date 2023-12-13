@@ -58,7 +58,7 @@
 	});
 	let toggle = true;
 	function add(list: dataBlock[], id: string, name: blocks) {
-		list.push({ id, name, data: { ...defaultData.get(name) } as any });
+		list.push({ id, name, data: { ...defaultData.get(name) } });
 		eventDispatcher('BlockAdded', {
 			id,
 			name
