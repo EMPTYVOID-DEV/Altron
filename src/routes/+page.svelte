@@ -38,7 +38,8 @@
 <style>
 	div {
 		width: 100vw;
-		display: grid;
-		grid-template-columns: 45% 45%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 </style>

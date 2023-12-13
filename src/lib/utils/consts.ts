@@ -27,7 +27,7 @@ export type blocks =
 	| 'embed';
 
 export type dataBlock =
-	| { name: 'image'; id: string; data: { base64: string; name: string; caption: string } }
+	| { name: 'image'; id: string; data: { file: File; caption: string } }
 	| { name: 'paragraph'; id: string; data: { text: string } }
 	| { name: 'code'; id: string; data: { text: string; lang: string } }
 	| { name: 'quote'; id: string; data: { text: string; owner: string } }

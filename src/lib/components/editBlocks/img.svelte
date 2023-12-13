@@ -2,15 +2,13 @@
 	import { SvelteComponent, getContext, type ComponentType } from 'svelte';
 	import Input from '../extra/input.svelte';
 	import Upload from '../extra/upload.svelte';
-	import defaultImg from '../../assets/default.jpg';
 	import type { updateDataType } from '../../utils/consts';
-	export let content: { base64: string; name: string; caption: string };
+	export let content: { file: File; caption: string };
 	export let id: string;
 	export let active = false;
 	const updateData: updateDataType = getContext('updateData');
-	const view: ComponentType<SvelteComponent<{ base64: string; caption: string }>> =
-		getContext('Image');
-	$: fallback = content.base64 == '';
+	const view: ComponentType<SvelteComponent<{ file: File; caption: string }>> = getContext('Image');
+	$: preview = content.file ? URL.createObjectURL(content.file) : null;
 	function checkType(type: string) {
 		const typeArray = type.split('/');
 		let testType = 'image/*'.split('/');
@@ -21,14 +19,15 @@
 
 {#if active}
 	<div class="imageEdit">
-		{#if fallback}
-			<img src={defaultImg} alt="default" />
+		{#if !preview}
+			<h3 class="notSelected">Image not selected</h3>
 		{:else}
+			<!-- svelte-ignore a11y-img-redundant-alt -->
 			<img
-				src={content.base64}
-				alt="sorry {content.name} image does not exist"
+				src={preview}
+				alt="sorry image does not exist"
 				on:error={() => {
-					fallback = true;
+					preview = null;
 				}}
 			/>
 		{/if}
@@ -44,18 +43,13 @@
 		<Upload
 			fileType="image/*"
 			label="Image source"
-			currentFileName={content.name}
+			currentFileName={content.file ? content.file.name : 'not selected'}
 			changeHandler={(file) => {
-				const reader = new FileReader();
-				reader.readAsDataURL(file);
-				reader.onload = () => {
-					updateData(id, (el) => {
-						if (el.name == 'image') {
-							el.data.name = file.name;
-							el.data.base64 = checkType(file.type) ? reader.result.toString() : '';
-						}
-					});
-				};
+				updateData(id, (el) => {
+					if (el.name == 'image') {
+						el.data.file = checkType(file.type) ? file : null;
+					}
+				});
 			}}
 		/>
 	</div>
@@ -69,6 +63,11 @@
 		display: flex;
 		flex-direction: column;
 		gap: 15px;
+	}
+
+	.notSelected {
+		color: var(--textColor);
+		text-align: center;
 	}
 	.imageEdit img {
 		width: 80%;

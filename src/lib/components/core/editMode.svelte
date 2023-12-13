@@ -13,7 +13,7 @@
 		getContext('workingBlock');
 	const eventDispatcher = createEventDispatcher();
 
-	function traverseParent(element: any): { blockId: string; blockEditorId: string } {
+	function traverseParent(element): { blockId: string; blockEditorId: string } {
 		while (element) {
 			let currentId = element?.dataset?.blockid;
 			let editorId = element?.dataset?.editorid;
@@ -33,7 +33,9 @@
 
 	function switchBlockState(event: MouseEvent) {
 		const detail = traverseParent(event.target);
+		// in case we clicked to different editor or element outside any editor
 		const outFocus = !detail.blockId || detail.blockEditorId != editorId;
+		// in case we clicked to focus a block
 		const onFocus = !$workingBlock || $workingBlock.id != detail.blockId;
 		if ($workingBlock?.state == 'editing' && (outFocus || onFocus))
 			eventDispatcher('afterEditing', {
@@ -49,13 +51,15 @@
 				state: 'focused'
 			});
 		}
-		workingBlock.set({
-			id: detail.blockId,
-			state: 'editing'
-		});
-		eventDispatcher('editing', {
-			id: detail.blockId
-		});
+		if ($workingBlock.state == 'focused') {
+			workingBlock.set({
+				id: detail.blockId,
+				state: 'editing'
+			});
+			eventDispatcher('editing', {
+				id: detail.blockId
+			});
+		}
 	}
 
 	function move(up: boolean) {

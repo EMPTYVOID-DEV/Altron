@@ -10,7 +10,7 @@
 </script>
 
 {#if src == ''}
-	<span class="message">The embed content source is not valid</span>
+	<span class="errorEmbed">The embed content source is not valid</span>
 {:else}
 	<div class="embedView">
 		<iframe
@@ -18,18 +18,19 @@
 			title="embed"
 			src={processEmbedSrcs(src)}
 			{...iframeSettings}
-			on:load={(e) => (state = 'working')}
+			on:load={() => (state = 'working')}
 			on:error={() => (state = 'error')}
 		/>
 		<Loading visible={state == 'loading'} />
 		{#if state == 'error'}
-			<span class="message">Sorry the content has failed to load</span>
+			<span class="errorEmbed">Sorry the content has failed to load</span>
 		{/if}
 	</div>
 {/if}
 
 <style>
-	.message {
+	.errorEmbed {
+		display: block;
 		color: var(--textColor);
 		font-weight: bold !important;
 		border-left: 6px solid var(--primaryColor);

@@ -8,7 +8,7 @@
 
 <div class="attachment">
 	{#if !file}
-		<span class="notSelected">A file has'nt been uploaded yet</span>
+		<span class="notSelected">A file has'not been uploaded yet</span>
 	{:else}
 		<div class="info">
 			<span class="type">{mimeToFileNameMap.get(file.type) || 'file'}</span>
@@ -33,7 +33,7 @@
 		padding-inline: 10px;
 		border-left: 6px solid var(--primaryColor);
 	}
-	.attachment .notSelected {
+	.notSelected {
 		color: var(--textColor);
 		font-weight: bold;
 		padding-block: 10px;

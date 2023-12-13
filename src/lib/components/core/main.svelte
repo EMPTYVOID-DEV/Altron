@@ -64,9 +64,8 @@
 	export let customEmbed: ComponentType<SvelteComponent<{ src: string }>> = ViewEmbed;
 	export let customAttachment: ComponentType<SvelteComponent<{ file: File; title: string }>> =
 		ViewAttachment;
-	export let customImage: ComponentType<
-		SvelteComponent<{ base64: string; name: string; caption: string }>
-	> = ViewImage;
+	export let customImage: ComponentType<SvelteComponent<{ file: File; caption: string }>> =
+		ViewImage;
 	export let customCode: ComponentType<SvelteComponent<{ text: string; lang: string }>> = ViewCode;
 	export let customList: ComponentType<
 		SvelteComponent<{ items: string[]; type: 'ordered' | 'unordered' }>

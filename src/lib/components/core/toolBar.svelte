@@ -43,7 +43,7 @@
 	]);
 	const defaultData = new Map<blocks, any>([
 		['paragraph', { text: 'hello friend' }],
-		['image', { base64: '', name: 'default.png', caption: 'default image' }],
+		['image', { file: null, caption: 'default image' }],
 		['code', { text: 'console.log("hello friend")', lang: languages[0] }],
 		['quote', { text: 'hello friend', owner: 'me' }],
 		['header', { text: 'hello friend', level: 4 }],

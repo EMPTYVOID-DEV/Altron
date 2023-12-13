@@ -1,25 +1,23 @@
 <script lang="ts">
-	export let base64: string;
+	export let file: File;
 	export let caption: string;
-	export let name: string;
-	import defaultImg from '../../assets/default.jpg';
-	let fallback = base64 == '';
+	let preview = file ? URL.createObjectURL(file) : null;
 </script>
 
-<div class="imageView">
-	{#if fallback}
-		<img src={defaultImg} alt="default" />
-	{:else}
+{#if !preview}
+	<span class="notSelected">An image has not been uploaded yet</span>
+{:else}
+	<div class="imageView">
 		<img
-			src={base64}
-			alt="sorry {name} image does not exist"
+			src={preview}
+			alt="sorry we coudnt render {file.name} "
 			on:error={() => {
-				fallback = true;
+				preview = null;
 			}}
 		/>
-	{/if}
-	<span>{caption}</span>
-</div>
+		<span>{caption}</span>
+	</div>
+{/if}
 
 <style>
 	.imageView {
@@ -35,6 +33,15 @@
 		border-radius: 8px;
 		object-fit: cover;
 		object-position: center;
+	}
+
+	.notSelected {
+		display: block;
+		color: var(--textColor);
+		font-weight: bold !important;
+		border-left: 6px solid var(--primaryColor);
+		padding-left: 10px;
+		padding-block: 10px;
 	}
 	.imageView span {
 		color: var(--textColor);
