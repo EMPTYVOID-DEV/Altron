@@ -48,6 +48,7 @@
 				updateData(id, (el) => {
 					if (el.name == 'image') {
 						el.data.file = checkType(file.type) ? file : null;
+						//URL.revokeObjectURL(preview);
 					}
 				});
 			}}
