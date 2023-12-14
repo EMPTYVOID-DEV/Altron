@@ -1,5 +1,11 @@
 # altron
 
+## 1.2.0
+
+### Minor Changes
+
+- f16c6b8: changing image block from base64 to regular file
+
 ## 1.1.5
 
 ### Patch Changes
