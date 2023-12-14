@@ -3,41 +3,12 @@
 </script>
 
 <div>
-	<Altron
-		on:BlockDeleted={(e) => {
-			console.log('deleted');
-			console.log(e.detail);
-		}}
-		on:BlockAdded={(e) => {
-			console.log('add');
-			console.log(e.detail);
-		}}
-		on:BlockUpdate={(e) => {
-			console.log('update');
-			console.log(e.detail);
-		}}
-		on:afterEditing={(e) => {
-			console.log('after editing');
-			console.log(e.detail);
-		}}
-		on:BlockMoved={(e) => {
-			console.log('blockMoved');
-			console.log(e.detail);
-		}}
-		on:editing={(e) => {
-			console.log('edit');
-			console.log(e.detail);
-		}}
-		on:focusing={(e) => {
-			console.log('focus');
-			console.log(e.detail);
-		}}
-	/>
+	<Altron />
 </div>
 
 <style>
 	div {
-		width: 100vw;
+		width: 90vw;
 		display: flex;
 		align-items: center;
 		justify-content: center;
