@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import Altron from '../lib/components/core/main.svelte';
-	import Header from './header.svelte';
 
 	let main: Altron = null;
 
@@ -15,9 +14,10 @@
 		on:blockUpdate={(e) => {
 			console.log(e);
 		}}
+		on:blockDeleted={(e) => {
+			console.log(e.detail);
+		}}
 		bind:this={main}
-		customHeader={Header}
-		viewMode={true}
 	/>
 </div>
 
