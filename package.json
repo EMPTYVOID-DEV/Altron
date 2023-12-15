@@ -1,6 +1,6 @@
 {
 	"name": "@altron/altron",
-	"version": "1.2.0",
+	"version": "1.2.1",
 	"description": "Rich text editor as a svelte component",
 	"maintainers": [
 		"Aymen keskas <keskasaymen8@gmail.com> (https://aymenkeskas.vercel.app/)"
