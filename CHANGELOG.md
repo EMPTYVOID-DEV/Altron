@@ -1,5 +1,11 @@
 # altron
 
+## 1.2.1
+
+### Patch Changes
+
+- eda5946: using structured clone in blockUpdate event to get a deep copy from the blocks data and fixing the events namto be camelCase
+
 ## 1.2.0
 
 ### Minor Changes
