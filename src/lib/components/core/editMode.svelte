@@ -69,7 +69,7 @@
 			prev.splice(up ? index - 1 : index + 1, 0, val);
 			return prev;
 		});
-		eventDispatcher('BlockMoved', {
+		eventDispatcher('blockMoved', {
 			id: $workingBlock.id,
 			up
 		});
@@ -87,7 +87,7 @@
 			return newDataBlocks;
 		});
 
-		eventDispatcher('BlockDeleted', {
+		eventDispatcher('blockDeleted', {
 			deletedBlock
 		});
 	}

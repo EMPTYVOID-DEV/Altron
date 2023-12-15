@@ -164,9 +164,9 @@
 		</div>
 	{:else}
 		<div class="blocks" style:gap={blocksGap}>
-			<EditMode on:BlockDeleted on:BlockMoved on:editing on:focusing on:afterEditing />
+			<EditMode on:blockDeleted on:blockMoved on:editing on:focusing on:afterEditing />
 		</div>
-		<ToolBar on:BlockAdded on:afterEditing />
+		<ToolBar on:blockAdded on:afterEditing />
 	{/if}
 </div>
 

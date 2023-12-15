@@ -59,7 +59,7 @@
 	let toggle = true;
 	function add(list: dataBlock[], id: string, name: blocks) {
 		list.push({ id, name, data: { ...defaultData.get(name) } });
-		eventDispatcher('BlockAdded', {
+		eventDispatcher('blockAdded', {
 			id,
 			name
 		});

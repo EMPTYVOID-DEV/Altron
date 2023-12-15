@@ -10,12 +10,12 @@ export function createDataStore() {
 		data.update((prev) => {
 			prev.forEach((el) => {
 				if (el.id == id) {
-					const previousState = { ...el.data };
+					const previousState = structuredClone(el);
 					cb(el);
-					updateDispatcher('BlockUpdate', {
+					updateDispatcher('blockUpdate', {
 						id,
 						previousState,
-						newState: { ...el.data }
+						newState: structuredClone(el)
 					});
 				}
 			});

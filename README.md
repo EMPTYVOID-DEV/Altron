@@ -173,7 +173,8 @@ onMount(() => {
 | blockMoved | Fired when a block is moved | Block ID and `up` attribute (boolean) indicating whether it moved up or down |
 | focusing | Fired when a block gains focus | Block ID |
 | editing | Fired when a block is being edited | Block ID |
-| losingFocus | Fired when a block loses focus | None |
+| update | Fired on every update to a block data | None |
+| afterEditing | Fired after quitting editing state | None |
 
 ## Types
 
@@ -267,7 +268,7 @@ Here are all **Altron** props and their default values:
 | ------------------ | --------------------------------------------------------------------------------- |
 | customEmbed        | Accepts a `src` prop of type `string` for the embedded view.                        |
 | customAttachment   | Accepts a `file` prop of type `File` and a `title` prop of type `string`.          |
-| customImage        | Accepts `base64` (string), `name` (string), and `caption` (string) props.          |
+| customImage        | Accepts `file` (File) , and `caption` (string) props.          |
 | customCode         | Accepts `text` (string) and `lang` (languages) props.                               |
 | customList         | Accepts `items` (array of strings) and `type` ('ordered' or 'unordered') props.    |
 | customHeader       | Accepts `text` (string) and `level` (1, 2, 3, or 4) props.                          |
