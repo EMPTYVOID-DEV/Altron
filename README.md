@@ -176,7 +176,7 @@ onMount(() => {
 | blockMoved   | Fired when a block is moved           | Block ID and `up` attribute (boolean) indicating whether it moved up or down |
 | focusing     | Fired when a block gains focus        | Block ID                                                                     |
 | editing      | Fired when a block is being edited    | Block ID                                                                     |
-| update       | Fired on every update to a block data | Block ID , previous data and the new data                                                                        |
+| update       | Fired on every update to a block data | Block ID , previous data and the new data                                    |
 | afterEditing | Fired after quitting editing state    | Block ID                                                                     |
 
 ## Types
@@ -213,9 +213,9 @@ type blocks =
 	| 'embed';
 
 type dataBlock =
-	| { name: 'image'; id: string; data: {file :File ;caption: string } }
+	| { name: 'image'; id: string; data: { file: File; caption: string } }
 	| { name: 'paragraph'; id: string; data: { text: string } }
-	| { name: 'code'; id: string; data: { text: string; lang: languages } }
+	| { name: 'code'; id: string; data: { text: string; lang: string } }
 	| { name: 'quote'; id: string; data: { text: string; owner: string } }
 	| { name: 'header'; id: string; data: { text: string; level: 1 | 2 | 3 | 4 } }
 	| { name: 'space'; id: string; data: { size: number } }
@@ -278,7 +278,7 @@ Here are all **Altron** props and their default values:
 | lh3                | string                  | '1.4'                                                                             |
 | lh4                | string                  | '1.5'                                                                             |
 | lbody              | string                  | '1.6'                                                                             |
-| codeBlockLanguages | languages[]             | ['javascript', 'java', 'c', 'css', 'plaintext', 'typescript', 'python', 'csharp'] |
+| codeBlockLanguages | string[]                | ['javascript', 'java', 'c', 'css', 'plaintext', 'typescript', 'python', 'csharp'] |
 
 #### Custom components
 
@@ -287,7 +287,7 @@ Here are all **Altron** props and their default values:
 | customEmbed      | Accepts a `src` prop of type `string` for the embedded view.                     |
 | customAttachment | Accepts a `file` prop of type `File` and a `title` prop of type `string`.        |
 | customImage      | Accepts `file` (File) , and `caption` (string) props.                            |
-| customCode       | Accepts `text` (string) and `lang` (languages) props.                            |
+| customCode       | Accepts `text` (string) and `lang` (string) props.                               |
 | customList       | Accepts `items` (array of strings) and `type` ('ordered' or 'unordered') props.  |
 | customHeader     | Accepts `text` (string) and `level` (1, 2, 3, or 4) props.                       |
 | customParagraph  | Accepts a `text` prop of type `string` for the paragraph view.                   |

@@ -120,17 +120,6 @@
 	export function getWorkingBlock() {
 		return get(workingBlock);
 	}
-
-	// onMount(() => {
-	// 	const intervalId = setInterval(() => {
-	// 		fetch('', {
-	// 			body: JSON.stringify(getData())
-	// 		});
-	// 	}, 2000);
-	// 	return () => {
-	// 		clearInterval(intervalId);
-	// 	};
-	// });
 </script>
 
 <div
