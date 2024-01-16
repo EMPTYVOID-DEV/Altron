@@ -7,7 +7,7 @@
 	import ViewParagraph from '../viewBlocks/viewParagraph.svelte';
 	import ToolBar from './toolBar.svelte';
 	import ViewQuote from '../viewBlocks/viewQuote.svelte';
-	import type { IframeSettings, blocks, dataBlock } from '../../utils/consts';
+	import type { IframeSettings, blocks, dataBlock } from '../../utils/types';
 	import ViewMode from './viewMode.svelte';
 	import EditMode from './editMode.svelte';
 	import { createDataStore, createWorkingBlockStore } from '../../utils/stores';
@@ -16,8 +16,6 @@
 	import ViewChecklist from '../viewBlocks/viewChecklist.svelte';
 	import ViewAttachment from '../viewBlocks/viewAttachment.svelte';
 	import ViewEmbed from '../viewBlocks/viewEmbed.svelte';
-
-	// TODO:cypress testing
 
 	// exports
 	export let processEmbedSrcs: (src: string) => string = (src: string) => {

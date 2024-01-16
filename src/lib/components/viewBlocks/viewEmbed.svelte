@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { IframeSettings } from '../../utils/consts';
+	import type { IframeSettings } from '../../utils/types';
 	import { getContext } from 'svelte';
 	import Loading from '../extra/loading.svelte';
 

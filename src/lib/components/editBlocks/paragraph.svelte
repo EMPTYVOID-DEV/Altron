@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { SvelteComponent, getContext, type ComponentType } from 'svelte';
 	import Textarea from '../extra/textarea.svelte';
-	import type { updateDataType } from '../../utils/consts';
+	import type { updateDataType } from '../../utils/types';
 	export let content: { text: string };
 	export let active = false;
 	export let id: string;

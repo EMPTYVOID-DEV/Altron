@@ -2,7 +2,7 @@
 	import { SvelteComponent, getContext, type ComponentType } from 'svelte';
 	import Input from '../extra/input.svelte';
 	import Upload from '../extra/upload.svelte';
-	import type { updateDataType } from '../../utils/consts';
+	import type { updateDataType } from '../../utils/types';
 	export let content: { file: File; caption: string };
 	export let id: string;
 	export let active = false;

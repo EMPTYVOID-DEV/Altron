@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { SvelteComponent, getContext, type ComponentType } from 'svelte';
-	import type { updateDataType } from '../../utils/consts';
+	import type { updateDataType } from '../../utils/types';
 	import Textarea from '../extra/textarea.svelte';
 	import CloseIcon from '../icons/closeIcon.svelte';
 	import PlusIcon from '../icons/plusIcon.svelte';

@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
-import type { dataBlock, updateDataType } from './consts.js';
+import type { dataBlock, updateDataType } from './types.js';
 import { setContext } from 'svelte';
 import { createEventDispatcher } from 'svelte';
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { blocks, dataBlock } from '../../utils/consts';
+	import type { blocks, dataBlock } from '../../utils/types';
 	import {
 		getContext,
 		type ComponentType,

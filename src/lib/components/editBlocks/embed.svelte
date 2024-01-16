@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { updateDataType } from '../../utils/consts';
+	import type { updateDataType } from '../../utils/types';
 	import { type ComponentType, type SvelteComponent, getContext } from 'svelte';
 	import Input from '../extra/input.svelte';
 	export let id: string;

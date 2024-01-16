@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { getContext, type ComponentType } from 'svelte';
 	import type { Writable } from 'svelte/store';
-	import type { blocks, dataBlock } from '../../utils/consts.js';
+	import type { blocks, dataBlock } from '../../utils/types.js';
 	import Code from '../editBlocks/code.svelte';
 	import Header from '../editBlocks/header.svelte';
 	import Img from '../editBlocks/img.svelte';

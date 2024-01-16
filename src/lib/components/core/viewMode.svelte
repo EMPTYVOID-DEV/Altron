@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { blocks, dataBlock } from '../../utils/consts';
+	import type { blocks, dataBlock } from '../../utils/types';
 	import { getContext, type ComponentType } from 'svelte';
 	import type { Writable } from 'svelte/store';
 	import ViewSpace from '../viewBlocks/viewSpace.svelte';
