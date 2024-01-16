@@ -17,6 +17,11 @@
 	import ViewAttachment from '../viewBlocks/viewAttachment.svelte';
 	import ViewEmbed from '../viewBlocks/viewEmbed.svelte';
 
+	// TODO:  fixing menu issues
+	// TODO: fix ssr
+	// TODO: fix setting image and attachment source
+	// TODO: migrate to svelte 5
+
 	// exports
 	export let processEmbedSrcs: (src: string) => string = (src: string) => {
 		return src;
