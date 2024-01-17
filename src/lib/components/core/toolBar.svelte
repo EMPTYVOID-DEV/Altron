@@ -43,14 +43,14 @@
 	]);
 	const defaultData = new Map<blocks, any>([
 		['paragraph', { text: 'hello friend' }],
-		['image', { file: null, caption: 'default image' }],
+		['image', { file: null, state: { caption: '', src: '' } }],
 		['code', { text: 'console.log("hello friend")', lang: languages[0] }],
 		['quote', { text: 'hello friend', owner: 'me' }],
 		['header', { text: 'hello friend', level: 4 }],
 		['list', { items: ['hello friend'], type: 'ordered' }],
 		['space', { size: 24 }],
 		['checklist', { items: [] }],
-		['attachment', { file: null, title: '' }],
+		['attachment', { content: null, state: { title: '', size: 0, src: '', type: '' } }],
 		['embed', { src: '' }]
 	]);
 	excludedBlocks.forEach((el) => {

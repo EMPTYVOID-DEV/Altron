@@ -3,12 +3,12 @@
 	import Input from '../extra/input.svelte';
 	import Upload from '../extra/upload.svelte';
 	import type { updateDataType } from '../../utils/types';
-	export let content: { file: File; caption: string };
+	export let content: { content: File; state: { caption: string; src: string } };
 	export let id: string;
 	export let active = false;
 	const updateData: updateDataType = getContext('updateData');
-	const view: ComponentType<SvelteComponent<{ file: File; caption: string }>> = getContext('Image');
-	$: preview = content.file ? URL.createObjectURL(content.file) : null;
+	const view: ComponentType<SvelteComponent<{ src: string; caption: string }>> =
+		getContext('Image');
 	function checkType(type: string) {
 		const typeArray = type.split('/');
 		let testType = 'image/*'.split('/');
@@ -19,43 +19,38 @@
 
 {#if active}
 	<div class="imageEdit">
-		{#if !preview}
+		{#if content.state.src == ''}
 			<h3 class="notSelected">Image not selected</h3>
 		{:else}
 			<!-- svelte-ignore a11y-img-redundant-alt -->
-			<img
-				src={preview}
-				alt="sorry image does not exist"
-				on:error={() => {
-					preview = null;
-				}}
-			/>
+			<img src={content.state.src} alt="sorry image didnt load" />
 		{/if}
 		<Input
 			label="Image caption"
-			value={content.caption}
+			value={content.state.caption}
 			changeHandler={(text) => {
 				updateData(id, (el) => {
-					if (el.name == 'image') el.data.caption = text;
+					if (el.name == 'image') el.data.state.caption = text;
 				});
 			}}
 		/>
 		<Upload
 			fileType="image/*"
 			label="Image source"
-			currentFileName={content.file ? content.file.name : 'not selected'}
+			currentFileName={content.content ? content.content.name : 'not selected'}
 			changeHandler={(file) => {
 				updateData(id, (el) => {
-					if (el.name == 'image') {
-						el.data.file = checkType(file.type) ? file : null;
-						//URL.revokeObjectURL(preview);
+					if (el.name == 'image' && checkType(file.type)) {
+						el.data.content = file;
+						URL.revokeObjectURL(el.data.state.src);
+						el.data.state.src = URL.createObjectURL(file);
 					}
 				});
 			}}
 		/>
 	</div>
 {:else}
-	<svelte:component this={view} {...content} />
+	<svelte:component this={view} {...content.state} />
 {/if}
 
 <style>

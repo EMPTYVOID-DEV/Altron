@@ -1,20 +1,14 @@
 <script lang="ts">
-	export let file: File;
+	export let src: string;
 	export let caption: string;
-	let preview = file ? URL.createObjectURL(file) : null;
 </script>
 
-{#if !preview}
+{#if src == ''}
 	<span class="notSelected">An image has not been uploaded yet</span>
 {:else}
 	<div class="imageView">
-		<img
-			src={preview}
-			alt="sorry we coudnt render {file.name} "
-			on:error={() => {
-				preview = null;
-			}}
-		/>
+		<!-- svelte-ignore a11y-img-redundant-alt -->
+		<img {src} alt="sorry the image didnt load" />
 		<span>{caption}</span>
 	</div>
 {/if}

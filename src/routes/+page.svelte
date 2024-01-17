@@ -5,7 +5,32 @@
 	let main: Altron = null;
 
 	onMount(() => {
-		main.setData([{ id: '2', name: 'header', data: { text: 'hello', level: 1 } }]);
+		main.setData([
+			{
+				id: '2',
+				name: 'image',
+				data: {
+					content: null,
+					state: {
+						caption: 'osaka',
+						src: 'https://www.nippon.com/en/ncommon/contents/guide-to-japan/2339170/2339170.jpg'
+					}
+				}
+			},
+			{
+				id: '3',
+				name: 'attachment',
+				data: {
+					content: null,
+					state: {
+						src: 'https://www.nippon.com/en/ncommon/contents/guide-to-japan/2339170/2339170.jpg',
+						title: 'osaka',
+						type: 'jpg',
+						size: 200000
+					}
+				}
+			}
+		]);
 	});
 </script>
 
@@ -18,6 +43,7 @@
 			console.log(e.detail);
 		}}
 		bind:this={main}
+		width="50%"
 	/>
 </div>
 
