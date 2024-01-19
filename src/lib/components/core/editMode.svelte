@@ -2,17 +2,13 @@
 	import { createEventDispatcher, getContext, onMount } from 'svelte';
 	import BlockWrapper from './blockWrapper.svelte';
 	import DropDown from '../extra/dialog.svelte';
-	import UpIcon from '../icons/upIcon.svelte';
-	import DeleteIcon from '../icons/deleteIcon.svelte';
-	import DownIcon from '../icons/downIcon.svelte';
 	import type { Writable } from 'svelte/store';
 	import type { dataBlock } from '../../utils/types';
 	const editorId: string = getContext('editorId');
-	const data: Writable<dataBlock[]> = getContext('data');
 	const workingBlock: Writable<{ state: 'focused' | 'editing'; id: string }> =
 		getContext('workingBlock');
 	const eventDispatcher = createEventDispatcher();
-
+	const data = getContext('data') as Writable<dataBlock[]>;
 	function traverseParent(element): { blockId: string; blockEditorId: string } {
 		while (element) {
 			let currentId = element?.dataset?.blockid;
@@ -62,36 +58,6 @@
 		}
 	}
 
-	function move(up: boolean) {
-		data.update((prev) => {
-			const index = prev.findIndex((val) => val.id == $workingBlock.id);
-			const val = prev.splice(index, 1)[0];
-			prev.splice(up ? index - 1 : index + 1, 0, val);
-			return prev;
-		});
-		eventDispatcher('blockMoved', {
-			id: $workingBlock.id,
-			up
-		});
-	}
-
-	function Delete() {
-		let deletedBlock: dataBlock = null;
-		data.update((prev) => {
-			const newDataBlocks = prev.filter((element) => {
-				if (element.id == $workingBlock.id) {
-					deletedBlock = { ...element };
-				}
-				return element.id != $workingBlock.id;
-			});
-			return newDataBlocks;
-		});
-
-		eventDispatcher('blockDeleted', {
-			deletedBlock
-		});
-	}
-
 	onMount(() => {
 		window.addEventListener('click', switchBlockState);
 		return () => {
@@ -104,31 +70,7 @@
 	<div class="block">
 		<BlockWrapper dataBlock={block} />
 		{#if $workingBlock?.id == block.id && $workingBlock.state == 'focused'}
-			<DropDown
-				options={[
-					{
-						label: 'Move up',
-						icon: UpIcon,
-						cb: () => {
-							move(true);
-						}
-					},
-					{
-						icon: DownIcon,
-						label: 'Move down',
-						cb: () => {
-							move(false);
-						}
-					},
-					{
-						icon: DeleteIcon,
-						label: 'Delete the block',
-						cb: () => {
-							Delete();
-						}
-					}
-				]}
-			/>
+			<DropDown />
 		{/if}
 	</div>
 {/each}

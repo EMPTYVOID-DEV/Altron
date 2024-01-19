@@ -6,6 +6,7 @@
 	export let active: boolean;
 	export let content: { src: string };
 	const acceptedEmbedSrcs: string[] = getContext('acceptedEmbedSrcs');
+	const processEmbedSrcs: (src: string) => string = getContext('processEmbedSrcs');
 	const view: ComponentType<SvelteComponent<{ src: string }>> = getContext('Embed');
 	const updateData: updateDataType = getContext('updateData');
 	function acceptSrc(src: string) {
@@ -32,7 +33,7 @@
 			changeHandler={(textContent) => {
 				updateData(id, (el) => {
 					if (el.name == 'embed') {
-						el.data.src = acceptSrc(textContent) ? textContent : '';
+						el.data.src = acceptSrc(textContent) ? processEmbedSrcs(textContent) : '';
 					}
 				});
 			}}

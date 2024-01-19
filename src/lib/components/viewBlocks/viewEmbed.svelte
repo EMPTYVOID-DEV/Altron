@@ -2,10 +2,8 @@
 	import type { IframeSettings } from '../../utils/types';
 	import { getContext } from 'svelte';
 	import Loading from '../extra/loading.svelte';
-
 	export let src: string;
 	const iframeSettings: IframeSettings = getContext('iframeSettings');
-	const processEmbedSrcs: (src: string) => string = getContext('processEmbedSrcs');
 	let state: 'loading' | 'error' | 'working' = 'loading';
 </script>
 
@@ -16,7 +14,7 @@
 		<iframe
 			class:show={state == 'working'}
 			title="embed"
-			src={processEmbedSrcs(src)}
+			{src}
 			{...iframeSettings}
 			on:load={() => (state = 'working')}
 			on:error={() => (state = 'error')}

@@ -27,7 +27,7 @@ export type blocks =
 	| 'embed';
 
 export type dataBlock =
-	| { name: 'image'; id: string; data: { content: File; state: { caption: string; src: string } } }
+	| { name: 'image'; id: string; data: { file: File; caption: string; src: string } }
 	| { name: 'paragraph'; id: string; data: { text: string } }
 	| { name: 'code'; id: string; data: { text: string; lang: string } }
 	| { name: 'quote'; id: string; data: { text: string; owner: string } }
@@ -38,7 +38,7 @@ export type dataBlock =
 	| {
 			name: 'attachment';
 			id: string;
-			data: { content: File; state: { title: string; size: number; src: string; type: string } };
+			data: { file: File; title: string; size: number; src: string; type: string };
 	  }
 	| { name: 'embed'; id: string; data: { src: string } };
 

@@ -16,9 +16,8 @@
 	import ViewChecklist from '../viewBlocks/viewChecklist.svelte';
 	import ViewAttachment from '../viewBlocks/viewAttachment.svelte';
 	import ViewEmbed from '../viewBlocks/viewEmbed.svelte';
+	import Menu from '../extra/menu.svelte';
 
-	// TODO:  fixing menu issues
-	// TODO: fix ssr
 	// TODO: fix setting image and attachment source
 	// TODO: migrate to svelte 5
 
@@ -26,6 +25,7 @@
 	export let processEmbedSrcs: (src: string) => string = (src: string) => {
 		return src;
 	};
+	export let intialData: dataBlock[] = [];
 	export let acceptedEmbedSrcs: string[] = [];
 	export let iframeSettings: IframeSettings = {};
 	export let attachmentTypes = '*';
@@ -82,7 +82,11 @@
 	export let customCheckList: ComponentType<
 		SvelteComponent<{ items: { value: string; checked: boolean }[] }>
 	> = ViewChecklist;
-	export let customMenu: ComponentType<SvelteComponent<{ close: () => void }>> = null;
+	export let customMenu: ComponentType<
+		SvelteComponent<{
+			close: () => void;
+		}>
+	> = Menu;
 	// context setup
 	setContext('dropDown', customMenu);
 	setContext('Embed', customEmbed);
@@ -106,14 +110,25 @@
 	if (codeBlockLanguages.length == 0) codeBlockLanguages.push('plaintext');
 	setContext('languages', codeBlockLanguages);
 	// editor id
+	const editorId = nanoid(8);
 	setContext('editorId', nanoid(8));
 
 	// setting up stores
-	const data = createDataStore();
+	const data = createDataStore(intialData);
 	const workingBlock = createWorkingBlockStore();
+
+	// global set and get function
+	setContext('setData', setData);
+	setContext('getData', getData);
+	setContext('getWorkingBlock', getWorkingBlock);
+	setContext('getEditorId', getEditorId);
 
 	export function getData() {
 		return get(data);
+	}
+
+	export function getEditorId() {
+		return editorId;
 	}
 
 	export function setData(newData: dataBlock[] | ((prev: dataBlock[]) => dataBlock[])) {
@@ -187,7 +202,7 @@
 		font-weight: bold;
 		color: var(--textColor);
 		word-break: break-word;
-		white-space: pre-line;
+		white-space: pre-wrap;
 	}
 	.main :global(h1) {
 		font-size: var(--h1);

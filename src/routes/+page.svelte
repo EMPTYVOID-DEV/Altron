@@ -1,50 +1,29 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import type { dataBlock } from '$lib/utils/types';
 	import Altron from '../lib/components/core/main.svelte';
-
-	let main: Altron = null;
-
-	onMount(() => {
-		main.setData([
-			{
-				id: '2',
-				name: 'image',
-				data: {
-					content: null,
-					state: {
-						caption: 'osaka',
-						src: 'https://www.nippon.com/en/ncommon/contents/guide-to-japan/2339170/2339170.jpg'
-					}
-				}
-			},
-			{
-				id: '3',
-				name: 'attachment',
-				data: {
-					content: null,
-					state: {
-						src: 'https://www.nippon.com/en/ncommon/contents/guide-to-japan/2339170/2339170.jpg',
-						title: 'osaka',
-						type: 'jpg',
-						size: 200000
-					}
-				}
+	const intialData: dataBlock[] = [
+		{
+			id: '2',
+			name: 'header',
+			data: {
+				level: 1,
+				text: 'Seoul the morgin star city'
 			}
-		]);
-	});
+		},
+		{
+			id: '12',
+			name: 'image',
+			data: {
+				caption: 'why is this?',
+				file: null,
+				src: 'https://assets.aifsabroad.com/images/w_1680,h_961,c_fill/f_auto,q_auto:good/v1687977649/wordpress_uploads/south-korea-seoul-temple-water/south-korea-seoul-temple-water.jpg?_i=AA'
+			}
+		}
+	];
 </script>
 
 <div>
-	<Altron
-		on:blockUpdate={(e) => {
-			console.log(e);
-		}}
-		on:blockDeleted={(e) => {
-			console.log(e.detail);
-		}}
-		bind:this={main}
-		width="50%"
-	/>
+	<Altron {intialData} width="50%" />
 </div>
 
 <style>

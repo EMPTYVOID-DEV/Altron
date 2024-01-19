@@ -1,8 +1,7 @@
 <script lang="ts">
 	import UploadIcon from '../icons/uploadIcon.svelte';
-
-	export let label = '';
 	export let changeHandler: (file: File) => void;
+	export let label = '';
 	export let fileType: string = '*';
 	export let currentFileName: string = 'default.png';
 </script>

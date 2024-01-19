@@ -1,10 +1,79 @@
 <script lang="ts">
-	import type { ComponentType, SvelteComponent } from 'svelte';
+	import {
+		createEventDispatcher,
+		type ComponentType,
+		type SvelteComponent,
+		getContext
+	} from 'svelte';
 	import CloseIcon from '../icons/closeIcon.svelte';
 	import MenuIcon from '../icons/menuIcon.svelte';
-	export let options: { icon: ComponentType<SvelteComponent>; label: string; cb: () => void }[] =
-		[];
+	import type { dataBlock } from '$lib/utils/types';
+	import UpIcon from '../icons/upIcon.svelte';
+	import DeleteIcon from '../icons/deleteIcon.svelte';
+	import DownIcon from '../icons/downIcon.svelte';
+	const eventDispatcher = createEventDispatcher();
 	export let close: () => void;
+	const setData = getContext('setData') as (
+		newData: dataBlock[] | ((prev: dataBlock[]) => dataBlock[])
+	) => void;
+	const workingBlock = (
+		getContext('getWorkingBlock') as () => {
+			state: 'focused' | 'editing';
+			id: string;
+		}
+	)();
+	let options: { icon: ComponentType<SvelteComponent>; label: string; cb: () => void }[] = [
+		{
+			label: 'Move up',
+			icon: UpIcon,
+			cb: () => {
+				move(true);
+			}
+		},
+		{
+			icon: DownIcon,
+			label: 'Move down',
+			cb: () => {
+				move(false);
+			}
+		},
+		{
+			icon: DeleteIcon,
+			label: 'Delete the block',
+			cb: () => {
+				Delete();
+			}
+		}
+	];
+	function move(up: boolean) {
+		setData((prev) => {
+			const index = prev.findIndex((val) => val.id == workingBlock.id);
+			const val = prev.splice(index, 1)[0];
+			prev.splice(up ? index - 1 : index + 1, 0, val);
+			return prev;
+		});
+		eventDispatcher('blockMoved', {
+			id: workingBlock.id,
+			up
+		});
+	}
+
+	function Delete() {
+		let deletedBlock: dataBlock = null;
+		setData((prev) => {
+			const newDataBlocks = prev.filter((element) => {
+				if (element.id == workingBlock.id) {
+					deletedBlock = { ...element };
+				}
+				return element.id != workingBlock.id;
+			});
+			return newDataBlocks;
+		});
+
+		eventDispatcher('blockDeleted', {
+			deletedBlock
+		});
+	}
 </script>
 
 <div class="dropDown">

@@ -1,10 +1,12 @@
 <script lang="ts">
 	import { getContext, type ComponentType, type SvelteComponent } from 'svelte';
 	import MenuIcon from '../icons/menuIcon.svelte';
-	import Menu from './menu.svelte';
-	export let options: { icon: ComponentType<SvelteComponent>; label: string; cb: () => void }[] =
-		[];
-	const menu = getContext('dropDown') as ComponentType<SvelteComponent<{ close: () => void }>>;
+	import type { dataBlock } from '$lib/utils/types';
+	const menu = getContext('dropDown') as ComponentType<
+		SvelteComponent<{
+			close: () => void;
+		}>
+	>;
 	let dialog: HTMLDialogElement = null;
 </script>
 
@@ -26,16 +28,7 @@
 		e.stopPropagation();
 	}}
 >
-	{#if menu}
-		<svelte:component this={menu} close={() => dialog.close()} />
-	{:else}
-		<Menu
-			{options}
-			close={() => {
-				dialog.close();
-			}}
-		/>
-	{/if}
+	<svelte:component this={menu} close={() => dialog.close()} />
 </dialog>
 
 <style>

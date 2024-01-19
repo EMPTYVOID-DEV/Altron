@@ -24,7 +24,6 @@
 	import EmbedIcon from '../icons/embedIcon.svelte';
 
 	const eventDispatcher = createEventDispatcher();
-	const data: Writable<dataBlock[]> = getContext('data');
 	const excludedBlocks: blocks[] = getContext('excludedBlocks');
 	const workingBlock: Writable<{ state: 'focused' | 'editing'; id: string }> =
 		getContext('workingBlock');
@@ -43,20 +42,23 @@
 	]);
 	const defaultData = new Map<blocks, any>([
 		['paragraph', { text: 'hello friend' }],
-		['image', { file: null, state: { caption: '', src: '' } }],
+		['image', { file: null, caption: '', src: '' }],
 		['code', { text: 'console.log("hello friend")', lang: languages[0] }],
 		['quote', { text: 'hello friend', owner: 'me' }],
 		['header', { text: 'hello friend', level: 4 }],
 		['list', { items: ['hello friend'], type: 'ordered' }],
 		['space', { size: 24 }],
 		['checklist', { items: [] }],
-		['attachment', { content: null, state: { title: '', size: 0, src: '', type: '' } }],
+		['attachment', { file: null, title: '', size: 0, src: '', type: '' }],
 		['embed', { src: '' }]
 	]);
+	const setData = getContext('setData') as (
+		newData: dataBlock[] | ((prev: dataBlock[]) => dataBlock[])
+	) => void;
+	let toggle = true;
 	excludedBlocks.forEach((el) => {
 		options.delete(el);
 	});
-	let toggle = true;
 	function add(list: dataBlock[], id: string, name: blocks) {
 		list.push({ id, name, data: { ...defaultData.get(name) } });
 		eventDispatcher('blockAdded', {
@@ -93,7 +95,7 @@
 					class="option"
 					on:click|stopPropagation={() => {
 						const id = nanoid(8);
-						data.update((prev) => {
+						setData((prev) => {
 							add(prev, id, option[0]);
 							toggle = true;
 							return prev;

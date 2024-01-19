@@ -5,11 +5,12 @@
 	export let title: string;
 	export let type: string;
 	export let size: number;
+	let errorMsg: string = "A file has'not been uploaded yet";
 </script>
 
 <div class="attachment">
 	{#if src == ''}
-		<span class="notSelected">A file has'not been uploaded yet</span>
+		<span class="notSelected">{errorMsg}</span>
 	{:else}
 		<div class="info">
 			<span class="type">{mimeToFileNameMap.get(type) || 'file'}</span>
@@ -18,7 +19,7 @@
 				<span>{(size / Math.pow(10, 6)).toString().substring(0, 5)} Mb</span>
 			</div>
 		</div>
-		<a href={src} download={title} on:click|stopPropagation>
+		<a href={src} download={title} on:click|stopPropagation target="_blank">
 			<UploadIcon />
 		</a>
 	{/if}
@@ -35,8 +36,10 @@
 		border-left: 6px solid var(--primaryColor);
 	}
 	.notSelected {
+		display: block;
 		color: var(--textColor);
-		font-weight: bold;
+		font-weight: bold !important;
+		text-transform: capitalize;
 		padding-block: 10px;
 	}
 	.attachment .info {

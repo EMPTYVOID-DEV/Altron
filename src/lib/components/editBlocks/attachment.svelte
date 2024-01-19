@@ -6,8 +6,11 @@
 	export let id: string;
 	export let active: boolean;
 	export let content: {
-		content: File;
-		state: { title: string; size: number; src: string; type: string };
+		file: File;
+		title: string;
+		size: number;
+		src: string;
+		type: string;
 	};
 	const attachmentTypes: string = getContext('attachmentType');
 	const updateData: updateDataType = getContext('updateData');
@@ -30,32 +33,38 @@
 	<div class="editAttachment">
 		<Input
 			label="Attachment title"
-			value={content.state.title}
+			value={content.title}
 			changeHandler={(text) => {
 				updateData(id, (el) => {
-					if (el.name == 'attachment') el.data.state.title = text;
+					if (el.name == 'attachment') el.data.title = text;
 				});
 			}}
 		/>
 		<Upload
 			fileType={attachmentTypes}
 			label="Attachment source"
-			currentFileName={content.content ? content.content.name : 'not selected'}
+			currentFileName={content.file ? content.file.name : 'not selected'}
 			changeHandler={(file) => {
 				updateData(id, (el) => {
 					if (el.name == 'attachment' && checkType(file.type)) {
-						el.data.content = file;
-						el.data.state.type = file.type;
-						el.data.state.size = file.size;
-						URL.revokeObjectURL(el.data.state.src);
-						el.data.state.src = URL.createObjectURL(file);
+						URL.revokeObjectURL(el.data.src);
+						el.data.file = file;
+						el.data.type = file.type;
+						el.data.size = file.size;
+						el.data.src = URL.createObjectURL(file);
 					}
 				});
 			}}
 		/>
 	</div>
 {:else}
-	<svelte:component this={view} {...content.state} />
+	<svelte:component
+		this={view}
+		type={content.type}
+		size={content.size}
+		title={content.title}
+		src={content.src}
+	/>
 {/if}
 
 <style>
