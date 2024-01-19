@@ -19,7 +19,7 @@
 				<span>{(size / Math.pow(10, 6)).toString().substring(0, 5)} Mb</span>
 			</div>
 		</div>
-		<a href={src} download={title} on:click|stopPropagation target="_blank">
+		<a href={src} download={title} on:click|stopPropagation>
 			<UploadIcon />
 		</a>
 	{/if}

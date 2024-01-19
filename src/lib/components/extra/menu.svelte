@@ -7,11 +7,11 @@
 	} from 'svelte';
 	import CloseIcon from '../icons/closeIcon.svelte';
 	import MenuIcon from '../icons/menuIcon.svelte';
-	import type { dataBlock } from '$lib/utils/types';
+	import type { dataBlock, eventTypes } from '../../utils/types';
 	import UpIcon from '../icons/upIcon.svelte';
 	import DeleteIcon from '../icons/deleteIcon.svelte';
 	import DownIcon from '../icons/downIcon.svelte';
-	const eventDispatcher = createEventDispatcher();
+	const eventDispatcher = createEventDispatcher<eventTypes>();
 	export let close: () => void;
 	const setData = getContext('setData') as (
 		newData: dataBlock[] | ((prev: dataBlock[]) => dataBlock[])
@@ -70,9 +70,7 @@
 			return newDataBlocks;
 		});
 
-		eventDispatcher('blockDeleted', {
-			deletedBlock
-		});
+		eventDispatcher('blockDeleted', deletedBlock);
 	}
 </script>
 

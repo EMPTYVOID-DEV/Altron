@@ -6,12 +6,12 @@
 			id: '2',
 			name: 'header',
 			data: {
-				level: 1,
+				level: 2,
 				text: 'Seoul the morgin star city'
 			}
 		},
 		{
-			id: '12',
+			id: '2',
 			name: 'image',
 			data: {
 				caption: 'why is this?',
@@ -20,10 +20,18 @@
 			}
 		}
 	];
+	let altron: Altron = null;
 </script>
 
 <div>
-	<Altron {intialData} width="50%" />
+	<Altron
+		bind:this={altron}
+		{intialData}
+		width="50%"
+		on:afterEditing={(e) => {
+			console.log(altron.getData());
+		}}
+	/>
 </div>
 
 <style>

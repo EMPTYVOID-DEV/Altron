@@ -19,6 +19,7 @@
 			  */
 		"sourceMap": true,
 		"esModuleInterop": true,
+		"declaration": true,
 		"skipLibCheck": true,
 		"forceConsistentCasingInFileNames": false,
 		"baseUrl": ".",

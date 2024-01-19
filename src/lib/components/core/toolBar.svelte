@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { blocks, dataBlock } from '../../utils/types';
+	import type { blocks, dataBlock, eventTypes } from '../../utils/types';
 	import {
 		getContext,
 		type ComponentType,
@@ -23,7 +23,7 @@
 	import type { Writable } from 'svelte/store';
 	import EmbedIcon from '../icons/embedIcon.svelte';
 
-	const eventDispatcher = createEventDispatcher();
+	const eventDispatcher = createEventDispatcher<eventTypes>();
 	const excludedBlocks: blocks[] = getContext('excludedBlocks');
 	const workingBlock: Writable<{ state: 'focused' | 'editing'; id: string }> =
 		getContext('workingBlock');
@@ -42,14 +42,14 @@
 	]);
 	const defaultData = new Map<blocks, any>([
 		['paragraph', { text: 'hello friend' }],
-		['image', { file: null, caption: '', src: '' }],
+		['image', { file: null, caption: 'image', src: '' }],
 		['code', { text: 'console.log("hello friend")', lang: languages[0] }],
 		['quote', { text: 'hello friend', owner: 'me' }],
 		['header', { text: 'hello friend', level: 4 }],
 		['list', { items: ['hello friend'], type: 'ordered' }],
 		['space', { size: 24 }],
 		['checklist', { items: [] }],
-		['attachment', { file: null, title: '', size: 0, src: '', type: '' }],
+		['attachment', { file: null, title: 'my attachment', size: 0, src: '', type: '' }],
 		['embed', { src: '' }]
 	]);
 	const setData = getContext('setData') as (
@@ -62,8 +62,7 @@
 	function add(list: dataBlock[], id: string, name: blocks) {
 		list.push({ id, name, data: { ...defaultData.get(name) } });
 		eventDispatcher('blockAdded', {
-			id,
-			name
+			id
 		});
 		if ($workingBlock?.state == 'editing')
 			eventDispatcher('afterEditing', {

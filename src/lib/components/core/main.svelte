@@ -7,7 +7,7 @@
 	import ViewParagraph from '../viewBlocks/viewParagraph.svelte';
 	import ToolBar from './toolBar.svelte';
 	import ViewQuote from '../viewBlocks/viewQuote.svelte';
-	import type { IframeSettings, blocks, dataBlock } from '../../utils/types';
+	import type { IframeSettings, blocks, dataBlock, eventTypes } from '../../utils/types';
 	import ViewMode from './viewMode.svelte';
 	import EditMode from './editMode.svelte';
 	import { createDataStore, createWorkingBlockStore } from '../../utils/stores';
@@ -26,7 +26,10 @@
 		return src;
 	};
 	export let intialData: dataBlock[] = [];
-	export let acceptedEmbedSrcs: string[] = [];
+	export let acceptedEmbedSrcs: { rules: string[]; description: string } = {
+		description: 'You should enter a valid url for an embed any source is accepted',
+		rules: []
+	};
 	export let iframeSettings: IframeSettings = {};
 	export let attachmentTypes = '*';
 	export let excludedBlocks: blocks[] = [];
@@ -114,17 +117,30 @@
 	setContext('editorId', nanoid(8));
 
 	// setting up stores
-	const data = createDataStore(intialData);
+	const data = createDataStore(validateData(intialData));
 	const workingBlock = createWorkingBlockStore();
 
-	// global set and get function
+	// global set and get funhction
 	setContext('setData', setData);
 	setContext('getData', getData);
 	setContext('getWorkingBlock', getWorkingBlock);
 	setContext('getEditorId', getEditorId);
 
-	export function getData() {
-		return get(data);
+	function validateData(data: dataBlock[]): dataBlock[] {
+		const dupSet = new Set();
+		for (let block of data) {
+			if (dupSet.has(block.id)) {
+				block.id = nanoid(8);
+			}
+			dupSet.add(block.id);
+		}
+		return data;
+	}
+
+	export function getData(id?: string) {
+		const currentData = get(data);
+		if (id) return currentData.find((el) => el.id == id);
+		return currentData;
 	}
 
 	export function getEditorId() {
@@ -132,8 +148,10 @@
 	}
 
 	export function setData(newData: dataBlock[] | ((prev: dataBlock[]) => dataBlock[])) {
-		if (typeof newData == 'function') data.set(newData(get(data)) || []);
-		else if (typeof newData == 'object') data.set(newData);
+		if (typeof newData == 'function') {
+			const result = newData(get(data));
+			data.set(validateData(result));
+		} else if (typeof newData == 'object') data.set(validateData(newData));
 	}
 
 	export function getWorkingBlock() {

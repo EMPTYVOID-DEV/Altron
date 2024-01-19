@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { getContext, type ComponentType, type SvelteComponent } from 'svelte';
 	import MenuIcon from '../icons/menuIcon.svelte';
-	import type { dataBlock } from '$lib/utils/types';
 	const menu = getContext('dropDown') as ComponentType<
 		SvelteComponent<{
 			close: () => void;
