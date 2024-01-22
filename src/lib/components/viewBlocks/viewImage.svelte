@@ -1,19 +1,14 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
-
 	export let src: string;
 	export let caption: string;
-	let errorMsg: string = 'An image has not been uploaded yet';
-	const eventDispatcher = createEventDispatcher();
 </script>
 
 {#if src == ''}
-	<span class="notSelected">{errorMsg}</span>
+	<span class="notSelected">The image did'nt get uploaded</span>
 {:else}
 	<div class="imageView">
 		<!-- svelte-ignore a11y-img-redundant-alt -->
-
-		<img {src} alt="sorry the image did not load" />
+		<img {src} alt="Sorry the image did not load" />
 		<h4>{caption}</h4>
 	</div>
 {/if}
@@ -42,7 +37,7 @@
 		display: block;
 		color: var(--textColor);
 		font-weight: bold !important;
-		border-left: 6px solid var(--primaryColor);
+		border-left: 6px solid var(--errorColor);
 		padding-left: 10px;
 		padding-block: 10px;
 	}

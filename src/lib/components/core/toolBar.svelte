@@ -48,7 +48,7 @@
 		['header', { text: 'hello friend', level: 4 }],
 		['list', { items: ['hello friend'], type: 'ordered' }],
 		['space', { size: 24 }],
-		['checklist', { items: [] }],
+		['checklist', { items: [{ value: 'hello friend', checked: true }] }],
 		['attachment', { file: null, title: 'my attachment', size: 0, src: '', type: '' }],
 		['embed', { src: '' }]
 	]);

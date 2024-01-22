@@ -19,7 +19,6 @@
 
 {#if active}
 	<div class="imageEdit">
-		<svelte:component this={view} caption={content.caption} src={content.src} />
 		<Input
 			label="Image caption"
 			value={content.caption}
@@ -32,7 +31,7 @@
 		<Upload
 			fileType="image/*"
 			label="Image source"
-			currentFileName={content.file ? content.file.name : 'not selected'}
+			currentFileName={content.file ? content.file.name : ''}
 			changeHandler={(file) => {
 				updateData(id, (el) => {
 					if (el.name == 'image' && checkType(file.type)) {

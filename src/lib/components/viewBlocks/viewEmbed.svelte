@@ -31,7 +31,7 @@
 		display: block;
 		color: var(--textColor);
 		font-weight: bold !important;
-		border-left: 6px solid var(--primaryColor);
+		border-left: 6px solid var(--errorColor);
 		padding-left: 10px;
 		padding-block: 10px;
 	}

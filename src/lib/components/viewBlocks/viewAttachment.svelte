@@ -5,12 +5,11 @@
 	export let title: string;
 	export let type: string;
 	export let size: number;
-	let errorMsg: string = "A file has'not been uploaded yet";
 </script>
 
 <div class="attachment">
 	{#if src == ''}
-		<span class="notSelected">{errorMsg}</span>
+		<span class="notSelected">An attachment has'not been uploaded yet</span>
 	{:else}
 		<div class="info">
 			<span class="type">{mimeToFileNameMap.get(type) || 'file'}</span>
@@ -32,8 +31,6 @@
 		align-items: center;
 		justify-content: space-between;
 		gap: 10px;
-		padding-inline: 10px;
-		border-left: 6px solid var(--primaryColor);
 	}
 	.notSelected {
 		display: block;
@@ -41,11 +38,15 @@
 		font-weight: bold !important;
 		text-transform: capitalize;
 		padding-block: 10px;
+		border-left: 6px solid var(--errorColor);
+		padding-left: 10px;
 	}
 	.attachment .info {
 		display: flex;
 		align-items: center;
 		gap: 20px;
+		border-left: 6px solid var(--primaryColor);
+		padding-left: 10px;
 	}
 	.attachment .info .type {
 		color: var(--primaryColor);

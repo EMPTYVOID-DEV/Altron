@@ -18,16 +18,13 @@
 	import ViewEmbed from '../viewBlocks/viewEmbed.svelte';
 	import Menu from '../extra/menu.svelte';
 
-	// TODO: fix setting image and attachment source
-	// TODO: migrate to svelte 5
-
 	// exports
 	export let processEmbedSrcs: (src: string) => string = (src: string) => {
 		return src;
 	};
 	export let intialData: dataBlock[] = [];
 	export let acceptedEmbedSrcs: { rules: string[]; description: string } = {
-		description: 'You should enter a valid url for an embed any source is accepted',
+		description: 'You should enter a valid url for an embed , any source is accepted',
 		rules: []
 	};
 	export let iframeSettings: IframeSettings = {};
@@ -38,6 +35,7 @@
 	export let bodyFont = `Helvetica, sans-serif`;
 	export let primaryColor = '#3366FF';
 	export let secondaryColor = '#1eeb36';
+	export let errorColor = '#ff3333';
 	export let textColor = '#121212';
 	export let bgColor = '#ffffff';
 	export let blocksGap = '10px';
@@ -163,6 +161,7 @@
 	class="main"
 	style:--primaryColor={primaryColor}
 	style:--secondaryColor={secondaryColor}
+	style:--errorColor={errorColor}
 	style:--textColor={textColor}
 	style:--bgColor={bgColor}
 	style:--headingFont={headerFont}

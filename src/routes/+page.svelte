@@ -26,7 +26,6 @@
 <div>
 	<Altron
 		bind:this={altron}
-		{intialData}
 		width="50%"
 		on:afterEditing={(e) => {
 			console.log(altron.getData());

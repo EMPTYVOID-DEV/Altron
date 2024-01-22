@@ -37,8 +37,8 @@
 			value={content.src}
 			changeHandler={(textContent) => {
 				updateData(id, (el) => {
-					if (el.name == 'embed') {
-						el.data.src = acceptSrc(textContent) ? processEmbedSrcs(textContent) : '';
+					if (el.name == 'embed' && acceptSrc(textContent)) {
+						el.data.src = processEmbedSrcs(textContent);
 					}
 				});
 			}}
