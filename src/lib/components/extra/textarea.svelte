@@ -2,10 +2,12 @@
 	export let changeHandler: (data: string) => void;
 	export let textContent: string = '';
 	export let textLevel: 0 | 1 | 2 | 3 | 4 = 0;
-	export let width = 100;
+	export let label: string = '';
+	export let width = 95;
 </script>
 
-<div class="areaWrapper" style:width={`${width}%`}>
+<div class="textArea" style:width={`${width}%`}>
+	<span class="header">{label}</span>
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<span
 		style:font-size="var(--{textLevel == 0 ? 'body' : 'h' + textLevel})"
@@ -24,18 +26,25 @@
 </div>
 
 <style>
-	.areaWrapper {
+	.textArea {
 		display: flex;
-		align-items: center;
-		min-height: 2rem;
-		border-left: 6px solid var(--secondaryColor);
-		padding-left: 8px !important;
-		cursor: pointer;
+		flex-direction: column;
+		gap: 6px;
 	}
-	.editableArea {
-		width: 100%;
+	.textArea > .header {
+		margin-left: 10px;
+		font-weight: bold;
 		color: var(--textColor);
+		font-size: var(--small);
+	}
+
+	.editableArea {
 		border: none;
 		outline: none;
+		min-height: 1rem;
+		border-left: 5px solid var(--secondaryColor);
+		padding-left: 8px;
+		cursor: pointer;
+		color: var(--textColor);
 	}
 </style>

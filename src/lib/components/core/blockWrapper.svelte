@@ -55,6 +55,7 @@
 		width: 100%;
 		position: relative;
 		min-height: 50px;
+		cursor: pointer;
 	}
 
 	.focused {

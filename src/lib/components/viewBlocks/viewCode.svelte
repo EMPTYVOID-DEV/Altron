@@ -4,11 +4,10 @@
 	export let text: string;
 	export let lang: string;
 	let copyStatement: boolean = false;
-	async function copyCode(e: MouseEvent) {
+	function copyCode(e: MouseEvent) {
 		navigator.clipboard.writeText(text);
 		copyStatement = true;
-		await new Promise((res) => setTimeout(res, 800));
-		copyStatement = false;
+		new Promise((res) => setTimeout(res, 800)).then(() => (copyStatement = false));
 	}
 </script>
 
@@ -18,7 +17,7 @@
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<!-- svelte-ignore a11y-no-static-element-interactions -->
 		{#if !copyStatement}
-			<span on:click|stopPropagation={copyCode}><CopyIcon /></span>
+			<span on:click|stopPropagation={copyCode} class="control"><CopyIcon /></span>
 		{:else}
 			<span><DoneIcon /></span>
 		{/if}
@@ -58,7 +57,7 @@
 		font-weight: bold;
 		text-transform: capitalize;
 	}
-	#codeMdBlock #lang span:last-child {
+	.control {
 		cursor: pointer;
 	}
 </style>

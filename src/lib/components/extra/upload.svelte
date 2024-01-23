@@ -7,7 +7,7 @@
 </script>
 
 <div class="input-container">
-	<span>{label}</span>
+	<span class="header">{label}</span>
 	<input
 		type="file"
 		id="custom-input"
@@ -29,19 +29,13 @@
 
 <style>
 	.input-container {
-		width: 100%;
 		display: flex;
 		flex-direction: column;
 		gap: 6px;
 	}
 
-	.input-container span,
-	.input-container label {
+	.input-container .header {
 		color: var(--textColor);
-		font-size: var(--body);
-	}
-
-	.input-container span:first-child {
 		font-weight: 600;
 		margin-left: 10px;
 		font-size: var(--small);
@@ -54,8 +48,8 @@
 		gap: 20px;
 	}
 	.inputReplace > span:last-child {
-		max-width: 50%;
 		text-align: center;
+		color: var(--textColor);
 	}
 
 	.custom-input {
@@ -71,8 +65,9 @@
 		padding-block: 8px;
 		border-radius: 0.5rem;
 	}
-	.uploadBtn span {
+	.uploadBtn > span {
+		color: var(--textColor);
+		font-size: var(--small);
 		font-weight: 600;
-		text-align: center;
 	}
 </style>

@@ -123,7 +123,7 @@
 		border-radius: 6px;
 		border: 2px solid var(--textColor);
 	}
-	.dropDown div {
+	.dropDown :is(.label, .option) {
 		width: 100%;
 		padding-left: 6px;
 		padding-block: 8px;

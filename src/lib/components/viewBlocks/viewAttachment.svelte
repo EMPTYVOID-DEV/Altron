@@ -38,7 +38,7 @@
 		font-weight: bold !important;
 		text-transform: capitalize;
 		padding-block: 10px;
-		border-left: 6px solid var(--errorColor);
+		border-left: 5px solid var(--errorColor);
 		padding-left: 10px;
 	}
 	.attachment .info {

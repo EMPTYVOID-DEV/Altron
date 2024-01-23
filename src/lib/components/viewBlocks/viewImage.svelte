@@ -9,7 +9,7 @@
 	<div class="imageView">
 		<!-- svelte-ignore a11y-img-redundant-alt -->
 		<img {src} alt="Sorry the image did not load" />
-		<h4>{caption}</h4>
+		<span>{caption}</span>
 	</div>
 {/if}
 
@@ -22,10 +22,6 @@
 		gap: 8px;
 	}
 	.imageView img {
-		font-size: var(--h4);
-		color: var(--primaryColor);
-		text-transform: capitalize;
-		font-weight: bold;
 		width: 100%;
 		aspect-ratio: 2/1;
 		border-radius: 8px;
@@ -37,12 +33,13 @@
 		display: block;
 		color: var(--textColor);
 		font-weight: bold !important;
-		border-left: 6px solid var(--errorColor);
+		border-left: 5px solid var(--errorColor);
 		padding-left: 10px;
 		padding-block: 10px;
 	}
-	.imageView h4 {
+	.imageView span {
 		color: var(--textColor);
-		font-weight: 600;
+		font-weight: bold;
+		text-transform: capitalize;
 	}
 </style>

@@ -23,18 +23,16 @@
 				});
 			}}
 		/>
-		<div>
-			<span>The code</span>
-			<Textarea
-				textLevel={0}
-				textContent={content.text}
-				changeHandler={(text) => {
-					updateData(id, (el) => {
-						if (el.name == 'code') el.data.text = text;
-					});
-				}}
-			/>
-		</div>
+		<Textarea
+			label="Code content"
+			textLevel={0}
+			textContent={content.text}
+			changeHandler={(text) => {
+				updateData(id, (el) => {
+					if (el.name == 'code') el.data.text = text;
+				});
+			}}
+		/>
 	</div>
 {:else}
 	<svelte:component this={view} {...content} />
@@ -55,16 +53,5 @@
 	}
 	.codeEdit :global(::-webkit-scrollbar-thumb) {
 		background: var(--secondaryColor);
-	}
-	.codeEdit div {
-		display: flex;
-		flex-direction: column;
-		gap: 5px;
-	}
-	.codeEdit div span {
-		margin-left: 10px;
-		font-weight: bold;
-		color: var(--textColor);
-		font-size: var(--small);
 	}
 </style>

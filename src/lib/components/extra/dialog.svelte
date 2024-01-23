@@ -14,19 +14,14 @@
 <span
 	class="openMenu"
 	on:click|stopPropagation={() => {
-		dialog.showModal();
+		dialog.show();
 	}}
 >
 	<MenuIcon />
 </span>
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-<dialog
-	bind:this={dialog}
-	on:click={(e) => {
-		e.stopPropagation();
-	}}
->
+<dialog bind:this={dialog} on:click|stopPropagation>
 	<svelte:component this={menu} close={() => dialog.close()} />
 </dialog>
 

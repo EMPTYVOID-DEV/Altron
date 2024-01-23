@@ -31,7 +31,7 @@
 		display: block;
 		color: var(--textColor);
 		font-weight: bold !important;
-		border-left: 6px solid var(--errorColor);
+		border-left: 5px solid var(--errorColor);
 		padding-left: 10px;
 		padding-block: 10px;
 	}
@@ -41,6 +41,7 @@
 		align-items: center;
 	}
 	.embedView iframe {
+		/* width should be below 95% to allow clicks that changes the state of the embed block */
 		width: 85%;
 		aspect-ratio: 2/1;
 		overflow: hidden;

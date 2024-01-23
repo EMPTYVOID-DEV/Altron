@@ -1,16 +1,29 @@
 <script lang="ts">
 	import { SvelteComponent, getContext, type ComponentType } from 'svelte';
 	import Select from '../extra/select.svelte';
-	import Textarea from '../extra/textarea.svelte';
-	import CloseIcon from '../icons/closeIcon.svelte';
-	import PlusIcon from '../icons/plusIcon.svelte';
 	import type { updateDataType } from '../../utils/types';
+	import ListHandler from '../extra/listHandler.svelte';
 	export let content: { items: string[]; type: 'ordered' | 'unordered' };
 	export let id: string;
 	export let active = false;
 	const updateData: updateDataType = getContext('updateData');
 	const view: ComponentType<SvelteComponent<{ items: string[]; type: 'ordered' | 'unordered' }>> =
 		getContext('List');
+	function updateEntry(index: number, text: string) {
+		updateData(id, (el) => {
+			if (el.name == 'list') el.data.items[index] = text;
+		});
+	}
+	function removeEntry(index: number) {
+		updateData(id, (el) => {
+			if (el.name == 'list') el.data.items.splice(index, 1);
+		});
+	}
+	function addEntry(defaultVal: string) {
+		updateData(id, (el) => {
+			if (el.name == 'list') el.data.items.push(defaultVal);
+		});
+	}
 </script>
 
 {#if active}
@@ -29,45 +42,7 @@
 				});
 			}}
 		/>
-		<div class="itemsEdit">
-			<span>List items</span>
-			{#each content.items as item, index}
-				<div class="itemEdit">
-					<Textarea
-						width={90}
-						textContent={item}
-						textLevel={0}
-						changeHandler={(text) => {
-							updateData(id, (el) => {
-								if (el.name == 'list') el.data.items[index] = text;
-							});
-						}}
-					/>
-					<!-- svelte-ignore missing-declaration -->
-					<!-- svelte-ignore a11y-click-events-have-key-events -->
-					<!-- svelte-ignore a11y-no-static-element-interactions -->
-					<span
-						class="control"
-						on:click|stopPropagation={() => {
-							updateData(id, (el) => {
-								if (el.name == 'list') el.data.items.splice(index, 1);
-							});
-						}}><CloseIcon /></span
-					>
-				</div>
-			{/each}
-			<!-- svelte-ignore missing-declaration -->
-			<!-- svelte-ignore a11y-click-events-have-key-events -->
-			<!-- svelte-ignore a11y-no-static-element-interactions -->
-			<span
-				class="control"
-				on:click|stopPropagation={() => {
-					updateData(id, (el) => {
-						if (el.name == 'list') el.data.items.push('');
-					});
-				}}><PlusIcon /></span
-			>
-		</div>
+		<ListHandler items={content.items} {updateEntry} {addEntry} {removeEntry} />
 	</div>
 {:else}
 	<svelte:component this={view} {...content} />
@@ -79,27 +54,5 @@
 		display: flex;
 		flex-direction: column;
 		gap: 15px;
-	}
-	.listEdit .itemsEdit {
-		display: flex;
-		flex-direction: column;
-		gap: 10px;
-	}
-	.listEdit .itemsEdit .itemEdit {
-		display: flex;
-		align-items: center;
-		gap: 8px;
-	}
-	.listEdit .itemsEdit .control {
-		cursor: pointer;
-	}
-	.listEdit .itemsEdit span:first-child {
-		margin-left: 10px;
-		font-weight: bold;
-		color: var(--textColor);
-		font-size: var(--small);
-	}
-	.listEdit .itemsEdit span:last-child {
-		align-self: center;
 	}
 </style>
