@@ -7,6 +7,7 @@
 		on:blockMoved={(e) => {
 			console.log(e.detail);
 		}}
+		codeBlockLanguages={['c', 'fortant']}
 	/>
 </div>
 

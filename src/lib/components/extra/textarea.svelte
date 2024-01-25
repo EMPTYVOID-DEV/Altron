@@ -15,7 +15,7 @@
 		style:line-height="var(--l{textLevel == 0 ? 'body' : 'h'})"
 		style:font-family={textLevel == 0 ? 'var(--bodyFont)' : 'var(--headingFont)'}
 		class="editableArea"
-		contenteditable
+		contenteditable="true"
 		bind:textContent
 		on:input={() => {
 			changeHandler(textContent);

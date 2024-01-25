@@ -42,7 +42,7 @@
 	.embedView iframe {
 		/* width should be below 95% to allow clicks that changes the state of the embed block */
 		width: 85%;
-		aspect-ratio: 2/1;
+		aspect-ratio: 3/2;
 		overflow: hidden;
 		display: none;
 		border: none;

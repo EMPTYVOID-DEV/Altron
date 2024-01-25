@@ -1,11 +1,11 @@
 import { writable } from 'svelte/store';
-import type { dataBlock, eventTypes, updateDataType } from './types.js';
+import type { dataBlock, updateDataType } from './types.js';
 import { setContext } from 'svelte';
 import { createEventDispatcher } from 'svelte';
 
 export function createDataStore(intialData: dataBlock[]) {
 	const data = writable<dataBlock[]>(intialData);
-	const updateDispatcher = createEventDispatcher<eventTypes>();
+	const updateDispatcher = createEventDispatcher();
 	const updateData: updateDataType = (id: string, cb: (el: dataBlock) => void) => {
 		data.update((prev) => {
 			prev.forEach((el) => {
