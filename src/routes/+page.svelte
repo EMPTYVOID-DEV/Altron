@@ -1,31 +1,27 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import Altron from '../lib/components/core/main.svelte';
-
-	let main: Altron = null;
-
-	onMount(() => {
-		main.setData([{ id: '2', name: 'header', data: { text: 'hello', level: 1 } }]);
-	});
+	import Main from '$lib/components/core/main.svelte';
 </script>
 
 <div>
-	<Altron
-		on:blockUpdate={(e) => {
-			console.log(e);
-		}}
-		on:blockDeleted={(e) => {
+	<Main
+		on:blockMoved={(e) => {
 			console.log(e.detail);
 		}}
-		bind:this={main}
+		codeBlockLanguages={['c', 'fortant']}
 	/>
 </div>
 
 <style>
 	div {
-		width: 90vw;
+		width: 50vw;
 		display: flex;
 		align-items: center;
 		justify-content: center;
+	}
+
+	@media screen and (width < 768px) {
+		div {
+			width: 100%;
+		}
 	}
 </style>

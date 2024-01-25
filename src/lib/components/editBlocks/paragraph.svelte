@@ -7,13 +7,12 @@
 	export let id: string;
 	export let view: ComponentType<SvelteComponent<{ text: string }>> = getContext('Paragraph');
 	const updateData: updateDataType = getContext('updateData');
-	// *TODO : use custom paragraph
 </script>
 
 {#if active}
 	<div class="editParagraph">
-		<span>Paragraph content</span>
 		<Textarea
+			label="Paragraph content"
 			textContent={content.text}
 			textLevel={0}
 			changeHandler={(textContent) => {
@@ -30,12 +29,5 @@
 <style>
 	.editParagraph {
 		width: 100%;
-		display: flex;
-		flex-direction: column;
-		gap: 6px;
-	}
-	.editParagraph span {
-		font-weight: bold;
-		color: var(--textColor);
 	}
 </style>

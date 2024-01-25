@@ -1,12 +1,9 @@
-<script lang="ts">
-	import type { IframeSettings } from '../../utils/types';
+<script>
 	import { getContext } from 'svelte';
 	import Loading from '../extra/loading.svelte';
-
-	export let src: string;
-	const iframeSettings: IframeSettings = getContext('iframeSettings');
-	const processEmbedSrcs: (src: string) => string = getContext('processEmbedSrcs');
-	let state: 'loading' | 'error' | 'working' = 'loading';
+	export let src;
+	const iframeSettings = getContext('iframeSettings');
+	let state = 'loading';
 </script>
 
 {#if src == ''}
@@ -16,7 +13,7 @@
 		<iframe
 			class:show={state == 'working'}
 			title="embed"
-			src={processEmbedSrcs(src)}
+			{src}
 			{...iframeSettings}
 			on:load={() => (state = 'working')}
 			on:error={() => (state = 'error')}
@@ -33,7 +30,7 @@
 		display: block;
 		color: var(--textColor);
 		font-weight: bold !important;
-		border-left: 6px solid var(--primaryColor);
+		border-left: 5px solid var(--errorColor);
 		padding-left: 10px;
 		padding-block: 10px;
 	}
@@ -43,8 +40,9 @@
 		align-items: center;
 	}
 	.embedView iframe {
+		/* width should be below 95% to allow clicks that changes the state of the embed block */
 		width: 85%;
-		aspect-ratio: 2/1;
+		aspect-ratio: 3/2;
 		overflow: hidden;
 		display: none;
 		border: none;

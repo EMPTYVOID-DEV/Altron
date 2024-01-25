@@ -5,11 +5,18 @@
 	import Upload from '../extra/upload.svelte';
 	export let id: string;
 	export let active: boolean;
-	export let content: { file: File; title: string };
+	export let content: {
+		file: File;
+		title: string;
+		size: number;
+		src: string;
+		type: string;
+	};
 	const attachmentTypes: string = getContext('attachmentType');
 	const updateData: updateDataType = getContext('updateData');
-	const view: ComponentType<SvelteComponent<{ file: File; title: string }>> =
-		getContext('Attachment');
+	const view: ComponentType<
+		SvelteComponent<{ title: string; size: number; src: string; type: string }>
+	> = getContext('Attachment');
 	function checkType(type: string) {
 		const typeArray = type.split('/');
 		if (attachmentTypes == '*') return true;
@@ -36,18 +43,28 @@
 		<Upload
 			fileType={attachmentTypes}
 			label="Attachment source"
-			currentFileName={content.file == null ? 'not selected yet' : content.file.name}
+			currentFileName={content.file ? content.file.name : 'not selected'}
 			changeHandler={(file) => {
 				updateData(id, (el) => {
-					if (el.name == 'attachment') {
-						el.data.file = checkType(file.type) ? file : null;
+					if (el.name == 'attachment' && checkType(file.type)) {
+						URL.revokeObjectURL(el.data.src);
+						el.data.file = file;
+						el.data.type = file.type;
+						el.data.size = file.size;
+						el.data.src = URL.createObjectURL(file);
 					}
 				});
 			}}
 		/>
 	</div>
 {:else}
-	<svelte:component this={view} {...content} />
+	<svelte:component
+		this={view}
+		type={content.type}
+		size={content.size}
+		title={content.title}
+		src={content.src}
+	/>
 {/if}
 
 <style>

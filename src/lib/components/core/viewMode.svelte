@@ -1,9 +1,9 @@
 <script lang="ts">
 	import type { blocks, dataBlock } from '../../utils/types';
 	import { getContext, type ComponentType } from 'svelte';
-	import type { Writable } from 'svelte/store';
 	import ViewSpace from '../viewBlocks/viewSpace.svelte';
-	const data: Writable<dataBlock[]> = getContext('data');
+	const getData = getContext('getData') as () => dataBlock[];
+	const data = getData();
 
 	const viewsMap = new Map<blocks, ComponentType>([
 		['code', getContext('Code')],
@@ -19,6 +19,6 @@
 	]);
 </script>
 
-{#each $data as block}
+{#each data as block}
 	<svelte:component this={viewsMap.get(block.name)} {...block.data} />
 {/each}

@@ -1,11 +1,13 @@
-<script lang="ts">
-	export let changeHandler: (data: string) => void;
-	export let textContent: string = '';
-	export let textLevel: 0 | 1 | 2 | 3 | 4 = 0;
-	export let width = 100;
+<script>
+	export let changeHandler;
+	export let textContent;
+	export let textLevel;
+	export let label = '';
+	export let width = 95;
 </script>
 
-<div class="areaWrapper" style:width={`${width}%`}>
+<div class="textArea" style:width={`${width}%`}>
+	<span class="header">{label}</span>
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<span
 		style:font-size="var(--{textLevel == 0 ? 'body' : 'h' + textLevel})"
@@ -13,7 +15,7 @@
 		style:line-height="var(--l{textLevel == 0 ? 'body' : 'h'})"
 		style:font-family={textLevel == 0 ? 'var(--bodyFont)' : 'var(--headingFont)'}
 		class="editableArea"
-		contenteditable="plaintext-only"
+		contenteditable="true"
 		bind:textContent
 		on:input={() => {
 			changeHandler(textContent);
@@ -24,18 +26,24 @@
 </div>
 
 <style>
-	.areaWrapper {
+	.textArea {
 		display: flex;
-		align-items: center;
-		min-height: 2rem;
-		border-left: 6px solid var(--secondaryColor);
-		padding-left: 8px !important;
-		cursor: pointer;
+		flex-direction: column;
+		gap: 6px;
 	}
-	.editableArea {
-		width: 100%;
+	.textArea > .header {
+		font-weight: bold;
 		color: var(--textColor);
+		font-size: var(--small);
+	}
+
+	.editableArea {
 		border: none;
 		outline: none;
+		min-height: 1rem;
+		border-left: 5px solid var(--secondaryColor);
+		padding-left: 8px;
+		cursor: pointer;
+		color: var(--textColor);
 	}
 </style>

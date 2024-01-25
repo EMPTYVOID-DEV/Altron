@@ -1,5 +1,5 @@
-<script lang="ts">
-	export let text: string;
+<script>
+	export let text;
 </script>
 
 <div class="viewParagraph">

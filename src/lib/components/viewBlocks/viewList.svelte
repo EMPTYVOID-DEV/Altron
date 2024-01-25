@@ -1,13 +1,13 @@
-<script lang="ts">
-	export let items: string[];
-	export let type: 'ordered' | 'unordered';
+<script>
+	export let items;
+	export let type;
 </script>
 
 {#if type == 'ordered'}
 	<ol>
 		{#each items as item, index}
 			<div class="item">
-				<span class="index">{index + '.'}</span>
+				<span class="index">{index + 1 + '.'}</span>
 				<li>{item}</li>
 			</div>
 		{/each}
@@ -44,27 +44,32 @@
 		justify-content: start;
 		gap: 12px;
 	}
-	ol .item .index {
+	ol .index {
 		width: 2.2rem;
 		height: 2.2rem;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		border: 2px solid var(--primaryColor);
 		border-radius: 50%;
 		font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 	}
-	ol .item li,
-	ul li {
+	ol .item:nth-child(even) .index {
+		border: 2px solid var(--secondaryColor);
+	}
+	ol .item:nth-child(odd) .index {
+		border: 2px solid var(--primaryColor);
+	}
+	ol .item:nth-child(odd) li,
+	ul li:nth-child(odd) {
 		background-color: color-mix(in srgb, var(--primaryColor) 34%, white 10%);
-		padding: 6px;
-		border-radius: 4px;
 	}
 	ol .item:nth-child(even) li,
 	ul li:nth-child(even) {
 		background-color: color-mix(in srgb, var(--secondaryColor) 34%, white 10%);
 	}
-	ol .item:nth-child(even) .index {
-		border: 2px solid var(--secondaryColor);
+
+	li {
+		padding: 6px;
+		border-radius: 4px;
 	}
 </style>

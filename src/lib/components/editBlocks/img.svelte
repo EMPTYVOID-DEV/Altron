@@ -3,12 +3,12 @@
 	import Input from '../extra/input.svelte';
 	import Upload from '../extra/upload.svelte';
 	import type { updateDataType } from '../../utils/types';
-	export let content: { file: File; caption: string };
+	export let content: { file: File; caption: string; src: string };
 	export let id: string;
 	export let active = false;
 	const updateData: updateDataType = getContext('updateData');
-	const view: ComponentType<SvelteComponent<{ file: File; caption: string }>> = getContext('Image');
-	$: preview = content.file ? URL.createObjectURL(content.file) : null;
+	const view: ComponentType<SvelteComponent<{ src: string; caption: string }>> =
+		getContext('Image');
 	function checkType(type: string) {
 		const typeArray = type.split('/');
 		let testType = 'image/*'.split('/');
@@ -19,18 +19,6 @@
 
 {#if active}
 	<div class="imageEdit">
-		{#if !preview}
-			<h3 class="notSelected">Image not selected</h3>
-		{:else}
-			<!-- svelte-ignore a11y-img-redundant-alt -->
-			<img
-				src={preview}
-				alt="sorry image does not exist"
-				on:error={() => {
-					preview = null;
-				}}
-			/>
-		{/if}
 		<Input
 			label="Image caption"
 			value={content.caption}
@@ -43,19 +31,20 @@
 		<Upload
 			fileType="image/*"
 			label="Image source"
-			currentFileName={content.file ? content.file.name : 'not selected'}
+			currentFileName={content.file ? content.file.name : ''}
 			changeHandler={(file) => {
 				updateData(id, (el) => {
-					if (el.name == 'image') {
-						el.data.file = checkType(file.type) ? file : null;
-						//URL.revokeObjectURL(preview);
+					if (el.name == 'image' && checkType(file.type)) {
+						el.data.file = file;
+						URL.revokeObjectURL(el.data.src);
+						el.data.src = URL.createObjectURL(file);
 					}
 				});
 			}}
 		/>
 	</div>
 {:else}
-	<svelte:component this={view} {...content} />
+	<svelte:component this={view} caption={content.caption} src={content.src} />
 {/if}
 
 <style>
@@ -64,18 +53,5 @@
 		display: flex;
 		flex-direction: column;
 		gap: 15px;
-	}
-
-	.notSelected {
-		color: var(--textColor);
-		text-align: center;
-	}
-	.imageEdit img {
-		width: 80%;
-		margin-bottom: 10px;
-		aspect-ratio: 2/1;
-		border-radius: 8px;
-		object-fit: cover;
-		object-position: center;
 	}
 </style>

@@ -1,8 +1,8 @@
-<script lang="ts">
+<script>
 	import CloseQuoteIcon from '../icons/closeQuoteIcon.svelte';
 	import OpenQuote from '../icons/openQuoteIcon.svelte';
-	export let text: string;
-	export let owner: string;
+	export let text;
+	export let owner;
 </script>
 
 <div class="quote">

@@ -1,9 +1,9 @@
-<script lang="ts">
+<script>
 	import Select from 'svelte-select';
-	export let label: string;
-	export let elements: { label: string; value: any }[];
-	export let changeHandler: (item: { value: any; label: string }) => void;
-	export let preSelected: { label: string; value: any };
+	export let label;
+	export let elements;
+	export let changeHandler;
+	export let preSelected;
 </script>
 
 <div class="select">
@@ -49,7 +49,6 @@
 	.select span {
 		font-size: var(--small);
 		font-weight: 600;
-		margin-left: 10px;
 		color: var(--textColor);
 	}
 </style>

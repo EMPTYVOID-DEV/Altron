@@ -16,12 +16,27 @@
 	import ViewChecklist from '../viewBlocks/viewChecklist.svelte';
 	import ViewAttachment from '../viewBlocks/viewAttachment.svelte';
 	import ViewEmbed from '../viewBlocks/viewEmbed.svelte';
+	import Menu from '../extra/menu.svelte';
+
+	interface $$Events {
+		blockAdded: CustomEvent<{ id: string }>;
+		blockDeleted: CustomEvent<dataBlock>;
+		blockMoved: CustomEvent<{ up: boolean; id: string }>;
+		editing: CustomEvent<{ id: string }>;
+		focusing: CustomEvent<{ id: string }>;
+		afterEditing: CustomEvent<{ id: string }>;
+		blockUpdate: CustomEvent<{ id: string }>;
+	}
 
 	// exports
 	export let processEmbedSrcs: (src: string) => string = (src: string) => {
 		return src;
 	};
-	export let acceptedEmbedSrcs: string[] = [];
+	export let intialData: dataBlock[] = [];
+	export let acceptedEmbedSrcs: { rules: string[]; description: string } = {
+		description: 'You should enter a valid url for an embed , any source is accepted',
+		rules: []
+	};
 	export let iframeSettings: IframeSettings = {};
 	export let attachmentTypes = '*';
 	export let excludedBlocks: blocks[] = [];
@@ -30,6 +45,7 @@
 	export let bodyFont = `Helvetica, sans-serif`;
 	export let primaryColor = '#3366FF';
 	export let secondaryColor = '#1eeb36';
+	export let errorColor = '#ff3333';
 	export let textColor = '#121212';
 	export let bgColor = '#ffffff';
 	export let blocksGap = '10px';
@@ -60,9 +76,10 @@
 		'csharp'
 	];
 	export let customEmbed: ComponentType<SvelteComponent<{ src: string }>> = ViewEmbed;
-	export let customAttachment: ComponentType<SvelteComponent<{ file: File; title: string }>> =
-		ViewAttachment;
-	export let customImage: ComponentType<SvelteComponent<{ file: File; caption: string }>> =
+	export let customAttachment: ComponentType<
+		SvelteComponent<{ src: string; title: string; type: string; size: number }>
+	> = ViewAttachment;
+	export let customImage: ComponentType<SvelteComponent<{ src: string; caption: string }>> =
 		ViewImage;
 	export let customCode: ComponentType<SvelteComponent<{ text: string; lang: string }>> = ViewCode;
 	export let customList: ComponentType<
@@ -76,7 +93,11 @@
 	export let customCheckList: ComponentType<
 		SvelteComponent<{ items: { value: string; checked: boolean }[] }>
 	> = ViewChecklist;
-	export let customMenu: ComponentType<SvelteComponent<{ close: () => void }>> = null;
+	export let customMenu: ComponentType<
+		SvelteComponent<{
+			close: () => void;
+		}>
+	> = Menu;
 	// context setup
 	setContext('dropDown', customMenu);
 	setContext('Embed', customEmbed);
@@ -100,19 +121,45 @@
 	if (codeBlockLanguages.length == 0) codeBlockLanguages.push('plaintext');
 	setContext('languages', codeBlockLanguages);
 	// editor id
+	const editorId = nanoid(8);
 	setContext('editorId', nanoid(8));
 
 	// setting up stores
-	const data = createDataStore();
+	const data = createDataStore(validateData(intialData));
 	const workingBlock = createWorkingBlockStore();
 
-	export function getData() {
-		return get(data);
+	// global set and get funhction
+	setContext('setData', setData);
+	setContext('getData', getData);
+	setContext('getWorkingBlock', getWorkingBlock);
+	setContext('getEditorId', getEditorId);
+
+	function validateData(data: dataBlock[]): dataBlock[] {
+		const dupSet = new Set();
+		for (let block of data) {
+			if (dupSet.has(block.id)) {
+				block.id = nanoid(8);
+			}
+			dupSet.add(block.id);
+		}
+		return data;
+	}
+
+	export function getData(id?: string) {
+		const currentData = get(data);
+		if (id) return currentData.find((el) => el.id == id);
+		return currentData;
+	}
+
+	export function getEditorId() {
+		return editorId;
 	}
 
 	export function setData(newData: dataBlock[] | ((prev: dataBlock[]) => dataBlock[])) {
-		if (typeof newData == 'function') data.set(newData(get(data)) || []);
-		else if (typeof newData == 'object') data.set(newData);
+		if (typeof newData == 'function') {
+			const result = newData(get(data));
+			data.set(validateData(result));
+		} else if (typeof newData == 'object') data.set(validateData(newData));
 	}
 
 	export function getWorkingBlock() {
@@ -124,6 +171,7 @@
 	class="main"
 	style:--primaryColor={primaryColor}
 	style:--secondaryColor={secondaryColor}
+	style:--errorColor={errorColor}
 	style:--textColor={textColor}
 	style:--bgColor={bgColor}
 	style:--headingFont={headerFont}
@@ -181,7 +229,7 @@
 		font-weight: bold;
 		color: var(--textColor);
 		word-break: break-word;
-		white-space: pre-line;
+		white-space: pre-wrap;
 	}
 	.main :global(h1) {
 		font-size: var(--h1);

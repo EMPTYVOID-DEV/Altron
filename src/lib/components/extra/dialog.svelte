@@ -1,11 +1,8 @@
-<script lang="ts">
-	import { getContext, type ComponentType, type SvelteComponent } from 'svelte';
+<script>
+	import { getContext } from 'svelte';
 	import MenuIcon from '../icons/menuIcon.svelte';
-	import Menu from './menu.svelte';
-	export let options: { icon: ComponentType<SvelteComponent>; label: string; cb: () => void }[] =
-		[];
-	const menu = getContext('dropDown') as ComponentType<SvelteComponent<{ close: () => void }>>;
-	let dialog: HTMLDialogElement = null;
+	const menu = getContext('dropDown');
+	let dialog = null;
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -20,22 +17,8 @@
 </span>
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-<dialog
-	bind:this={dialog}
-	on:click={(e) => {
-		e.stopPropagation();
-	}}
->
-	{#if menu}
-		<svelte:component this={menu} close={() => dialog.close()} />
-	{:else}
-		<Menu
-			{options}
-			close={() => {
-				dialog.close();
-			}}
-		/>
-	{/if}
+<dialog bind:this={dialog} on:click|stopPropagation>
+	<svelte:component this={menu} close={() => dialog.close()} on:blockMoved on:blockDeleted />
 </dialog>
 
 <style>

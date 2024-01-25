@@ -1,13 +1,13 @@
-<script lang="ts">
+<script>
 	export let value = '';
 	export let label = '';
-	export let type: 'text' | 'number' = 'text';
-	export let changeHandler: (text: string) => void;
+	export let type = 'text';
+	export let changeHandler;
 </script>
 
 <div class="input-container">
-	<label for="custom-input">{label}</label>
-	<div>
+	<label class="header" for="custom-input">{label}</label>
+	<div class="inputWrapper">
 		<input
 			{type}
 			{value}
@@ -20,30 +20,28 @@
 
 <style>
 	.input-container {
-		width: 85%;
+		width: 80%;
 		display: flex;
 		flex-direction: column;
 		align-items: stretch;
 		gap: 6px;
 	}
 
-	.input-container label {
+	.input-container .header {
 		font-size: var(--small);
 		font-weight: 600;
-		margin-left: 10px;
 		color: var(--textColor);
 	}
 
-	.input-container div {
-		padding: 2px;
-		border-radius: 0.4rem;
+	.input-container .inputWrapper {
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		border-radius: 0.4rem;
 		padding: 3px;
 		height: 3rem;
 	}
-	.input-container div:hover {
+	.input-container .inputWrapper:hover {
 		border: 3px solid var(--secondaryColor);
 	}
 

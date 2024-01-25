@@ -1,5 +1,3 @@
-<!-- Loading.svelte -->
-
 <script>
 	export let visible = false;
 </script>

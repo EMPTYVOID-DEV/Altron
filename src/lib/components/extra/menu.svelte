@@ -1,10 +1,64 @@
-<script lang="ts">
-	import type { ComponentType, SvelteComponent } from 'svelte';
+<script>
+	import { createEventDispatcher, getContext } from 'svelte';
 	import CloseIcon from '../icons/closeIcon.svelte';
 	import MenuIcon from '../icons/menuIcon.svelte';
-	export let options: { icon: ComponentType<SvelteComponent>; label: string; cb: () => void }[] =
-		[];
-	export let close: () => void;
+	import UpIcon from '../icons/upIcon.svelte';
+	import DeleteIcon from '../icons/deleteIcon.svelte';
+	import DownIcon from '../icons/downIcon.svelte';
+	export let close;
+	const eventDispatcher = createEventDispatcher();
+	const setData = getContext('setData');
+	const workingBlock = getContext('getWorkingBlock')();
+	let options = [
+		{
+			label: 'Move up',
+			icon: UpIcon,
+			cb: () => {
+				move(true);
+			}
+		},
+		{
+			icon: DownIcon,
+			label: 'Move down',
+			cb: () => {
+				move(false);
+			}
+		},
+		{
+			icon: DeleteIcon,
+			label: 'Delete the block',
+			cb: () => {
+				Delete();
+			}
+		}
+	];
+	function move(up) {
+		setData((prev) => {
+			const index = prev.findIndex((val) => val.id == workingBlock.id);
+			const val = prev.splice(index, 1)[0];
+			prev.splice(up ? index - 1 : index + 1, 0, val);
+			return prev;
+		});
+		eventDispatcher('blockMoved', {
+			id: workingBlock.id,
+			up
+		});
+	}
+
+	function Delete() {
+		let deletedBlock = null;
+		setData((prev) => {
+			const newDataBlocks = prev.filter((element) => {
+				if (element.id == workingBlock.id) {
+					deletedBlock = { ...element };
+				}
+				return element.id != workingBlock.id;
+			});
+			return newDataBlocks;
+		});
+
+		eventDispatcher('blockDeleted', deletedBlock);
+	}
 </script>
 
 <div class="dropDown">
@@ -12,10 +66,9 @@
 		<MenuIcon />
 		<span>Menu</span>
 	</div>
-	{#each options as option}
-		<!-- svelte-ignore a11y-no-static-element-interactions -->
-		<!-- svelte-ignore missing-declaration -->
+	{#each options as option (option.label)}
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<!-- svelte-ignore a11y-no-static-element-interactions -->
 		<div
 			class="option"
 			on:click={() => {
@@ -56,7 +109,7 @@
 		border-radius: 6px;
 		border: 2px solid var(--textColor);
 	}
-	.dropDown div {
+	.dropDown :is(.label, .option) {
 		width: 100%;
 		padding-left: 6px;
 		padding-block: 8px;

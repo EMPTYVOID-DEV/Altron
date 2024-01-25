@@ -3,19 +3,16 @@ import type { dataBlock, updateDataType } from './types.js';
 import { setContext } from 'svelte';
 import { createEventDispatcher } from 'svelte';
 
-export function createDataStore() {
-	const data = writable<dataBlock[]>([]);
+export function createDataStore(intialData: dataBlock[]) {
+	const data = writable<dataBlock[]>(intialData);
 	const updateDispatcher = createEventDispatcher();
 	const updateData: updateDataType = (id: string, cb: (el: dataBlock) => void) => {
 		data.update((prev) => {
 			prev.forEach((el) => {
 				if (el.id == id) {
-					const previousState = structuredClone(el);
 					cb(el);
 					updateDispatcher('blockUpdate', {
-						id,
-						previousState,
-						newState: structuredClone(el)
+						id
 					});
 				}
 			});

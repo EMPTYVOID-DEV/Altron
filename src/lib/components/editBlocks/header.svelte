@@ -35,18 +35,16 @@
 				});
 			}}
 		/>
-		<div>
-			<span>Header content</span>
-			<Textarea
-				textLevel={content.level}
-				textContent={content.text}
-				changeHandler={(text) => {
-					updateData(id, (prev) => {
-						if (prev.name == 'header') prev.data.text = text;
-					});
-				}}
-			/>
-		</div>
+		<Textarea
+			label="Header content"
+			textLevel={content.level}
+			textContent={content.text}
+			changeHandler={(text) => {
+				updateData(id, (prev) => {
+					if (prev.name == 'header') prev.data.text = text;
+				});
+			}}
+		/>
 	</div>
 {:else}
 	<svelte:component this={view} {...content} />
@@ -58,16 +56,5 @@
 		display: flex;
 		flex-direction: column;
 		gap: 15px;
-	}
-	.headerEdit div {
-		display: flex;
-		flex-direction: column;
-		gap: 5px;
-	}
-	.headerEdit div span {
-		margin-left: 10px;
-		font-weight: bold;
-		color: var(--textColor);
-		font-size: var(--small);
 	}
 </style>

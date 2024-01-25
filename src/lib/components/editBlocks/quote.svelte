@@ -21,18 +21,17 @@
 				});
 			}}
 		/>
-		<div>
-			<span>The quote</span>
-			<Textarea
-				textContent={content.text}
-				textLevel={0}
-				changeHandler={(textContent) => {
-					updateData(id, (prev) => {
-						if (prev.name == 'quote') prev.data.text = textContent;
-					});
-				}}
-			/>
-		</div>
+
+		<Textarea
+			label="The Quote content"
+			textContent={content.text}
+			textLevel={0}
+			changeHandler={(textContent) => {
+				updateData(id, (prev) => {
+					if (prev.name == 'quote') prev.data.text = textContent;
+				});
+			}}
+		/>
 	</div>
 {:else}
 	<svelte:component this={view} {...content} />
@@ -44,17 +43,5 @@
 		display: flex;
 		flex-direction: column;
 		gap: 15px;
-	}
-	.quoteEdit div {
-		display: flex;
-		flex-direction: column;
-		gap: 5px;
-		color: var(-textColor);
-	}
-	.quoteEdit div span {
-		margin-left: 10px;
-		font-weight: bold;
-		font-size: var(--small);
-		color: var(--textColor);
 	}
 </style>
