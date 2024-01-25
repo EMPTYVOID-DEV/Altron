@@ -18,6 +18,8 @@
 	import ViewEmbed from '../viewBlocks/viewEmbed.svelte';
 	import Menu from '../extra/menu.svelte';
 
+	// TODO: moving all cli needed components to a separate location
+
 	interface $$Events {
 		blockAdded: CustomEvent<{ id: string }>;
 		blockDeleted: CustomEvent<dataBlock>;
