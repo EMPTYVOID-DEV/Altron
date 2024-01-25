@@ -1,8 +1,8 @@
-<script lang="ts">
-	export let changeHandler: (data: string) => void;
-	export let textContent: string = '';
-	export let textLevel: 0 | 1 | 2 | 3 | 4 = 0;
-	export let label: string = '';
+<script>
+	export let changeHandler;
+	export let textContent;
+	export let textLevel;
+	export let label = '';
 	export let width = 95;
 </script>
 
@@ -32,7 +32,6 @@
 		gap: 6px;
 	}
 	.textArea > .header {
-		margin-left: 10px;
 		font-weight: bold;
 		color: var(--textColor);
 		font-size: var(--small);

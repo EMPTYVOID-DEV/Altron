@@ -1,7 +1,7 @@
-<script lang="ts">
+<script>
 	import UnChecked from '../icons/unCheckedIcon.svelte';
 	import Checked from '../icons/checkedIcon.svelte';
-	export let items: { value: string; checked: boolean }[];
+	export let items;
 </script>
 
 <div class="checkListView">

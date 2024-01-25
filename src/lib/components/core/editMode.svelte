@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { createEventDispatcher, getContext, onMount } from 'svelte';
 	import BlockWrapper from './blockWrapper.svelte';
-	import DropDown from '../extra/dialog.svelte';
+	import Dialog from '../extra/dialog.svelte';
 	import type { Writable } from 'svelte/store';
-	import type { dataBlock, eventTypes } from '../../utils/types';
+	import type { dataBlock } from '../../utils/types';
 	const editorId: string = getContext('editorId');
 	const workingBlock: Writable<{ state: 'focused' | 'editing'; id: string }> =
 		getContext('workingBlock');
-	const eventDispatcher = createEventDispatcher<eventTypes>();
+	const eventDispatcher = createEventDispatcher();
 	const data = getContext('data') as Writable<dataBlock[]>;
 	function traverseParent(element): { blockId: string; blockEditorId: string } {
 		while (element) {
@@ -70,7 +70,7 @@
 	<div class="block">
 		<BlockWrapper dataBlock={block} />
 		{#if $workingBlock?.id == block.id && $workingBlock.state == 'focused'}
-			<DropDown />
+			<Dialog on:blockMoved on:blockDeleted />
 		{/if}
 	</div>
 {/each}

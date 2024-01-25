@@ -1,12 +1,8 @@
-<script lang="ts">
-	import { getContext, type ComponentType, type SvelteComponent } from 'svelte';
+<script>
+	import { getContext } from 'svelte';
 	import MenuIcon from '../icons/menuIcon.svelte';
-	const menu = getContext('dropDown') as ComponentType<
-		SvelteComponent<{
-			close: () => void;
-		}>
-	>;
-	let dialog: HTMLDialogElement = null;
+	const menu = getContext('dropDown');
+	let dialog = null;
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -14,7 +10,7 @@
 <span
 	class="openMenu"
 	on:click|stopPropagation={() => {
-		dialog.show();
+		dialog.showModal();
 	}}
 >
 	<MenuIcon />
@@ -22,7 +18,7 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 <dialog bind:this={dialog} on:click|stopPropagation>
-	<svelte:component this={menu} close={() => dialog.close()} />
+	<svelte:component this={menu} close={() => dialog.close()} on:blockMoved on:blockDeleted />
 </dialog>
 
 <style>

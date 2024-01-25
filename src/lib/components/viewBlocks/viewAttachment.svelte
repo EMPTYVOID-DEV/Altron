@@ -1,10 +1,10 @@
-<script lang="ts">
+<script>
 	import { mimeToFileNameMap } from '../../utils/consts';
 	import UploadIcon from '../icons/uploadIcon.svelte';
-	export let src: string;
-	export let title: string;
-	export let type: string;
-	export let size: number;
+	export let src;
+	export let title;
+	export let type;
+	export let size;
 </script>
 
 <div class="attachment">

@@ -1,10 +1,10 @@
-<script lang="ts">
+<script>
 	import CopyIcon from '../icons/copyIcon.svelte';
 	import DoneIcon from '../icons/doneIcon.svelte';
-	export let text: string;
-	export let lang: string;
-	let copyStatement: boolean = false;
-	function copyCode(e: MouseEvent) {
+	export let text;
+	export let lang;
+	let copyStatement = false;
+	function copyCode() {
 		navigator.clipboard.writeText(text);
 		copyStatement = true;
 		new Promise((res) => setTimeout(res, 800)).then(() => (copyStatement = false));

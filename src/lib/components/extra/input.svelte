@@ -1,8 +1,8 @@
-<script lang="ts">
+<script>
 	export let value = '';
 	export let label = '';
-	export let type: 'text' | 'number' = 'text';
-	export let changeHandler: (text: string) => void;
+	export let type = 'text';
+	export let changeHandler;
 </script>
 
 <div class="input-container">
@@ -30,7 +30,6 @@
 	.input-container .header {
 		font-size: var(--small);
 		font-weight: 600;
-		margin-left: 10px;
 		color: var(--textColor);
 	}
 

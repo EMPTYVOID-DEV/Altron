@@ -1,11 +1,11 @@
-<script lang="ts">
+<script>
 	import CloseIcon from '../icons/closeIcon.svelte';
 	import PlusIcon from '../icons/plusIcon.svelte';
 	import Textarea from './textarea.svelte';
-	export let items: string[];
-	export let updateEntry: (index: number, newText: String) => void;
-	export let removeEntry: (index: number) => void;
-	export let addEntry: (defaultVal: string) => void;
+	export let items;
+	export let updateEntry;
+	export let removeEntry;
+	export let addEntry;
 </script>
 
 <div class="itemsEdit">

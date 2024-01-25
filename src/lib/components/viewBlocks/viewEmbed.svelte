@@ -1,10 +1,9 @@
-<script lang="ts">
-	import type { IframeSettings } from '../../utils/types';
+<script>
 	import { getContext } from 'svelte';
 	import Loading from '../extra/loading.svelte';
-	export let src: string;
-	const iframeSettings: IframeSettings = getContext('iframeSettings');
-	let state: 'loading' | 'error' | 'working' = 'loading';
+	export let src;
+	const iframeSettings = getContext('iframeSettings');
+	let state = 'loading';
 </script>
 
 {#if src == ''}

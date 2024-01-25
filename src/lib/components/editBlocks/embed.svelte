@@ -2,6 +2,7 @@
 	import type { updateDataType } from '../../utils/types';
 	import { type ComponentType, type SvelteComponent, getContext } from 'svelte';
 	import Input from '../extra/input.svelte';
+	import Description from '../extra/description.svelte';
 	export let id: string;
 	export let active: boolean;
 	export let content: { src: string };
@@ -27,10 +28,7 @@
 
 {#if active}
 	<div class="editEmbed">
-		<div class="embedDesc">
-			<span>Valid embeds</span>
-			<p>{acceptedEmbedSrcs.description}</p>
-		</div>
+		<Description title="accepted sources" description={acceptedEmbedSrcs.description} />
 		<Input
 			label="Embed content source"
 			type="text"
@@ -51,18 +49,8 @@
 <style>
 	.editEmbed {
 		width: 100%;
-	}
-	.embedDesc {
-		margin-left: 10px;
 		display: flex;
 		flex-direction: column;
-		gap: 6px;
-		margin-bottom: 30px;
-	}
-	.embedDesc span {
-		font-weight: 600;
-	}
-	.embedDesc :is(span, p) {
-		font-size: var(--small);
+		gap: 15px;
 	}
 </style>

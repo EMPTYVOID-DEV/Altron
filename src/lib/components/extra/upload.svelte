@@ -1,9 +1,9 @@
-<script lang="ts">
+<script>
 	import UploadIcon from '../icons/uploadIcon.svelte';
-	export let changeHandler: (file: File) => void;
+	export let changeHandler;
 	export let label = '';
-	export let fileType: string = '*';
-	export let currentFileName: string = 'default.png';
+	export let fileType = '*';
+	export let currentFileName = 'default.png';
 </script>
 
 <div class="input-container">
@@ -37,7 +37,6 @@
 	.input-container .header {
 		color: var(--textColor);
 		font-weight: 600;
-		margin-left: 10px;
 		font-size: var(--small);
 	}
 

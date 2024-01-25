@@ -3,7 +3,11 @@
 </script>
 
 <div>
-	<Main />
+	<Main
+		on:blockMoved={(e) => {
+			console.log(e.detail);
+		}}
+	/>
 </div>
 
 <style>

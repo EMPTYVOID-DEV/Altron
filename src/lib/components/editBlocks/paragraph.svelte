@@ -7,7 +7,6 @@
 	export let id: string;
 	export let view: ComponentType<SvelteComponent<{ text: string }>> = getContext('Paragraph');
 	const updateData: updateDataType = getContext('updateData');
-	// *TODO : use custom paragraph
 </script>
 
 {#if active}

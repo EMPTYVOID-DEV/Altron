@@ -7,7 +7,7 @@
 	import ViewParagraph from '../viewBlocks/viewParagraph.svelte';
 	import ToolBar from './toolBar.svelte';
 	import ViewQuote from '../viewBlocks/viewQuote.svelte';
-	import type { IframeSettings, blocks, dataBlock, eventTypes } from '../../utils/types';
+	import type { IframeSettings, blocks, dataBlock } from '../../utils/types';
 	import ViewMode from './viewMode.svelte';
 	import EditMode from './editMode.svelte';
 	import { createDataStore, createWorkingBlockStore } from '../../utils/stores';
@@ -17,6 +17,16 @@
 	import ViewAttachment from '../viewBlocks/viewAttachment.svelte';
 	import ViewEmbed from '../viewBlocks/viewEmbed.svelte';
 	import Menu from '../extra/menu.svelte';
+
+	interface $$Events {
+		blockAdded: CustomEvent<{ id: string }>;
+		blockDeleted: CustomEvent<dataBlock>;
+		blockMoved: CustomEvent<{ up: boolean; id: string }>;
+		editing: CustomEvent<{ id: string }>;
+		focusing: CustomEvent<{ id: string }>;
+		afterEditing: CustomEvent<{ id: string }>;
+		blockUpdate: CustomEvent<{ id: string }>;
+	}
 
 	// exports
 	export let processEmbedSrcs: (src: string) => string = (src: string) => {

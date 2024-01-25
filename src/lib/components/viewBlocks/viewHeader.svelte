@@ -1,6 +1,6 @@
-<script lang="ts">
-	export let text: string;
-	export let level: 1 | 2 | 3 | 4;
+<script>
+	export let text;
+	export let level;
 </script>
 
 {#if level == 1}

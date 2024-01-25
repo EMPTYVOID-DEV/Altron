@@ -1,28 +1,15 @@
-<script lang="ts">
-	import {
-		createEventDispatcher,
-		type ComponentType,
-		type SvelteComponent,
-		getContext
-	} from 'svelte';
+<script>
+	import { createEventDispatcher, getContext } from 'svelte';
 	import CloseIcon from '../icons/closeIcon.svelte';
 	import MenuIcon from '../icons/menuIcon.svelte';
-	import type { dataBlock, eventTypes } from '../../utils/types';
 	import UpIcon from '../icons/upIcon.svelte';
 	import DeleteIcon from '../icons/deleteIcon.svelte';
 	import DownIcon from '../icons/downIcon.svelte';
-	const eventDispatcher = createEventDispatcher<eventTypes>();
-	export let close: () => void;
-	const setData = getContext('setData') as (
-		newData: dataBlock[] | ((prev: dataBlock[]) => dataBlock[])
-	) => void;
-	const workingBlock = (
-		getContext('getWorkingBlock') as () => {
-			state: 'focused' | 'editing';
-			id: string;
-		}
-	)();
-	let options: { icon: ComponentType<SvelteComponent>; label: string; cb: () => void }[] = [
+	export let close;
+	const eventDispatcher = createEventDispatcher();
+	const setData = getContext('setData');
+	const workingBlock = getContext('getWorkingBlock')();
+	let options = [
 		{
 			label: 'Move up',
 			icon: UpIcon,
@@ -45,7 +32,7 @@
 			}
 		}
 	];
-	function move(up: boolean) {
+	function move(up) {
 		setData((prev) => {
 			const index = prev.findIndex((val) => val.id == workingBlock.id);
 			const val = prev.splice(index, 1)[0];
@@ -59,7 +46,7 @@
 	}
 
 	function Delete() {
-		let deletedBlock: dataBlock = null;
+		let deletedBlock = null;
 		setData((prev) => {
 			const newDataBlocks = prev.filter((element) => {
 				if (element.id == workingBlock.id) {
@@ -79,10 +66,9 @@
 		<MenuIcon />
 		<span>Menu</span>
 	</div>
-	{#each options as option}
-		<!-- svelte-ignore a11y-no-static-element-interactions -->
-		<!-- svelte-ignore missing-declaration -->
+	{#each options as option (option.label)}
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<!-- svelte-ignore a11y-no-static-element-interactions -->
 		<div
 			class="option"
 			on:click={() => {

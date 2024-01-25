@@ -1,6 +1,6 @@
-<script lang="ts">
-	export let items: string[];
-	export let type: 'ordered' | 'unordered';
+<script>
+	export let items;
+	export let type;
 </script>
 
 {#if type == 'ordered'}

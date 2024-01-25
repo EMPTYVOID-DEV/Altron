@@ -1,45 +1,11 @@
 <script lang="ts">
-	import type { blocks, dataBlock, eventTypes } from '../../utils/types';
-	import {
-		getContext,
-		type ComponentType,
-		type SvelteComponent,
-		createEventDispatcher
-	} from 'svelte';
-	import CodeIcon from '../icons/codeIcon.svelte';
-	import HeaderIcon from '../icons/headerIcon.svelte';
-	import ImageIcon from '../icons/imageIcon.svelte';
-	import ListIcon from '../icons/listIcon.svelte';
-	import ChecklistIcon from '../icons/checkListIcon.svelte';
-	import QuoteIcon from '../icons/closeQuoteIcon.svelte';
-	import ParagraphIcon from '../icons/paragraphIcon.svelte';
-	import PlusIcon from '../icons/plusIcon.svelte';
-	import CloseIcon from '../icons/closeIcon.svelte';
-	import SpaceIcon from '../icons/spaceIcon.svelte';
-	import AttachmentIcon from '../icons/attachmentIcon.svelte';
-	import { nanoid } from 'nanoid';
-	import { fade } from 'svelte/transition';
-	import { elasticIn } from 'svelte/easing';
+	import type { blocks, dataBlock } from '../../utils/types';
+	import { getContext, createEventDispatcher } from 'svelte';
 	import type { Writable } from 'svelte/store';
-	import EmbedIcon from '../icons/embedIcon.svelte';
+	import CustomToolBar from './toolBarUI.svelte';
+	import { nanoid } from 'nanoid';
 
-	const eventDispatcher = createEventDispatcher<eventTypes>();
-	const excludedBlocks: blocks[] = getContext('excludedBlocks');
-	const workingBlock: Writable<{ state: 'focused' | 'editing'; id: string }> =
-		getContext('workingBlock');
-	const languages = getContext('languages') as string[];
-	const options: Map<blocks, ComponentType<SvelteComponent>> = new Map([
-		['paragraph', ParagraphIcon],
-		['header', HeaderIcon],
-		['image', ImageIcon],
-		['list', ListIcon],
-		['quote', QuoteIcon],
-		['code', CodeIcon],
-		['space', SpaceIcon],
-		['checklist', ChecklistIcon],
-		['attachment', AttachmentIcon],
-		['embed', EmbedIcon]
-	]);
+	const languages = getContext('languages');
 	const defaultData = new Map<blocks, any>([
 		['paragraph', { text: 'hello friend' }],
 		['image', { file: null, caption: 'image', src: '' }],
@@ -52,123 +18,28 @@
 		['attachment', { file: null, title: 'my attachment', size: 0, src: '', type: '' }],
 		['embed', { src: '' }]
 	]);
+	const eventDispatcher = createEventDispatcher();
+	const workingBlock: Writable<{ state: 'focused' | 'editing'; id: string }> =
+		getContext('workingBlock');
 	const setData = getContext('setData') as (
 		newData: dataBlock[] | ((prev: dataBlock[]) => dataBlock[])
 	) => void;
-	let toggle = true;
-	excludedBlocks.forEach((el) => {
-		options.delete(el);
-	});
-	function add(list: dataBlock[], id: string, name: blocks) {
-		list.push({ id, name, data: { ...defaultData.get(name) } });
-		eventDispatcher('blockAdded', {
-			id
+	function add(name: blocks) {
+		const defaultValue = defaultData.get(name);
+		const id = nanoid(8);
+		setData((prev) => {
+			prev.push({ id, name, data: { ...defaultValue } });
+			eventDispatcher('blockAdded', {
+				id
+			});
+			return prev;
 		});
 		if ($workingBlock?.state == 'editing')
 			eventDispatcher('afterEditing', {
 				id: $workingBlock.id
 			});
+		workingBlock.set({ id, state: 'editing' });
 	}
 </script>
 
-<div class="toolBar">
-	<!-- svelte-ignore a11y-click-events-have-key-events -->
-	<!-- svelte-ignore a11y-no-static-element-interactions -->
-
-	<span on:click={() => (toggle = !toggle)} class="control">
-		{#if toggle}
-			<CloseIcon />
-		{:else}
-			<PlusIcon />
-		{/if}
-	</span>
-	{#if toggle}
-		<div class="options">
-			{#each options.entries() as option, index}
-				<!-- svelte-ignore a11y-click-events-have-key-events -->
-				<!-- svelte-ignore a11y-no-static-element-interactions -->
-				<span
-					in:fade|global={{ delay: 80 * index, duration: 300, easing: elasticIn }}
-					out:fade|global={{ delay: 80 * (6 - index), duration: 300, easing: elasticIn }}
-					data-label={'add ' + option[0] + '...'}
-					class="option"
-					on:click|stopPropagation={() => {
-						const id = nanoid(8);
-						setData((prev) => {
-							add(prev, id, option[0]);
-							toggle = true;
-							return prev;
-						});
-						workingBlock.set({ id, state: 'editing' });
-					}}
-				>
-					<svelte:component this={option[1]} />
-				</span>
-			{/each}
-		</div>
-	{/if}
-</div>
-
-<style>
-	.toolBar {
-		width: fit-content;
-		display: grid;
-		grid-template-columns: repeat(2, auto);
-		align-items: center;
-		gap: 12px;
-		margin-top: 35px;
-	}
-	.toolBar span {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 36px;
-		aspect-ratio: 1/1;
-		border-radius: 50%;
-		cursor: pointer;
-	}
-
-	.control {
-		border: 2px solid var(--textColor);
-	}
-
-	.options {
-		display: flex;
-		align-items: center;
-		flex-wrap: wrap;
-		justify-content: center;
-		gap: 10px;
-	}
-	.option {
-		border: 2px solid var(--primaryColor);
-		position: relative;
-	}
-	.option::after {
-		content: attr(data-label);
-		position: absolute;
-		display: none;
-		top: -95%;
-		left: -50%;
-		width: 9rem;
-		text-transform: capitalize;
-		padding-inline: 6px;
-		border: 1px solid var(--textColor);
-		font-size: var(--small);
-		font-weight: bold;
-		color: var(--textColor);
-		background-color: color-mix(in srgb, gray 60%, var(--primaryColor) 30%);
-		z-index: 99;
-	}
-	.option:hover::after {
-		display: inline-block;
-	}
-	.option > :global(svg path) {
-		fill: var(--primaryColor);
-	}
-
-	@media screen and (width < 768px) {
-		.option:hover:after {
-			display: none;
-		}
-	}
-</style>
+<CustomToolBar {add} />

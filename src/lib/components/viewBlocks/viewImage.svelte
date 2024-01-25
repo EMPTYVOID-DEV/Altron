@@ -1,6 +1,6 @@
-<script lang="ts">
-	export let src: string;
-	export let caption: string;
+<script>
+	export let src;
+	export let caption;
 </script>
 
 {#if src == ''}
