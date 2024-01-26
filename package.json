@@ -42,10 +42,6 @@
 		},
 		"./types": {
 			"import": "./dist/utils/types.d.ts"
-		},
-		"./consts": {
-			"types": "./dist/utils/consts.d.ts",
-			"import": "./dist/utils/consts.js"
 		}
 	},
 	"files": [

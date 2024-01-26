@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { SvelteComponent, getContext, type ComponentType } from 'svelte';
 	import type { updateDataType } from '../../utils/types';
-	import CheckListHandler from '../extra/checkListHandler.svelte';
 	export let content: { items: { value: string; checked: boolean }[] };
 	export let id: string;
 	export let active = false;
-	const view: ComponentType<SvelteComponent<{ items: { value: string; checked: boolean }[] }>> =
-		getContext('Checklist');
+	const componentMap = getContext('componentMap') as Map<string, ComponentType<SvelteComponent>>;
+	const checkListHandler = componentMap.get('checkListHandler');
+	const view = componentMap.get('viewCheckList');
 	const updateData: updateDataType = getContext('updateData');
 
 	function checkEntry(index: number, checked: boolean) {
@@ -35,7 +35,14 @@
 
 {#if active}
 	<div class="checkListEdit">
-		<CheckListHandler items={content.items} {addEntry} {removeEntry} {updateEntry} {checkEntry} />
+		<svelte:component
+			this={checkListHandler}
+			items={content.items}
+			{addEntry}
+			{removeEntry}
+			{updateEntry}
+			{checkEntry}
+		/>
 	</div>
 {:else}
 	<svelte:component this={view} {...content} />

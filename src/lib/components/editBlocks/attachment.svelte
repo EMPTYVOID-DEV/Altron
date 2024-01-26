@@ -1,8 +1,6 @@
 <script lang="ts">
 	import type { updateDataType } from '../../utils/types';
 	import { getContext, type ComponentType, type SvelteComponent } from 'svelte';
-	import Input from '../extra/input.svelte';
-	import Upload from '../extra/upload.svelte';
 	export let id: string;
 	export let active: boolean;
 	export let content: {
@@ -12,11 +10,12 @@
 		src: string;
 		type: string;
 	};
+	const componentMap = getContext('componentMap') as Map<string, ComponentType<SvelteComponent>>;
+	const input = componentMap.get('input');
+	const upload = componentMap.get('upload');
+	const view = componentMap.get('viewAttachment');
 	const attachmentTypes: string = getContext('attachmentType');
 	const updateData: updateDataType = getContext('updateData');
-	const view: ComponentType<
-		SvelteComponent<{ title: string; size: number; src: string; type: string }>
-	> = getContext('Attachment');
 	function checkType(type: string) {
 		const typeArray = type.split('/');
 		if (attachmentTypes == '*') return true;
@@ -31,7 +30,8 @@
 
 {#if active}
 	<div class="editAttachment">
-		<Input
+		<svelte:component
+			this={input}
 			label="Attachment title"
 			value={content.title}
 			changeHandler={(text) => {
@@ -40,7 +40,8 @@
 				});
 			}}
 		/>
-		<Upload
+		<svelte:component
+			this={upload}
 			fileType={attachmentTypes}
 			label="Attachment source"
 			currentFileName={content.file ? content.file.name : 'not selected'}

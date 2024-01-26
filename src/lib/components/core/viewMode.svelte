@@ -1,21 +1,21 @@
 <script lang="ts">
 	import type { blocks, dataBlock } from '../../utils/types';
-	import { getContext, type ComponentType } from 'svelte';
-	import ViewSpace from '../viewBlocks/viewSpace.svelte';
+	import { getContext, type ComponentType, SvelteComponent } from 'svelte';
 	const getData = getContext('getData') as () => dataBlock[];
+	const componentMap = getContext('componentMap') as Map<string, ComponentType<SvelteComponent>>;
 	const data = getData();
 
 	const viewsMap = new Map<blocks, ComponentType>([
-		['code', getContext('Code')],
-		['header', getContext('Header')],
-		['image', getContext('Image')],
-		['list', getContext('List')],
-		['paragraph', getContext('Paragraph')],
-		['quote', getContext('Quote')],
-		['space', ViewSpace],
-		['checklist', getContext('Checklist')],
-		['attachment', getContext('Attachment')],
-		['embed', getContext('Embed')]
+		['code', componentMap.get('viewCode')],
+		['header', componentMap.get('viewHeader')],
+		['image', componentMap.get('viewImage')],
+		['list', componentMap.get('viewList')],
+		['paragraph', componentMap.get('viewParagraph')],
+		['quote', componentMap.get('viewQuote')],
+		['space', componentMap.get('viewSpace')],
+		['checklist', componentMap.get('viewChecklist')],
+		['attachment', componentMap.get('viewAttachment')],
+		['embed', componentMap.get('viewEmbed')]
 	]);
 </script>
 

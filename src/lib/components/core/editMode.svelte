@@ -1,9 +1,17 @@
 <script lang="ts">
-	import { createEventDispatcher, getContext, onMount } from 'svelte';
+	import {
+		createEventDispatcher,
+		getContext,
+		onMount,
+		type ComponentType,
+		SvelteComponent
+	} from 'svelte';
 	import BlockWrapper from './blockWrapper.svelte';
-	import Dialog from '../extra/dialog.svelte';
 	import type { Writable } from 'svelte/store';
 	import type { dataBlock } from '../../utils/types';
+
+	const componentMap = getContext('componentMap') as Map<string, ComponentType<SvelteComponent>>;
+	const dialog = componentMap.get('dialog');
 	const editorId: string = getContext('editorId');
 	const workingBlock: Writable<{ state: 'focused' | 'editing'; id: string }> =
 		getContext('workingBlock');
@@ -70,7 +78,7 @@
 	<div class="block">
 		<BlockWrapper dataBlock={block} />
 		{#if $workingBlock?.id == block.id && $workingBlock.state == 'focused'}
-			<Dialog on:blockMoved on:blockDeleted />
+			<svelte:component this={dialog} on:blockMoved on:blockDeleted />
 		{/if}
 	</div>
 {/each}

@@ -1,16 +1,17 @@
 <script lang="ts">
 	import type { updateDataType } from '../../utils/types';
 	import { type ComponentType, type SvelteComponent, getContext } from 'svelte';
-	import Input from '../extra/input.svelte';
-	import Description from '../extra/description.svelte';
 	export let id: string;
 	export let active: boolean;
 	export let content: { src: string };
+	const componentMap = getContext('componentMap') as Map<string, ComponentType<SvelteComponent>>;
+	const input = componentMap.get('input');
+	const description = componentMap.get('description');
+	const view = componentMap.get('viewEmbed');
+	const processEmbedSrcs: (src: string) => string = getContext('processEmbedSrcs');
+	const updateData: updateDataType = getContext('updateData');
 	const acceptedEmbedSrcs: { rules: string[]; description: string } =
 		getContext('acceptedEmbedSrcs');
-	const processEmbedSrcs: (src: string) => string = getContext('processEmbedSrcs');
-	const view: ComponentType<SvelteComponent<{ src: string }>> = getContext('Embed');
-	const updateData: updateDataType = getContext('updateData');
 	function acceptSrc(src: string) {
 		const urlRegex = /^(https?:\/\/)?([\w.-]+)\.([a-z]{2,})(\/\S*)?$/i;
 		if (!urlRegex.test(src)) return false;
@@ -28,8 +29,13 @@
 
 {#if active}
 	<div class="editEmbed">
-		<Description title="accepted sources" description={acceptedEmbedSrcs.description} />
-		<Input
+		<svelte:component
+			this={description}
+			title="accepted sources"
+			description={acceptedEmbedSrcs.description}
+		/>
+		<svelte:component
+			this={input}
 			label="Embed content source"
 			type="text"
 			value={content.src}

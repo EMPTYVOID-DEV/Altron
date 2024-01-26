@@ -1,17 +1,19 @@
 <script lang="ts">
 	import { SvelteComponent, getContext, type ComponentType } from 'svelte';
-	import Textarea from '../extra/textarea.svelte';
 	import type { updateDataType } from '../../utils/types';
 	export let content: { text: string };
 	export let active = false;
 	export let id: string;
-	export let view: ComponentType<SvelteComponent<{ text: string }>> = getContext('Paragraph');
+	const componentMap = getContext('componentMap') as Map<string, ComponentType<SvelteComponent>>;
+	const textArea = componentMap.get('textArea');
+	const view = componentMap.get('viewParagraph');
 	const updateData: updateDataType = getContext('updateData');
 </script>
 
 {#if active}
 	<div class="editParagraph">
-		<Textarea
+		<svelte:component
+			this={textArea}
 			label="Paragraph content"
 			textContent={content.text}
 			textLevel={0}

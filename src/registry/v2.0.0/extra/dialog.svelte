@@ -1,7 +1,6 @@
 <script>
-	import { getContext } from 'svelte';
 	import MenuIcon from '../icons/menuIcon.svelte';
-	const menu = getContext('dropDown');
+	import Menu from './menu.svelte';
 	let dialog = null;
 </script>
 
@@ -18,7 +17,7 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 <dialog bind:this={dialog} on:click|stopPropagation>
-	<svelte:component this={menu} close={() => dialog.close()} on:blockMoved on:blockDeleted />
+	<Menu close={() => dialog.close()} on:blockMoved on:blockDeleted />
 </dialog>
 
 <style>

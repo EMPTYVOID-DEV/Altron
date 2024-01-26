@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getContext, type ComponentType } from 'svelte';
+	import { getContext, type ComponentType, SvelteComponent } from 'svelte';
 	import type { Writable } from 'svelte/store';
 	import type { blocks, dataBlock } from '../../utils/types.js';
 	import Code from '../editBlocks/code.svelte';
@@ -12,8 +12,10 @@
 	import Checklist from '../editBlocks/checklist.svelte';
 	import Attachment from '../editBlocks/attachment.svelte';
 	import Embed from '../editBlocks/embed.svelte';
-	import BlockWrapperUi from './blockWrapperUi.svelte';
+
 	export let dataBlock: dataBlock;
+	const componentMap = getContext('componentMap') as Map<string, ComponentType<SvelteComponent>>;
+	const blockWrapperUi = componentMap.get('blockWrapperUI');
 	const workingBlock: Writable<{ state: 'focused' | 'editing'; id: string }> =
 		getContext('workingBlock');
 	const editorId: string = getContext('editorId');
@@ -40,14 +42,14 @@
 	data-editorid={editorId}
 	data-blocktype={dataBlock.name}
 >
-	<BlockWrapperUi blockName={dataBlock.name} {edited} {focused}>
+	<svelte:component this={blockWrapperUi} blockName={dataBlock.name} {edited} {focused}>
 		<svelte:component
 			this={blocksMap.get(dataBlock.name)}
 			active={edited}
 			id={dataBlock.id}
 			content={dataBlock.data}
 		/>
-	</BlockWrapperUi>
+	</svelte:component>
 </div>
 
 <style>
