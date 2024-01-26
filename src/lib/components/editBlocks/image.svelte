@@ -8,7 +8,7 @@
 	const input = componentMap.get('input');
 	const upload = componentMap.get('upload');
 	const updateData: updateDataType = getContext('updateData');
-	const view = componentMap.get('viewImg');
+	const view = componentMap.get('viewImage');
 	function checkType(type: string) {
 		const typeArray = type.split('/');
 		let testType = 'image/*'.split('/');

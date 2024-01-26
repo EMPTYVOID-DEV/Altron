@@ -1,0 +1,41 @@
+{
+	"description": "This is file that holds the dependencies for each block",
+	"components": {
+		"core": [
+			"blockWrapperUi",
+			"toolBarUi",
+			"plusIcon",
+			"closeIcon",
+			"menuIcon",
+			"menu",
+			"dialog",
+			"deleteIcon",
+			"upIcon",
+			"downIcon"
+		],
+		"paragraph": ["viewParagraph", "textArea", "paragraphIcon"],
+		"header": ["viewHeader", "headerIcon", "select", "textArea"],
+		"img": ["viewImg", "upload", "input", "uploadIcon", "imageIcon"],
+		"list": ["viewList", "listHandler", "textArea", "plusIcon", "closeIcon", "select", "listIcon"],
+		"quote": ["viewQuote", "closeQuoteIcon", "openQuote", "input", "textArea", "quoteIcon"],
+		"space": ["viewSpace", "input", "spaceIcon"],
+		"code": ["viewCode", "copyIcon", "doneIcon", "codeIcon", "select", "textArea"],
+		"checkList": [
+			"viewCheckList",
+			"checkListHandler",
+			"closeIcon",
+			"plusIcon",
+			"textArea",
+			"unCheckedIcon",
+			"checkedIcon",
+			"checkListIcon"
+		],
+		"embed": ["viewEmbed", "embedIcon", "description", "input", "loading"],
+		"attachment": ["viewAttachment", "attachmentIcon", "uploadIcon", "input", "upload"]
+	},
+	"packages": {
+		"image": ["svelte-select"],
+		"list": ["svelte-select"],
+		"code": ["svelte-select"]
+	}
+}

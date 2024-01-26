@@ -1,7 +1,7 @@
 <script>
 	import CloseIcon from '../icons/closeIcon.svelte';
 	import PlusIcon from '../icons/plusIcon.svelte';
-	import Textarea from './textarea.svelte';
+	import Textarea from './textArea.svelte';
 	export let updateEntry;
 	export let removeEntry;
 	export let addEntry;

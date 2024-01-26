@@ -4,12 +4,12 @@
 	import type { blocks, dataBlock } from '../../utils/types.js';
 	import Code from '../editBlocks/code.svelte';
 	import Header from '../editBlocks/header.svelte';
-	import Img from '../editBlocks/img.svelte';
+	import Img from '../editBlocks/image.svelte';
 	import List from '../editBlocks/list.svelte';
 	import Paragraph from '../editBlocks/paragraph.svelte';
 	import Quote from '../editBlocks/quote.svelte';
 	import Space from '../editBlocks/space.svelte';
-	import Checklist from '../editBlocks/checklist.svelte';
+	import Checklist from '../editBlocks/checkList.svelte';
 	import Attachment from '../editBlocks/attachment.svelte';
 	import Embed from '../editBlocks/embed.svelte';
 

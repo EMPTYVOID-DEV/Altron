@@ -5,7 +5,7 @@
 	import ParagraphIcon from '../registry/v2.0.0/icons/paragraphIcon.svelte';
 	import HeaderIcon from '../registry/v2.0.0/icons/headerIcon.svelte';
 	import BlockWrapperUi from '../registry/v2.0.0/core/blockWrapperUi.svelte';
-	import Textarea from '../registry/v2.0.0/extra/textarea.svelte';
+	import Textarea from '../registry/v2.0.0/extra/textArea.svelte';
 	import ViewParagraph from '../registry/v2.0.0/viewBlocks/viewParagraph.svelte';
 	import ViewHeader from '../registry/v2.0.0/viewBlocks/viewHeader.svelte';
 	import Select from '../registry/v2.0.0/extra/select.svelte';
