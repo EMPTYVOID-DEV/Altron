@@ -10,8 +10,8 @@
 					"path": "/src/registry/v2.0.0/core/blockWrapperUi.svelte"
 				},
 				{
-					"component": "blockWrapperUi",
-					"path": "/src/registry/v2.0.0/core/blockWrapperUi.svelte"
+					"component": "toolBarUi",
+					"path": "/src/registry/v2.0.0/core/toolBarUi.svelte"
 				},
 				{
 					"component": "checkListHandler",
