@@ -1,184 +1,79 @@
 {
-	"description": "This a is a json file that holdes the registry entries, where it maps each version with components that has changed starting from v2.0.0",
-	"available versions": ["2.0.0"],
-	"registry": {
-		"2.0.0": [
-			{
-				"component": "blockWrapperUi",
-				"path": "/src/registry/v2.0.0/core/blockWrapperUi.svelte"
-			},
-			{
-				"component": "blockWrapperUi",
-				"path": "/src/registry/v2.0.0/core/blockWrapperUi.svelte"
-			},
-			{
-				"component": "checkListHandler",
-				"path": "/src/registry/v2.0.0/extra/checkListHandler.svelte"
-			},
-			{
-				"component": "description",
-				"path": "/src/registry/v2.0.0/extra/description.svelte"
-			},
-			{
-				"component": "dialog",
-				"path": "/src/registry/v2.0.0/extra/dialog.svelte"
-			},
-			{
-				"component": "input",
-				"path": "/src/registry/v2.0.0/extra/input.svelte"
-			},
-			{
-				"component": "listHandler",
-				"path": "/src/registry/v2.0.0/extra/listHandler.svelte"
-			},
-			{
-				"component": "loading",
-				"path": "/src/registry/v2.0.0/extra/loading.svelte"
-			},
-			{
-				"component": "menu",
-				"path": "/src/registry/v2.0.0/extra/menu.svelte"
-			},
-			{
-				"component": "select",
-				"path": "/src/registry/v2.0.0/extra/select.svelte"
-			},
-			{
-				"component": "textArea",
-				"path": "/src/registry/v2.0.0/extra/textArea.svelte"
-			},
-			{
-				"component": "upload",
-				"path": "/src/registry/v2.0.0/extra/upload.svelte"
-			},
-			{
-				"component": "attachmentIcon",
-				"path": "/src/registry/v2.0.0/icons/attachmentIcon.svelte"
-			},
-			{
-				"component": "checkedIcon",
-				"path": "/src/registry/v2.0.0/icons/checkedIcon.svelte"
-			},
-			{
-				"component": "checkListIcon",
-				"path": "/src/registry/v2.0.0/icons/checkListIcon.svelte"
-			},
-			{
-				"component": "closeIcon",
-				"path": "/src/registry/v2.0.0/icons/closeIcon.svelte"
-			},
-			{
-				"component": "closeQuoteIcon",
-				"path": "/src/registry/v2.0.0/icons/closeQuoteIcon.svelte"
-			},
-			{
-				"component": "codeIcon",
-				"path": "/src/registry/v2.0.0/icons/codeIcon.svelte"
-			},
-			{
-				"component": "copyIcon",
-				"path": "/src/registry/v2.0.0/icons/copyIcon.svelte"
-			},
-			{
-				"component": "deleteIcon",
-				"path": "/src/registry/v2.0.0/icons/deleteIcon.svelte"
-			},
-			{
-				"component": "doneIcon",
-				"path": "/src/registry/v2.0.0/icons/doneIcon.svelte"
-			},
-			{
-				"component": "downIcon",
-				"path": "/src/registry/v2.0.0/icons/downIcon.svelte"
-			},
-			{
-				"component": "embedIcon",
-				"path": "/src/registry/v2.0.0/icons/embedIcon.svelte"
-			},
-			{
-				"component": "headerIcon",
-				"path": "/src/registry/v2.0.0/icons/headerIcon.svelte"
-			},
-			{
-				"component": "imageIcon",
-				"path": "/src/registry/v2.0.0/icons/imageIcon.svelte"
-			},
-			{
-				"component": "listIcon",
-				"path": "/src/registry/v2.0.0/icons/listIcon.svelte"
-			},
-			{
-				"component": "menuIcon",
-				"path": "/src/registry/v2.0.0/icons/menuIcon.svelte"
-			},
-			{
-				"component": "openQuoteIcon",
-				"path": "/src/registry/v2.0.0/icons/openQuoteIcon.svelte"
-			},
-			{
-				"component": "paragraphIcon",
-				"path": "/src/registry/v2.0.0/icons/paragraphIcon.svelte"
-			},
-			{
-				"component": "plusIcon",
-				"path": "/src/registry/v2.0.0/icons/plusIcon.svelte"
-			},
-			{
-				"component": "spaceIcon",
-				"path": "/src/registry/v2.0.0/icons/spaceIcon.svelte"
-			},
-			{
-				"component": "unCheckedIcon",
-				"path": "/src/registry/v2.0.0/icons/unCheckedIcon.svelte"
-			},
-			{
-				"component": "upIcon",
-				"path": "/src/registry/v2.0.0/icons/upIcon.svelte"
-			},
-			{
-				"component": "uploadIcon",
-				"path": "/src/registry/v2.0.0/icons/uploadIcon.svelte"
-			},
-			{
-				"component": "viewAttachment",
-				"path": "/src/registry/v2.0.0/viewBlocks/viewAttachment.svelte"
-			},
-			{
-				"component": "viewCode",
-				"path": "/src/registry/v2.0.0/viewBlocks/viewCode.svelte"
-			},
-			{
-				"component": "viewHeader",
-				"path": "/src/registry/v2.0.0/viewBlocks/viewHeader.svelte"
-			},
-			{
-				"component": "viewList",
-				"path": "/src/registry/v2.0.0/viewBlocks/viewList.svelte"
-			},
-			{
-				"component": "viewQuote",
-				"path": "/src/registry/v2.0.0/viewBlocks/viewQuote.svelte"
-			},
-			{
-				"component": "viewCheckList",
-				"path": "/src/registry/v2.0.0/viewBlocks/viewCheckList.svelte"
-			},
-			{
-				"component": "viewEmbed",
-				"path": "/src/registry/v2.0.0/viewBlocks/viewEmbed.svelte"
-			},
-			{
-				"component": "viewImage",
-				"path": "/src/registry/v2.0.0/viewBlocks/viewImage.svelte"
-			},
-			{
-				"component": "viewParagraph",
-				"path": "/src/registry/v2.0.0/viewBlocks/viewParagraph.svelte"
-			},
-			{
-				"component": "viewSpace",
-				"path": "/src/registry/v2.0.0/viewBlocks/viewSpace.svelte"
-			}
-		]
-	}
+	"description": "This a is a json file that holds the registry entries, where it maps each version with components that has changed starting from v2.0.0",
+	"versions": ["2.0.0"],
+	"registry": [
+		{
+			"version": "2.0.0",
+			"changes": [
+				{
+					"component": "blockWrapperUi",
+					"path": "/src/registry/v2.0.0/core/blockWrapperUi.svelte"
+				},
+				{
+					"component": "blockWrapperUi",
+					"path": "/src/registry/v2.0.0/core/blockWrapperUi.svelte"
+				},
+				{
+					"component": "checkListHandler",
+					"path": "/src/registry/v2.0.0/extra/checkListHandler.svelte"
+				},
+				{ "component": "description", "path": "/src/registry/v2.0.0/extra/description.svelte" },
+				{ "component": "dialog", "path": "/src/registry/v2.0.0/extra/dialog.svelte" },
+				{ "component": "input", "path": "/src/registry/v2.0.0/extra/input.svelte" },
+				{ "component": "listHandler", "path": "/src/registry/v2.0.0/extra/listHandler.svelte" },
+				{ "component": "loading", "path": "/src/registry/v2.0.0/extra/loading.svelte" },
+				{ "component": "menu", "path": "/src/registry/v2.0.0/extra/menu.svelte" },
+				{ "component": "select", "path": "/src/registry/v2.0.0/extra/select.svelte" },
+				{ "component": "textArea", "path": "/src/registry/v2.0.0/extra/textArea.svelte" },
+				{ "component": "upload", "path": "/src/registry/v2.0.0/extra/upload.svelte" },
+				{
+					"component": "attachmentIcon",
+					"path": "/src/registry/v2.0.0/icons/attachmentIcon.svelte"
+				},
+				{ "component": "checkedIcon", "path": "/src/registry/v2.0.0/icons/checkedIcon.svelte" },
+				{ "component": "checkListIcon", "path": "/src/registry/v2.0.0/icons/checkListIcon.svelte" },
+				{ "component": "closeIcon", "path": "/src/registry/v2.0.0/icons/closeIcon.svelte" },
+				{
+					"component": "closeQuoteIcon",
+					"path": "/src/registry/v2.0.0/icons/closeQuoteIcon.svelte"
+				},
+				{ "component": "codeIcon", "path": "/src/registry/v2.0.0/icons/codeIcon.svelte" },
+				{ "component": "copyIcon", "path": "/src/registry/v2.0.0/icons/copyIcon.svelte" },
+				{ "component": "deleteIcon", "path": "/src/registry/v2.0.0/icons/deleteIcon.svelte" },
+				{ "component": "doneIcon", "path": "/src/registry/v2.0.0/icons/doneIcon.svelte" },
+				{ "component": "downIcon", "path": "/src/registry/v2.0.0/icons/downIcon.svelte" },
+				{ "component": "embedIcon", "path": "/src/registry/v2.0.0/icons/embedIcon.svelte" },
+				{ "component": "headerIcon", "path": "/src/registry/v2.0.0/icons/headerIcon.svelte" },
+				{ "component": "imageIcon", "path": "/src/registry/v2.0.0/icons/imageIcon.svelte" },
+				{ "component": "listIcon", "path": "/src/registry/v2.0.0/icons/listIcon.svelte" },
+				{ "component": "menuIcon", "path": "/src/registry/v2.0.0/icons/menuIcon.svelte" },
+				{ "component": "openQuoteIcon", "path": "/src/registry/v2.0.0/icons/openQuoteIcon.svelte" },
+				{ "component": "paragraphIcon", "path": "/src/registry/v2.0.0/icons/paragraphIcon.svelte" },
+				{ "component": "plusIcon", "path": "/src/registry/v2.0.0/icons/plusIcon.svelte" },
+				{ "component": "spaceIcon", "path": "/src/registry/v2.0.0/icons/spaceIcon.svelte" },
+				{ "component": "unCheckedIcon", "path": "/src/registry/v2.0.0/icons/unCheckedIcon.svelte" },
+				{ "component": "upIcon", "path": "/src/registry/v2.0.0/icons/upIcon.svelte" },
+				{ "component": "uploadIcon", "path": "/src/registry/v2.0.0/icons/uploadIcon.svelte" },
+				{
+					"component": "viewAttachment",
+					"path": "/src/registry/v2.0.0/viewBlocks/viewAttachment.svelte"
+				},
+				{ "component": "viewCode", "path": "/src/registry/v2.0.0/viewBlocks/viewCode.svelte" },
+				{ "component": "viewHeader", "path": "/src/registry/v2.0.0/viewBlocks/viewHeader.svelte" },
+				{ "component": "viewList", "path": "/src/registry/v2.0.0/viewBlocks/viewList.svelte" },
+				{ "component": "viewQuote", "path": "/src/registry/v2.0.0/viewBlocks/viewQuote.svelte" },
+				{
+					"component": "viewCheckList",
+					"path": "/src/registry/v2.0.0/viewBlocks/viewCheckList.svelte"
+				},
+				{ "component": "viewEmbed", "path": "/src/registry/v2.0.0/viewBlocks/viewEmbed.svelte" },
+				{ "component": "viewImage", "path": "/src/registry/v2.0.0/viewBlocks/viewImage.svelte" },
+				{
+					"component": "viewParagraph",
+					"path": "/src/registry/v2.0.0/viewBlocks/viewParagraph.svelte"
+				},
+				{ "component": "viewSpace", "path": "/src/registry/v2.0.0/viewBlocks/viewSpace.svelte" }
+			]
+		}
+	]
 }
