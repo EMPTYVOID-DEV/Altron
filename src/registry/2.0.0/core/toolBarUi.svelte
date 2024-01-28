@@ -11,7 +11,7 @@
 		['header', componentMap.get('headerIcon')],
 		['image', componentMap.get('imageIcon')],
 		['list', componentMap.get('listIcon')],
-		['quote', componentMap.get('quoteIcon')],
+		['quote', componentMap.get('closeQuoteIcon')],
 		['code', componentMap.get('codeIcon')],
 		['space', componentMap.get('spaceIcon')],
 		['checklist', componentMap.get('checkListIcon')],
