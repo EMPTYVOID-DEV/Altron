@@ -76,7 +76,7 @@
 	],
 	"packages": [
 		{
-			"block": "image",
+			"block": "header",
 			"dependencies": ["svelte-select"]
 		},
 		{
