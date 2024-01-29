@@ -34,7 +34,7 @@
 		"attachment": ["viewAttachment", "attachmentIcon", "uploadIcon", "input", "upload"]
 	},
 	"packages": {
-		"image": ["svelte-select"],
+		"header": ["svelte-select"],
 		"list": ["svelte-select"],
 		"code": ["svelte-select"]
 	}
