@@ -34,7 +34,7 @@
     },
     {
       "block": "quote",
-      "dependencies": ["viewQuote", "closeQuoteIcon", "openQuote", "input", "textArea", "quoteIcon"]
+      "dependencies": ["viewQuote", "closeQuoteIcon", "openQuoteIcon", "input", "textArea"]
     },
     {
       "block": "space",
