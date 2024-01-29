@@ -1,12 +1,12 @@
 <script>
 	import CloseQuoteIcon from '../icons/closeQuoteIcon.svelte';
-	import OpenQuote from '../icons/openQuoteIcon.svelte';
+	import OpenQuoteIcon from '../icons/openQuoteIcon.svelte';
 	export let text;
 	export let owner;
 </script>
 
 <div class="quote">
-	<OpenQuote />
+	<OpenQuoteIcon />
 	<span class="quoteContent">{text}</span>
 	<CloseQuoteIcon />
 	<span class="quoteOwner">{owner}</span>

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { getContext, type ComponentType, SvelteComponent } from 'svelte';
 	import type { Writable } from 'svelte/store';
-	import type { blocks, dataBlock } from '../../utils/types.js';
+	import type { blocks, dataBlock as blockData } from '../../utils/types.js';
 	import Code from '../editBlocks/code.svelte';
 	import Header from '../editBlocks/header.svelte';
 	import Img from '../editBlocks/image.svelte';
@@ -13,9 +13,9 @@
 	import Attachment from '../editBlocks/attachment.svelte';
 	import Embed from '../editBlocks/embed.svelte';
 
-	export let dataBlock: dataBlock;
+	export let dataBlock: blockData;
 	const componentMap = getContext('componentMap') as Map<string, ComponentType<SvelteComponent>>;
-	const blockWrapperUi = componentMap.get('blockWrapperUI');
+	const blockWrapperUi = componentMap.get('blockWrapperUi');
 	const workingBlock: Writable<{ state: 'focused' | 'editing'; id: string }> =
 		getContext('workingBlock');
 	const editorId: string = getContext('editorId');

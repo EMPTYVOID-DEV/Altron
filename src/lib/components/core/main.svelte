@@ -65,7 +65,7 @@
 		'python',
 		'csharp'
 	];
-	//dynamically imported components context
+	// component context
 	setContext('componentMap', componentMap);
 
 	// embeds context

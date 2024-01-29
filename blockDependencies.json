@@ -1,91 +1,41 @@
 {
 	"description": "This is file that holds the dependencies for each block",
-	"components": [
-		{
-			"block": "core",
-			"dependencies": [
-				"blockWrapperUi",
-				"toolBarUi",
-				"plusIcon",
-				"closeIcon",
-				"menuIcon",
-				"menu",
-				"dialog",
-				"deleteIcon",
-				"upIcon",
-				"downIcon"
-			]
-		},
-		{
-			"block": "paragraph",
-			"dependencies": ["viewParagraph", "textArea", "paragraphIcon"]
-		},
-		{
-			"block": "header",
-			"dependencies": ["viewHeader", "headerIcon", "select", "textArea"]
-		},
-		{
-			"block": "image",
-			"dependencies": ["viewImage", "upload", "input", "uploadIcon", "imageIcon"]
-		},
-		{
-			"block": "list",
-			"dependencies": [
-				"viewList",
-				"listHandler",
-				"textArea",
-				"plusIcon",
-				"closeIcon",
-				"select",
-				"listIcon"
-			]
-		},
-		{
-			"block": "quote",
-			"dependencies": ["viewQuote", "closeQuoteIcon", "openQuoteIcon", "input", "textArea"]
-		},
-		{
-			"block": "space",
-			"dependencies": ["viewSpace", "input", "spaceIcon"]
-		},
-		{
-			"block": "code",
-			"dependencies": ["viewCode", "copyIcon", "doneIcon", "codeIcon", "select", "textArea"]
-		},
-		{
-			"block": "checkList",
-			"dependencies": [
-				"viewCheckList",
-				"checkListHandler",
-				"closeIcon",
-				"plusIcon",
-				"textArea",
-				"unCheckedIcon",
-				"checkedIcon",
-				"checkListIcon"
-			]
-		},
-		{
-			"block": "embed",
-			"dependencies": ["viewEmbed", "embedIcon", "description", "input", "loading"]
-		},
-		{
-			"block": "attachment",
-			"dependencies": ["viewAttachment", "attachmentIcon", "uploadIcon", "input", "upload"]
-		}
-	],
-	"packages": [
-		{
-			"block": "image",
-			"dependencies": ["svelte-select"]
-		},
-		{
-			"block": "list",
-			"dependencies": ["svelte-select"]
-		},
-		{
-			"block": "code",
-			"dependencies": ["svelte-select"]
-		}
-	]
+	"components": {
+		"core": [
+			"blockWrapperUi",
+			"toolBarUi",
+			"plusIcon",
+			"closeIcon",
+			"menuIcon",
+			"menu",
+			"dialog",
+			"deleteIcon",
+			"upIcon",
+			"downIcon"
+		],
+		"paragraph": ["viewParagraph", "textArea", "paragraphIcon"],
+		"header": ["viewHeader", "headerIcon", "select", "textArea"],
+		"image": ["viewImage", "upload", "input", "uploadIcon", "imageIcon"],
+		"list": ["viewList", "listHandler", "textArea", "plusIcon", "closeIcon", "select", "listIcon"],
+		"quote": ["viewQuote", "closeQuoteIcon", "openQuote", "input", "textArea", "quoteIcon"],
+		"space": ["viewSpace", "input", "spaceIcon"],
+		"code": ["viewCode", "copyIcon", "doneIcon", "codeIcon", "select", "textArea"],
+		"checklist": [
+			"viewCheckList",
+			"checkListHandler",
+			"closeIcon",
+			"plusIcon",
+			"textArea",
+			"unCheckedIcon",
+			"checkedIcon",
+			"checkListIcon"
+		],
+		"embed": ["viewEmbed", "embedIcon", "description", "input", "loading"],
+		"attachment": ["viewAttachment", "attachmentIcon", "uploadIcon", "input", "upload"]
+	},
+	"packages": {
+		"image": ["svelte-select"],
+		"list": ["svelte-select"],
+		"code": ["svelte-select"]
+	}
 }
