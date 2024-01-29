@@ -47,14 +47,14 @@
     {
       "block": "checklist",
       "dependencies": [
-        "viewCheckList",
-        "checkListHandler",
+        "viewChecklist",
+        "checklistHandler",
         "closeIcon",
         "plusIcon",
         "textArea",
         "unCheckedIcon",
         "checkedIcon",
-        "checkListIcon"
+        "checklistIcon"
       ]
     },
     {
