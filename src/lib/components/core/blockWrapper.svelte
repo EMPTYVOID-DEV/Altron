@@ -9,7 +9,7 @@
 	import Paragraph from '../editBlocks/paragraph.svelte';
 	import Quote from '../editBlocks/quote.svelte';
 	import Space from '../editBlocks/space.svelte';
-	import Checklist from '../editBlocks/checkList.svelte';
+	import Checklist from '../editBlocks/checklist.svelte';
 	import Attachment from '../editBlocks/attachment.svelte';
 	import Embed from '../editBlocks/embed.svelte';
 

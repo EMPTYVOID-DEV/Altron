@@ -5,8 +5,8 @@
 	export let id: string;
 	export let active = false;
 	const componentMap = getContext('componentMap') as Map<string, ComponentType<SvelteComponent>>;
-	const checkListHandler = componentMap.get('checkListHandler');
-	const view = componentMap.get('viewCheckList');
+	const checkListHandler = componentMap.get('checklistHandler');
+	const view = componentMap.get('viewChecklist');
 	const updateData: updateDataType = getContext('updateData');
 
 	function checkEntry(index: number, checked: boolean) {
