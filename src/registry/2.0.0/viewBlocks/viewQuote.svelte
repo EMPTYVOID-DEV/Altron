@@ -1,14 +1,16 @@
 <script>
-	import CloseQuoteIcon from '../icons/closeQuoteIcon.svelte';
-	import OpenQuoteIcon from '../icons/openQuoteIcon.svelte';
+	import { getContext } from 'svelte';
+	const componentMap = getContext('componentMap');
+	const CloseQuoteIcon = componentMap.get('closeQuoteIcon');
+	const OpenQuoteIcon = componentMap.get('openQuoteIcon');
 	export let text;
 	export let owner;
 </script>
 
 <div class="quote">
-	<OpenQuoteIcon />
+	<svelte:component this={OpenQuoteIcon} />
 	<span class="quoteContent">{text}</span>
-	<CloseQuoteIcon />
+	<svelte:component this={CloseQuoteIcon} />
 	<span class="quoteOwner">{owner}</span>
 </div>
 

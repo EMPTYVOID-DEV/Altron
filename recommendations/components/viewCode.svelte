@@ -1,4 +1,6 @@
 <script>
+	import { onedark } from 'svelte-highlight/styles';
+	import { HighlightAuto, LineNumbers } from 'svelte-highlight';
 	import { getContext } from 'svelte';
 	export let text;
 	export let lang;
@@ -6,12 +8,18 @@
 	const DoneIcon = componentMap.get('doneIcon');
 	const CopyIcon = componentMap.get('copyIcon');
 	let copyStatement = false;
-	function copyCode() {
+	async function copyCode(e) {
 		navigator.clipboard.writeText(text);
 		copyStatement = true;
-		new Promise((res) => setTimeout(res, 800)).then(() => (copyStatement = false));
+		await new Promise((res) => setTimeout(res, 800));
+		copyStatement = false;
 	}
+	console.log('hello');
 </script>
+
+<svelte:head>
+	{@html onedark}
+</svelte:head>
 
 <div id="codeMdBlock" class={lang}>
 	<div id="lang">
@@ -19,15 +27,15 @@
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<!-- svelte-ignore a11y-no-static-element-interactions -->
 		{#if !copyStatement}
-			<span on:click|stopPropagation={copyCode} class="control"
-				><svelte:component this={CopyIcon} /></span
-			>
+			<span on:click|stopPropagation={copyCode}><CopyIcon /></span>
 		{:else}
-			<span><svelte:component this={DoneIcon} /></span>
+			<span><DoneIcon /></span>
 		{/if}
 	</div>
 
-	<code>{text}</code>
+	<HighlightAuto code={text} let:highlighted>
+		<LineNumbers {highlighted} hideBorder wrapLines />
+	</HighlightAuto>
 </div>
 
 <style>
@@ -35,20 +43,21 @@
 		width: 100%;
 		display: flex;
 		flex-direction: column;
-		gap: 5px;
-		border-radius: 5px;
-		background-color: color-mix(in srgb, var(--primaryColor) 40%, white 0%);
-		padding-bottom: 10px;
-		overflow: hidden;
-		color: var(--textColor);
+	}
+	#codeMdBlock :global(> :not(#lang)) {
+		width: 100%;
+		border-bottom-left-radius: 5px;
+		border-bottom-right-radius: 5px;
 	}
 
-	#codeMdBlock > code {
-		padding-left: 10px;
+	#codeMdBlock :global(tr) {
+		display: block;
 	}
 
 	#codeMdBlock #lang {
 		width: 100%;
+		border-top-left-radius: 5px;
+		border-top-right-radius: 5px;
 		background-color: var(--primaryColor);
 		display: flex;
 		justify-content: space-between;
@@ -58,10 +67,11 @@
 	}
 
 	#codeMdBlock #lang span {
+		color: var(--textColor);
 		font-weight: bold;
 		text-transform: capitalize;
 	}
-	.control {
+	#codeMdBlock #lang span:last-child {
 		cursor: pointer;
 	}
 </style>

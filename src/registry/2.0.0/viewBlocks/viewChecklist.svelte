@@ -1,16 +1,18 @@
 <script>
-	import UnChecked from '../icons/unCheckedIcon.svelte';
-	import Checked from '../icons/checkedIcon.svelte';
+	import { getContext } from 'svelte';
 	export let items;
+	const componentMap = getContext('componentMap');
+	const Checked = componentMap.get('checkedIcon');
+	const UnChecked = componentMap.get('unCheckedIcon');
 </script>
 
 <div class="checkListView">
 	{#each items as item}
 		<div class="checkItem">
 			{#if item.checked}
-				<Checked />
+				<svelte:component this={Checked} />
 			{:else}
-				<UnChecked />
+				<svelte:component this={UnChecked} />
 			{/if}
 			<span style:text-decoration={item.checked ? 'line-through' : 'none'}>{item.value}</span>
 		</div>

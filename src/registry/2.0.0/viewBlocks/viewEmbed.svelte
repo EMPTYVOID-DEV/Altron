@@ -1,7 +1,8 @@
 <script>
 	import { getContext } from 'svelte';
-	import Loading from '../extra/loading.svelte';
 	export let src;
+	const componentMap = getContext('componentMap');
+	const Loading = componentMap.get('loading');
 	const iframeSettings = getContext('iframeSettings');
 	let state = 'loading';
 </script>
@@ -18,7 +19,7 @@
 			on:load={() => (state = 'working')}
 			on:error={() => (state = 'error')}
 		/>
-		<Loading visible={state == 'loading'} />
+		<svelte:component this={Loading} visible={state == 'loading'} />
 		{#if state == 'error'}
 			<span class="errorEmbed">Sorry the content has failed to load</span>
 		{/if}
