@@ -1,6 +1,6 @@
 {
 	"description": "This a is a json file that holds the registry entries, where it maps each version with components that has changed starting from v2.0.0",
-	"versions": ["2.0.0", "2.0.1", "2.0.2"],
+	"versions": ["2.0.0"],
 	"registry": [
 		{
 			"version": "2.0.0",

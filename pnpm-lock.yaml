@@ -8,9 +8,6 @@ dependencies:
   nanoid:
     specifier: ^5.0.3
     version: 5.0.3
-  svelte-select:
-    specifier: ^5.7.0
-    version: 5.7.0
 
 devDependencies:
   '@changesets/cli':
@@ -3259,12 +3256,6 @@ packages:
       typescript: 5.2.2
     dev: true
 
-  /svelte-select@5.7.0:
-    resolution: {integrity: sha512-oClK1exjcWDj2817+0djGhK04t5CSZbuP0oh7gz+3dEcn/G+QqRsfI2/dvIyOSHILqNzlj+Ztp2z1pMtE7Wf8Q==}
-    dependencies:
-      '@floating-ui/dom': 1.5.3
-      svelte-floating-ui: 1.2.8
-    dev: false
 
   /svelte2tsx@0.6.23(svelte@4.2.2)(typescript@5.2.2):
     resolution: {integrity: sha512-3bwd1PuWUA3oEXy8+85zrLDnmJOsVpShpKVAehGWeYsz/66zMihTpRpUN97VVAKTZbO5tP4wnchHUXYs0zOwdw==}
