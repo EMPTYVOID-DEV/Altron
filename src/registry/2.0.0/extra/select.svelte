@@ -1,4 +1,5 @@
 <script>
+	//@ts-ignore
 	import Select from 'svelte-select';
 	export let label;
 	export let elements;
