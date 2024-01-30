@@ -1,10 +1,8 @@
 <script lang="ts">
 	import type { blocks, dataBlock } from '../../utils/types';
-	import { getContext, createEventDispatcher } from 'svelte';
+	import { getContext, createEventDispatcher, SvelteComponent, type ComponentType } from 'svelte';
 	import type { Writable } from 'svelte/store';
-	import CustomToolBar from './toolBarUI.svelte';
 	import { nanoid } from 'nanoid';
-
 	const languages = getContext('languages');
 	const defaultData = new Map<blocks, any>([
 		['paragraph', { text: 'hello friend' }],
@@ -18,6 +16,8 @@
 		['attachment', { file: null, title: 'my attachment', size: 0, src: '', type: '' }],
 		['embed', { src: '' }]
 	]);
+	const componentMap = getContext('componentMap') as Map<string, ComponentType<SvelteComponent>>;
+	const toolBarUI = componentMap.get('toolBarUi');
 	const eventDispatcher = createEventDispatcher();
 	const workingBlock: Writable<{ state: 'focused' | 'editing'; id: string }> =
 		getContext('workingBlock');
@@ -42,4 +42,4 @@
 	}
 </script>
 
-<CustomToolBar {add} />
+<svelte:component this={toolBarUI} {add} />

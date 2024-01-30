@@ -1,19 +1,21 @@
 <script lang="ts">
 	import { SvelteComponent, getContext, type ComponentType } from 'svelte';
-	import Select from '../extra/select.svelte';
 	import type { updateDataType } from '../../utils/types';
-	import Textarea from '../extra/textarea.svelte';
 	export let content: { text: string; lang: string };
 	export let id: string;
 	export let active = false;
+	const componentMap = getContext('componentMap') as Map<string, ComponentType<SvelteComponent>>;
+	const select = componentMap.get('select');
+	const textarea = componentMap.get('textArea');
+	const view = componentMap.get('viewCode');
 	const languages = getContext('languages') as string[];
-	const view: ComponentType<SvelteComponent<{ text: string; lang: string }>> = getContext('Code');
 	const updateData: updateDataType = getContext('updateData');
 </script>
 
 {#if active}
 	<div class="codeEdit">
-		<Select
+		<svelte:component
+			this={select}
 			label="Code language"
 			preSelected={{ label: content.lang, value: content.lang }}
 			elements={languages.map((el) => ({ value: el, label: el }))}
@@ -23,7 +25,8 @@
 				});
 			}}
 		/>
-		<Textarea
+		<svelte:component
+			this={textarea}
 			label="Code content"
 			textLevel={0}
 			textContent={content.text}

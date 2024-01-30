@@ -1,11 +1,12 @@
 <script>
 	import { createEventDispatcher, getContext } from 'svelte';
-	import CloseIcon from '../icons/closeIcon.svelte';
-	import MenuIcon from '../icons/menuIcon.svelte';
-	import UpIcon from '../icons/upIcon.svelte';
-	import DeleteIcon from '../icons/deleteIcon.svelte';
-	import DownIcon from '../icons/downIcon.svelte';
 	export let close;
+	const componentMap = getContext('componentMap');
+	const CloseIcon = componentMap.get('closeIcon');
+	const MenuIcon = componentMap.get('menuIcon');
+	const UpIcon = componentMap.get('upIcon');
+	const DeleteIcon = componentMap.get('deleteIcon');
+	const DownIcon = componentMap.get('downIcon');
 	const eventDispatcher = createEventDispatcher();
 	const setData = getContext('setData');
 	const workingBlock = getContext('getWorkingBlock')();
@@ -63,7 +64,7 @@
 
 <div class="dropDown">
 	<div class="label">
-		<MenuIcon />
+		<svelte:component this={MenuIcon} />
 		<span>Menu</span>
 	</div>
 	{#each options as option (option.label)}
@@ -88,7 +89,7 @@
 			close();
 		}}
 	>
-		<CloseIcon />
+		<svelte:component this={CloseIcon} />
 		<span>Close menu</span>
 	</div>
 </div>

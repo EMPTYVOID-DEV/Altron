@@ -1,7 +1,8 @@
 <script>
 	import { getContext } from 'svelte';
-	import MenuIcon from '../icons/menuIcon.svelte';
-	const menu = getContext('dropDown');
+	const componentMap = getContext('componentMap');
+	const MenuIcon = componentMap.get('menuIcon');
+	const Menu = componentMap.get('menu');
 	let dialog = null;
 </script>
 
@@ -13,12 +14,12 @@
 		dialog.showModal();
 	}}
 >
-	<MenuIcon />
+	<svelte:component this={MenuIcon} />
 </span>
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 <dialog bind:this={dialog} on:click|stopPropagation>
-	<svelte:component this={menu} close={() => dialog.close()} on:blockMoved on:blockDeleted />
+	<svelte:component this={Menu} close={() => dialog.close()} on:blockMoved on:blockDeleted />
 </dialog>
 
 <style>

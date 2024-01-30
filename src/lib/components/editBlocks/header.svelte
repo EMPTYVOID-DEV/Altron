@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { SvelteComponent, getContext, type ComponentType } from 'svelte';
-	import Select from '../extra/select.svelte';
-	import Textarea from '../extra/textarea.svelte';
 	import type { updateDataType } from '../../utils/types';
 	export let content: { text: string; level: 1 | 2 | 3 | 4 };
 	export let id: string;
 	export let active = false;
+	const componentMap = getContext('componentMap') as Map<string, ComponentType<SvelteComponent>>;
+	const select = componentMap.get('select');
+	const textarea = componentMap.get('textArea');
 	const updateData: updateDataType = getContext('updateData');
-	const view: ComponentType<SvelteComponent<{ text: string; level: 1 | 2 | 3 | 4 }>> =
-		getContext('Header');
+	const view = componentMap.get('viewHeader');
 	const elements = [
 		{ value: 1, label: 'Very big' },
 		{ value: 2, label: 'Big' },
@@ -19,7 +19,8 @@
 
 {#if active}
 	<div class="headerEdit">
-		<Select
+		<svelte:component
+			this={select}
 			preSelected={{
 				value: content.level,
 				label: elements.find((el) => el.value == content.level).label
@@ -35,7 +36,8 @@
 				});
 			}}
 		/>
-		<Textarea
+		<svelte:component
+			this={textarea}
 			label="Header content"
 			textLevel={content.level}
 			textContent={content.text}

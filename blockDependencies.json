@@ -1,0 +1,91 @@
+{
+	"description": "This is file that holds the dependencies for each block",
+	"components": [
+		{
+			"block": "core",
+			"dependencies": [
+				"blockWrapperUi",
+				"toolBarUi",
+				"plusIcon",
+				"closeIcon",
+				"menuIcon",
+				"menu",
+				"dialog",
+				"deleteIcon",
+				"upIcon",
+				"downIcon"
+			]
+		},
+		{
+			"block": "paragraph",
+			"dependencies": ["viewParagraph", "textArea", "paragraphIcon"]
+		},
+		{
+			"block": "header",
+			"dependencies": ["viewHeader", "headerIcon", "select", "textArea"]
+		},
+		{
+			"block": "image",
+			"dependencies": ["viewImage", "upload", "input", "uploadIcon", "imageIcon"]
+		},
+		{
+			"block": "list",
+			"dependencies": [
+				"viewList",
+				"listHandler",
+				"textArea",
+				"plusIcon",
+				"closeIcon",
+				"select",
+				"listIcon"
+			]
+		},
+		{
+			"block": "quote",
+			"dependencies": ["viewQuote", "closeQuoteIcon", "openQuoteIcon", "input", "textArea"]
+		},
+		{
+			"block": "space",
+			"dependencies": ["viewSpace", "input", "spaceIcon"]
+		},
+		{
+			"block": "code",
+			"dependencies": ["viewCode", "copyIcon", "doneIcon", "codeIcon", "select", "textArea"]
+		},
+		{
+			"block": "checklist",
+			"dependencies": [
+				"viewChecklist",
+				"checklistHandler",
+				"closeIcon",
+				"plusIcon",
+				"textArea",
+				"unCheckedIcon",
+				"checkedIcon",
+				"checklistIcon"
+			]
+		},
+		{
+			"block": "embed",
+			"dependencies": ["viewEmbed", "embedIcon", "description", "input", "loading"]
+		},
+		{
+			"block": "attachment",
+			"dependencies": ["viewAttachment", "attachmentIcon", "uploadIcon", "input", "upload"]
+		}
+	],
+	"packages": [
+		{
+			"block": "header",
+			"dependencies": ["svelte-select"]
+		},
+		{
+			"block": "list",
+			"dependencies": ["svelte-select"]
+		},
+		{
+			"block": "code",
+			"dependencies": ["svelte-select"]
+		}
+	]
+}

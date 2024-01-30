@@ -1,10 +1,13 @@
 <script>
-	import { mimeToFileNameMap } from '../../utils/consts';
-	import UploadIcon from '../icons/uploadIcon.svelte';
+	// @ts-ignore
+	import { mimeToFileNameMap } from '@altron/altron/consts';
 	export let src;
 	export let title;
 	export let type;
 	export let size;
+	import { getContext } from 'svelte';
+	const componentMap = getContext('componentMap');
+	const UploadIcon = componentMap.get('uploadIcon');
 </script>
 
 <div class="attachment">
@@ -19,7 +22,7 @@
 			</div>
 		</div>
 		<a href={src} download={title} on:click|stopPropagation>
-			<UploadIcon />
+			<svelte:component this={UploadIcon} />
 		</a>
 	{/if}
 </div>

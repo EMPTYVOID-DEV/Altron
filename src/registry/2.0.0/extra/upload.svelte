@@ -1,5 +1,7 @@
 <script>
-	import UploadIcon from '../icons/uploadIcon.svelte';
+	import { getContext } from 'svelte';
+	const componentMap = getContext('componentMap');
+	const UploadIcon = componentMap.get('uploadIcon');
 	export let changeHandler;
 	export let label = '';
 	export let fileType = '*';
@@ -21,7 +23,7 @@
 	<div class="inputReplace">
 		<label class="uploadBtn" for="custom-input">
 			<span>Upload a file</span>
-			<UploadIcon />
+			<svelte:component this={UploadIcon} />
 		</label>
 		<span>{currentFileName}</span>
 	</div>

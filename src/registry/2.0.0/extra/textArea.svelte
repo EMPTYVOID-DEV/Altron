@@ -8,7 +8,6 @@
 
 <div class="textArea" style:width={`${width}%`}>
 	<span class="header">{label}</span>
-	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<span
 		style:font-size="var(--{textLevel == 0 ? 'body' : 'h' + textLevel})"
 		style:font-weight={textLevel == 0 ? '400' : 'bold'}

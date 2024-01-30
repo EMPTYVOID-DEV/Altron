@@ -1,37 +1,30 @@
 <script>
-	import CodeIcon from '../icons/codeIcon.svelte';
-	import HeaderIcon from '../icons/headerIcon.svelte';
-	import ImageIcon from '../icons/imageIcon.svelte';
-	import ListIcon from '../icons/listIcon.svelte';
-	import ChecklistIcon from '../icons/checkListIcon.svelte';
-	import QuoteIcon from '../icons/closeQuoteIcon.svelte';
-	import ParagraphIcon from '../icons/paragraphIcon.svelte';
-	import PlusIcon from '../icons/plusIcon.svelte';
-	import CloseIcon from '../icons/closeIcon.svelte';
-	import SpaceIcon from '../icons/spaceIcon.svelte';
-	import AttachmentIcon from '../icons/attachmentIcon.svelte';
 	import { fade } from 'svelte/transition';
 	import { elasticIn } from 'svelte/easing';
-	import EmbedIcon from '../icons/embedIcon.svelte';
 	import { getContext } from 'svelte';
 	export let add;
-	const excludedBlocks = getContext('excludedBlocks');
-	const options = new Map([
-		['paragraph', ParagraphIcon],
-		['header', HeaderIcon],
-		['image', ImageIcon],
-		['list', ListIcon],
-		['quote', QuoteIcon],
-		['code', CodeIcon],
-		['space', SpaceIcon],
-		['checklist', ChecklistIcon],
-		['attachment', AttachmentIcon],
-		['embed', EmbedIcon]
+	const componentMap = getContext('componentMap');
+	const CloseIcon = componentMap.get('closeIcon');
+	const PlusIcon = componentMap.get('plusIcon');
+	let options = new Map([
+		['paragraph', componentMap.get('paragraphIcon')],
+		['header', componentMap.get('headerIcon')],
+		['image', componentMap.get('imageIcon')],
+		['list', componentMap.get('listIcon')],
+		['quote', componentMap.get('closeQuoteIcon')],
+		['code', componentMap.get('codeIcon')],
+		['space', componentMap.get('spaceIcon')],
+		['checklist', componentMap.get('checkListIcon')],
+		['attachment', componentMap.get('attachmentIcon')],
+		['embed', componentMap.get('embedIcon')]
 	]);
+	options = filterOptions(options);
 	let toggle = true;
-	excludedBlocks.forEach((el) => {
-		options.delete(el);
-	});
+	function filterOptions(map) {
+		const entries = [...map];
+		const filteredEntrier = entries.filter((value) => value[1] != undefined);
+		return new Map(filteredEntrier);
+	}
 </script>
 
 <div class="toolBar">
@@ -39,9 +32,9 @@
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<span on:click={() => (toggle = !toggle)} class="control">
 		{#if toggle}
-			<CloseIcon />
+			<svelte:component this={CloseIcon} />
 		{:else}
-			<PlusIcon />
+			<svelte:component this={PlusIcon} />
 		{/if}
 	</span>
 	{#if toggle}

@@ -1,18 +1,20 @@
 <script lang="ts">
 	import { SvelteComponent, getContext, type ComponentType } from 'svelte';
-	import Input from '../extra/input.svelte';
-	import Textarea from '../extra/textarea.svelte';
+	import type { updateDataType } from '../../utils/types';
 	export let content: { text: string; owner: string };
 	export let id: string;
 	export let active = false;
-	import type { updateDataType } from '../../utils/types';
+	const componentMap = getContext('componentMap') as Map<string, ComponentType<SvelteComponent>>;
+	const input = componentMap.get('input');
+	const textarea = componentMap.get('textArea');
 	const updateData: updateDataType = getContext('updateData');
-	const view: ComponentType<SvelteComponent<{ text: string; owner: string }>> = getContext('Quote');
+	const view = componentMap.get('viewQuote');
 </script>
 
 {#if active}
 	<div class="quoteEdit">
-		<Input
+		<svelte:component
+			this={input}
 			value={content.owner}
 			label="The Quote owner"
 			changeHandler={(textContent) => {
@@ -22,7 +24,8 @@
 			}}
 		/>
 
-		<Textarea
+		<svelte:component
+			this={textarea}
 			label="The Quote content"
 			textContent={content.text}
 			textLevel={0}

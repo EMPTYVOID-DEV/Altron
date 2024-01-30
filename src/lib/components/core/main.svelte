@@ -1,22 +1,12 @@
 <script lang="ts">
-	import { type SvelteComponent, type ComponentType, setContext } from 'svelte';
-	import ViewImage from '../viewBlocks/viewImage.svelte';
-	import ViewCode from '../viewBlocks/viewCode.svelte';
-	import ViewHeader from '../viewBlocks/viewHeader.svelte';
-	import ViewList from '../viewBlocks/viewList.svelte';
-	import ViewParagraph from '../viewBlocks/viewParagraph.svelte';
+	import { SvelteComponent, setContext, type ComponentType } from 'svelte';
 	import ToolBar from './toolBar.svelte';
-	import ViewQuote from '../viewBlocks/viewQuote.svelte';
-	import type { IframeSettings, blocks, dataBlock } from '../../utils/types';
+	import type { IframeSettings, dataBlock } from '../../utils/types';
 	import ViewMode from './viewMode.svelte';
 	import EditMode from './editMode.svelte';
 	import { createDataStore, createWorkingBlockStore } from '../../utils/stores';
 	import { get } from 'svelte/store';
 	import { nanoid } from 'nanoid';
-	import ViewChecklist from '../viewBlocks/viewChecklist.svelte';
-	import ViewAttachment from '../viewBlocks/viewAttachment.svelte';
-	import ViewEmbed from '../viewBlocks/viewEmbed.svelte';
-	import Menu from '../extra/menu.svelte';
 
 	interface $$Events {
 		blockAdded: CustomEvent<{ id: string }>;
@@ -32,14 +22,14 @@
 	export let processEmbedSrcs: (src: string) => string = (src: string) => {
 		return src;
 	};
-	export let intialData: dataBlock[] = [];
 	export let acceptedEmbedSrcs: { rules: string[]; description: string } = {
 		description: 'You should enter a valid url for an embed , any source is accepted',
 		rules: []
 	};
+	export let intialData: dataBlock[] = [];
+	export let componentMap: Map<string, ComponentType<SvelteComponent>> = new Map();
 	export let iframeSettings: IframeSettings = {};
 	export let attachmentTypes = '*';
-	export let excludedBlocks: blocks[] = [];
 	export let viewMode = false;
 	export let headerFont = `Verdana, sans-serif`;
 	export let bodyFont = `Helvetica, sans-serif`;
@@ -75,51 +65,21 @@
 		'python',
 		'csharp'
 	];
-	export let customEmbed: ComponentType<SvelteComponent<{ src: string }>> = ViewEmbed;
-	export let customAttachment: ComponentType<
-		SvelteComponent<{ src: string; title: string; type: string; size: number }>
-	> = ViewAttachment;
-	export let customImage: ComponentType<SvelteComponent<{ src: string; caption: string }>> =
-		ViewImage;
-	export let customCode: ComponentType<SvelteComponent<{ text: string; lang: string }>> = ViewCode;
-	export let customList: ComponentType<
-		SvelteComponent<{ items: string[]; type: 'ordered' | 'unordered' }>
-	> = ViewList;
-	export let customHeader: ComponentType<SvelteComponent<{ text: string; level: 1 | 2 | 3 | 4 }>> =
-		ViewHeader;
-	export let customParagraph: ComponentType<SvelteComponent<{ text: string }>> = ViewParagraph;
-	export let customQuote: ComponentType<SvelteComponent<{ text: string; owner: string }>> =
-		ViewQuote;
-	export let customCheckList: ComponentType<
-		SvelteComponent<{ items: { value: string; checked: boolean }[] }>
-	> = ViewChecklist;
-	export let customMenu: ComponentType<
-		SvelteComponent<{
-			close: () => void;
-		}>
-	> = Menu;
-	// context setup
-	setContext('dropDown', customMenu);
-	setContext('Embed', customEmbed);
-	setContext('Attachment', customAttachment);
-	setContext('Checklist', customCheckList);
-	setContext('Image', customImage);
-	setContext('Code', customCode);
-	setContext('Header', customHeader);
-	setContext('Paragraph', customParagraph);
-	setContext('List', customList);
-	setContext('Quote', customQuote);
+	// component context
+	setContext('componentMap', componentMap);
+
 	// embeds context
 	setContext('processEmbedSrcs', processEmbedSrcs);
 	setContext('acceptedEmbedSrcs', acceptedEmbedSrcs);
 	setContext('iframeSettings', iframeSettings);
+
 	//setting attachment types
 	setContext('attachmentType', attachmentTypes);
-	// excluded blocks
-	setContext('excludedBlocks', excludedBlocks);
+
 	// in case no options add plaintext
 	if (codeBlockLanguages.length == 0) codeBlockLanguages.push('plaintext');
 	setContext('languages', codeBlockLanguages);
+
 	// editor id
 	const editorId = nanoid(8);
 	setContext('editorId', nanoid(8));

@@ -1,8 +1,10 @@
 <script>
-	import CopyIcon from '../icons/copyIcon.svelte';
-	import DoneIcon from '../icons/doneIcon.svelte';
+	import { getContext } from 'svelte';
 	export let text;
 	export let lang;
+	const componentMap = getContext('componentMap');
+	const DoneIcon = componentMap.get('doneIcon');
+	const CopyIcon = componentMap.get('copyIcon');
 	let copyStatement = false;
 	function copyCode() {
 		navigator.clipboard.writeText(text);
@@ -17,9 +19,11 @@
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<!-- svelte-ignore a11y-no-static-element-interactions -->
 		{#if !copyStatement}
-			<span on:click|stopPropagation={copyCode} class="control"><CopyIcon /></span>
+			<span on:click|stopPropagation={copyCode} class="control"
+				><svelte:component this={CopyIcon} /></span
+			>
 		{:else}
-			<span><DoneIcon /></span>
+			<span><svelte:component this={DoneIcon} /></span>
 		{/if}
 	</div>
 

@@ -1,12 +1,14 @@
 <script>
-	import CloseIcon from '../icons/closeIcon.svelte';
-	import PlusIcon from '../icons/plusIcon.svelte';
-	import Textarea from './textarea.svelte';
+	import { getContext } from 'svelte';
 	export let updateEntry;
 	export let removeEntry;
 	export let addEntry;
 	export let checkEntry;
 	export let items;
+	const componentMap = getContext('componentMap');
+	const CloseIcon = componentMap.get('closeIcon');
+	const PlusIcon = componentMap.get('plusIcon');
+	const Textarea = componentMap.get('textArea');
 </script>
 
 <div class="checkListExtra">
@@ -20,7 +22,8 @@
 					checkEntry(index, e.currentTarget.checked);
 				}}
 			/>
-			<Textarea
+			<svelte:component
+				this={Textarea}
 				width={90}
 				textContent={item.value}
 				textLevel={0}
@@ -28,25 +31,23 @@
 					updateEntry(index, text);
 				}}
 			/>
-			<!-- svelte-ignore missing-declaration -->
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<!-- svelte-ignore a11y-no-static-element-interactions -->
 			<span
 				class="control"
 				on:click|stopPropagation={() => {
 					removeEntry(index);
-				}}><CloseIcon /></span
+				}}><svelte:component this={CloseIcon} /></span
 			>
 		</div>
 	{/each}
-	<!-- svelte-ignore missing-declaration -->
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<span
 		class="control"
 		on:click|stopPropagation={() => {
 			addEntry({ value: 'hello friend', checked: true });
-		}}><PlusIcon /></span
+		}}><svelte:component this={PlusIcon} /></span
 	>
 </div>
 
