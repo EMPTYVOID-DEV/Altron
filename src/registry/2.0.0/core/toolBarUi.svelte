@@ -1,11 +1,11 @@
 <script>
-	import PlusIcon from '../icons/plusIcon.svelte';
-	import CloseIcon from '../icons/closeIcon.svelte';
 	import { fade } from 'svelte/transition';
 	import { elasticIn } from 'svelte/easing';
 	import { getContext } from 'svelte';
 	export let add;
 	const componentMap = getContext('componentMap');
+	const CloseIcon = componentMap.get('closeIcon');
+	const PlusIcon = componentMap.get('plusIcon');
 	let options = new Map([
 		['paragraph', componentMap.get('paragraphIcon')],
 		['header', componentMap.get('headerIcon')],
@@ -32,9 +32,9 @@
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<span on:click={() => (toggle = !toggle)} class="control">
 		{#if toggle}
-			<CloseIcon />
+			<svelte:component this={CloseIcon} />
 		{:else}
-			<PlusIcon />
+			<svelte:component this={PlusIcon} />
 		{/if}
 	</span>
 	{#if toggle}

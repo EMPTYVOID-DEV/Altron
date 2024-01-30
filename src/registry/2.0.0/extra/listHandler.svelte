@@ -1,7 +1,10 @@
 <script>
-	import CloseIcon from '../icons/closeIcon.svelte';
-	import PlusIcon from '../icons/plusIcon.svelte';
-	import Textarea from './textArea.svelte';
+	import { getContext } from 'svelte';
+	const componentMap = getContext('componentMap');
+	const CloseIcon = componentMap.get('closeIcon');
+	const PlusIcon = componentMap.get('plusIcon');
+	const Textarea = componentMap.get('textArea');
+
 	export let items;
 	export let updateEntry;
 	export let removeEntry;
@@ -12,7 +15,8 @@
 	<span class="header">List items</span>
 	{#each items as item, index}
 		<div class="itemEdit">
-			<Textarea
+			<svelte:component
+				this={Textarea}
 				width={90}
 				textContent={item}
 				textLevel={0}
@@ -20,18 +24,16 @@
 					updateEntry(index, text);
 				}}
 			/>
-			<!-- svelte-ignore missing-declaration -->
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<!-- svelte-ignore a11y-no-static-element-interactions -->
 			<span
 				class="control"
 				on:click|stopPropagation={() => {
 					removeEntry(index);
-				}}><CloseIcon /></span
+				}}><svelte:component this={CloseIcon} /></span
 			>
 		</div>
 	{/each}
-	<!-- svelte-ignore missing-declaration -->
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<span
@@ -39,7 +41,7 @@
 		on:click|stopPropagation={() => {
 			// default value
 			addEntry('hello friend');
-		}}><PlusIcon /></span
+		}}><svelte:component this={PlusIcon} /></span
 	>
 </div>
 
