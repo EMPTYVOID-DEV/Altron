@@ -1,5 +1,21 @@
 # altron
 
+## 2.0.0
+
+### Major Changes
+
+- 87cf735: changes
+
+  fixing menu issues
+  fixing ssr
+  fixing setting image and attachment source
+  events typing
+  validate data
+  export types
+  separate the non-logic components to a registry that get loaded on demand by the user using a cli.
+  faster load time
+  dynamic imports capabilities using an exported map of block dependencies.
+
 ## 1.2.1
 
 ### Patch Changes
