@@ -1,5 +1,11 @@
 # altron
 
+## 2.0.1
+
+### Patch Changes
+
+- c687d31: removing svelte-select from the dependencies
+
 ## 2.0.0
 
 ### Major Changes
