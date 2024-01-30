@@ -1,4 +1,5 @@
 <script>
+	// @ts-ignore
 	import { mimeToFileNameMap } from '@altron/altron/consts';
 	export let src;
 	export let title;
