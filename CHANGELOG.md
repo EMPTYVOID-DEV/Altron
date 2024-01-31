@@ -1,5 +1,11 @@
 # altron
 
+## 2.0.2
+
+### Patch Changes
+
+- 607caf7: fixing the package exports
+
 ## 2.0.1
 
 ### Patch Changes
