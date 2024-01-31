@@ -1,5 +1,11 @@
 # altron
 
+## 2.0.3
+
+### Patch Changes
+
+- d46ecde: fixing the package exports and typescript mapping
+
 ## 2.0.2
 
 ### Patch Changes
