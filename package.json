@@ -36,7 +36,7 @@
 		"format": "prettier --plugin-search-dir . --write ."
 	},
 	"exports": {
-		".": {
+		"./altron.svelte": {
 			"types": "./dist/components/core/main.svelte.d.ts",
 			"svelte": "./dist/components/core/main.svelte"
 		},
@@ -76,6 +76,16 @@
 		"vite": "^4.4.2"
 	},
 	"type": "module",
+	"typesVersions": {
+		">4.0": {
+			"altron.svelte": [
+				"./dist/components/core/main.svelte.d.ts"
+			],
+			"consts": [
+				"./dist/utils/consts.d.ts"
+			]
+		}
+	},
 	"dependencies": {
 		"nanoid": "^5.0.3"
 	}
