@@ -1,5 +1,11 @@
 # altron
 
+## 2.0.4
+
+### Patch Changes
+
+- d6903ff: fixing some global styles issues
+
 ## 2.0.3
 
 ### Patch Changes
