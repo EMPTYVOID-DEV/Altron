@@ -14,7 +14,7 @@
 		['quote', componentMap.get('closeQuoteIcon')],
 		['code', componentMap.get('codeIcon')],
 		['space', componentMap.get('spaceIcon')],
-		['checklist', componentMap.get('checkListIcon')],
+		['checklist', componentMap.get('checklistIcon')],
 		['attachment', componentMap.get('attachmentIcon')],
 		['embed', componentMap.get('embedIcon')]
 	]);
