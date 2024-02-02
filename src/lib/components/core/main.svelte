@@ -127,8 +127,7 @@
 	}
 </script>
 
-<div
-	class="main"
+<main
 	style:--primaryColor={primaryColor}
 	style:--secondaryColor={secondaryColor}
 	style:--errorColor={errorColor}
@@ -163,57 +162,48 @@
 		</div>
 		<ToolBar on:blockAdded on:afterEditing />
 	{/if}
-</div>
+</main>
 
 <style>
-	.main {
+	main {
 		display: flex;
 		flex-direction: column;
 	}
 
-	.main .blocks {
+	main .blocks {
 		display: flex;
 		width: 100%;
 		flex-direction: column;
 	}
-	.main :global(*) {
+	main :global(*) {
 		box-sizing: border-box;
 		margin: 0;
 		padding: 0;
 	}
-	.main :global(h1),
-	.main :global(h2),
-	.main :global(h3),
-	.main :global(h4) {
+	main :global(:where(h1, h2, h3, h4)) {
 		font-family: var(--headingFont);
 		font-weight: bold;
-		color: var(--textColor);
 		word-break: break-word;
 		white-space: pre-wrap;
 	}
-	.main :global(h1) {
+	main :global(h1) {
 		font-size: var(--h1);
 		line-height: var(--lh1);
 	}
-	.main :global(h2) {
+	main :global(h2) {
 		font-size: var(--h2);
 		line-height: var(--lh2);
 	}
-	.main :global(h3) {
+	main :global(h3) {
 		font-size: var(--h3);
 		line-height: var(--lh3);
 	}
-	.main :global(h4) {
+	main :global(h4) {
 		font-size: var(--h4);
 		line-height: var(--lh4);
 	}
 
-	.main :global(span),
-	.main :global(code),
-	.main :global(li),
-	.main :global(p),
-	.main :global(i),
-	.main :global(label) {
+	main :global(:where(label, code, span, li, p, i)) {
 		white-space: pre-wrap;
 		word-break: break-word;
 		font-family: var(--bodyFont);

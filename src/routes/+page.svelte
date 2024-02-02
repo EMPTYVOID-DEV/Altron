@@ -1,13 +1,12 @@
 <script lang="ts">
 	import Main from '$lib/components/core/main.svelte';
-	import type { ComponentType, SvelteComponent } from 'svelte';
-	export let data: { componentMap: Map<string, ComponentType<SvelteComponent>> };
+	import { componentMap } from '../registry/2.0.0/index';
 	let main: Main = null;
 </script>
 
 <div>
 	<Main
-		componentMap={data.componentMap}
+		{componentMap}
 		bind:this={main}
 		intialData={[{ id: '12', name: 'paragraph', data: { text: 'hi' } }]}
 		on:blockAdded={() => {
