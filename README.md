@@ -10,20 +10,34 @@
 
 You can check our [altron-site](https://altron.vercel.app). We have clear documentation with an example and a live testing route.
 
-### Note
+## Getting started
 
-The documentation has'nt been updated yet to match version 2.0.0 changes.It will be updated in few days.
+To use altron we need to follow the following steps.
 
-## Installation
-
-To kickstart your journey with **Altron**, install it via your preferred package manager:
+1-Installing altron core package
 
 ```bash
-npm install @altron/altron
-# or
-yarn add @altron/altron
-# or
 pnpm i @altron/altron
+```
+
+2-Loading blocks dependencies with the cli
+
+```bash
+pnpm dlx @altron/altron-cli
+```
+
+3-Importing the entry and componentMap
+
+The cli will create a map that links the component name with it svelte class.You need to import and pass it to altron entry as a prop.
+
+```Svelte
+
+<script>
+   import Altron from "@altron/altron/altron.svelte"
+   import { componentMap } from '$lib/components/altron/index';
+</script>
+
+<Altron {componentMap} />
 ```
 
 ## Contribution
@@ -32,4 +46,4 @@ We welcome contributions! If you find any issues or have suggestions for improve
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).Feel free to use or modify as needed!
+This project is licensed under the [MIT License](https://opensource.org/license/mit/).Feel free to use or modify as needed!

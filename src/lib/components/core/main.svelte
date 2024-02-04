@@ -26,7 +26,7 @@
 		description: 'You should enter a valid url for an embed , any source is accepted',
 		rules: []
 	};
-	export let intialData: dataBlock[] = [];
+	export let initialData: dataBlock[] = [];
 	export let componentMap: Map<string, ComponentType<SvelteComponent>> = new Map();
 	export let iframeSettings: IframeSettings = {};
 	export let attachmentTypes = '*';
@@ -85,7 +85,7 @@
 	setContext('editorId', nanoid(8));
 
 	// setting up stores
-	const data = createDataStore(validateData(intialData));
+	const data = createDataStore(validateData(initialData));
 	const workingBlock = createWorkingBlockStore();
 
 	// global set and get funhction
