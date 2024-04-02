@@ -1,5 +1,11 @@
 # altron
 
+## 2.0.5
+
+### Patch Changes
+
+- fbf5fa6: fixing a typo on the initialData prop name
+
 ## 2.0.4
 
 ### Patch Changes
