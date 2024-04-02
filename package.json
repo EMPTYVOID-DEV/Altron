@@ -21,7 +21,7 @@
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/Shinji13/Altron"
+		"url": "https://github.com/EMPTYVOID-DEV/Altron"
 	},
 	"scripts": {
 		"dev": "vite --host",

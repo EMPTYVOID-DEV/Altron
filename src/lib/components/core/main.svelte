@@ -8,6 +8,7 @@
 	import { get } from 'svelte/store';
 	import { nanoid } from 'nanoid';
 
+	// TODO:replace break-word with break-all
 	interface $$Events {
 		blockAdded: CustomEvent<{ id: string }>;
 		blockDeleted: CustomEvent<dataBlock>;
