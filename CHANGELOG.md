@@ -1,5 +1,11 @@
 # altron
 
+## 2.0.6
+
+### Patch Changes
+
+- c7edb2f: changing the repo url in package.json
+
 ## 2.0.5
 
 ### Patch Changes
