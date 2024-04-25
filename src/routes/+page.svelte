@@ -7,8 +7,8 @@
 <div>
 	<Main
 		{componentMap}
+		initialData={[{ name: 'paragraph', id: '8', data: { text: 'hi' } }]}
 		bind:this={main}
-		intialData={[{ id: '12', name: 'paragraph', data: { text: 'hi' } }]}
 		on:blockAdded={() => {
 			console.log(main.getData());
 		}}

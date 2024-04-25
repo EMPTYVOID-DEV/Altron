@@ -2,8 +2,10 @@
 	import { fade } from 'svelte/transition';
 	import { elasticIn } from 'svelte/easing';
 	import { getContext } from 'svelte';
+
 	export let add;
 	const componentMap = getContext('componentMap');
+	const excludeBlocks = getContext('excludedBlocks');
 	const CloseIcon = componentMap.get('closeIcon');
 	const PlusIcon = componentMap.get('plusIcon');
 	let options = new Map([
@@ -20,9 +22,13 @@
 	]);
 	options = filterOptions(options);
 	let toggle = true;
+	// here we re removing the options without icons (not loaded) also the excluded onces
+
 	function filterOptions(map) {
 		const entries = [...map];
-		const filteredEntrier = entries.filter((value) => value[1] != undefined);
+		const filteredEntrier = entries.filter(
+			(value) => value[1] != undefined && !excludeBlocks.find((el) => el == value[0])
+		);
 		return new Map(filteredEntrier);
 	}
 </script>

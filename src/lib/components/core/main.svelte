@@ -1,14 +1,18 @@
 <script lang="ts">
 	import { SvelteComponent, setContext, type ComponentType } from 'svelte';
 	import ToolBar from './toolBar.svelte';
-	import type { IframeSettings, dataBlock } from '../../utils/types';
+	import type { IframeSettings, blocks, dataBlock } from '../../utils/types';
 	import ViewMode from './viewMode.svelte';
 	import EditMode from './editMode.svelte';
 	import { createDataStore, createWorkingBlockStore } from '../../utils/stores';
 	import { get } from 'svelte/store';
 	import { nanoid } from 'nanoid';
 
-	// TODO:replace break-word with break-all
+	/**
+	 * TODO:replace break-word with break-all
+	 * TODO:add exclude blocks
+	 * */
+
 	interface $$Events {
 		blockAdded: CustomEvent<{ id: string }>;
 		blockDeleted: CustomEvent<dataBlock>;
@@ -27,6 +31,7 @@
 		description: 'You should enter a valid url for an embed , any source is accepted',
 		rules: []
 	};
+	export let excludedBlocks: blocks[] = [];
 	export let initialData: dataBlock[] = [];
 	export let componentMap: Map<string, ComponentType<SvelteComponent>> = new Map();
 	export let iframeSettings: IframeSettings = {};
@@ -73,6 +78,9 @@
 	setContext('processEmbedSrcs', processEmbedSrcs);
 	setContext('acceptedEmbedSrcs', acceptedEmbedSrcs);
 	setContext('iframeSettings', iframeSettings);
+
+	// excluded blocks
+	setContext('excludedBlocks', excludedBlocks);
 
 	//setting attachment types
 	setContext('attachmentType', attachmentTypes);
