@@ -1,5 +1,11 @@
 # altron
 
+## 2.1.0
+
+### Minor Changes
+
+- cc6b4fc: adding excluded blocks main prop export which will limit the user options but won't affect the rendered blocks
+
 ## 2.0.6
 
 ### Patch Changes
