@@ -33,6 +33,11 @@
 	};
 	export let excludedBlocks: blocks[] = [];
 	export let initialData: dataBlock[] = [];
+	// by default -1 means no limits
+	export let sizeLimits = {
+		imgs: -1,
+		attachments: -1
+	};
 	export let componentMap: Map<string, ComponentType<SvelteComponent>> = new Map();
 	export let iframeSettings: IframeSettings = {};
 	export let attachmentTypes = '*';
@@ -73,6 +78,9 @@
 	];
 	// component context
 	setContext('componentMap', componentMap);
+
+	// size limits
+	setContext('sizeLimits', sizeLimits);
 
 	// embeds context
 	setContext('processEmbedSrcs', processEmbedSrcs);

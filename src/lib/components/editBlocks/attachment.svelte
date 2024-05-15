@@ -14,6 +14,10 @@
 	const input = componentMap.get('input');
 	const upload = componentMap.get('upload');
 	const view = componentMap.get('viewAttachment');
+	const sizeLimits = getContext('sizeLimits') as {
+		imgs: number;
+		attachments: number;
+	};
 	const attachmentTypes: string = getContext('attachmentType');
 	const updateData: updateDataType = getContext('updateData');
 	function checkType(type: string) {
@@ -24,6 +28,17 @@
 			if (testType[0] == typeArray[0] && (testType[1] == '*' || testType[1] == typeArray[1]))
 				return true;
 		}
+		return false;
+	}
+
+	/**
+	 * sizelimit can be -1 to indicate there is no size limit also it in mega bytes.
+	 */
+
+	function checkSize(sizeInBytes: number) {
+		const sizeInMega = sizeInBytes / Math.pow(2, 20);
+		if (sizeLimits.attachments == -1) return true;
+		if (sizeInMega <= sizeLimits.attachments) return true;
 		return false;
 	}
 </script>
@@ -47,7 +62,7 @@
 			currentFileName={content.file ? content.file.name : 'not selected'}
 			changeHandler={(file) => {
 				updateData(id, (el) => {
-					if (el.name == 'attachment' && checkType(file.type)) {
+					if (el.name == 'attachment' && checkType(file.type) && checkSize(file.size)) {
 						URL.revokeObjectURL(el.data.src);
 						el.data.file = file;
 						el.data.type = file.type;

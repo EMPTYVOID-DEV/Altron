@@ -6,6 +6,7 @@
 
 <div>
 	<Main
+		sizeLimits={{ attachments: 1.2, imgs: 1.2 }}
 		{componentMap}
 		initialData={[{ name: 'paragraph', id: '8', data: { text: 'hi' } }]}
 		bind:this={main}
