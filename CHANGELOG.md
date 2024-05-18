@@ -1,5 +1,11 @@
 # altron
 
+## 2.2.1
+
+### Patch Changes
+
+- fa1df40: Using structured clone with default value in add function to make sure list block dont share the same reference
+
 ## 2.2.0
 
 ### Minor Changes
