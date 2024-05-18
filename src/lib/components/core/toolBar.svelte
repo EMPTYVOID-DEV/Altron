@@ -25,7 +25,7 @@
 		newData: dataBlock[] | ((prev: dataBlock[]) => dataBlock[])
 	) => void;
 	function add(name: blocks) {
-		const defaultValue = defaultData.get(name);
+		const defaultValue = structuredClone(defaultData.get(name));
 		const id = nanoid(8);
 		setData((prev) => {
 			prev.push({ id, name, data: { ...defaultValue } });
