@@ -1,5 +1,11 @@
 # altron
 
+## 3.0.0
+
+### Major Changes
+
+- fb99208: V3 changeset
+
 ## 2.2.1
 
 ### Patch Changes
