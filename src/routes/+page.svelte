@@ -6,16 +6,11 @@
 
 <div>
 	<Main
-		sizeLimits={{ attachments: 1.2, imgs: 1.2 }}
+		attachmentTypes="image/*"
+		sizeLimits={{ attachments: 1.8, imgs: 1.8 }}
 		{componentMap}
 		initialData={[{ name: 'paragraph', id: '8', data: { text: 'hi' } }]}
 		bind:this={main}
-		on:blockAdded={() => {
-			console.log(main.getData());
-		}}
-		on:blockMoved={(e) => {
-			console.log(e.detail);
-		}}
 		codeBlockLanguages={['c', 'fortant']}
 	/>
 </div>

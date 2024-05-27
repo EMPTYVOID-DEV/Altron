@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { SvelteComponent, setContext, type ComponentType } from 'svelte';
+	import { SvelteComponent, createEventDispatcher, setContext, type ComponentType } from 'svelte';
 	import ToolBar from './toolBar.svelte';
 	import type { IframeSettings, blocks, dataBlock } from '../../utils/types';
 	import ViewMode from './viewMode.svelte';
@@ -7,11 +7,6 @@
 	import { createDataStore, createWorkingBlockStore } from '../../utils/stores';
 	import { get } from 'svelte/store';
 	import { nanoid } from 'nanoid';
-
-	/**
-	 * TODO:replace break-word with break-all
-	 * TODO:add exclude blocks
-	 * */
 
 	interface $$Events {
 		blockAdded: CustomEvent<{ id: string }>;
@@ -42,30 +37,6 @@
 	export let iframeSettings: IframeSettings = {};
 	export let attachmentTypes = '*';
 	export let viewMode = false;
-	export let headerFont = `Verdana, sans-serif`;
-	export let bodyFont = `Helvetica, sans-serif`;
-	export let primaryColor = '#3366FF';
-	export let secondaryColor = '#1eeb36';
-	export let errorColor = '#ff3333';
-	export let textColor = '#121212';
-	export let bgColor = '#ffffff';
-	export let blocksGap = '10px';
-	export let marginTop = '10px';
-	export let marginBottom = '10px';
-	export let marginLeft = '10px';
-	export let marginRight = '10px';
-	export let width = '95%';
-	export let h1 = 'clamp(1.8rem, calc(1.8rem + ((1vw - 0.48rem) * 0.9722)), 2.1rem)';
-	export let h2 = 'clamp(1.5rem, calc(1.5rem + ((1vw - 0.48rem) * 0.9722)), 1.8rem)';
-	export let h3 = 'clamp(1.2rem, calc(1.2rem + ((1vw - 0.48rem) * 0.9722)), 1.5rem)';
-	export let h4 = 'clamp(1.125rem, calc(1.15rem + ((1vw - 0.48rem) * 0.3472)), 1.2rem)';
-	export let body = 'clamp(1rem, calc(1rem + ((1vw - 0.48rem) * 0.1736)), 1.125rem)';
-	export let small = 'clamp(0.875rem, calc(0.875rem + ((1vw - 0.48rem) * 0.1736)), 1rem)';
-	export let lh1 = '1.3';
-	export let lh2 = '1.35';
-	export let lh3 = '1.4';
-	export let lh4 = '1.5';
-	export let lbody = '1.6';
 	export let codeBlockLanguages: string[] = [
 		'javascript',
 		'java',
@@ -76,6 +47,8 @@
 		'python',
 		'csharp'
 	];
+
+	const eventDispatcher = createEventDispatcher();
 	// component context
 	setContext('componentMap', componentMap);
 
@@ -107,7 +80,8 @@
 
 	// global set and get funhction
 	setContext('setData', setData);
-	setContext('getData', getData);
+	setContext('getAllBlocks', getAllBlocks);
+	setContext('getBlock', getBlock);
 	setContext('getWorkingBlock', getWorkingBlock);
 	setContext('getEditorId', getEditorId);
 
@@ -122,10 +96,14 @@
 		return data;
 	}
 
-	export function getData(id?: string) {
+	export function getAllBlocks() {
 		const currentData = get(data);
-		if (id) return currentData.find((el) => el.id == id);
 		return currentData;
+	}
+
+	export function getBlock(id: string) {
+		const currentData = get(data);
+		return currentData.find((el) => el.id == id);
 	}
 
 	export function getEditorId() {
@@ -142,42 +120,37 @@
 	export function getWorkingBlock() {
 		return get(workingBlock);
 	}
+
+	function removeBadBlocks(e: { detail: { id: string } }) {
+		const currentData = get(data);
+		const block = currentData.find((el) => el.id == e.detail.id);
+		if (
+			(block.name == 'embed' || block.name == 'attachment' || block.name == 'image') &&
+			block.data.src == ''
+		) {
+			data.set(currentData.filter((el) => el.id != e.detail.id));
+		} else {
+			eventDispatcher('afterEditing', { id: e.detail.id });
+		}
+	}
 </script>
 
-<main
-	style:--primaryColor={primaryColor}
-	style:--secondaryColor={secondaryColor}
-	style:--errorColor={errorColor}
-	style:--textColor={textColor}
-	style:--bgColor={bgColor}
-	style:--headingFont={headerFont}
-	style:--bodyFont={bodyFont}
-	style:--h1={h1}
-	style:--h2={h2}
-	style:--h3={h3}
-	style:--h4={h4}
-	style:--body={body}
-	style:--small={small}
-	style:--lh1={lh1}
-	style:--lh2={lh2}
-	style:--lh3={lh3}
-	style:--lh4={lh4}
-	style:--lbody={lbody}
-	style:margin-right={marginRight}
-	style:margin-left={marginLeft}
-	style:margin-top={marginTop}
-	style:margin-bottom={marginBottom}
-	style:width
->
+<main>
 	{#if viewMode}
-		<div class="blocks" style:gap={blocksGap}>
+		<div class="blocks">
 			<ViewMode />
 		</div>
 	{:else}
-		<div class="blocks" style:gap={blocksGap}>
-			<EditMode on:blockDeleted on:blockMoved on:editing on:focusing on:afterEditing />
+		<div class="blocks">
+			<EditMode
+				on:blockDeleted
+				on:blockMoved
+				on:editing
+				on:focusing
+				on:afterEditing={removeBadBlocks}
+			/>
 		</div>
-		<ToolBar on:blockAdded on:afterEditing />
+		<ToolBar on:blockAdded on:afterEditing={removeBadBlocks} />
 	{/if}
 </main>
 
@@ -185,12 +158,35 @@
 	main {
 		display: flex;
 		flex-direction: column;
+		width: var(--width, 95%);
+		margin-top: var(--marging-top, 0);
+		margin-left: var(--marging-left, 0);
+		margin-bottom: var(--margin-bottom, 0);
+		margin-right: var(--margin-right, 0);
+		--primaryColor: var(--primary-color, #3366ff);
+		--secondaryColor: var(--secondary-color, #1eeb36);
+		--textColor: var(--text-color, #121212);
+		--bgColor: var(--bg-color, #ffffff);
+		--headingFont: var(--heading-font, 'Verdana, sans-serif');
+		--bodyFont: var(--body-font, 'Helvetica, sans-serif');
+		--h1: var(--h1-size, clamp(1.8rem, calc(1.8rem + ((1vw - 0.48rem) * 0.9722)), 2.1rem));
+		--h2: var(--h1-size, clamp(1.5rem, calc(1.5rem + ((1vw - 0.48rem) * 0.9722)), 1.8rem));
+		--h3: var(--h3-size, clamp(1.2rem, calc(1.2rem + ((1vw - 0.48rem) * 0.9722)), 1.5rem));
+		--h4: var(--h4-size, clamp(1.125rem, calc(1.15rem + ((1vw - 0.48rem) * 0.3472)), 1.2rem));
+		--body: var(--body-size, clamp(1rem, calc(1rem + ((1vw - 0.48rem) * 0.1736)), 1.125rem));
+		--small: var(--small-size, clamp(0.875rem, calc(0.875rem + ((1vw - 0.48rem) * 0.1736)), 1rem));
+		--lh1: var(--lh1-size, 1.3);
+		--lh2: var(--lh2-size, 1.35);
+		--lh3: var(--lh3-size, 1.4);
+		--lh4: var(--lh4-size, 1.5);
+		--lbody: var(--lbody-size, 1.6);
 	}
 
 	main .blocks {
 		display: flex;
 		width: 100%;
 		flex-direction: column;
+		gap: var(--block-gap, 10px);
 	}
 	main :global(*) {
 		box-sizing: border-box;
@@ -200,7 +196,7 @@
 	main :global(:where(h1, h2, h3, h4)) {
 		font-family: var(--headingFont);
 		font-weight: bold;
-		word-break: break-word;
+		word-break: break-all;
 		white-space: pre-wrap;
 	}
 	main :global(h1) {
@@ -222,7 +218,7 @@
 
 	main :global(:where(label, code, span, li, p, i)) {
 		white-space: pre-wrap;
-		word-break: break-word;
+		word-break: break-all;
 		font-family: var(--bodyFont);
 		font-size: var(--body);
 		font-weight: 400;

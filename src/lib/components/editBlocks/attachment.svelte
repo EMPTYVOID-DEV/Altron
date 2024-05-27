@@ -59,7 +59,7 @@
 			this={upload}
 			fileType={attachmentTypes}
 			label="Attachment source"
-			currentFileName={content.file ? content.file.name : 'not selected'}
+			currentFileName={content.file ? content.file.name : ''}
 			changeHandler={(file) => {
 				updateData(id, (el) => {
 					if (el.name == 'attachment' && checkType(file.type) && checkSize(file.size)) {

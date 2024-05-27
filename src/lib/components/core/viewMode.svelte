@@ -1,9 +1,9 @@
 <script lang="ts">
 	import type { blocks, dataBlock } from '../../utils/types';
 	import { getContext, type ComponentType, SvelteComponent } from 'svelte';
-	const getData = getContext('getData') as () => dataBlock[];
+	const getAllBlocks = getContext('getAllBlocks') as () => dataBlock[];
 	const componentMap = getContext('componentMap') as Map<string, ComponentType<SvelteComponent>>;
-	const data = getData();
+	const data = getAllBlocks();
 
 	const viewsMap = new Map<blocks, ComponentType>([
 		['code', componentMap.get('viewCode')],

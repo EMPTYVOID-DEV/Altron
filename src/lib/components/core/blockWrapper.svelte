@@ -38,6 +38,7 @@
 
 <div
 	class="blockWrapper"
+	id={dataBlock.id}
 	data-blockid={dataBlock.id}
 	data-editorid={editorId}
 	data-blocktype={dataBlock.name}
