@@ -1,5 +1,11 @@
 # altron
 
+## 3.0.1
+
+### Patch Changes
+
+- 2ae1b5a: fixing css variables naming
+
 ## 3.0.0
 
 ### Major Changes
