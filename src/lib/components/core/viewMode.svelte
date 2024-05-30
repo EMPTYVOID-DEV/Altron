@@ -20,5 +20,7 @@
 </script>
 
 {#each data as block}
-	<svelte:component this={viewsMap.get(block.name)} {...block.data} />
+	<div class="block" id={block.id}>
+		<svelte:component this={viewsMap.get(block.name)} {...block.data} />
+	</div>
 {/each}
