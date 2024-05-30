@@ -1,5 +1,11 @@
 # altron
 
+## 3.0.2
+
+### Patch Changes
+
+- df419dd: adding block wrapper with an id in viewMode
+
 ## 3.0.1
 
 ### Patch Changes
