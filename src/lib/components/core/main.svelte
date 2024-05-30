@@ -159,8 +159,8 @@
 		display: flex;
 		flex-direction: column;
 		width: var(--width, 95%);
-		margin-top: var(--marging-top, 0);
-		margin-left: var(--marging-left, 0);
+		margin-top: var(--margin-top, 0);
+		margin-left: var(--margin-left, 0);
 		margin-bottom: var(--margin-bottom, 0);
 		margin-right: var(--margin-right, 0);
 		--primaryColor: var(--primary-color, #3366ff);
