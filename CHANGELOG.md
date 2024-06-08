@@ -1,5 +1,11 @@
 # altron
 
+## 3.0.3
+
+### Patch Changes
+
+- ea221a2: removing white-space and word-break from global styles of different elements
+
 ## 3.0.2
 
 ### Patch Changes
