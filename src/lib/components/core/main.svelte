@@ -196,8 +196,6 @@
 	main :global(:where(h1, h2, h3, h4)) {
 		font-family: var(--headingFont);
 		font-weight: bold;
-		word-break: break-all;
-		white-space: pre-wrap;
 	}
 	main :global(h1) {
 		font-size: var(--h1);
@@ -217,8 +215,6 @@
 	}
 
 	main :global(:where(label, code, span, li, p, i)) {
-		white-space: pre-wrap;
-		word-break: break-all;
 		font-family: var(--bodyFont);
 		font-size: var(--body);
 		font-weight: 400;

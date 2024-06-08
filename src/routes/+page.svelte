@@ -6,7 +6,6 @@
 
 <div>
 	<Main
-		viewMode
 		attachmentTypes="image/*"
 		sizeLimits={{ attachments: 1.8, imgs: 1.8 }}
 		{componentMap}
