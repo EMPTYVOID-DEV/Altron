@@ -5,25 +5,16 @@
 		"moduleResolution": "Node",
 		"module": "es2020",
 		"lib": ["es2020", "DOM"],
-		"target": "es2019",
-
-		/**
-			  svelte-preprocess cannot figure out whether you have a value or a type, so tell TypeScript
-			  to enforce using \`import type\` instead of \`import\` for Types.
-			  */
+		"target": "es2019",		
 		"isolatedModules": true,
-		"resolveJsonModule": true,
-		/**
-			  To have warnings/errors of the Svelte compiler at the correct position,
-			  enable source maps by default.
-			  */
+		"resolveJsonModule": true,		
 		"sourceMap": true,
 		"esModuleInterop": true,
 		"declaration": true,
 		"skipLibCheck": true,
 		"forceConsistentCasingInFileNames": false,
 		"baseUrl": ".",
-		"allowJs": false,
+		"allowJs": true,
 		"checkJs": true,
 		"paths": {
 			"$lib/*": ["src/lib/*"],
