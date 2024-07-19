@@ -1,10 +1,12 @@
 <script>
-	//@ts-ignore
 	import Select from 'svelte-select';
-	export let label;
-	export let elements;
-	export let changeHandler;
-	export let preSelected;
+	/**
+	 * @typedef {{value:string,label:string}} element
+	 */
+	/**
+	 * @type {{label:string,changeHandler:(detail:element)=>void,preSelected:element,elements:element[]}}
+	 */
+	let { label, elements, changeHandler, preSelected } = $props();
 </script>
 
 <div class="select">

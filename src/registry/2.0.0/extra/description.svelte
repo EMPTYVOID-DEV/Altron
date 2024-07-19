@@ -1,6 +1,8 @@
 <script>
-	export let title;
-	export let description;
+	/**
+	 * @type {{title:string,description:string}}
+	 */
+	let { description, title } = $props();
 </script>
 
 <div class="description">

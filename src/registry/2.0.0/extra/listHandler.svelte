@@ -1,14 +1,19 @@
 <script>
 	import { getContext } from 'svelte';
+
+	/**
+	 * @type {Map<string,import("svelte").Component>}
+	 */
 	const componentMap = getContext('componentMap');
 	const CloseIcon = componentMap.get('closeIcon');
 	const PlusIcon = componentMap.get('plusIcon');
 	const Textarea = componentMap.get('textArea');
 
-	export let items;
-	export let updateEntry;
-	export let removeEntry;
-	export let addEntry;
+	/**
+	 * @type {{ items:string[],updateEntry:(index: number, text: string)=>void,removeEntry:(index: number)=>void ,
+     addEntry :(val:string)=>void}}
+	 */
+	let { addEntry, items, removeEntry, updateEntry } = $props();
 </script>
 
 <div class="itemsEdit">
@@ -24,22 +29,19 @@
 					updateEntry(index, text);
 				}}
 			/>
-			<!-- svelte-ignore a11y-click-events-have-key-events -->
-			<!-- svelte-ignore a11y-no-static-element-interactions -->
 			<span
 				class="control"
-				on:click|stopPropagation={() => {
+				onclick={(e) => {
+					e.stopPropagation();
 					removeEntry(index);
 				}}><svelte:component this={CloseIcon} /></span
 			>
 		</div>
 	{/each}
-	<!-- svelte-ignore a11y-click-events-have-key-events -->
-	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<span
 		class="control"
-		on:click|stopPropagation={() => {
-			// default value
+		onclick={(e) => {
+			e.stopPropagation();
 			addEntry('hello friend');
 		}}><svelte:component this={PlusIcon} /></span
 	>

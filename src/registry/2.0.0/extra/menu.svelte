@@ -1,13 +1,18 @@
 <script>
-	import { createEventDispatcher, getContext } from 'svelte';
-	export let close;
+	import { getContext } from 'svelte';
+
+	/**@type {{close:Function}}*/
+	let { close } = $props();
+
+	/**
+	 * @type {Map<string,import("svelte").Component>}
+	 */
 	const componentMap = getContext('componentMap');
 	const CloseIcon = componentMap.get('closeIcon');
 	const MenuIcon = componentMap.get('menuIcon');
 	const UpIcon = componentMap.get('upIcon');
 	const DeleteIcon = componentMap.get('deleteIcon');
 	const DownIcon = componentMap.get('downIcon');
-	const eventDispatcher = createEventDispatcher();
 	const setData = getContext('setData');
 	const workingBlock = getContext('getWorkingBlock')();
 	let options = [
@@ -33,16 +38,13 @@
 			}
 		}
 	];
+
 	function move(up) {
 		setData((prev) => {
 			const index = prev.findIndex((val) => val.id == workingBlock.id);
 			const val = prev.splice(index, 1)[0];
 			prev.splice(up ? index - 1 : index + 1, 0, val);
 			return prev;
-		});
-		eventDispatcher('blockMoved', {
-			id: workingBlock.id,
-			up
 		});
 	}
 
@@ -57,8 +59,6 @@
 			});
 			return newDataBlocks;
 		});
-
-		eventDispatcher('blockDeleted', deletedBlock);
 	}
 </script>
 
@@ -68,11 +68,9 @@
 		<span>Menu</span>
 	</div>
 	{#each options as option (option.label)}
-		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<!-- svelte-ignore a11y-no-static-element-interactions -->
 		<div
 			class="option"
-			on:click={() => {
+			onclick={() => {
 				option.cb();
 				close();
 			}}
@@ -81,11 +79,9 @@
 			<span>{option.label}</span>
 		</div>
 	{/each}
-	<!-- svelte-ignore a11y-click-events-have-key-events -->
-	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<div
 		class="option"
-		on:click={() => {
+		onclick={() => {
 			close();
 		}}
 	>

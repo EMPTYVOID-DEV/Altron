@@ -1,6 +1,4 @@
 <script>
-	import { mimeToFileNameMap } from '@altron/altron/consts';
-	// @ts-ignore
 	export let src;
 	export let title;
 	export let type;
@@ -12,7 +10,7 @@
 
 <div class="attachment">
 	<div class="info">
-		<span class="type">{mimeToFileNameMap.get(type) || 'file'}</span>
+		<span class="type">file</span>
 		<div class="subInfo">
 			<span>{title}</span>
 			<span>{(size / Math.pow(10, 6)).toString().substring(0, 5)} Mb</span>

@@ -1,10 +1,18 @@
 <script>
 	import { getContext } from 'svelte';
-	export let updateEntry;
-	export let removeEntry;
-	export let addEntry;
-	export let checkEntry;
-	export let items;
+
+	/**
+	 * @typedef {{value:string,checked:boolean}} item
+	 */
+
+	/**
+	 * @type {{ items:item[],updateEntry:(index: number, text: string)=>void,removeEntry:(index: number)=>void ,
+     addEntry :(item:item)=>void , checkEntry:(index:number,checked:boolean)=>void}}
+	 */
+	let { addEntry, items, removeEntry, updateEntry, checkEntry } = $props();
+	/**
+	 * @type {Map<string,import("svelte").Component>}
+	 */
 	const componentMap = getContext('componentMap');
 	const CloseIcon = componentMap.get('closeIcon');
 	const PlusIcon = componentMap.get('plusIcon');
@@ -18,7 +26,7 @@
 			<input
 				type="checkbox"
 				bind:checked={item.checked}
-				on:change={(e) => {
+				onchange={(e) => {
 					checkEntry(index, e.currentTarget.checked);
 				}}
 			/>
@@ -31,21 +39,20 @@
 					updateEntry(index, text);
 				}}
 			/>
-			<!-- svelte-ignore a11y-click-events-have-key-events -->
-			<!-- svelte-ignore a11y-no-static-element-interactions -->
+
 			<span
 				class="control"
-				on:click|stopPropagation={() => {
+				onclick={(e) => {
+					e.stopPropagation();
 					removeEntry(index);
 				}}><svelte:component this={CloseIcon} /></span
 			>
 		</div>
 	{/each}
-	<!-- svelte-ignore a11y-click-events-have-key-events -->
-	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<span
 		class="control"
-		on:click|stopPropagation={() => {
+		onclick={(e) => {
+			e.stopPropagation();
 			addEntry({ value: 'hello friend', checked: true });
 		}}><svelte:component this={PlusIcon} /></span
 	>
