@@ -5,15 +5,15 @@
 	import { nanoid } from 'nanoid';
 	const languages = getContext('languages');
 	const defaultData = new Map<blocks, any>([
-		['paragraph', { text: 'hello friend' }],
-		['image', { file: null, caption: 'image', src: '' }],
-		['code', { text: 'console.log("hello friend")', lang: languages[0] }],
-		['quote', { text: 'hello friend', owner: 'me' }],
-		['header', { text: 'hello friend', level: 4 }],
-		['list', { items: ['hello friend'], type: 'ordered' }],
-		['space', { size: 24 }],
-		['checklist', { items: [{ value: 'hello friend', checked: true }] }],
-		['attachment', { file: null, title: 'my attachment', size: 0, src: '', type: '' }],
+		['paragraph', { text: '' }],
+		['image', { file: null, caption: '', src: '' }],
+		['code', { text: '', lang: languages[0] }],
+		['quote', { text: '', owner: '' }],
+		['header', { text: '', level: 4 }],
+		['list', { items: [], type: 'ordered' }],
+		['space', { size: 0 }],
+		['checklist', { items: [] }],
+		['attachment', { file: null, title: '', size: 0, src: '', type: '' }],
 		['embed', { src: '' }]
 	]);
 	const componentMap = getContext('componentMap') as Map<string, ComponentType<SvelteComponent>>;

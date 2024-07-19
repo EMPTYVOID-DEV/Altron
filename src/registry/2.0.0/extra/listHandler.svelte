@@ -1,19 +1,14 @@
 <script>
 	import { getContext } from 'svelte';
-
-	/**
-	 * @type {Map<string,import("svelte").Component>}
-	 */
 	const componentMap = getContext('componentMap');
 	const CloseIcon = componentMap.get('closeIcon');
 	const PlusIcon = componentMap.get('plusIcon');
 	const Textarea = componentMap.get('textArea');
 
-	/**
-	 * @type {{ items:string[],updateEntry:(index: number, text: string)=>void,removeEntry:(index: number)=>void ,
-     addEntry :(val:string)=>void}}
-	 */
-	let { addEntry, items, removeEntry, updateEntry } = $props();
+	export let items;
+	export let updateEntry;
+	export let removeEntry;
+	export let addEntry;
 </script>
 
 <div class="itemsEdit">
@@ -31,7 +26,7 @@
 			/>
 			<span
 				class="control"
-				onclick={(e) => {
+				on:click={(e) => {
 					e.stopPropagation();
 					removeEntry(index);
 				}}><svelte:component this={CloseIcon} /></span
@@ -40,7 +35,7 @@
 	{/each}
 	<span
 		class="control"
-		onclick={(e) => {
+		on:click={(e) => {
 			e.stopPropagation();
 			addEntry('hello friend');
 		}}><svelte:component this={PlusIcon} /></span
@@ -71,8 +66,7 @@
 			0 0 5px var(--secondaryColor);
 	}
 	.itemsEdit .header {
-		margin-left: 10px;
-		font-weight: bold;
+		font-weight: 600;
 		color: var(--textColor);
 		font-size: var(--small);
 	}

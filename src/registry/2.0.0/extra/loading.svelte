@@ -1,5 +1,5 @@
 <script>
-	let { visible = false } = $props();
+	export let visible = false;
 </script>
 
 {#if visible}

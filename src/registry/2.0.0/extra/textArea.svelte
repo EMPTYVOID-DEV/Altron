@@ -1,8 +1,9 @@
 <script>
-	/**
-	 * @type {{textContent:string,textLevel: 0 | 1 | 2 | 3 | 4,label:string,width:number,changeHandler:(val:string)=>void}}
-	 */
-	let { changeHandler, textContent, textLevel, label, width } = $props();
+	export let changeHandler;
+	export let textContent;
+	export let textLevel;
+	export let label = '';
+	export let width = 95;
 </script>
 
 <div class="textArea" style:width={`${width}%`}>
@@ -15,7 +16,7 @@
 		class="editableArea"
 		contenteditable="true"
 		bind:textContent
-		oninput={() => {
+		on:input={() => {
 			changeHandler(textContent);
 		}}
 	>
@@ -30,7 +31,7 @@
 		gap: 6px;
 	}
 	.textArea > .header {
-		font-weight: bold;
+		font-weight: 600;
 		color: var(--textColor);
 		font-size: var(--small);
 	}

@@ -121,13 +121,24 @@
 		return get(workingBlock);
 	}
 
+	function isEmptyBlock(block: dataBlock) {
+		const srcBlocks = ['embed', 'image', 'attachment'] as const;
+		const listBlocks = ['checklist', 'list'] as const;
+		const textBlocks = ['code', 'quote', 'paragraph', 'header'] as const;
+		for (let srcBlock of srcBlocks)
+			if (block.name == srcBlock && block.data.src === '') return true;
+		for (let listBlock of listBlocks)
+			if (block.name == listBlock && block.data.items.length == 0) return true;
+		for (let textBlock of textBlocks)
+			if (block.name == textBlock && block.data.text === '') return true;
+		if (block.name == 'space' && block.data.size == 0) return true;
+		return false;
+	}
+
 	function removeBadBlocks(e: { detail: { id: string } }) {
 		const currentData = get(data);
 		const block = currentData.find((el) => el.id == e.detail.id);
-		if (
-			(block.name == 'embed' || block.name == 'attachment' || block.name == 'image') &&
-			block.data.src == ''
-		) {
+		if (isEmptyBlock(block)) {
 			data.set(currentData.filter((el) => el.id != e.detail.id));
 		} else {
 			eventDispatcher('afterEditing', { id: e.detail.id });

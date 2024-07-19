@@ -1,14 +1,11 @@
 <script>
 	import { getContext } from 'svelte';
-	/**
-	 * @type {Map<string,import("svelte").Component>}
-	 */
+	export let changeHandler;
+	export let label = '';
+	export let fileType = '*';
+	export let currentFileName = 'default.png';
 	const componentMap = getContext('componentMap');
 	const UploadIcon = componentMap.get('uploadIcon');
-	/**
-	 * @type {{label:string,fileType:string,currentFileName:string,changeHandler:(file:File)=>void}}
-	 */
-	let { changeHandler, label = '', fileType = '*', currentFileName = 'default.png' } = $props();
 </script>
 
 <div class="input-container">
@@ -18,7 +15,7 @@
 		id="custom-input"
 		class="custom-input"
 		accept={fileType}
-		onchange={(e) => {
+		on:change={(e) => {
 			const file = e.currentTarget.files[0];
 			changeHandler(file);
 		}}

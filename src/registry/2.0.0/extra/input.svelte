@@ -1,8 +1,8 @@
 <script>
-	/**
-	 * @type {{value:string,label:string,type:"text"|"number",changeHandler:(val:string)=>void}}
-	 */
-	let { value, label, type, changeHandler } = $props();
+	export let value = '';
+	export let label = '';
+	export let type = 'text';
+	export let changeHandler;
 </script>
 
 <div class="input-container">
@@ -13,7 +13,7 @@
 			{value}
 			placeholder="Enter the {label.toLowerCase()}"
 			class="custom-input"
-			oninput={(e) => changeHandler(e.currentTarget.value)}
+			on:input={(e) => changeHandler(e.currentTarget.value)}
 		/>
 	</div>
 </div>

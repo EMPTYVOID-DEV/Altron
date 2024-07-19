@@ -1,18 +1,10 @@
 <script>
 	import { getContext } from 'svelte';
-
-	/**
-	 * @typedef {{value:string,checked:boolean}} item
-	 */
-
-	/**
-	 * @type {{ items:item[],updateEntry:(index: number, text: string)=>void,removeEntry:(index: number)=>void ,
-     addEntry :(item:item)=>void , checkEntry:(index:number,checked:boolean)=>void}}
-	 */
-	let { addEntry, items, removeEntry, updateEntry, checkEntry } = $props();
-	/**
-	 * @type {Map<string,import("svelte").Component>}
-	 */
+	export let updateEntry;
+	export let removeEntry;
+	export let addEntry;
+	export let checkEntry;
+	export let items;
 	const componentMap = getContext('componentMap');
 	const CloseIcon = componentMap.get('closeIcon');
 	const PlusIcon = componentMap.get('plusIcon');
@@ -26,7 +18,7 @@
 			<input
 				type="checkbox"
 				bind:checked={item.checked}
-				onchange={(e) => {
+				on:change={(e) => {
 					checkEntry(index, e.currentTarget.checked);
 				}}
 			/>
@@ -39,10 +31,9 @@
 					updateEntry(index, text);
 				}}
 			/>
-
 			<span
 				class="control"
-				onclick={(e) => {
+				on:click={(e) => {
 					e.stopPropagation();
 					removeEntry(index);
 				}}><svelte:component this={CloseIcon} /></span
@@ -51,7 +42,7 @@
 	{/each}
 	<span
 		class="control"
-		onclick={(e) => {
+		on:click={(e) => {
 			e.stopPropagation();
 			addEntry({ value: 'hello friend', checked: true });
 		}}><svelte:component this={PlusIcon} /></span
@@ -66,7 +57,7 @@
 	}
 	.checkListExtra > .header {
 		margin-left: 10px;
-		font-weight: bold;
+		font-weight: 600;
 		color: var(--textColor);
 		font-size: var(--small);
 	}

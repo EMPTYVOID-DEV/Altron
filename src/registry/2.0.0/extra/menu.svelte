@@ -1,12 +1,6 @@
 <script>
 	import { getContext } from 'svelte';
-
-	/**@type {{close:Function}}*/
-	let { close } = $props();
-
-	/**
-	 * @type {Map<string,import("svelte").Component>}
-	 */
+	export let close;
 	const componentMap = getContext('componentMap');
 	const CloseIcon = componentMap.get('closeIcon');
 	const MenuIcon = componentMap.get('menuIcon');
@@ -70,7 +64,7 @@
 	{#each options as option (option.label)}
 		<div
 			class="option"
-			onclick={() => {
+			on:click={() => {
 				option.cb();
 				close();
 			}}
@@ -81,7 +75,7 @@
 	{/each}
 	<div
 		class="option"
-		onclick={() => {
+		on:click={() => {
 			close();
 		}}
 	>
