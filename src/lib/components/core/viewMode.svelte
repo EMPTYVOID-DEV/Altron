@@ -4,7 +4,6 @@
 	const getAllBlocks = getContext('getAllBlocks') as () => dataBlock[];
 	const componentMap = getContext('componentMap') as Map<string, ComponentType<SvelteComponent>>;
 	const data = getAllBlocks();
-
 	const viewsMap = new Map<blocks, ComponentType>([
 		['code', componentMap.get('viewCode')],
 		['header', componentMap.get('viewHeader')],

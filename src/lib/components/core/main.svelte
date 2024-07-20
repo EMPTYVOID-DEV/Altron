@@ -11,7 +11,7 @@
 	interface $$Events {
 		blockAdded: CustomEvent<{ id: string }>;
 		blockDeleted: CustomEvent<dataBlock>;
-		blockMoved: CustomEvent<{ up: boolean; id: string }>;
+		blockMoved: CustomEvent<{ direction: 'up' | 'down'; id: string }>;
 		editing: CustomEvent<{ id: string }>;
 		focusing: CustomEvent<{ id: string }>;
 		afterEditing: CustomEvent<{ id: string }>;
@@ -75,10 +75,13 @@
 	setContext('editorId', nanoid(8));
 
 	// setting up stores
-	const data = createDataStore(validateData(initialData));
+	const { data, updateData } = createDataStore(validateData(initialData));
 	const workingBlock = createWorkingBlockStore();
 
 	// global set and get funhction
+	setContext('data', data);
+	setContext('workingBlock', workingBlock);
+	setContext('updateData', updateData);
 	setContext('setData', setData);
 	setContext('getAllBlocks', getAllBlocks);
 	setContext('getBlock', getBlock);
@@ -153,13 +156,7 @@
 		</div>
 	{:else}
 		<div class="blocks">
-			<EditMode
-				on:blockDeleted
-				on:blockMoved
-				on:editing
-				on:focusing
-				on:afterEditing={removeBadBlocks}
-			/>
+			<EditMode on:editing on:focusing on:afterEditing={removeBadBlocks} on:blockMoved />
 		</div>
 		<ToolBar on:blockAdded on:afterEditing={removeBadBlocks} />
 	{/if}
@@ -186,11 +183,6 @@
 		--h4: var(--h4-size, clamp(1.125rem, calc(1.15rem + ((1vw - 0.48rem) * 0.3472)), 1.2rem));
 		--body: var(--body-size, clamp(1rem, calc(1rem + ((1vw - 0.48rem) * 0.1736)), 1.125rem));
 		--small: var(--small-size, clamp(0.875rem, calc(0.875rem + ((1vw - 0.48rem) * 0.1736)), 1rem));
-		--lh1: var(--lh1-size, 1.3);
-		--lh2: var(--lh2-size, 1.35);
-		--lh3: var(--lh3-size, 1.4);
-		--lh4: var(--lh4-size, 1.5);
-		--lbody: var(--lbody-size, 1.6);
 	}
 
 	main .blocks {
@@ -210,25 +202,20 @@
 	}
 	main :global(h1) {
 		font-size: var(--h1);
-		line-height: var(--lh1);
 	}
 	main :global(h2) {
 		font-size: var(--h2);
-		line-height: var(--lh2);
 	}
 	main :global(h3) {
 		font-size: var(--h3);
-		line-height: var(--lh3);
 	}
 	main :global(h4) {
 		font-size: var(--h4);
-		line-height: var(--lh4);
 	}
 
 	main :global(:where(label, code, span, li, p, i)) {
 		font-family: var(--bodyFont);
 		font-size: var(--body);
 		font-weight: 400;
-		line-height: var(--lbody);
 	}
 </style>

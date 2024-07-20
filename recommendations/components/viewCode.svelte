@@ -1,4 +1,5 @@
 <script lang="ts">
+	// @ts-nocheck
 	import { altronTheme } from '$global/const.global';
 	import { getHighlighterCore } from 'shiki';
 	import getWasm from 'shiki/wasm';

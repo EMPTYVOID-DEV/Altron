@@ -36,7 +36,5 @@
 	}
 	.checkListView span {
 		color: var(--textColor);
-		word-break: break-all;
-		white-space: pre-wrap;
 	}
 </style>

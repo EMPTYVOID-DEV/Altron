@@ -1,6 +1,5 @@
 import { writable } from 'svelte/store';
 import type { dataBlock, updateDataType } from './types.js';
-import { setContext } from 'svelte';
 import { createEventDispatcher } from 'svelte';
 
 export function createDataStore(intialData: dataBlock[]) {
@@ -19,13 +18,10 @@ export function createDataStore(intialData: dataBlock[]) {
 			return prev;
 		});
 	};
-	setContext('data', data);
-	setContext('updateData', updateData);
-	return data;
+	return { data, updateData };
 }
 
 export function createWorkingBlockStore() {
 	const workingBlock = writable<{ state: 'focused' | 'editing'; id: string }>(null);
-	setContext('workingBlock', workingBlock);
 	return workingBlock;
 }

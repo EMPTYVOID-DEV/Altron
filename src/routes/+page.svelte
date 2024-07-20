@@ -1,7 +1,6 @@
 <script lang="ts">
 	import Main from '$lib/components/core/main.svelte';
-	import { onMount } from 'svelte';
-	import { componentMap } from '../registry/2.0.0/index';
+	import { componentMap } from '../registry/index';
 	let main: Main = null;
 </script>
 
@@ -11,7 +10,8 @@
 
 <style>
 	div {
-		width: 50vw;
+		width: 80vw;
+		padding-block: 40px;
 		display: flex;
 		align-items: center;
 		justify-content: center;

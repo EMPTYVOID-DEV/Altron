@@ -14,6 +14,10 @@
 		width: 100%;
 		position: relative;
 		cursor: pointer;
+		overflow-wrap: break-word;
+		hyphens: auto;
+		-webkit-hyphens: auto;
+		-ms-hyphens: auto;
 	}
 
 	.focused {

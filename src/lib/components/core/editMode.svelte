@@ -1,84 +1,109 @@
 <script lang="ts">
-	import {
-		createEventDispatcher,
-		getContext,
-		onMount,
-		type ComponentType,
-		SvelteComponent
-	} from 'svelte';
+	import { createEventDispatcher, getContext, onMount } from 'svelte';
 	import BlockWrapper from './blockWrapper.svelte';
 	import type { Writable } from 'svelte/store';
 	import type { dataBlock } from '../../utils/types';
 
-	const componentMap = getContext('componentMap') as Map<string, ComponentType<SvelteComponent>>;
-	const dialog = componentMap.get('dialog');
+	let dragIntialY = 0;
 	const editorId: string = getContext('editorId');
 	const workingBlock: Writable<{ state: 'focused' | 'editing'; id: string }> =
 		getContext('workingBlock');
-	const eventDispatcher = createEventDispatcher();
-	const data = getContext('data') as Writable<dataBlock[]>;
-	function traverseParent(element): { blockId: string; blockEditorId: string } {
+	const componentMap: Map<string, any> = getContext('componentMap');
+	const menu = componentMap.get('menu');
+	const data: Writable<dataBlock[]> = getContext('data');
+	const dispatch = createEventDispatcher();
+
+	function traverseParent(element: HTMLElement): { blockId: string; blockEditorId: string } {
 		while (element) {
-			let currentId = element?.dataset?.blockid;
-			let editorId = element?.dataset?.editorid;
-			if (typeof currentId == 'string' && typeof editorId == 'string') {
-				return {
-					blockId: currentId,
-					blockEditorId: editorId
-				};
+			const { blockid: currentId, editorid } = element.dataset;
+			if (currentId && editorid) {
+				return { blockId: currentId, blockEditorId: editorid };
 			}
 			element = element.parentElement;
 		}
-		return {
-			blockEditorId: null,
-			blockId: null
-		};
+		return { blockEditorId: null, blockId: null };
 	}
 
-	function switchBlockState(event: MouseEvent) {
-		const detail = traverseParent(event.target);
-		// in case we clicked to different editor or element outside any editor
-		const outFocus = !detail.blockId || detail.blockEditorId != editorId;
-		// in case we clicked to focus a block
-		const onFocus = !$workingBlock || $workingBlock.id != detail.blockId;
-		if ($workingBlock?.state == 'editing' && (outFocus || onFocus))
-			eventDispatcher('afterEditing', {
-				id: $workingBlock.id
-			});
-		if (outFocus) return workingBlock.set(null);
-		if (onFocus) {
-			eventDispatcher('focusing', {
-				id: detail.blockId
-			});
-			return workingBlock.set({
-				id: detail.blockId,
-				state: 'focused'
-			});
+	function switchBlockState(event: PointerEvent) {
+		const { blockId, blockEditorId } = traverseParent(event.target as HTMLElement);
+		const outFocus = !blockId || blockEditorId !== editorId;
+		const onFocus = !$workingBlock || $workingBlock.id !== blockId;
+
+		if ($workingBlock?.state === 'editing' && (outFocus || onFocus)) {
+			dispatch('afterEditing', { id: $workingBlock.id });
 		}
-		if ($workingBlock.state == 'focused') {
-			workingBlock.set({
-				id: detail.blockId,
-				state: 'editing'
-			});
-			eventDispatcher('editing', {
-				id: detail.blockId
-			});
+
+		if (outFocus) {
+			workingBlock.set(null);
+		} else if (onFocus) {
+			dispatch('focusing', { id: blockId });
+			workingBlock.set({ id: blockId, state: 'focused' });
+		} else if ($workingBlock.state === 'focused') {
+			workingBlock.set({ id: blockId, state: 'editing' });
+			dispatch('editing', { id: blockId });
 		}
+	}
+
+	function deleteBlock() {
+		data.update((prev) => prev.filter((block) => block.id !== $workingBlock.id));
+	}
+
+	function moveBlock({
+		direction,
+		id,
+		distance
+	}: {
+		id: string;
+		direction: 'up' | 'down';
+		distance: number;
+	}) {
+		data.update((blocks) => {
+			const index = blocks.findIndex((block) => block.id === id);
+			const newIndex =
+				direction === 'up'
+					? Math.max(0, index - distance)
+					: Math.min(blocks.length - 1, index + distance);
+
+			if (index !== newIndex) {
+				const [movedBlock] = blocks.splice(index, 1);
+				blocks.splice(newIndex, 0, movedBlock);
+			}
+			return blocks;
+		});
+	}
+
+	function handlePointerUp(e: PointerEvent & { target: HTMLElement }, draggedBlockId: string) {
+		let currentY = e.clientY;
+		let deltaY = currentY - dragIntialY;
+		const distance = Math.floor(Math.abs(deltaY) / 80);
+
+		if (distance > 0) {
+			const direction = deltaY < 0 ? 'up' : 'down';
+			moveBlock({ direction, id: draggedBlockId, distance });
+		}
+	}
+
+	function handlePointerDown(e: PointerEvent & { target: HTMLElement }) {
+		dragIntialY = e.clientY;
+		e.target.setPointerCapture(e.pointerId);
 	}
 
 	onMount(() => {
 		window.addEventListener('click', switchBlockState);
-		return () => {
-			window.removeEventListener('click', switchBlockState);
-		};
+		return () => window.removeEventListener('click', switchBlockState);
 	});
 </script>
 
 {#each $data as block}
 	<div class="block">
 		<BlockWrapper dataBlock={block} />
-		{#if $workingBlock?.id == block.id && $workingBlock.state == 'focused'}
-			<svelte:component this={dialog} on:blockMoved on:blockDeleted />
+		{#if $workingBlock?.id === block.id && $workingBlock.state === 'focused'}
+			<svelte:component
+				this={menu}
+				on:pointerdown={handlePointerDown}
+				on:pointerup={(e) => handlePointerUp(e, block.id)}
+				on:click={deleteBlock}
+			/>
 		{/if}
 	</div>
 {/each}
@@ -89,5 +114,6 @@
 		width: 100%;
 		gap: 10px;
 		align-items: center;
+		touch-action: none;
 	}
 </style>

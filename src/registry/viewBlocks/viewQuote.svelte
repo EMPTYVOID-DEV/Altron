@@ -30,7 +30,5 @@
 	.quote .quoteContent {
 		padding-left: 10px;
 		font-size: var(--small);
-		white-space: pre-wrap;
-		word-break: break-all;
 	}
 </style>

@@ -22,8 +22,8 @@
 	]);
 	options = filterOptions(options);
 	let toggle = true;
-	// here we re removing the options without icons (not loaded) also the excluded onces
 
+	// here we re removing the options without icons (not loaded) also the excluded onces
 	function filterOptions(map) {
 		const entries = [...map];
 		const filteredEntrier = entries.filter(

@@ -4,7 +4,6 @@
 </script>
 
 <div class="imageView">
-	<!-- svelte-ignore a11y-img-redundant-alt -->
 	<img {src} alt="Sorry the image did not load" />
 	<span>{caption}</span>
 </div>
