@@ -44,5 +44,6 @@
 		padding-left: 8px;
 		cursor: pointer;
 		color: var(--textColor);
+		white-space: pre-wrap;
 	}
 </style>

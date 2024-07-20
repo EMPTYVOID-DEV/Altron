@@ -16,8 +16,6 @@
 <div id="codeMdBlock" class={lang}>
 	<div id="lang">
 		<span>{lang}</span>
-		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<!-- svelte-ignore a11y-no-static-element-interactions -->
 		{#if !copyStatement}
 			<span on:click|stopPropagation={copyCode} class="control"
 				><svelte:component this={CopyIcon} /></span
@@ -63,5 +61,9 @@
 	}
 	.control {
 		cursor: pointer;
+	}
+	#codeMdBlock code {
+		white-space: pre-wrap;
+		word-break: break-all;
 	}
 </style>

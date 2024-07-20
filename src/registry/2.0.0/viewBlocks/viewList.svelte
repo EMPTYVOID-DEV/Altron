@@ -71,5 +71,7 @@
 	li {
 		padding: 6px;
 		border-radius: 4px;
+		word-break: break-all;
+		white-space: pre-wrap;
 	}
 </style>

@@ -1,77 +1,87 @@
-<script>
-	import { onedark } from 'svelte-highlight/styles';
-	import { HighlightAuto, LineNumbers } from 'svelte-highlight';
-	import { getContext } from 'svelte';
-	export let text;
-	export let lang;
-	const componentMap = getContext('componentMap');
-	const DoneIcon = componentMap.get('doneIcon');
-	const CopyIcon = componentMap.get('copyIcon');
+<script lang="ts">
+	import { altronTheme } from '$global/const.global';
+	import { getHighlighterCore } from 'shiki';
+	import getWasm from 'shiki/wasm';
+	import CopyIcon from '$icons/copyIcon.svelte';
+	import DoneIcon from '$icons/doneIcon.svelte';
+	import { onMount } from 'svelte';
+	export let text: string;
+	export let lang: string;
 	let copyStatement = false;
-	async function copyCode(e) {
+	let code = text;
+
+	function copyCode() {
 		navigator.clipboard.writeText(text);
 		copyStatement = true;
-		await new Promise((res) => setTimeout(res, 800));
-		copyStatement = false;
+		new Promise((res) => setTimeout(res, 800)).then(() => (copyStatement = false));
 	}
-	console.log('hello');
+	onMount(async () => {
+		const { bundledLanguages } = await import('shiki/langs');
+		const importFn = (bundledLanguages as any)[lang.toLowerCase()];
+		const highlighter = await getHighlighterCore({
+			loadWasm: getWasm,
+			themes: [altronTheme],
+			langs: []
+		});
+		await highlighter.loadLanguage(await importFn());
+		code = highlighter.codeToHtml(text, {
+			lang: lang.toLowerCase(),
+			theme: 'altronTheme'
+		});
+	});
 </script>
 
-<svelte:head>
-	{@html onedark}
-</svelte:head>
-
-<div id="codeMdBlock" class={lang}>
-	<div id="lang">
+<div class="viewCode">
+	<div class="lang">
 		<span>{lang}</span>
-		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<!-- svelte-ignore a11y-no-static-element-interactions -->
 		{#if !copyStatement}
-			<span on:click|stopPropagation={copyCode}><CopyIcon /></span>
+			<button on:click|stopPropagation={copyCode} class="control"
+				><svelte:component this={CopyIcon} /></button
+			>
 		{:else}
-			<span><DoneIcon /></span>
+			<svelte:component this={DoneIcon} />
 		{/if}
 	</div>
-
-	<HighlightAuto code={text} let:highlighted>
-		<LineNumbers {highlighted} hideBorder wrapLines />
-	</HighlightAuto>
+	<div class="content">
+		{@html code}
+	</div>
 </div>
 
 <style>
-	#codeMdBlock {
+	.viewCode {
 		width: 100%;
 		display: flex;
 		flex-direction: column;
-	}
-	#codeMdBlock :global(> :not(#lang)) {
-		width: 100%;
-		border-bottom-left-radius: 5px;
-		border-bottom-right-radius: 5px;
+		border: 1px solid var(--textColor);
+		border-radius: var(--border-radius);
+		overflow: hidden;
 	}
 
-	#codeMdBlock :global(tr) {
-		display: block;
-	}
-
-	#codeMdBlock #lang {
+	.lang {
 		width: 100%;
-		border-top-left-radius: 5px;
-		border-top-right-radius: 5px;
-		background-color: var(--primaryColor);
+		background-color: transparent;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		padding-inline: 10px;
-		padding-block: 5px;
+		padding-inline: 0.75rem;
+		padding-block: 0.25rem;
+		border-bottom: 1px solid var(--textColor);
 	}
 
-	#codeMdBlock #lang span {
-		color: var(--textColor);
-		font-weight: bold;
+	.lang span {
+		font-weight: 600;
 		text-transform: capitalize;
+		color: var(--textColor);
 	}
-	#codeMdBlock #lang span:last-child {
+	.control {
+		all: unset;
 		cursor: pointer;
+	}
+	.content {
+		width: 100%;
+		background-color: color-mix(in srgb, var(--textColor) 8%, transparent 92%);
+		padding-inline: 0.75rem;
+		padding-block: 0.25rem;
+		color: var(--foregroundColor);
 	}
 </style>
