@@ -1,5 +1,11 @@
 # @altron/altron-cli
 
+## 0.2.1
+
+### Patch Changes
+
+- ac3a56b: Updating the altronCheck function to make sure it will uses the valid altron version
+
 ## 0.2.0
 
 ### Minor Changes
