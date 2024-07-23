@@ -1,5 +1,11 @@
 # @altron/altron-cli
 
+## 0.2.2
+
+### Patch Changes
+
+- 6222dba: adding clean version function
+
 ## 0.2.1
 
 ### Patch Changes
