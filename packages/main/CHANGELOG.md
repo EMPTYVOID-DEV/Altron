@@ -1,4 +1,4 @@
-# altron
+# @altron/altron
 
 ## 3.0.4
 

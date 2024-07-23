@@ -2,7 +2,7 @@ import path from "path";
 import fsExtra from "fs-extra";
 import { logger } from "../utils/logger.js";
 import type { PackageJson } from "type-fest";
-import { workingDir } from "../consts.js";
+import { validVersion, workingDir } from "../consts.js";
 import { compareVersions } from "src/utils/compareVersion.js";
 
 export function altronCheck() {
@@ -19,9 +19,9 @@ export function altronCheck() {
     );
     process.exit(1);
   }
-  if (compareVersions(altronVersion, "3.0.5") == -1) {
+  if (compareVersions(altronVersion, validVersion) == -1) {
     logger.error(
-      "It seems you re using a version of altron less than 3.0.5 which the cli no longer supports, try updating altron to latest version"
+      `It seems you re using a version of altron less than ${validVersion} which the cli no longer supports.`
     );
     process.exit(1);
   }

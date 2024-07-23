@@ -24,3 +24,5 @@ export const infoColor = "#0000FF";
 export const rawPath = "https://raw.githubusercontent.com/EMPTYVOID-DEV/Altron";
 
 export const workingDir = process.cwd();
+
+export const validVersion = "3.1.2";

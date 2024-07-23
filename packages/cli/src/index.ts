@@ -12,12 +12,12 @@ import { installPackages } from "./handlers/installPackages.js";
 import { createIndex } from "./handlers/createIndex.js";
 import { logger } from "./utils/logger.js";
 import { whatNext } from "./handlers/whatNext.js";
-import { rawPath } from "./consts.js";
+import { constructBaseUrl } from "./utils/constructBaseUrl.js";
 
 async function main() {
   welcome();
   const usedVersion = altronCheck();
-  const baseUrl = `${rawPath}/v${usedVersion}/packages/main`;
+  const baseUrl = constructBaseUrl(usedVersion);
   const { altronPath, choices } = await cli();
   const { registry, blockDependencies } = await getMetaData(baseUrl);
   await createAltronDir(altronPath);
