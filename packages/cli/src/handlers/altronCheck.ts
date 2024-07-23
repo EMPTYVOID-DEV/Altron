@@ -4,6 +4,7 @@ import { logger } from "../utils/logger.js";
 import type { PackageJson } from "type-fest";
 import { validVersion, workingDir } from "../consts.js";
 import { compareVersions } from "src/utils/compareVersion.js";
+import { getCleanVersion } from "../utils/getCleanVersion.js";
 
 export function altronCheck() {
   const pkgJsonPath = path.join(workingDir, "package.json");
@@ -26,5 +27,5 @@ export function altronCheck() {
     process.exit(1);
   }
   logger.info(`Version ${altronVersion} was detected.`);
-  return altronVersion;
+  return getCleanVersion(altronVersion);
 }
