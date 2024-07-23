@@ -9,7 +9,7 @@ importers:
   .:
     dependencies:
       '@altron/altron':
-        specifier: ^3.0.3
+        specifier: ^3.1.2
         version: link:../../packages/main
       svelte-highlight:
         specifier: ^7.4.1
