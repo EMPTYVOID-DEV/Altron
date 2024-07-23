@@ -31,7 +31,7 @@
 		gap: 6px;
 	}
 	.textArea > .header {
-		font-weight: bold;
+		font-weight: 600;
 		color: var(--textColor);
 		font-size: var(--small);
 	}
@@ -44,5 +44,6 @@
 		padding-left: 8px;
 		cursor: pointer;
 		color: var(--textColor);
+		white-space: pre-wrap;
 	}
 </style>

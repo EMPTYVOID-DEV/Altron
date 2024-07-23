@@ -1,11 +1,11 @@
 <script>
 	import { getContext } from 'svelte';
-	const componentMap = getContext('componentMap');
-	const UploadIcon = componentMap.get('uploadIcon');
 	export let changeHandler;
 	export let label = '';
 	export let fileType = '*';
 	export let currentFileName = 'default.png';
+	const componentMap = getContext('componentMap');
+	const UploadIcon = componentMap.get('uploadIcon');
 </script>
 
 <div class="input-container">

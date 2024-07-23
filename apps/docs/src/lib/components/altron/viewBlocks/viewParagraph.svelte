@@ -1,5 +1,4 @@
 <script>
-	//@ts-nocheck
 	export let text;
 </script>
 
@@ -10,5 +9,6 @@
 <style>
 	p {
 		color: var(--textColor);
+		white-space: pre-wrap;
 	}
 </style>

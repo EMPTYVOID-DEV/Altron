@@ -80,9 +80,4 @@
 | --h4-size         | clamp(1.125rem, calc(1.15rem + ((1vw - 0.48rem) \* 0.3472)), 1.2rem) |
 | --body-size       | clamp(2rem, calc(1rem + ((1vw - 0.48rem) \* 0.1736)), 1.125rem)      |
 | --small-size      | clamp(1.875rem, calc(0.875rem + ((1vw - 0.48rem) \* 0.1736)), 1rem)  |
-| --lh1-size        | 1.3                                                                  |
-| --lh2-size        | 1.35                                                                 |
-| --lh3-size        | 1.4                                                                  |
-| --lh4-size        | 1.5                                                                  |
-| --lbody-size      | 2.6                                                                  |
 | --block-gap       | 10px                                                                 |
