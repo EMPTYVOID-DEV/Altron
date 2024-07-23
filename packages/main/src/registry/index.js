@@ -30,7 +30,6 @@ import EMBEDICON from './icons/embedIcon.svelte';
 import HEADERICON from './icons/headerIcon.svelte';
 import IMAGEICON from './icons/imageIcon.svelte';
 import LISTICON from './icons/listIcon.svelte';
-import MENUICON from './icons/menuIcon.svelte';
 import OPENQUOTEICON from './icons/openQuoteIcon.svelte';
 import PARAGRAPHICON from './icons/paragraphIcon.svelte';
 import PLUSICON from './icons/plusIcon.svelte';
@@ -76,7 +75,6 @@ export const componentMap = new Map([
 	['headerIcon', HEADERICON],
 	['imageIcon', IMAGEICON],
 	['listIcon', LISTICON],
-	['menuIcon', MENUICON],
 	['openQuoteIcon', OPENQUOTEICON],
 	['paragraphIcon', PARAGRAPHICON],
 	['plusIcon', PLUSICON],
