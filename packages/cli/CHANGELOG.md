@@ -1,5 +1,11 @@
 # @altron/altron-cli
 
+## 0.2.0
+
+### Minor Changes
+
+- 1aae5dd: Adjusting cli to match latest version of altron
+
 ## 0.1.2
 
 ### Patch Changes
