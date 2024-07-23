@@ -6,13 +6,11 @@
 			"dependencies": [
 				"blockWrapperUi",
 				"toolBarUi",
+				"menu",
 				"plusIcon",
 				"closeIcon",
-				"menuIcon",
-				"menu",
 				"deleteIcon",
-				"upIcon",
-				"downIcon"
+				"upDownIcon"
 			]
 		},
 		{
