@@ -23,7 +23,7 @@ jobs:
     strategy:
       matrix:
         node-version:
-          - '18.x'
+          - "18.x"
     steps:
       - uses: actions/checkout@v3
       - uses: pnpm/action-setup@v2
@@ -33,12 +33,13 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{matrix.node-version}}
-          cache: 'pnpm'
+          cache: "pnpm"
       - run: pnpm install --frozen-lockfile
       - name: Publish to npm
         id: changesets
         uses: changesets/action@v1
         with:
+          version: pnpm run version
           publish: pnpm run release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
