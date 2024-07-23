@@ -21,7 +21,7 @@
     "@changesets/cli": "^2.27.1"
   },
   "engines": {
-    "pnpm": ">=8"
+    "pnpm": ">=9"
   },
   "workspaces": [
     "apps/*",
