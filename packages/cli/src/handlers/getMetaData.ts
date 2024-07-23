@@ -2,13 +2,13 @@ import { blockDependenciesJson, registryJson } from "src/types.js";
 import { customGithubFetch } from "../utils/customFetch.js";
 import { logger } from "src/utils/logger.js";
 
-export async function getMetaData(): Promise<{
+export async function getMetaData(baseUrl: string): Promise<{
   registry: registryJson;
   blockDependencies: blockDependenciesJson;
 }> {
   const responses = await Promise.allSettled([
-    customGithubFetch("registry.json"),
-    customGithubFetch("blockDependencies.json"),
+    customGithubFetch(`${baseUrl}/registry.json`),
+    customGithubFetch(`${baseUrl}/blockDependencies.json`),
   ]);
   // @ts-ignore
   const registry = JSON.parse(responses[0].value);

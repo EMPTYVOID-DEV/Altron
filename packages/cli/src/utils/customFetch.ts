@@ -1,8 +1,6 @@
-import { rawPath } from "../consts.js";
 import { logger } from "../utils/logger.js";
 
-export async function customGithubFetch(path: string): Promise<string> {
-  const url = rawPath + path;
+export async function customGithubFetch(url: string): Promise<string> {
   try {
     const response = await fetch(url);
     if (!response.ok) {
@@ -34,12 +32,12 @@ export async function customGithubFetch(path: string): Promise<string> {
         break;
       case 404:
         logger.error(
-          `Unable to load the file under the relative path ${path}. Please report this issue on the cli repository.`
+          `Unable to load the file ${url}. Please report this issue on the cli repository.`
         );
         break;
       default:
         logger.error(
-          `Unknown error occured when loading the file with the relative path "${path}". You open an issue on the cli repository with this message ${statusText}.`
+          `Unknown error occured when loading the file "${url}". You open an issue on the cli repository with this message ${statusText}.`
         );
         break;
     }

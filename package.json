@@ -9,7 +9,7 @@
     "cli-dev": "pnpm --filter @altron/altron-cli dev",
     "cli-build": "pnpm --filter @altron/altron-cli build",
     "altron-dev": "pnpm --filter @altron/altron dev",
-    "altron-build": "pnpm --filter @altron/altron build",
+    "altron-build": "pnpm --filter @altron/altron package",
     "altron-lint": "pnpm --filter @altron/altron lint",
     "version": "npx changeset version",
     "release": "pnpm altron-build && pnpm cli-build && changeset publish"

@@ -12,16 +12,18 @@ import { installPackages } from "./handlers/installPackages.js";
 import { createIndex } from "./handlers/createIndex.js";
 import { logger } from "./utils/logger.js";
 import { whatNext } from "./handlers/whatNext.js";
+import { rawPath } from "./consts.js";
 
 async function main() {
   welcome();
   const usedVersion = altronCheck();
+  const baseUrl = `${rawPath}/v${usedVersion}/packages/main`;
   const { altronPath, choices } = await cli();
-  const { registry, blockDependencies } = await getMetaData();
+  const { registry, blockDependencies } = await getMetaData(baseUrl);
   await createAltronDir(altronPath);
   const { components, packages } = getDependencies(choices, blockDependencies);
-  const componentPaths = componentToPath(components, registry, usedVersion);
-  await loadComponents(componentPaths, altronPath);
+  const componentPaths = componentToPath(components, registry);
+  await loadComponents(baseUrl, componentPaths, altronPath);
   await installPackages(packages);
   createIndex(altronPath);
   whatNext();

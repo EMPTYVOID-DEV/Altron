@@ -19,6 +19,12 @@ export function altronCheck() {
     );
     process.exit(1);
   }
+  if (compareVersions(altronVersion, "3.0.5") == -1) {
+    logger.error(
+      "It seems you re using a version of altron less than 3.0.5 which the cli no longer supports, try updating altron to latest version"
+    );
+    process.exit(1);
+  }
   logger.info(`Version ${altronVersion} was detected.`);
   return altronVersion;
 }

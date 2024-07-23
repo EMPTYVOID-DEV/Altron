@@ -4,11 +4,7 @@ export type blocks = (typeof blocksList)[number];
 
 export type registryJson = {
   description: string;
-  versions: string[];
-  registry: {
-    version: string;
-    changes: string[];
-  }[];
+  registry: string[];
 };
 
 export type blockDependenciesJson = {

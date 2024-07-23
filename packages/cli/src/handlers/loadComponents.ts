@@ -5,19 +5,15 @@ import path from "path";
 import { logger } from "../utils/logger.js";
 
 export async function loadComponents(
-  components: string[],
+  baseUrl: string,
+  componentsPaths: string[],
   writeLocation: string
 ) {
   const registryPath = "src/registry";
-  // creating paralle request to github api to load the components content
-  // all components are under src/registry we only need the version and the component name 'component'
-  const fetchPromises = components.map(async (component) => {
-    return customGithubFetch(`${registryPath}/${component}`)
+  const fetchPromises = componentsPaths.map(async (component) => {
+    return customGithubFetch(`${baseUrl}/${registryPath}/${component}`)
       .then((content) => {
-        // removing the version from the component
-        const componentWithoutVer = component.split("/");
-        componentWithoutVer.shift();
-        return writeFile(componentWithoutVer.join("/"), content, writeLocation);
+        return writeFile(component, content, writeLocation);
       })
       .then(() => {
         logger.success(`The component ${component} was loaded.`);
