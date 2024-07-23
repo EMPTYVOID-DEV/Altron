@@ -13,8 +13,11 @@
 	.blockWrapperUi {
 		width: 100%;
 		position: relative;
-		min-height: 50px;
 		cursor: pointer;
+		overflow-wrap: break-word;
+		hyphens: auto;
+		-webkit-hyphens: auto;
+		-ms-hyphens: auto;
 	}
 
 	.focused {
@@ -26,7 +29,7 @@
 
 	.focused,
 	.edited {
-		padding-top: 30px;
+		padding-top: 35px;
 		padding-bottom: 10px;
 		padding-inline: 15px;
 		border-radius: 8px;

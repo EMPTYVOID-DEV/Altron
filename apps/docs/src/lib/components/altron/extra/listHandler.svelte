@@ -24,22 +24,19 @@
 					updateEntry(index, text);
 				}}
 			/>
-			<!-- svelte-ignore a11y-click-events-have-key-events -->
-			<!-- svelte-ignore a11y-no-static-element-interactions -->
 			<span
 				class="control"
-				on:click|stopPropagation={() => {
+				on:click={(e) => {
+					e.stopPropagation();
 					removeEntry(index);
 				}}><svelte:component this={CloseIcon} /></span
 			>
 		</div>
 	{/each}
-	<!-- svelte-ignore a11y-click-events-have-key-events -->
-	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<span
 		class="control"
-		on:click|stopPropagation={() => {
-			// default value
+		on:click={(e) => {
+			e.stopPropagation();
 			addEntry('hello friend');
 		}}><svelte:component this={PlusIcon} /></span
 	>
@@ -69,8 +66,7 @@
 			0 0 5px var(--secondaryColor);
 	}
 	.itemsEdit .header {
-		margin-left: 10px;
-		font-weight: bold;
+		font-weight: 600;
 		color: var(--textColor);
 		font-size: var(--small);
 	}

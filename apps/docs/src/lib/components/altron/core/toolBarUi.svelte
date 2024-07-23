@@ -1,10 +1,11 @@
 <script>
-	// @ts-nocheck
 	import { fade } from 'svelte/transition';
-	import { quadInOut } from 'svelte/easing';
+	import { elasticIn } from 'svelte/easing';
 	import { getContext } from 'svelte';
+
 	export let add;
 	const componentMap = getContext('componentMap');
+	const excludeBlocks = getContext('excludedBlocks');
 	const CloseIcon = componentMap.get('closeIcon');
 	const PlusIcon = componentMap.get('plusIcon');
 	let options = new Map([
@@ -20,10 +21,14 @@
 		['embed', componentMap.get('embedIcon')]
 	]);
 	options = filterOptions(options);
-	let toggle = false;
+	let toggle = true;
+
+	// here we re removing the options without icons (not loaded) also the excluded onces
 	function filterOptions(map) {
 		const entries = [...map];
-		const filteredEntrier = entries.filter((value) => value[1] != undefined);
+		const filteredEntrier = entries.filter(
+			(value) => value[1] != undefined && !excludeBlocks.find((el) => el == value[0])
+		);
 		return new Map(filteredEntrier);
 	}
 </script>
@@ -44,8 +49,8 @@
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<!-- svelte-ignore a11y-no-static-element-interactions -->
 				<span
-					in:fade|global={{ delay: 80 * index, duration: 300, easing: quadInOut }}
-					out:fade|global={{ delay: 80 * (6 - index), duration: 300, easing: quadInOut }}
+					in:fade|global={{ delay: 80 * index, duration: 300, easing: elasticIn }}
+					out:fade|global={{ delay: 80 * (6 - index), duration: 300, easing: elasticIn }}
 					class="option"
 					on:click|stopPropagation={() => {
 						const blockName = option[0];

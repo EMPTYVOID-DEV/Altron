@@ -19,6 +19,7 @@
 		font-weight: 600;
 	}
 	.description :is(span, p) {
+		color: var(--textColor);
 		font-size: var(--small);
 	}
 </style>
