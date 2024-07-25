@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { createEventDispatcher, getContext, onMount } from 'svelte';
+	import { createEventDispatcher, getContext, onMount, SvelteComponent } from 'svelte';
 	import BlockWrapper from './blockWrapper.svelte';
 	import type { Writable } from 'svelte/store';
 	import type { dataBlock } from '../../utils/types';
@@ -8,7 +8,7 @@
 	const editorId: string = getContext('editorId');
 	const workingBlock: Writable<{ state: 'focused' | 'editing'; id: string }> =
 		getContext('workingBlock');
-	const componentMap: Map<string, any> = getContext('componentMap');
+	const componentMap: Map<string, SvelteComponent> = getContext('componentMap');
 	const menu = componentMap.get('menu');
 	const data: Writable<dataBlock[]> = getContext('data');
 	const dispatch = createEventDispatcher();

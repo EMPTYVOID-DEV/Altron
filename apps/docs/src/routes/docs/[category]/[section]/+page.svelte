@@ -1,8 +1,8 @@
 <script lang="ts">
   import { Main } from "sveltedocsmaker";
   import { page } from "$app/stores";
-  import Code from "$lib/components/other/customCode.svelte";
   import Logo from "$lib/components/other/logo.svelte";
+  import Code from "$lib/components/other/customCode.svelte";
   $: data = $page.data as {
     md: string;
     toc: {

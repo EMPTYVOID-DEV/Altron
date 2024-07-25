@@ -5,7 +5,7 @@
 </script>
 
 <div>
-	<Main {componentMap} bind:this={main} />
+	<Main {componentMap} bind:this={main} sizeLimits={{ attachments: 1, imgs: 1 }} />
 </div>
 
 <style>
