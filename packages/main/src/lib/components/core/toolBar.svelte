@@ -4,7 +4,7 @@
 	import type { Writable } from 'svelte/store';
 	import { nanoid } from 'nanoid';
 	const languages = getContext('languages');
-	const defaultData = new Map<blocks, any>([
+	const defaultData = new Map<blocks, Record<string, unknown>>([
 		['paragraph', { text: '' }],
 		['image', { file: null, caption: '', src: '' }],
 		['code', { text: '', lang: languages[0] }],

@@ -4,6 +4,6 @@
 
 <style>
 	svg path {
-		fill: var(--secondaryColor);
+		fill: var(--icon, var(--primaryColor));
 	}
 </style>

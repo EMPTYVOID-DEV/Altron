@@ -1,10 +1,14 @@
 <script>
 	import { getContext } from 'svelte';
+
+	/**@type {string}*/
+	export let text;
+	/**@type {string}*/
+	export let owner;
+	/**@type {Map<string,import("svelte").SvelteComponent>}*/
 	const componentMap = getContext('componentMap');
 	const CloseQuoteIcon = componentMap.get('closeQuoteIcon');
 	const OpenQuoteIcon = componentMap.get('openQuoteIcon');
-	export let text;
-	export let owner;
 </script>
 
 <div class="quote">

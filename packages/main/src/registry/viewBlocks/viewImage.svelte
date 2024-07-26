@@ -1,10 +1,12 @@
 <script>
+	/**@type {string}*/
 	export let src;
+	/**@type {string}*/
 	export let caption;
 </script>
 
 <div class="imageView">
-	<img {src} alt="Sorry the image did not load" />
+	<img {src} alt="Did not load" />
 	<span>{caption}</span>
 </div>
 

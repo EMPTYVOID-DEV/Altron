@@ -1,9 +1,14 @@
 <script>
-	export let src;
-	export let title;
-	export let type;
-	export let size;
 	import { getContext } from 'svelte';
+	/**@type {string}*/
+	export let src;
+	/**@type {string}*/
+	export let title;
+	/**@type {string}*/
+	export let type;
+	/**@type {number}*/
+	export let size;
+	/**@type {Map<string,import("svelte").SvelteComponent>}*/
 	const componentMap = getContext('componentMap');
 	const UploadIcon = componentMap.get('uploadIcon');
 </script>

@@ -1,6 +1,9 @@
 <script>
+	/** @type {boolean}*/
 	export let edited;
+	/** @type {boolean}*/
 	export let focused;
+	/** @type {string}*/
 	export let blockName;
 </script>
 

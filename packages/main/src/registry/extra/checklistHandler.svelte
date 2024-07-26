@@ -1,10 +1,16 @@
 <script>
 	import { getContext } from 'svelte';
+	/**@type {(index:number,text:string)=>void}*/
 	export let updateEntry;
+	/**@type {(index:number)=>void}*/
 	export let removeEntry;
+	/**@type {(defaultVal: { value: string; checked: boolean })=>void}*/
 	export let addEntry;
+	/**@type {(index:number,checked:boolean)=>void}*/
 	export let checkEntry;
+	/**@type {{ value: string; checked: boolean }[]}*/
 	export let items;
+	/**@type {Map<string,import("svelte").SvelteComponent>}*/
 	const componentMap = getContext('componentMap');
 	const CloseIcon = componentMap.get('closeIcon');
 	const PlusIcon = componentMap.get('plusIcon');
@@ -31,21 +37,19 @@
 					updateEntry(index, text);
 				}}
 			/>
-			<span
+			<button
 				class="control"
-				on:click={(e) => {
-					e.stopPropagation();
+				on:click|stopPropagation={() => {
 					removeEntry(index);
-				}}><svelte:component this={CloseIcon} /></span
+				}}><svelte:component this={CloseIcon} /></button
 			>
 		</div>
 	{/each}
-	<span
+	<button
 		class="control"
-		on:click={(e) => {
-			e.stopPropagation();
+		on:click|stopPropagation={() => {
 			addEntry({ value: 'hello friend', checked: true });
-		}}><svelte:component this={PlusIcon} /></span
+		}}><svelte:component this={PlusIcon} /></button
 	>
 </div>
 
@@ -73,6 +77,7 @@
 		cursor: pointer;
 	}
 	.control {
+		all: unset;
 		cursor: pointer;
 		width: 2.2rem;
 		aspect-ratio: 1/1;
@@ -83,8 +88,9 @@
 		border: 2px solid var(--secondaryColor);
 		box-shadow: 0 0 5px var(--secondaryColor), 0 0 5px var(--secondaryColor),
 			0 0 5px var(--secondaryColor);
+		--icon: var(--secondaryColor);
 	}
-	.checkListExtra span:last-child {
+	.checkListExtra button:last-child {
 		align-self: center;
 	}
 </style>

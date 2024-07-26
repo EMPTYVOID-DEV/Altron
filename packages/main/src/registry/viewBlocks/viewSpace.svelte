@@ -1,4 +1,5 @@
 <script>
+	/**@type {number}*/
 	export let size;
 </script>
 

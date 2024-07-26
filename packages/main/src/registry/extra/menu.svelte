@@ -1,5 +1,6 @@
 <script>
 	import { getContext } from 'svelte';
+	/**@type {Map<string,import("svelte").SvelteComponent>}*/
 	const componentMap = getContext('componentMap');
 	const upDownIcon = componentMap.get('upDownIcon');
 	const deleteIcon = componentMap.get('deleteIcon');

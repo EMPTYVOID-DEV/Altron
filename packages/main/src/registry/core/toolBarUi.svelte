@@ -3,9 +3,12 @@
 	import { elasticIn } from 'svelte/easing';
 	import { getContext } from 'svelte';
 
+	/**@type {(blockName:string)=>void}*/
 	export let add;
-	const componentMap = getContext('componentMap');
+	/**@type {string[]}*/
 	const excludeBlocks = getContext('excludedBlocks');
+	/**@type {Map<string,import("svelte").SvelteComponent>}*/
+	const componentMap = getContext('componentMap');
 	const CloseIcon = componentMap.get('closeIcon');
 	const PlusIcon = componentMap.get('plusIcon');
 	let options = new Map([
@@ -24,31 +27,28 @@
 	let toggle = true;
 
 	// here we re removing the options without icons (not loaded) also the excluded onces
+	/**@param {Map<string,import("svelte").SvelteComponent>} map*/
 	function filterOptions(map) {
 		const entries = [...map];
 		const filteredEntrier = entries.filter(
-			(value) => value[1] != undefined && !excludeBlocks.find((el) => el == value[0])
+			(value) => value[1] && !excludeBlocks.find((el) => el == value[0])
 		);
 		return new Map(filteredEntrier);
 	}
 </script>
 
 <div class="toolBar">
-	<!-- svelte-ignore a11y-click-events-have-key-events -->
-	<!-- svelte-ignore a11y-no-static-element-interactions -->
-	<span on:click={() => (toggle = !toggle)} class="control">
+	<button on:click={() => (toggle = !toggle)} class="control">
 		{#if toggle}
 			<svelte:component this={CloseIcon} />
 		{:else}
 			<svelte:component this={PlusIcon} />
 		{/if}
-	</span>
+	</button>
 	{#if toggle}
 		<div class="options">
 			{#each options.entries() as option, index}
-				<!-- svelte-ignore a11y-click-events-have-key-events -->
-				<!-- svelte-ignore a11y-no-static-element-interactions -->
-				<span
+				<button
 					in:fade|global={{ delay: 80 * index, duration: 300, easing: elasticIn }}
 					out:fade|global={{ delay: 80 * (6 - index), duration: 300, easing: elasticIn }}
 					class="option"
@@ -59,7 +59,7 @@
 					}}
 				>
 					<svelte:component this={option[1]} />
-				</span>
+				</button>
 			{/each}
 		</div>
 	{/if}
@@ -74,7 +74,7 @@
 		gap: 20px;
 		margin-top: 35px;
 	}
-	.toolBar span {
+	.toolBar button {
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -86,6 +86,7 @@
 
 	.control {
 		border: 2px solid var(--textColor);
+		--icon: var(--textColor);
 	}
 
 	.options {
@@ -98,8 +99,6 @@
 	.option {
 		border: 2px solid var(--primaryColor);
 		position: relative;
-	}
-	.option > :global(svg path) {
-		fill: var(--primaryColor);
+		--icon: var(--primaryColor);
 	}
 </style>

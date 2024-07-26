@@ -1,5 +1,7 @@
 <script>
+	/**@type {string[]}*/
 	export let items;
+	/**@type {string}*/
 	export let type;
 </script>
 

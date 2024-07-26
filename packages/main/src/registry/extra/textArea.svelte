@@ -1,8 +1,14 @@
 <script>
+	/**@type {(val:string)=>void}*/
 	export let changeHandler;
+
+	/**@type {string}*/
 	export let textContent;
+	/**@type {0|1|2|3|4}*/
 	export let textLevel;
+	/**@type {string}*/
 	export let label = '';
+	/**@type {number}*/
 	export let width = 95;
 </script>
 
@@ -11,7 +17,6 @@
 	<span
 		style:font-size="var(--{textLevel == 0 ? 'body' : 'h' + textLevel})"
 		style:font-weight={textLevel == 0 ? '400' : 'bold'}
-		style:line-height="var(--l{textLevel == 0 ? 'body' : 'h'})"
 		style:font-family={textLevel == 0 ? 'var(--bodyFont)' : 'var(--headingFont)'}
 		class="editableArea"
 		contenteditable="true"

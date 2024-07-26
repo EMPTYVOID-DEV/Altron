@@ -1,7 +1,11 @@
 <script>
+	/**@type {string}*/
 	export let value = '';
+	/**@type {string}*/
 	export let label = '';
+	/**@type {string}*/
 	export let type = 'text';
+	/**@type {(value:string)=>void}*/
 	export let changeHandler;
 </script>
 

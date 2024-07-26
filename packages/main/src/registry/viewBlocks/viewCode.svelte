@@ -1,7 +1,11 @@
 <script>
 	import { getContext } from 'svelte';
+
+	/**@type {string}*/
 	export let text;
+	/**@type {string}*/
 	export let lang;
+	/**@type {Map<string,import("svelte").SvelteComponent>}*/
 	const componentMap = getContext('componentMap');
 	const DoneIcon = componentMap.get('doneIcon');
 	const CopyIcon = componentMap.get('copyIcon');
@@ -17,8 +21,8 @@
 	<div id="lang">
 		<span>{lang}</span>
 		{#if !copyStatement}
-			<span on:click|stopPropagation={copyCode} class="control"
-				><svelte:component this={CopyIcon} /></span
+			<button on:click|stopPropagation={copyCode} class="control"
+				><svelte:component this={CopyIcon} /></button
 			>
 		{:else}
 			<span><svelte:component this={DoneIcon} /></span>
@@ -39,6 +43,7 @@
 		padding-bottom: 10px;
 		overflow: hidden;
 		color: var(--textColor);
+		--icon: var(--textColor);
 	}
 
 	#codeMdBlock > code {
@@ -60,6 +65,7 @@
 		text-transform: capitalize;
 	}
 	.control {
+		all: unset;
 		cursor: pointer;
 	}
 </style>

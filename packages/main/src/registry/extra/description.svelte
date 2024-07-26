@@ -1,5 +1,7 @@
 <script>
+	/**@type {string}*/
 	export let title;
+	/**@type {string}*/
 	export let description;
 </script>
 

@@ -45,7 +45,17 @@
 	}
 
 	function deleteBlock() {
-		data.update((prev) => prev.filter((block) => block.id !== $workingBlock.id));
+		let deletedBlock: dataBlock;
+		data.update((prev) =>
+			prev.filter((el) => {
+				if (el.id == $workingBlock.id) {
+					deletedBlock = structuredClone(el);
+					return false;
+				}
+				return true;
+			})
+		);
+		dispatch('blockDeleted', deletedBlock);
 	}
 
 	function moveBlock({
@@ -67,6 +77,7 @@
 			if (index !== newIndex) {
 				const [movedBlock] = blocks.splice(index, 1);
 				blocks.splice(newIndex, 0, movedBlock);
+				dispatch('blockMoved', { id, direction });
 			}
 			return blocks;
 		});

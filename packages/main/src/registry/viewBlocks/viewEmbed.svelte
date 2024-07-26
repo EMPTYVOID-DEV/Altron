@@ -1,6 +1,9 @@
 <script>
 	import { getContext } from 'svelte';
+
+	/**@type {string}*/
 	export let src;
+	/**@type {Map<string,import("svelte").SvelteComponent>}*/
 	const componentMap = getContext('componentMap');
 	const Loading = componentMap.get('loading');
 	const iframeSettings = getContext('iframeSettings');

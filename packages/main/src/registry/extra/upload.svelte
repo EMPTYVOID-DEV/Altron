@@ -1,9 +1,14 @@
 <script>
 	import { getContext } from 'svelte';
+	/**@type {(file:File)=>void}*/
 	export let changeHandler;
+	/**@type {string}*/
 	export let label = '';
+	/**@type {string}*/
 	export let fileType = '*';
+	/**@type {string}*/
 	export let currentFileName = 'default.png';
+	/**@type {Map<string,import("svelte").SvelteComponent>}*/
 	const componentMap = getContext('componentMap');
 	const UploadIcon = componentMap.get('uploadIcon');
 </script>
@@ -65,6 +70,7 @@
 		padding-inline: 8px;
 		padding-block: 8px;
 		border-radius: 0.5rem;
+		--icon: var(--secondaryColor);
 	}
 	.uploadBtn > span {
 		color: var(--textColor);

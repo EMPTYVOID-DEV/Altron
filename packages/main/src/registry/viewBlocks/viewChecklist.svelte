@@ -1,6 +1,8 @@
 <script>
 	import { getContext } from 'svelte';
+	/**@type {{ value: string; checked: boolean }[]}*/
 	export let items;
+	/**@type {Map<string,import("svelte").SvelteComponent>}*/
 	const componentMap = getContext('componentMap');
 	const Checked = componentMap.get('checkedIcon');
 	const UnChecked = componentMap.get('unCheckedIcon');

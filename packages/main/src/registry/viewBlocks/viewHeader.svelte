@@ -1,5 +1,7 @@
 <script>
+	/**@type {string}*/
 	export let text;
+	/**@type {1|2|3|4}*/
 	export let level;
 </script>
 

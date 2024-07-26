@@ -1,8 +1,12 @@
 <script>
 	import Select from 'svelte-select';
+	/**@type {string}*/
 	export let label;
+	/**@type {{value:string,label:string}[]}*/
 	export let elements;
+	/**@type {(detail:{value:string,label:string})=>void}*/
 	export let changeHandler;
+	/**@type {{value:string,label:string}}*/
 	export let preSelected;
 </script>
 

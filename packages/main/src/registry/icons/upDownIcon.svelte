@@ -13,6 +13,6 @@
 
 <style>
 	svg {
-		stroke: var(--primaryColor);
+		stroke: var(--icon, var(--primaryColor));
 	}
 </style>

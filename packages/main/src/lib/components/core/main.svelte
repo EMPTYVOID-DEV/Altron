@@ -8,6 +8,7 @@
 	import { get } from 'svelte/store';
 	import { nanoid } from 'nanoid';
 
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	interface $$Events {
 		blockAdded: CustomEvent<{ id: string }>;
 		blockDeleted: CustomEvent<dataBlock>;
@@ -156,7 +157,13 @@
 		</div>
 	{:else}
 		<div class="blocks">
-			<EditMode on:editing on:focusing on:afterEditing={removeBadBlocks} on:blockMoved />
+			<EditMode
+				on:editing
+				on:focusing
+				on:blockMoved
+				on:blockDeleted
+				on:afterEditing={removeBadBlocks}
+			/>
 		</div>
 		<ToolBar on:blockAdded on:afterEditing={removeBadBlocks} />
 	{/if}

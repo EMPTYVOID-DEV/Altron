@@ -4,6 +4,6 @@
 
 <style>
 	svg path {
-		fill: var(--textColor);
+		fill: var(--icon, var(--primaryColor));
 	}
 </style>
