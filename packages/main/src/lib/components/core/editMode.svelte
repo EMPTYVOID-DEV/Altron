@@ -11,7 +11,7 @@
 	const componentMap: Map<string, SvelteComponent> = getContext('componentMap');
 	const menu = componentMap.get('menu');
 	const data: Writable<dataBlock[]> = getContext('data');
-	const dispatch = createEventDispatcher();
+	const dispatch = createEventDispatcher<{ afterEditing: { id: string } }>();
 
 	function traverseParent(element: HTMLElement): { blockId: string; blockEditorId: string } {
 		while (element) {
@@ -36,26 +36,14 @@
 		if (outFocus) {
 			workingBlock.set(null);
 		} else if (onFocus) {
-			dispatch('focusing', { id: blockId });
 			workingBlock.set({ id: blockId, state: 'focused' });
 		} else if ($workingBlock.state === 'focused') {
 			workingBlock.set({ id: blockId, state: 'editing' });
-			dispatch('editing', { id: blockId });
 		}
 	}
 
 	function deleteBlock() {
-		let deletedBlock: dataBlock;
-		data.update((prev) =>
-			prev.filter((el) => {
-				if (el.id == $workingBlock.id) {
-					deletedBlock = structuredClone(el);
-					return false;
-				}
-				return true;
-			})
-		);
-		dispatch('blockDeleted', deletedBlock);
+		data.update((prev) => prev.filter((el) => $workingBlock.id != el.id));
 	}
 
 	function moveBlock({
@@ -77,7 +65,6 @@
 			if (index !== newIndex) {
 				const [movedBlock] = blocks.splice(index, 1);
 				blocks.splice(newIndex, 0, movedBlock);
-				dispatch('blockMoved', { id, direction });
 			}
 			return blocks;
 		});

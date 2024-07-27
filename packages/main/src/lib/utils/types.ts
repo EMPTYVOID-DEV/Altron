@@ -43,12 +43,3 @@ export type dataBlock =
 	| { name: 'embed'; id: string; data: { src: string } };
 
 export type updateDataType = (id: string, cb: (el: dataBlock) => void) => void;
-export interface eventTypes {
-	blockAdded: { id: string };
-	blockDeleted: dataBlock;
-	blockMoved: { up: boolean; id: string };
-	editing: { id: string };
-	focusing: { id: string };
-	afterEditing: { id: string };
-	blockUpdate: { id: string };
-}

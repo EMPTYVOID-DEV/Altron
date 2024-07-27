@@ -5,13 +5,7 @@
 </script>
 
 <div>
-	<Main
-		{componentMap}
-		bind:this={main}
-		sizeLimits={{ attachments: 1, imgs: 1 }}
-		on:blockMoved={(e) => console.log(e)}
-		on:blockDeleted={(e) => console.log(e)}
-	/>
+	<Main {componentMap} bind:this={main} sizeLimits={{ attachments: 1, imgs: 1 }} />
 </div>
 
 <style>

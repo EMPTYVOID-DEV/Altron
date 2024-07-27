@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { SvelteComponent, createEventDispatcher, setContext, type ComponentType } from 'svelte';
+	import { SvelteComponent, setContext, type ComponentType } from 'svelte';
 	import ToolBar from './toolBar.svelte';
 	import type { IframeSettings, blocks, dataBlock } from '../../utils/types';
 	import ViewMode from './viewMode.svelte';
@@ -7,17 +7,6 @@
 	import { createDataStore, createWorkingBlockStore } from '../../utils/stores';
 	import { get } from 'svelte/store';
 	import { nanoid } from 'nanoid';
-
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	interface $$Events {
-		blockAdded: CustomEvent<{ id: string }>;
-		blockDeleted: CustomEvent<dataBlock>;
-		blockMoved: CustomEvent<{ direction: 'up' | 'down'; id: string }>;
-		editing: CustomEvent<{ id: string }>;
-		focusing: CustomEvent<{ id: string }>;
-		afterEditing: CustomEvent<{ id: string }>;
-		blockUpdate: CustomEvent<{ id: string }>;
-	}
 
 	// exports
 	export let processEmbedSrcs: (src: string) => string = (src: string) => {
@@ -49,7 +38,6 @@
 		'csharp'
 	];
 
-	const eventDispatcher = createEventDispatcher();
 	// component context
 	setContext('componentMap', componentMap);
 
@@ -139,14 +127,10 @@
 		return false;
 	}
 
-	function removeBadBlocks(e: { detail: { id: string } }) {
+	function removeBadBlocks({ detail: { id } }: { detail: { id: string } }) {
 		const currentData = get(data);
-		const block = currentData.find((el) => el.id == e.detail.id);
-		if (isEmptyBlock(block)) {
-			data.set(currentData.filter((el) => el.id != e.detail.id));
-		} else {
-			eventDispatcher('afterEditing', { id: e.detail.id });
-		}
+		const block = currentData.find((el) => el.id == id);
+		if (isEmptyBlock(block)) data.set(currentData.filter((el) => el.id != id));
 	}
 </script>
 
@@ -157,15 +141,9 @@
 		</div>
 	{:else}
 		<div class="blocks">
-			<EditMode
-				on:editing
-				on:focusing
-				on:blockMoved
-				on:blockDeleted
-				on:afterEditing={removeBadBlocks}
-			/>
+			<EditMode on:afterEditing={removeBadBlocks} />
 		</div>
-		<ToolBar on:blockAdded on:afterEditing={removeBadBlocks} />
+		<ToolBar on:afterEditing={removeBadBlocks} />
 	{/if}
 </main>
 

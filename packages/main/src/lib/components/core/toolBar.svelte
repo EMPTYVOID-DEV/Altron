@@ -4,7 +4,7 @@
 	import type { Writable } from 'svelte/store';
 	import { nanoid } from 'nanoid';
 	const languages = getContext('languages');
-	const defaultData = new Map<blocks, Record<string, unknown>>([
+	const defaultData = new Map<blocks, any>([
 		['paragraph', { text: '' }],
 		['image', { file: null, caption: '', src: '' }],
 		['code', { text: '', lang: languages[0] }],
@@ -18,7 +18,7 @@
 	]);
 	const componentMap = getContext('componentMap') as Map<string, ComponentType<SvelteComponent>>;
 	const toolBarUI = componentMap.get('toolBarUi');
-	const eventDispatcher = createEventDispatcher();
+	const dispatch = createEventDispatcher<{ afterEditing: { id: string } }>();
 	const workingBlock: Writable<{ state: 'focused' | 'editing'; id: string }> =
 		getContext('workingBlock');
 	const setData = getContext('setData') as (
@@ -29,13 +29,10 @@
 		const id = nanoid(8);
 		setData((prev) => {
 			prev.push({ id, name, data: { ...defaultValue } });
-			eventDispatcher('blockAdded', {
-				id
-			});
 			return prev;
 		});
 		if ($workingBlock?.state == 'editing')
-			eventDispatcher('afterEditing', {
+			dispatch('afterEditing', {
 				id: $workingBlock.id
 			});
 		workingBlock.set({ id, state: 'editing' });

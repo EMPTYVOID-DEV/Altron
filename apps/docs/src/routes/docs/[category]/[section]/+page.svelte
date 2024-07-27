@@ -22,7 +22,7 @@
         "What next",
       ],
     ],
-    ["Usage", ["Props and css variables", "Utils", "Events", "Types"]],
+    ["Usage", ["Props and css variables", "Utils", "Types"]],
   ]);
 </script>
 
