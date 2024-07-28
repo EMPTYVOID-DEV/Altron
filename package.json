@@ -18,7 +18,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@changesets/cli": "^2.27.1"
+    "@changesets/cli": "^2.27.1",
+    "vercel": "^35.2.1"
   },
   "engines": {
     "pnpm": ">=9"
