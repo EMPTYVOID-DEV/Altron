@@ -31,7 +31,7 @@
   },
   "type": "module",
   "dependencies": {
-    "@altron/altron": "^3.2.1",
+    "@altron/altron": "workspace:*",
     "shiki": "^1.11.1",
     "svelte-highlight": "^7.4.1",
     "svelte-select": "^5.8.3",
