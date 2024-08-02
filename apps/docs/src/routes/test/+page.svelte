@@ -8,8 +8,6 @@
 
 <div class="example">
   <header>
-    <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <!-- svelte-ignore a11y-no-static-element-interactions -->
     <span
       on:click={() => {
         goto("/");
@@ -50,12 +48,12 @@
 <style>
   .example {
     width: 95vw;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 20px;
-    padding-left: 20px;
+    padding-block: 2rem;
+    padding-left: 1.5rem;
     gap: 40px;
   }
   header {

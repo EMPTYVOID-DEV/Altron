@@ -6,6 +6,7 @@
     "docs-dev": "pnpm --filter @altron/altron-docs dev",
     "docs-build": "pnpm --filter @altron/altron-docs build",
     "docs-preview": "pnpm --filter @altron/altron-docs preview",
+    "docs-deploy": "pnpm --filter @altron/altron-docs deploy",
     "cli-dev": "pnpm --filter @altron/altron-cli dev",
     "cli-build": "pnpm --filter @altron/altron-cli build",
     "altron-dev": "pnpm --filter @altron/altron dev",
@@ -18,8 +19,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@changesets/cli": "^2.27.1",
-    "vercel": "^35.2.1"
+    "@changesets/cli": "^2.27.1"
   },
   "engines": {
     "pnpm": ">=9"

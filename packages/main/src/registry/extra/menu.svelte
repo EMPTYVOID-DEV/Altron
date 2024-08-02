@@ -25,5 +25,6 @@
 	.menu button {
 		all: unset;
 		cursor: pointer;
+		touch-action: none;
 	}
 </style>

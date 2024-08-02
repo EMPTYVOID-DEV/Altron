@@ -112,6 +112,5 @@
 		width: 100%;
 		gap: 10px;
 		align-items: center;
-		touch-action: none;
 	}
 </style>
