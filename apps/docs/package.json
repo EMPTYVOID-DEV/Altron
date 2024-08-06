@@ -10,10 +10,11 @@
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "lint": "prettier --check . && eslint .",
     "format": "prettier --write .",
-    "deploy": "pnpm dlx vercel deploy --prod"
+    "deploy": "pnpm dlx vercel build && pnpm dlx vercel deploy --prod --prebuilt"
   },
   "devDependencies": {
     "@sveltejs/adapter-auto": "^2.0.0",
+    "@sveltejs/adapter-vercel": "2",
     "@sveltejs/kit": "^1.27.4",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
@@ -31,7 +32,7 @@
   },
   "type": "module",
   "dependencies": {
-    "@altron/altron": "workspace:*",
+    "@altron/altron": "3.2.1",
     "shiki": "^1.11.1",
     "svelte-highlight": "^7.4.1",
     "svelte-select": "^5.8.3",

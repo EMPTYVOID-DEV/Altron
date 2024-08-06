@@ -38,17 +38,17 @@
 </script>
 
 <div class="toolBar">
-	<button on:click={() => (toggle = !toggle)} class="control">
+	<span on:click={() => (toggle = !toggle)} class="control">
 		{#if toggle}
 			<svelte:component this={CloseIcon} />
 		{:else}
 			<svelte:component this={PlusIcon} />
 		{/if}
-	</button>
+	</span>
 	{#if toggle}
 		<div class="options">
 			{#each options.entries() as option, index}
-				<button
+				<span
 					in:fade|global={{ delay: 80 * index, duration: 300, easing: elasticIn }}
 					out:fade|global={{ delay: 80 * (6 - index), duration: 300, easing: elasticIn }}
 					class="option"
@@ -59,7 +59,7 @@
 					}}
 				>
 					<svelte:component this={option[1]} />
-				</button>
+				</span>
 			{/each}
 		</div>
 	{/if}
@@ -74,7 +74,7 @@
 		gap: 20px;
 		margin-top: 35px;
 	}
-	.toolBar button {
+	.toolBar span {
 		display: flex;
 		align-items: center;
 		justify-content: center;

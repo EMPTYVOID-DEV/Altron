@@ -159,7 +159,6 @@
 		--primaryColor: var(--primary-color, #3366ff);
 		--secondaryColor: var(--secondary-color, #1eeb36);
 		--textColor: var(--text-color, #121212);
-		--bgColor: var(--bg-color, #ffffff);
 		--headingFont: var(--heading-font, 'Verdana, sans-serif');
 		--bodyFont: var(--body-font, 'Helvetica, sans-serif');
 		--h1: var(--h1-size, clamp(1.8rem, calc(1.8rem + ((1vw - 0.48rem) * 0.9722)), 2.1rem));

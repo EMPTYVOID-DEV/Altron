@@ -5,7 +5,17 @@
 </script>
 
 <div>
-	<Main {componentMap} bind:this={main} sizeLimits={{ attachments: 1, imgs: 1 }} />
+	<Main
+		--secondary-color="#ff6ec7"
+		--bg-color="red"
+		--text-color="red"
+		--primary-color="blue"
+		--body-font="var(--bodyFont)"
+		--heading-font="var(--headerFont)"
+		{componentMap}
+		bind:this={main}
+		sizeLimits={{ attachments: 1, imgs: 1 }}
+	/>
 </div>
 
 <style>
@@ -15,6 +25,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		background-color: black;
 	}
 
 	@media screen and (width < 768px) {

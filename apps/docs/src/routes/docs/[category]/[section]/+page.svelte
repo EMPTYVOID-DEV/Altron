@@ -40,8 +40,8 @@
       href: "/",
     },
     {
-      label: "Try-Altron",
-      href: "/test",
+      label: "Playground",
+      href: "/playground",
     },
   ]}
   githubLink="https://github.com/EMPTYVOID-DEV/Altron"
