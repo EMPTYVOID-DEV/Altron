@@ -22,7 +22,7 @@
 	function getDefaultData(block: blocks): any {
 		switch (block) {
 			case 'paragraph':
-				return { text: '' };
+				return { formattedText: { text: '', formats: [] } };
 			case 'image':
 				return { file: null, caption: '', src: '' };
 			case 'code':

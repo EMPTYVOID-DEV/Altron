@@ -39,6 +39,10 @@ import UPDOWNICON from './icons/upDownIcon.svelte';
 import UPLOADICON from './icons/uploadIcon.svelte';
 import BLOCKWRAPPERUI from './core/blockWrapperUi.svelte';
 import TOOLBARUI from './core/toolBarUi.svelte';
+import ITALICICON from './icons/italicIcon.svelte';
+import BOLDICON from './icons/boldIcon.svelte';
+import UNDERLINEICON from './icons/underlineIcon.svelte';
+import MARKUPTEXTAREA from './extra/markupTextArea.svelte';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-ignore
@@ -83,5 +87,9 @@ export const componentMap = new Map([
 	['upDownIcon', UPDOWNICON],
 	['uploadIcon', UPLOADICON],
 	['blockWrapperUi', BLOCKWRAPPERUI],
-	['toolBarUi', TOOLBARUI]
+	['toolBarUi', TOOLBARUI],
+	['underlineIcon', UNDERLINEICON],
+	['boldIcon', BOLDICON],
+	['italicIcon', ITALICICON],
+	['markupTextArea', MARKUPTEXTAREA]
 ]);

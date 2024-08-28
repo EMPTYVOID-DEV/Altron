@@ -95,6 +95,7 @@
 		flex-wrap: wrap;
 		justify-content: center;
 		gap: 0.5rem;
+		cursor: pointer;
 	}
 	.option {
 		border: 0.125rem solid var(--primaryColor);

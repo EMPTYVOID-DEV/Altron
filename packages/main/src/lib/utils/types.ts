@@ -28,7 +28,7 @@ export type blocks =
 
 export type dataBlock =
 	| { name: 'image'; id: string; data: { file: File; caption: string; src: string } }
-	| { name: 'paragraph'; id: string; data: { text: string } }
+	| { name: 'paragraph'; id: string; data: { formattedText: FormattedText } }
 	| { name: 'code'; id: string; data: { text: string; lang: string } }
 	| { name: 'quote'; id: string; data: { text: string; owner: string } }
 	| { name: 'header'; id: string; data: { text: string; level: 1 | 2 | 3 | 4 } }
@@ -43,3 +43,9 @@ export type dataBlock =
 	| { name: 'embed'; id: string; data: { src: string } };
 
 export type updateDataType = (id: string, cb: (el: dataBlock) => void) => void;
+
+export type FormatType = 'bold' | 'italic' | 'underline';
+
+export type Format = { start: number; end: number; type: FormatType };
+
+export type FormattedText = { text: string; formats: Format[] };
