@@ -32,11 +32,11 @@
 
 	.focused,
 	.edited {
-		padding-top: 35px;
-		padding-bottom: 10px;
-		padding-inline: 15px;
-		border-radius: 8px;
-		border: 3px solid var(--mainColor);
+		padding-top: 2rem;
+		padding-bottom: 0.5rem;
+		padding-inline: 0.5rem;
+		border-radius: 0.5rem;
+		border: 0.18rem solid var(--mainColor);
 	}
 
 	.focused .blockName,
@@ -55,9 +55,9 @@
 		background-color: var(--mainColor);
 		font-weight: bold;
 		display: none;
-		padding-inline: 12px;
-		padding-block: 2px;
-		border-bottom-left-radius: 12px;
+		padding-inline: 0.75rem;
+		padding-block: 0.125rem;
+		border-bottom-left-radius: 0.75rem;
 		text-transform: capitalize;
 	}
 </style>

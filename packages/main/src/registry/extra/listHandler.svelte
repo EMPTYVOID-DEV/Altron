@@ -50,28 +50,23 @@
 	.itemsEdit {
 		display: flex;
 		flex-direction: column;
-		gap: 10px;
+		gap: 0.5rem;
 	}
-	.itemsEdit .itemEdit {
+	.itemEdit {
 		display: flex;
 		align-items: center;
-		gap: 8px;
+		gap: 0.5rem;
 	}
-	.itemsEdit .control {
+	.control {
 		all: unset;
-		cursor: pointer;
-		width: 2.2rem;
-		aspect-ratio: 1/1;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		border-radius: 50%;
-		border: 2px solid var(--secondaryColor);
-		box-shadow: 0 0 5px var(--secondaryColor), 0 0 5px var(--secondaryColor),
-			0 0 5px var(--secondaryColor);
 		--icon: var(--secondaryColor);
 	}
-	.itemsEdit .header {
+
+	.control :global(svg) {
+		width: 1.25rem;
+		height: 1.25rem;
+	}
+	.header {
 		font-weight: 600;
 		color: var(--textColor);
 		font-size: var(--small);

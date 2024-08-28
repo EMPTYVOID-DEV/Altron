@@ -32,15 +32,15 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		gap: 10px;
+		gap: 0.75rem;
 	}
 
 	.attachment .info {
 		display: flex;
 		align-items: center;
-		gap: 20px;
-		border-left: 6px solid var(--primaryColor);
-		padding-left: 10px;
+		gap: 1rem;
+		border-left: 0.25rem solid var(--primaryColor);
+		padding-left: 0.75rem;
 	}
 	.attachment .info .type {
 		color: var(--primaryColor);

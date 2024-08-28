@@ -33,7 +33,7 @@
 	.textArea {
 		display: flex;
 		flex-direction: column;
-		gap: 6px;
+		gap: 0.25rem;
 	}
 	.textArea > .header {
 		font-weight: 600;
@@ -45,8 +45,8 @@
 		border: none;
 		outline: none;
 		min-height: 1rem;
-		border-left: 5px solid var(--secondaryColor);
-		padding-left: 8px;
+		border-left: 0.25rem solid var(--secondaryColor);
+		padding-left: 0.5rem;
 		cursor: pointer;
 		color: var(--textColor);
 		white-space: pre-wrap;

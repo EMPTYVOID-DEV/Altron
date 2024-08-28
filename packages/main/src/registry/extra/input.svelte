@@ -28,7 +28,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: stretch;
-		gap: 6px;
+		gap: 0.25rem;
 	}
 
 	.input-container .header {

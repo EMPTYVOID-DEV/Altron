@@ -37,17 +37,17 @@
 		width: 100%;
 		display: flex;
 		flex-direction: column;
-		gap: 5px;
-		border-radius: 5px;
+		gap: 0.25rem;
+		border-radius: 0.25rem;
 		background-color: color-mix(in srgb, var(--primaryColor) 40%, white 0%);
-		padding-bottom: 10px;
+		padding-bottom: 0.75rem;
 		overflow: hidden;
 		color: var(--textColor);
 		--icon: var(--textColor);
 	}
 
 	#codeMdBlock > code {
-		padding-left: 10px;
+		padding-left: 0.75rem;
 	}
 
 	#codeMdBlock #lang {
@@ -56,8 +56,8 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		padding-inline: 10px;
-		padding-block: 5px;
+		padding-inline: 0.75rem;
+		padding-block: 0.25rem;
 	}
 
 	#codeMdBlock #lang span {

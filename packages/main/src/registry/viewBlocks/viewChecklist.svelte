@@ -26,7 +26,7 @@
 		width: 100%;
 		display: flex;
 		flex-direction: column;
-		gap: 15px;
+		gap: 1rem;
 	}
 	.checkListView .checkItem {
 		width: 100%;
@@ -34,7 +34,7 @@
 		grid-template-columns: repeat(2, auto);
 		align-items: center;
 		justify-content: start;
-		gap: 10px;
+		gap: 0.75rem;
 	}
 	.checkListView span {
 		color: var(--textColor);

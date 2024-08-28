@@ -32,7 +32,7 @@
 		font-weight: bold;
 	}
 	.quote .quoteContent {
-		padding-left: 10px;
+		padding-left: 0.75rem;
 		font-size: var(--small);
 	}
 </style>
