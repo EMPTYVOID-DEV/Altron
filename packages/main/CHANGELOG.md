@@ -1,5 +1,11 @@
 # @altron/altron
 
+## 4.0.1
+
+### Patch Changes
+
+- b430d66: Fixing deploy script to use altron-package not altron-build
+
 ## 4.0.0
 
 ### Major Changes
