@@ -32,7 +32,7 @@
   },
   "type": "module",
   "dependencies": {
-    "@altron/altron": "4.0.1",
+    "@altron/altron": "4.0.0",
     "shiki": "^1.11.1",
     "svelte-highlight": "^7.4.1",
     "svelte-select": "^5.8.3",
