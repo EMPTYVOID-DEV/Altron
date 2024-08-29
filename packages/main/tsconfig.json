@@ -29,5 +29,6 @@
 		"./src/**/*.ts",
 		"./src/**/*.svelte",
 		"./.svelte-kit/ambient.d.ts"
-	]
+	],
+	"exclude": ["dist"]
 }

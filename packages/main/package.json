@@ -42,6 +42,10 @@
 		},
 		"./types": {
 			"import": "./dist/utils/types.d.ts"
+		},
+		"./utils": {
+			"types": "./dist/utils/utils.d.ts",
+			"import": "./dist/utils/utils.js"
 		}
 	},
 	"files": [
@@ -77,6 +81,9 @@
 			],
 			"types": [
 				"./dist/utils/types.d.ts"
+			],
+			"utils": [
+				"./dist/utils/utils.d.ts"
 			]
 		}
 	},

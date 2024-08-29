@@ -10,7 +10,9 @@
     "cli-dev": "pnpm --filter @altron/altron-cli dev",
     "cli-build": "pnpm --filter @altron/altron-cli build",
     "altron-dev": "pnpm --filter @altron/altron dev",
-    "altron-build": "pnpm --filter @altron/altron package",
+    "altron-preview": "pnpm --filter @altron/altron preview",
+    "altron-build": "pnpm --filter @altron/altron build",
+    "altron-package": "pnpm --filter @altron/altron package",
     "altron-lint": "pnpm --filter @altron/altron lint",
     "version": "npx changeset version",
     "release": "pnpm altron-build && pnpm cli-build && changeset publish"
@@ -19,7 +21,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@changesets/cli": "^2.27.1"
+    "@changesets/cli": "^2.27.1",
+    "prettier-plugin-svelte": "^3.2.6"
   },
   "engines": {
     "pnpm": ">=9"
