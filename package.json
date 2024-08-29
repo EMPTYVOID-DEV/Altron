@@ -15,7 +15,7 @@
     "altron-package": "pnpm --filter @altron/altron package",
     "altron-lint": "pnpm --filter @altron/altron lint",
     "version": "npx changeset version",
-    "release": "pnpm altron-build && pnpm cli-build && changeset publish"
+    "release": "pnpm altron-package && pnpm cli-build && changeset publish"
   },
   "keywords": [],
   "author": "",
