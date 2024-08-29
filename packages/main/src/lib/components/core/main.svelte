@@ -116,13 +116,16 @@
 	function isEmptyBlock(block: dataBlock) {
 		const srcBlocks = ['embed', 'image', 'attachment'] as const;
 		const listBlocks = ['checklist', 'list'] as const;
-		const textBlocks = ['code', 'quote', 'paragraph', 'header'] as const;
+		const textBlocks = ['code', 'header'] as const;
+		const formattedTextBlocks = ['quote', 'paragraph'] as const;
 		for (let srcBlock of srcBlocks)
 			if (block.name == srcBlock && block.data.src === '') return true;
 		for (let listBlock of listBlocks)
 			if (block.name == listBlock && block.data.items.length == 0) return true;
 		for (let textBlock of textBlocks)
 			if (block.name == textBlock && block.data.text === '') return true;
+		for (let formattedTextBlock of formattedTextBlocks)
+			if (block.name == formattedTextBlock && block.data.formattedText.text == '') return true;
 		if (block.name == 'space' && block.data.size == 0) return true;
 		return false;
 	}

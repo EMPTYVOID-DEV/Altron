@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { SvelteComponent, getContext, type ComponentType } from 'svelte';
-	import type { updateDataType } from '../../utils/types';
-	export let content: { items: { value: string; checked: boolean }[] };
+	import type { FormattedText, updateDataType } from '../../utils/types';
+	import { htmlToFormattedText } from '../../utils/utils';
+	export let content: { items: { value: FormattedText; checked: boolean }[] };
 	export let id: string;
 	export let active = false;
 	const componentMap = getContext('componentMap') as Map<string, ComponentType<SvelteComponent>>;
@@ -15,9 +16,9 @@
 		});
 	}
 
-	function updateEntry(index: number, text: string) {
+	function updateEntry(index: number, html: string) {
 		updateData(id, (el) => {
-			if (el.name == 'checklist') el.data.items[index].value = text;
+			if (el.name == 'checklist') htmlToFormattedText(el.data.items[index].value, html);
 		});
 	}
 	function removeEntry(index: number) {
@@ -25,7 +26,7 @@
 			if (el.name == 'checklist') el.data.items.splice(index, 1);
 		});
 	}
-	function addEntry(defaultVal: { value: string; checked: boolean }) {
+	function addEntry(defaultVal: { value: FormattedText; checked: boolean }) {
 		updateData(id, (el) => {
 			if (el.name == 'checklist')
 				el.data.items.push({ value: defaultVal.value, checked: defaultVal.checked });

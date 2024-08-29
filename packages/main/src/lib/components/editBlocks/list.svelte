@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { SvelteComponent, getContext, type ComponentType } from 'svelte';
-	import type { updateDataType } from '../../utils/types';
+	import type { FormattedText, updateDataType } from '../../utils/types';
+	import { htmlToFormattedText } from '../../utils/utils';
 
-	export let content: { items: string[]; type: 'ordered' | 'unordered' };
+	export let content: { items: FormattedText[]; type: 'ordered' | 'unordered' };
 	export let id: string;
 	export let active = false;
 
@@ -12,9 +13,9 @@
 	const updateData: updateDataType = getContext('updateData');
 	const view = componentMap.get('viewList');
 
-	function updateEntry(index: number, text: string) {
+	function updateEntry(index: number, html: string) {
 		updateData(id, (el) => {
-			if (el.name == 'list') el.data.items[index] = text;
+			if (el.name == 'list') htmlToFormattedText(el.data.items[index], html);
 		});
 	}
 	function removeEntry(index: number) {
@@ -22,7 +23,7 @@
 			if (el.name == 'list') el.data.items.splice(index, 1);
 		});
 	}
-	function addEntry(defaultVal: string) {
+	function addEntry(defaultVal: FormattedText) {
 		updateData(id, (el) => {
 			if (el.name == 'list') el.data.items.push(defaultVal);
 		});
@@ -42,7 +43,6 @@
 			changeHandler={(detail) => {
 				updateData(id, (el) => {
 					if (el.name == 'list') el.data.type = detail.value;
-					console.log(el);
 				});
 			}}
 		/>

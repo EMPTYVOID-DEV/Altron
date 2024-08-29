@@ -1,35 +1,47 @@
 <script>
+	import { generateHTML } from '$lib/utils/utils';
 	import { getContext } from 'svelte';
-	/**@type {(index:number,text:string)=>void}*/
+
+	/**
+	 * @typedef {'bold' | 'italic' | 'underline'} FormatType
+	 */
+
+	/**
+	 * @typedef {{start: number; end: number; type: FormatType}} Format
+	 */
+
+	/**
+	 * @typedef {{text: string; formats: Format[] }} FormattedText
+	 */
+
+	/**@type {(index:number,html:string)=>void}*/
 	export let updateEntry;
 	/**@type {(index:number)=>void}*/
 	export let removeEntry;
-	/**@type {(defaultVal: { value: string; checked: boolean })=>void}*/
+	/**@type {(defaultVal: { value:FormattedText ; checked: boolean })=>void}*/
 	export let addEntry;
 	/**@type {(index:number,checked:boolean)=>void}*/
 	export let checkEntry;
-	/**@type {{ value: string; checked: boolean }[]}*/
+	/**@type {{ value: FormattedText; checked: boolean }[]}*/
 	export let items;
 	/**@type {Map<string,import("svelte").SvelteComponent>}*/
 	const componentMap = getContext('componentMap');
 	const CloseIcon = componentMap.get('closeIcon');
 	const PlusIcon = componentMap.get('plusIcon');
-	const Textarea = componentMap.get('textArea');
+	const markupTextArea = componentMap.get('markupTextArea');
 	const Checked = componentMap.get('checkedIcon');
 	const UnChecked = componentMap.get('unCheckedIcon');
 </script>
 
 <div class="checkListExtra">
-	<span class="header">Check list items </span>
+	<span class="header">Check list items</span>
 	{#each items as item, index}
 		<div class="itemEdit">
 			<svelte:component
-				this={Textarea}
-				width={90}
-				textContent={item.value}
-				textLevel={0}
-				changeHandler={(text) => {
-					updateEntry(index, text);
+				this={markupTextArea}
+				initialHtml={generateHTML(item.value)}
+				changeHandler={(/**@type {string}*/ html) => {
+					updateEntry(index, html);
 				}}
 			/>
 			<div class="options">
@@ -50,7 +62,8 @@
 	{/each}
 	<button
 		class="control"
-		on:click|stopPropagation={() => addEntry({ value: 'hello friend', checked: true })}
+		on:click|stopPropagation={() =>
+			addEntry({ value: { text: 'Hello friend', formats: [] }, checked: true })}
 	>
 		<svelte:component this={PlusIcon} />
 	</button>
@@ -69,7 +82,7 @@
 	}
 	.itemEdit {
 		display: flex;
-		align-items: center;
+		align-items: flex-end;
 		gap: 0.5rem;
 	}
 

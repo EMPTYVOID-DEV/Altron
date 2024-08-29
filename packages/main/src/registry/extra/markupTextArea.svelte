@@ -81,10 +81,7 @@
 	}
 
 	function removeEmptyNodes() {
-		const walker = document.createTreeWalker(
-			editableArea,
-			NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT
-		);
+		const walker = document.createTreeWalker(editableArea, NodeFilter.SHOW_ELEMENT);
 		const nodesToRemove = [];
 		while (walker.nextNode()) {
 			const node = walker.currentNode;

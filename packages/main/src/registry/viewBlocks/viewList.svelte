@@ -1,5 +1,19 @@
 <script>
-	/**@type {string[]}*/
+	import FormatParser from '../extra/formatParser.svelte';
+
+	/**
+	 * @typedef {'bold' | 'italic' | 'underline'} FormatType
+	 */
+
+	/**
+	 * @typedef {{start: number; end: number; type: FormatType}} Format
+	 */
+
+	/**
+	 * @typedef {{text: string; formats: Format[] }} FormattedText
+	 */
+
+	/**@type {FormattedText[]}*/
 	export let items;
 	/**@type {string}*/
 	export let type;
@@ -10,14 +24,14 @@
 		{#each items as item, index}
 			<div class="item">
 				<span class="index">{index + 1 + '.'}</span>
-				<li>{item}</li>
+				<li><FormatParser formattedText={item} /></li>
 			</div>
 		{/each}
 	</ol>
 {:else}
 	<ul>
 		{#each items as item}
-			<li>{item}</li>
+			<li><FormatParser formattedText={item} /></li>
 		{/each}
 	</ul>
 {/if}
@@ -73,5 +87,6 @@
 	li {
 		padding: 0.25rem;
 		border-radius: 0.25rem;
+		white-space: pre-wrap;
 	}
 </style>

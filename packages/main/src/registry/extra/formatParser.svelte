@@ -48,6 +48,11 @@
 {/each}
 
 <style>
+	span {
+		color: inherit;
+		font-size: inherit;
+	}
+
 	.bold {
 		font-weight: bold;
 	}

@@ -28,7 +28,7 @@
 			case 'code':
 				return { text: '', lang: languages[0] };
 			case 'quote':
-				return { text: '', owner: '' };
+				return { formattedText: { text: '', formats: [] }, owner: '' };
 			case 'header':
 				return { text: '', level: 4 };
 			case 'list':

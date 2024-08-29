@@ -15,7 +15,7 @@
 <div class="textArea" style:width={`${width}%`}>
 	<span class="header">{label}</span>
 	<span
-		style:font-size="var(--{textLevel == 0 ? 'body' : 'h' + textLevel})"
+		style:font-size={textLevel == 0 ? 'var(--body)' : `var(--h${textLevel})`}
 		style:font-weight={textLevel == 0 ? '400' : 'bold'}
 		style:font-family={textLevel == 0 ? 'var(--bodyFont)' : 'var(--headingFont)'}
 		class="editableArea"

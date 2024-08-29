@@ -1,20 +1,33 @@
 <script>
+	import { generateHTML } from '$lib/utils/utils';
 	import { getContext } from 'svelte';
 
-	/**@type {string[]}*/
+	/**
+	 * @typedef {'bold' | 'italic' | 'underline'} FormatType
+	 */
+
+	/**
+	 * @typedef {{start: number; end: number; type: FormatType}} Format
+	 */
+
+	/**
+	 * @typedef {{text: string; formats: Format[] }} FormattedText
+	 */
+
+	/**@type {FormattedText[]}*/
 	export let items;
-	/**@type {(index:number,text:string)=>void}*/
+	/**@type {(index:number,html:string)=>void}*/
 	export let updateEntry;
 	/**@type {(index:number)=>void}*/
 	export let removeEntry;
-	/**@type {(defaultVal: string)=>void}*/
+	/**@type {(defaultVal: FormattedText)=>void}*/
 	export let addEntry;
 
 	/**@type {Map<string,import("svelte").SvelteComponent>}*/
 	const componentMap = getContext('componentMap');
 	const CloseIcon = componentMap.get('closeIcon');
 	const PlusIcon = componentMap.get('plusIcon');
-	const Textarea = componentMap.get('textArea');
+	const markupTextArea = componentMap.get('markupTextArea');
 </script>
 
 <div class="itemsEdit">
@@ -22,14 +35,13 @@
 	{#each items as item, index}
 		<div class="itemEdit">
 			<svelte:component
-				this={Textarea}
-				width={90}
-				textContent={item}
-				textLevel={0}
-				changeHandler={(text) => {
-					updateEntry(index, text);
+				this={markupTextArea}
+				initialHtml={generateHTML(item)}
+				changeHandler={(/**@type {string}*/ html) => {
+					updateEntry(index, html);
 				}}
 			/>
+
 			<button
 				class="control"
 				on:click|stopPropagation={() => {
@@ -41,7 +53,7 @@
 	<button
 		class="control"
 		on:click|stopPropagation={() => {
-			addEntry('hello friend');
+			addEntry({ formats: [], text: 'hello friend' });
 		}}><svelte:component this={PlusIcon} /></button
 	>
 </div>

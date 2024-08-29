@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { SvelteComponent, getContext, type ComponentType } from 'svelte';
 	import type { FormattedText, updateDataType } from '../../utils/types';
-	import { generateHTML, htmlToFormattedText } from '$lib/utils/utils';
+	import { generateHTML, htmlToFormattedText } from '../../utils/utils';
 	export let content: { formattedText: FormattedText };
 	export let active = false;
 	export let id: string;
