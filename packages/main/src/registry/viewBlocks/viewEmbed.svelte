@@ -34,9 +34,9 @@
 		display: block;
 		color: var(--textColor);
 		font-weight: bold !important;
-		border-left: 5px solid var(--errorColor);
-		padding-left: 10px;
-		padding-block: 10px;
+		border-left: 0.25rem solid var(--errorColor);
+		padding-left: 0.75rem;
+		padding-block: 0.75rem;
 	}
 	.embedView {
 		width: 100%;

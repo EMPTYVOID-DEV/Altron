@@ -38,7 +38,7 @@
 	.input-container {
 		display: flex;
 		flex-direction: column;
-		gap: 6px;
+		gap: 0.25rem;
 	}
 
 	.input-container .header {
@@ -51,7 +51,7 @@
 		width: 100%;
 		display: flex;
 		align-items: center;
-		gap: 20px;
+		gap: 1rem;
 	}
 	.inputReplace > span:last-child {
 		text-align: center;
@@ -65,16 +65,16 @@
 		cursor: pointer;
 		display: flex;
 		align-items: center;
-		gap: 5px;
-		border: 2px solid var(--secondaryColor);
-		padding-inline: 8px;
-		padding-block: 8px;
+		gap: 0.25rem;
+		border: 0.125rem solid var(--secondaryColor);
 		border-radius: 0.5rem;
+		padding-inline: 0.5rem;
+		padding-block: 0.5rem;
 		--icon: var(--secondaryColor);
 	}
 	.uploadBtn > span {
 		color: var(--textColor);
-		font-size: var(--small);
 		font-weight: 600;
+		font-size: var(--small);
 	}
 </style>

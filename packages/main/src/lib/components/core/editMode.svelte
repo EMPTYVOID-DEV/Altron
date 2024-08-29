@@ -110,7 +110,7 @@
 	.block {
 		display: flex;
 		width: 100%;
-		gap: 10px;
+		gap: 0.5rem;
 		align-items: center;
 	}
 </style>

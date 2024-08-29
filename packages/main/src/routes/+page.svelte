@@ -7,8 +7,8 @@
 <div>
 	<Main
 		--secondary-color="#ff6ec7"
-		--bg-color="red"
-		--text-color="red"
+		--bg-color="black"
+		--text-color="white"
 		--primary-color="blue"
 		--body-font="var(--bodyFont)"
 		--heading-font="var(--headerFont)"
@@ -19,8 +19,15 @@
 </div>
 
 <style>
+	:global(body) {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		overflow-x: hidden;
+	}
 	div {
-		width: 80vw;
+		width: 100vw;
+		min-height: 100vh;
 		padding-block: 40px;
 		display: flex;
 		align-items: center;

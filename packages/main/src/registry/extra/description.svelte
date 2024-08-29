@@ -14,7 +14,7 @@
 	.description {
 		display: flex;
 		flex-direction: column;
-		gap: 6px;
+		gap: 0.25rem;
 	}
 	.description span {
 		text-transform: capitalize;

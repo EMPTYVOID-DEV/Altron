@@ -116,13 +116,16 @@
 	function isEmptyBlock(block: dataBlock) {
 		const srcBlocks = ['embed', 'image', 'attachment'] as const;
 		const listBlocks = ['checklist', 'list'] as const;
-		const textBlocks = ['code', 'quote', 'paragraph', 'header'] as const;
+		const textBlocks = ['code', 'header'] as const;
+		const formattedTextBlocks = ['quote', 'paragraph'] as const;
 		for (let srcBlock of srcBlocks)
 			if (block.name == srcBlock && block.data.src === '') return true;
 		for (let listBlock of listBlocks)
 			if (block.name == listBlock && block.data.items.length == 0) return true;
 		for (let textBlock of textBlocks)
 			if (block.name == textBlock && block.data.text === '') return true;
+		for (let formattedTextBlock of formattedTextBlocks)
+			if (block.name == formattedTextBlock && block.data.formattedText.text == '') return true;
 		if (block.name == 'space' && block.data.size == 0) return true;
 		return false;
 	}
@@ -159,6 +162,7 @@
 		--primaryColor: var(--primary-color, #3366ff);
 		--secondaryColor: var(--secondary-color, #1eeb36);
 		--textColor: var(--text-color, #121212);
+		--bgColor: var(--bg-color, #ffffff);
 		--headingFont: var(--heading-font, 'Verdana, sans-serif');
 		--bodyFont: var(--body-font, 'Helvetica, sans-serif');
 		--h1: var(--h1-size, clamp(1.8rem, calc(1.8rem + ((1vw - 0.48rem) * 0.9722)), 2.1rem));
@@ -173,7 +177,7 @@
 		display: flex;
 		width: 100%;
 		flex-direction: column;
-		gap: var(--block-gap, 10px);
+		gap: var(--block-gap, 0.5rem);
 	}
 	main :global(*) {
 		box-sizing: border-box;

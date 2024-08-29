@@ -15,7 +15,7 @@
 <div class="textArea" style:width={`${width}%`}>
 	<span class="header">{label}</span>
 	<span
-		style:font-size="var(--{textLevel == 0 ? 'body' : 'h' + textLevel})"
+		style:font-size={textLevel == 0 ? 'var(--body)' : `var(--h${textLevel})`}
 		style:font-weight={textLevel == 0 ? '400' : 'bold'}
 		style:font-family={textLevel == 0 ? 'var(--bodyFont)' : 'var(--headingFont)'}
 		class="editableArea"
@@ -33,7 +33,7 @@
 	.textArea {
 		display: flex;
 		flex-direction: column;
-		gap: 6px;
+		gap: 0.25rem;
 	}
 	.textArea > .header {
 		font-weight: 600;
@@ -45,8 +45,8 @@
 		border: none;
 		outline: none;
 		min-height: 1rem;
-		border-left: 5px solid var(--secondaryColor);
-		padding-left: 8px;
+		border-left: 0.25rem solid var(--secondaryColor);
+		padding-left: 0.5rem;
 		cursor: pointer;
 		color: var(--textColor);
 		white-space: pre-wrap;

@@ -16,12 +16,12 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		gap: 8px;
+		gap: 0.5rem;
 	}
 	.imageView img {
 		width: 100%;
 		aspect-ratio: 2/1;
-		border-radius: 8px;
+		border-radius: 0.5rem;
 		object-fit: cover;
 		object-position: center;
 	}

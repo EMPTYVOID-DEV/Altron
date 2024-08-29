@@ -48,7 +48,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: stretch;
-		gap: 6px;
+		gap: 0.25rem;
 	}
 	.select span {
 		font-size: var(--small);

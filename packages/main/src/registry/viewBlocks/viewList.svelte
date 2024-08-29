@@ -1,5 +1,19 @@
 <script>
-	/**@type {string[]}*/
+	import FormatParser from '../extra/formatParser.svelte';
+
+	/**
+	 * @typedef {'bold' | 'italic' | 'underline'} FormatType
+	 */
+
+	/**
+	 * @typedef {{start: number; end: number; type: FormatType}} Format
+	 */
+
+	/**
+	 * @typedef {{text: string; formats: Format[] }} FormattedText
+	 */
+
+	/**@type {FormattedText[]}*/
 	export let items;
 	/**@type {string}*/
 	export let type;
@@ -10,14 +24,14 @@
 		{#each items as item, index}
 			<div class="item">
 				<span class="index">{index + 1 + '.'}</span>
-				<li>{item}</li>
+				<li><FormatParser formattedText={item} /></li>
 			</div>
 		{/each}
 	</ol>
 {:else}
 	<ul>
 		{#each items as item}
-			<li>{item}</li>
+			<li><FormatParser formattedText={item} /></li>
 		{/each}
 	</ul>
 {/if}
@@ -32,7 +46,7 @@
 		width: 100%;
 		display: flex;
 		flex-direction: column;
-		gap: 15px;
+		gap: 1rem;
 	}
 
 	ul {
@@ -44,11 +58,11 @@
 		grid-template-columns: auto auto;
 		align-items: center;
 		justify-content: start;
-		gap: 12px;
+		gap: 0.75rem;
 	}
 	ol .index {
-		width: 2.2rem;
-		height: 2.2rem;
+		width: 2rem;
+		height: 2rem;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -56,10 +70,10 @@
 		font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 	}
 	ol .item:nth-child(even) .index {
-		border: 2px solid var(--secondaryColor);
+		border: 0.125rem solid var(--secondaryColor);
 	}
 	ol .item:nth-child(odd) .index {
-		border: 2px solid var(--primaryColor);
+		border: 0.125rem solid var(--primaryColor);
 	}
 	ol .item:nth-child(odd) li,
 	ul li:nth-child(odd) {
@@ -71,7 +85,8 @@
 	}
 
 	li {
-		padding: 6px;
-		border-radius: 4px;
+		padding: 0.25rem;
+		border-radius: 0.25rem;
+		white-space: pre-wrap;
 	}
 </style>

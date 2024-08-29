@@ -38,17 +38,17 @@
 </script>
 
 <div class="toolBar">
-	<span on:click={() => (toggle = !toggle)} class="control">
+	<button on:click={() => (toggle = !toggle)} class="control">
 		{#if toggle}
 			<svelte:component this={CloseIcon} />
 		{:else}
 			<svelte:component this={PlusIcon} />
 		{/if}
-	</span>
+	</button>
 	{#if toggle}
 		<div class="options">
 			{#each options.entries() as option, index}
-				<span
+				<button
 					in:fade|global={{ delay: 80 * index, duration: 300, easing: elasticIn }}
 					out:fade|global={{ delay: 80 * (6 - index), duration: 300, easing: elasticIn }}
 					class="option"
@@ -59,7 +59,7 @@
 					}}
 				>
 					<svelte:component this={option[1]} />
-				</span>
+				</button>
 			{/each}
 		</div>
 	{/if}
@@ -71,22 +71,20 @@
 		display: grid;
 		grid-template-columns: repeat(2, auto);
 		align-items: center;
-		gap: 20px;
-		margin-top: 35px;
+		gap: 1rem;
+		margin-top: 2rem;
 	}
-	.toolBar span {
+
+	.control,
+	.option {
+		all: unset;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		width: 36px;
+		width: 1.8rem;
 		aspect-ratio: 1/1;
 		border-radius: 50%;
 		cursor: pointer;
-	}
-
-	.control {
-		border: 2px solid var(--textColor);
-		--icon: var(--textColor);
 	}
 
 	.options {
@@ -94,11 +92,17 @@
 		align-items: center;
 		flex-wrap: wrap;
 		justify-content: center;
-		gap: 10px;
+		gap: 0.5rem;
+		cursor: pointer;
 	}
+
+	.control {
+		border: 0.125rem solid var(--textColor);
+		--icon: var(--textColor);
+	}
+
 	.option {
-		border: 2px solid var(--primaryColor);
-		position: relative;
+		border: 0.125rem solid var(--primaryColor);
 		--icon: var(--primaryColor);
 	}
 </style>

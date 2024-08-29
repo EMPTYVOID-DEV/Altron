@@ -1,14 +1,20 @@
 <script lang="ts">
 	import { SvelteComponent, getContext, type ComponentType } from 'svelte';
-	import type { updateDataType } from '../../utils/types';
-	export let content: { text: string; owner: string };
+	import type { FormattedText, updateDataType } from '../../utils/types';
+	import { generateHTML, htmlToFormattedText } from '../../utils/utils';
+	export let content: { formattedText: FormattedText; owner: string };
 	export let id: string;
 	export let active = false;
 	const componentMap = getContext('componentMap') as Map<string, ComponentType<SvelteComponent>>;
 	const input = componentMap.get('input');
-	const textarea = componentMap.get('textArea');
+	const markupTextArea = componentMap.get('markupTextArea');
 	const updateData: updateDataType = getContext('updateData');
 	const view = componentMap.get('viewQuote');
+	function changeHandler(html: string) {
+		updateData(id, (prev) => {
+			if (prev.name == 'quote') htmlToFormattedText(prev.data.formattedText, html);
+		});
+	}
 </script>
 
 {#if active}
@@ -25,15 +31,10 @@
 		/>
 
 		<svelte:component
-			this={textarea}
-			label="The Quote content"
-			textContent={content.text}
-			textLevel={0}
-			changeHandler={(textContent) => {
-				updateData(id, (prev) => {
-					if (prev.name == 'quote') prev.data.text = textContent;
-				});
-			}}
+			this={markupTextArea}
+			label="Quote content"
+			initialHtml={generateHTML(content.formattedText)}
+			{changeHandler}
 		/>
 	</div>
 {:else}
@@ -45,6 +46,6 @@
 		width: 100%;
 		display: flex;
 		flex-direction: column;
-		gap: 15px;
+		gap: 1rem;
 	}
 </style>

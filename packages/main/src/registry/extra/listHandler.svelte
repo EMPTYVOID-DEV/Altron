@@ -1,20 +1,33 @@
 <script>
+	import { generateHTML } from '$lib/utils/utils';
 	import { getContext } from 'svelte';
 
-	/**@type {string[]}*/
+	/**
+	 * @typedef {'bold' | 'italic' | 'underline'} FormatType
+	 */
+
+	/**
+	 * @typedef {{start: number; end: number; type: FormatType}} Format
+	 */
+
+	/**
+	 * @typedef {{text: string; formats: Format[] }} FormattedText
+	 */
+
+	/**@type {FormattedText[]}*/
 	export let items;
-	/**@type {(index:number,text:string)=>void}*/
+	/**@type {(index:number,html:string)=>void}*/
 	export let updateEntry;
 	/**@type {(index:number)=>void}*/
 	export let removeEntry;
-	/**@type {(defaultVal: string)=>void}*/
+	/**@type {(defaultVal: FormattedText)=>void}*/
 	export let addEntry;
 
 	/**@type {Map<string,import("svelte").SvelteComponent>}*/
 	const componentMap = getContext('componentMap');
 	const CloseIcon = componentMap.get('closeIcon');
 	const PlusIcon = componentMap.get('plusIcon');
-	const Textarea = componentMap.get('textArea');
+	const markupTextArea = componentMap.get('markupTextArea');
 </script>
 
 <div class="itemsEdit">
@@ -22,14 +35,13 @@
 	{#each items as item, index}
 		<div class="itemEdit">
 			<svelte:component
-				this={Textarea}
-				width={90}
-				textContent={item}
-				textLevel={0}
-				changeHandler={(text) => {
-					updateEntry(index, text);
+				this={markupTextArea}
+				initialHtml={generateHTML(item)}
+				changeHandler={(/**@type {string}*/ html) => {
+					updateEntry(index, html);
 				}}
 			/>
+
 			<button
 				class="control"
 				on:click|stopPropagation={() => {
@@ -41,7 +53,7 @@
 	<button
 		class="control"
 		on:click|stopPropagation={() => {
-			addEntry('hello friend');
+			addEntry({ formats: [], text: 'hello friend' });
 		}}><svelte:component this={PlusIcon} /></button
 	>
 </div>
@@ -50,28 +62,23 @@
 	.itemsEdit {
 		display: flex;
 		flex-direction: column;
-		gap: 10px;
+		gap: 0.5rem;
 	}
-	.itemsEdit .itemEdit {
+	.itemEdit {
 		display: flex;
 		align-items: center;
-		gap: 8px;
+		gap: 0.5rem;
 	}
-	.itemsEdit .control {
+	.control {
 		all: unset;
-		cursor: pointer;
-		width: 2.2rem;
-		aspect-ratio: 1/1;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		border-radius: 50%;
-		border: 2px solid var(--secondaryColor);
-		box-shadow: 0 0 5px var(--secondaryColor), 0 0 5px var(--secondaryColor),
-			0 0 5px var(--secondaryColor);
 		--icon: var(--secondaryColor);
 	}
-	.itemsEdit .header {
+
+	.control :global(svg) {
+		width: 1.25rem;
+		height: 1.25rem;
+	}
+	.header {
 		font-weight: 600;
 		color: var(--textColor);
 		font-size: var(--small);
