@@ -12,18 +12,17 @@ import { installPackages } from "./handlers/installPackages.js";
 import { createIndex } from "./handlers/createIndex.js";
 import { logger } from "./utils/logger.js";
 import { whatNext } from "./handlers/whatNext.js";
-import { constructBaseUrl } from "./utils/constructBaseUrl.js";
+import { rawPath } from "./consts.js";
 
 async function main() {
   welcome();
-  const usedVersion = altronCheck();
-  const baseUrl = constructBaseUrl(usedVersion);
+  altronCheck();
   const { altronPath, choices } = await cli();
-  const { registry, blockDependencies } = await getMetaData(baseUrl);
+  const { registry, blockDependencies } = await getMetaData(rawPath);
   await createAltronDir(altronPath);
   const { components, packages } = getDependencies(choices, blockDependencies);
   const componentPaths = componentToPath(components, registry);
-  await loadComponents(baseUrl, componentPaths, altronPath);
+  await loadComponents(rawPath, componentPaths, altronPath);
   await installPackages(packages);
   createIndex(altronPath);
   whatNext();

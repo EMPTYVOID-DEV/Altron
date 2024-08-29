@@ -1,4 +1,4 @@
-import { blockDependenciesJson, registryJson } from "src/types.js";
+import { blockDependenciesJson, registryJson } from "../types.js";
 import { customGithubFetch } from "../utils/customFetch.js";
 import { logger } from "src/utils/logger.js";
 

@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@altron/altron':
-        specifier: 3.2.1
-        version: 3.2.1(svelte@4.2.18)
+        specifier: ^4.0.1
+        version: 4.0.1(svelte@4.2.18)
       shiki:
         specifier: ^1.11.1
         version: 1.11.1
@@ -75,8 +75,8 @@ importers:
 
 packages:
 
-  '@altron/altron@3.2.1':
-    resolution: {integrity: sha512-wupebrtE32cwX6LyFuCl1VfHeWZ2E8QwWG/ir7zXeVxOV4CbZlERwlut5yux34PlQc2dohlT/VAG8L3ONTNzdA==}
+  '@altron/altron@4.0.1':
+    resolution: {integrity: sha512-csSRM50iUZdy1vsBY0hckSeX0visGEb9MLQDc+Qw8U91Ojg77tlJ8VFsogXj3P9aevlMxnpHBSTXhSMO500rvQ==}
     engines: {node: '>=16.14'}
     peerDependencies:
       svelte: ^4.0.0
@@ -2195,7 +2195,7 @@ packages:
 
 snapshots:
 
-  '@altron/altron@3.2.1(svelte@4.2.18)':
+  '@altron/altron@4.0.1(svelte@4.2.18)':
     dependencies:
       nanoid: 5.0.7
       svelte: 4.2.18
