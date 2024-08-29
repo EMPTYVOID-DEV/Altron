@@ -1,5 +1,11 @@
 # @altron/altron-cli
 
+## 0.3.0
+
+### Minor Changes
+
+- 2d8ec17: making the cli always get the latest version
+
 ## 0.2.2
 
 ### Patch Changes
