@@ -43,6 +43,7 @@ import ITALICICON from './icons/italicIcon.svelte';
 import BOLDICON from './icons/boldIcon.svelte';
 import UNDERLINEICON from './icons/underlineIcon.svelte';
 import MARKUPTEXTAREA from './extra/markupTextArea.svelte';
+import FORMATPARSER from './extra/formatParser.svelte';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-ignore
@@ -91,5 +92,6 @@ export const componentMap = new Map([
 	['underlineIcon', UNDERLINEICON],
 	['boldIcon', BOLDICON],
 	['italicIcon', ITALICICON],
-	['markupTextArea', MARKUPTEXTAREA]
+	['markupTextArea', MARKUPTEXTAREA],
+	['formatParser', FORMATPARSER]
 ]);

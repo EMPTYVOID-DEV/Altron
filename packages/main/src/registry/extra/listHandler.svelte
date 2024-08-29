@@ -1,26 +1,14 @@
 <script>
-	import { generateHTML } from '$lib/utils/utils';
+	import { generateHTML } from '@altron/altron/utils';
 	import { getContext } from 'svelte';
 
-	/**
-	 * @typedef {'bold' | 'italic' | 'underline'} FormatType
-	 */
-
-	/**
-	 * @typedef {{start: number; end: number; type: FormatType}} Format
-	 */
-
-	/**
-	 * @typedef {{text: string; formats: Format[] }} FormattedText
-	 */
-
-	/**@type {FormattedText[]}*/
+	/**@type {import("@altron/altron/types").FormattedText[]}*/
 	export let items;
 	/**@type {(index:number,html:string)=>void}*/
 	export let updateEntry;
 	/**@type {(index:number)=>void}*/
 	export let removeEntry;
-	/**@type {(defaultVal: FormattedText)=>void}*/
+	/**@type {(defaultVal:import("@altron/altron/types").FormattedText)=>void}*/
 	export let addEntry;
 
 	/**@type {Map<string,import("svelte").SvelteComponent>}*/

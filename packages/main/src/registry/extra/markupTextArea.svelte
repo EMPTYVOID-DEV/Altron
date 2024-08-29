@@ -109,7 +109,8 @@
 			bind:this={editableArea}
 			class="editableArea"
 			contenteditable="true"
-			on:pointerup={handleSelection}
+			on:pointerup|stopPropagation={handleSelection}
+			on:contextmenu|preventDefault|stopPropagation={handleSelection}
 			on:input={handleInputChange}
 		/>
 	</div>

@@ -1,20 +1,8 @@
 <script>
-	/**
-	 * @typedef {'bold' | 'italic' | 'underline'} FormatType
-	 */
-
-	/**
-	 * @typedef {{start: number; end: number; type: FormatType}} Format
-	 */
-
-	/**
-	 * @typedef {{text: string; formats: Format[] }} FormattedText
-	 */
-
-	/**@type {FormattedText}*/
+	/**@type {import("@altron/altron/types").FormattedText}*/
 	export let formattedText;
 
-	/**@param {FormattedText} formattedText*/
+	/**@param {import("@altron/altron/types").FormattedText} formattedText*/
 	function parseFormattedText(formattedText) {
 		const points = new Set([
 			0,

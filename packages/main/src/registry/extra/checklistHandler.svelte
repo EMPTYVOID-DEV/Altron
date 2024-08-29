@@ -1,28 +1,16 @@
 <script>
-	import { generateHTML } from '$lib/utils/utils';
+	import { generateHTML } from '@altron/altron/utils';
 	import { getContext } from 'svelte';
-
-	/**
-	 * @typedef {'bold' | 'italic' | 'underline'} FormatType
-	 */
-
-	/**
-	 * @typedef {{start: number; end: number; type: FormatType}} Format
-	 */
-
-	/**
-	 * @typedef {{text: string; formats: Format[] }} FormattedText
-	 */
 
 	/**@type {(index:number,html:string)=>void}*/
 	export let updateEntry;
 	/**@type {(index:number)=>void}*/
 	export let removeEntry;
-	/**@type {(defaultVal: { value:FormattedText ; checked: boolean })=>void}*/
+	/**@type {(defaultVal: {value: import("@altron/altron/types").FormattedText ; checked: boolean })=>void}*/
 	export let addEntry;
 	/**@type {(index:number,checked:boolean)=>void}*/
 	export let checkEntry;
-	/**@type {{ value: FormattedText; checked: boolean }[]}*/
+	/**@type {{ value: import("@altron/altron/types").FormattedText; checked: boolean }[]}*/
 	export let items;
 	/**@type {Map<string,import("svelte").SvelteComponent>}*/
 	const componentMap = getContext('componentMap');

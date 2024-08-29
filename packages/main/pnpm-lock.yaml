@@ -12,6 +12,9 @@ importers:
         specifier: ^5.0.3
         version: 5.0.3
     devDependencies:
+      '@altron/altron':
+        specifier: ^4.0.1
+        version: 4.0.1(svelte@4.2.18)
       '@sveltejs/adapter-auto':
         specifier: ^2.0.0
         version: 2.1.0(@sveltejs/kit@1.27.1(svelte@4.2.18)(vite@4.5.0))
@@ -69,6 +72,12 @@ packages:
   '@aashutoshrathi/word-wrap@1.2.6':
     resolution: {integrity: sha512-1Yjs2SvM8TflER/OD3cOjhWWOZb58A2t7wpE2S9XfBYTiIl+XFhQG2bjy4Pu1I+EAlCNUzRDYDdFwFYUKvXcIA==}
     engines: {node: '>=0.10.0'}
+
+  '@altron/altron@4.0.1':
+    resolution: {integrity: sha512-csSRM50iUZdy1vsBY0hckSeX0visGEb9MLQDc+Qw8U91Ojg77tlJ8VFsogXj3P9aevlMxnpHBSTXhSMO500rvQ==}
+    engines: {node: '>=16.14'}
+    peerDependencies:
+      svelte: ^4.0.0
 
   '@ampproject/remapping@2.2.1':
     resolution: {integrity: sha512-lFMjJTrFL3j7L9yBxwYfCq2k6qqwHyzuUl/XBnif78PWTJYyL/dfowQHWE3sp6U6ZzqWiiIZnpTMO96zhkjwtg==}
@@ -1232,6 +1241,11 @@ packages:
 snapshots:
 
   '@aashutoshrathi/word-wrap@1.2.6': {}
+
+  '@altron/altron@4.0.1(svelte@4.2.18)':
+    dependencies:
+      nanoid: 5.0.3
+      svelte: 4.2.18
 
   '@ampproject/remapping@2.2.1':
     dependencies:

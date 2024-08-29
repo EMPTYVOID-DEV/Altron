@@ -1,25 +1,13 @@
 <script>
 	import { getContext } from 'svelte';
-	import FormatParser from '../extra/formatParser.svelte';
-	/**
-	 * @typedef {'bold' | 'italic' | 'underline'} FormatType
-	 */
 
-	/**
-	 * @typedef {{start: number; end: number; type: FormatType}} Format
-	 */
-
-	/**
-	 * @typedef {{text: string; formats: Format[] }} FormattedText
-	 */
-
-	/**@type {FormattedText}*/
-	/**@type {{ value: FormattedText; checked: boolean }[]}*/
+	/**@type {{ value: import("@altron/altron/types").FormattedText; checked: boolean }[]}*/
 	export let items;
 	/**@type {Map<string,import("svelte").SvelteComponent>}*/
 	const componentMap = getContext('componentMap');
 	const Checked = componentMap.get('checkedIcon');
 	const UnChecked = componentMap.get('unCheckedIcon');
+	const formatParser = componentMap.get('formatParser');
 </script>
 
 <div class="checkListView">
@@ -31,7 +19,7 @@
 				<svelte:component this={UnChecked} />
 			{/if}
 			<span style:text-decoration={item.checked ? 'line-through' : 'none'}
-				><FormatParser formattedText={item.value} /></span
+				><svelte:component this={formatParser} formattedText={item.value} /></span
 			>
 		</div>
 	{/each}

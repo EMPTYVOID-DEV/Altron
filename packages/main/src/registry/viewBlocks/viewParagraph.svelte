@@ -1,23 +1,15 @@
 <script>
-	import FormatParser from '../extra/formatParser.svelte';
-	/**
-	 * @typedef {'bold' | 'italic' | 'underline'} FormatType
-	 */
+	import { getContext } from 'svelte';
 
-	/**
-	 * @typedef {{start: number; end: number; type: FormatType}} Format
-	 */
-
-	/**
-	 * @typedef {{text: string; formats: Format[] }} FormattedText
-	 */
-
-	/**@type {FormattedText}*/
+	/**@type {import("@altron/altron/types").FormattedText}*/
 	export let formattedText;
+	/**@type {Map<string,import("svelte").SvelteComponent>}*/
+	const componentMap = getContext('componentMap');
+	const formatParser = componentMap.get('formatParser');
 </script>
 
 <div class="viewParagraph">
-	<FormatParser {formattedText} />
+	<svelte:component this={formatParser} {formattedText} />
 </div>
 
 <style>

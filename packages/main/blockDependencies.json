@@ -15,7 +15,15 @@
 		},
 		{
 			"block": "paragraph",
-			"dependencies": ["viewParagraph", "textArea", "paragraphIcon"]
+			"dependencies": [
+				"viewParagraph",
+				"markupTextArea",
+				"paragraphIcon",
+				"boldIcon",
+				"italicIcon",
+				"underlineIcon",
+				"formatParser"
+			]
 		},
 		{
 			"block": "header",
@@ -30,16 +38,30 @@
 			"dependencies": [
 				"viewList",
 				"listHandler",
-				"textArea",
+				"markupTextArea",
 				"plusIcon",
 				"closeIcon",
+				"boldIcon",
+				"italicIcon",
+				"underlineIcon",
 				"select",
+				"formatParser",
 				"listIcon"
 			]
 		},
 		{
 			"block": "quote",
-			"dependencies": ["viewQuote", "closeQuoteIcon", "openQuoteIcon", "input", "textArea"]
+			"dependencies": [
+				"formatParser",
+				"viewQuote",
+				"closeQuoteIcon",
+				"openQuoteIcon",
+				"input",
+				"markupTextArea",
+				"boldIcon",
+				"italicIcon",
+				"underlineIcon"
+			]
 		},
 		{
 			"block": "space",
@@ -56,10 +78,14 @@
 				"checklistHandler",
 				"closeIcon",
 				"plusIcon",
-				"textArea",
+				"markupTextArea",
 				"unCheckedIcon",
 				"checkedIcon",
-				"checklistIcon"
+				"checklistIcon",
+				"boldIcon",
+				"italicIcon",
+				"underlineIcon",
+				"formatParser"
 			]
 		},
 		{

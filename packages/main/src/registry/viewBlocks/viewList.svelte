@@ -1,19 +1,10 @@
 <script>
-	import FormatParser from '../extra/formatParser.svelte';
+	import { getContext } from 'svelte';
 
-	/**
-	 * @typedef {'bold' | 'italic' | 'underline'} FormatType
-	 */
-
-	/**
-	 * @typedef {{start: number; end: number; type: FormatType}} Format
-	 */
-
-	/**
-	 * @typedef {{text: string; formats: Format[] }} FormattedText
-	 */
-
-	/**@type {FormattedText[]}*/
+	/**@type {Map<string,import("svelte").SvelteComponent>}*/
+	const componentMap = getContext('componentMap');
+	const formatParser = componentMap.get('formatParser');
+	/**@type {import("@altron/altron/types").FormattedText[]}*/
 	export let items;
 	/**@type {string}*/
 	export let type;
@@ -24,14 +15,14 @@
 		{#each items as item, index}
 			<div class="item">
 				<span class="index">{index + 1 + '.'}</span>
-				<li><FormatParser formattedText={item} /></li>
+				<li><svelte:component this={formatParser} formattedText={item} /></li>
 			</div>
 		{/each}
 	</ol>
 {:else}
 	<ul>
 		{#each items as item}
-			<li><FormatParser formattedText={item} /></li>
+			<li><svelte:component this={formatParser} formattedText={item} /></li>
 		{/each}
 	</ul>
 {/if}

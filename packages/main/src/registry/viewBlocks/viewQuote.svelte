@@ -1,20 +1,7 @@
 <script>
 	import { getContext } from 'svelte';
-	import FormatParser from '../extra/formatParser.svelte';
 
-	/**
-	 * @typedef {'bold' | 'italic' | 'underline'} FormatType
-	 */
-
-	/**
-	 * @typedef {{start: number; end: number; type: FormatType}} Format
-	 */
-
-	/**
-	 * @typedef {{text: string; formats: Format[] }} FormattedText
-	 */
-
-	/**@type {FormattedText}*/
+	/**@type {import("@altron/altron/types").FormattedText}*/
 	export let formattedText;
 	/**@type {string}*/
 	export let owner;
@@ -22,12 +9,13 @@
 	const componentMap = getContext('componentMap');
 	const CloseQuoteIcon = componentMap.get('closeQuoteIcon');
 	const OpenQuoteIcon = componentMap.get('openQuoteIcon');
+	const formatParser = componentMap.get('formatParser');
 </script>
 
 <div class="quote">
 	<svelte:component this={OpenQuoteIcon} />
 	<span class="quoteContent">
-		<FormatParser {formattedText} />
+		<svelte:component this={formatParser} {formattedText} />
 	</span>
 	<svelte:component this={CloseQuoteIcon} />
 	<span class="quoteOwner">{owner}</span>
