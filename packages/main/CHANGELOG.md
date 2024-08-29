@@ -1,5 +1,11 @@
 # @altron/altron
 
+## 4.0.0
+
+### Major Changes
+
+- 0098b12: Adding inline elements
+
 ## 3.1.2
 
 ### Patch Changes
